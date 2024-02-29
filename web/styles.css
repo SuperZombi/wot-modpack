@@ -1,0 +1,27 @@
+body{
+	padding: 10px;
+}
+
+/*
+fieldset{
+	outline: 1px solid var(--bs-border-color);
+	border-radius: 10px
+}
+*/
+.form-check label{
+	width: 100%;
+	user-select: none;
+}
+
+#tab-content{
+	border: 1px solid var(--bs-border-color);
+	border-radius: var(--bs-border-radius);
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
+}
+#tab-content > tab{
+	display: none;
+}
+#tab-content > tab.active{
+	display: block;
+}
