@@ -17,4 +17,6 @@ window.onload=_=>{
 
 	let radios = new radiosArea(props)
 	main.appendChild(radios)
+
+	new simpleSelect(Select("#game-select"))
 }

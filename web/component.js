@@ -89,3 +89,30 @@ function initTabs(nav, content){
 		links[0].click()
 	}
 }
+
+class simpleSelect {
+	constructor(element){
+		this.root = element
+		this.updateWidth()
+		this.root.onclick = _=>{
+			this.root.classList.toggle("open")
+		}
+		this.root.querySelectorAll("option").forEach(option=>{
+			option.onclick = _=>{
+				this.resetSelected()
+				option.classList.add("selected")
+				this.root.querySelector(".select-placeholder").innerHTML = option.innerHTML
+			}
+		})
+	}
+	updateWidth(){
+		let placeholder = this.root.querySelector(".select-placeholder")
+		let choices = this.root.querySelector(".select-data")
+		this.root.style.width = `${Math.max(placeholder.offsetWidth, choices.offsetWidth)}px`
+	}
+	resetSelected(){
+		this.root.querySelectorAll("option.selected").forEach(option=>{
+			option.classList.remove("selected")
+		})
+	}
+}
