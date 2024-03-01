@@ -11,10 +11,17 @@ fieldset{
 .form-check label{
 	width: 100%;
 	user-select: none;
+	cursor: pointer;
+}
+.form-check .form-check-input{
+	cursor: pointer;
 }
 
 
 /* Nav Tabs */
+.nav.nav-tabs .nav-link{
+	user-select: none;
+}
 #tab-content{
 	border: 1px solid var(--bs-border-color);
 	border-radius: var(--bs-border-radius);
@@ -22,10 +29,15 @@ fieldset{
 	border-top-right-radius: 0;
 }
 #tab-content > tab{
-	display: none;
+	display: block;
+	visibility: hidden;
+	height: 0;
+	opacity: 0;
 }
 #tab-content > tab.active{
-	display: block;
+	visibility: visible;
+	height: auto;
+	opacity: 1;
 }
 
 
@@ -46,7 +58,7 @@ fieldset{
 }
 .simple-select .select-placeholder{
 	padding: 6px 24px;
-	padding-right: 28px;
+	padding-right: 36px;
 	min-height: 24pt;
 	cursor: pointer;
 	white-space: nowrap;

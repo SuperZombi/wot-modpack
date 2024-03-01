@@ -15,7 +15,7 @@ class radiosArea {
 						</label>
 					</div>
 				</legend>
-				<div class="collapse ps-4 pt-2">
+				<div class="collapse ps-4 pt-1">
 					${props.data.map(option => {return`
 						<div class="form-check mb-1">
 							<label>
