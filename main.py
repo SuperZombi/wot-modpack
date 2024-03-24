@@ -2,7 +2,6 @@ import eel
 import sys, os
 import win32api
 import xmltodict
-import json
 
 
 # Resources
@@ -21,7 +20,9 @@ def get_disks():
 def search_clients():
 	templates = (
 		('Games', 'World_of_Tanks_EU'),
-		('Games', 'World_of_Tanks_CT')
+		('Games', 'World_of_Tanks_NA'),
+		('Games', 'World_of_Tanks_CT'),
+		('Games', 'World_of_Tanks_SB'),
 	)
 	disks = get_disks()
 	clients = []
@@ -33,50 +34,24 @@ def search_clients():
 				clients.append(path)
 	return clients
 
-def get_cliens_info(cliens):
-	for client in cliens:
+def get_clients_info(clients):
+	all_clients = []
+	for client in clients:
+		client_info = {"path": client}
 
 		with open(os.path.join(client, "version.xml"), 'r', encoding="utf-8") as f:
 			xpars = xmltodict.parse(f.read())
-			data = xpars.get('version.xml')
-			meta = data.get('meta')
+			meta = xpars.get('version.xml').get('meta')
 
-			output = {
-				"version": data.get('version'),
-				"localization": meta.get('localization'),
-				"realm": meta.get('realm'),
-				"branch": meta.get('branch')
-			}
-			print("version.xml")
-			print(json.dumps(output, indent=4))
-
+			client_info["realm"] = meta.get('realm')
+			client_info["version"] = meta.get('branch').strip('v')
+			client_info["title"] = f"WoT {meta.get('realm')} {meta.get('branch').strip('v')}"
 
 		with open(os.path.join(client, "game_info.xml"), 'r', encoding="utf-8") as f:
 			xpars = xmltodict.parse(f.read())
 			data = xpars.get('protocol').get('game')
 
-			output = {
-				"localization": data.get('localization'),
-				"version_name": data.get('version_name'),
-			}
-			print("game_info.xml")
-			print(json.dumps(output, indent=4))
-
-		with open(os.path.join(client, "game_metadata", "metadata.xml"), 'r', encoding="utf-8") as f:
-			xpars = xmltodict.parse(f.read())
-			data = xpars.get('protocol')
-			meta = data.get('predefined_section')
-
-			output = {
-				"fs_name": meta.get('fs_name'),
-				"shortcut_name": meta.get('shortcut_name'),
-				"environment_name": meta.get('environment_name'),
-
-				"name": meta.get('name'),  # dont use
-				"default_language": meta.get('default_language') # dont use
-			}
-			print("metadata.xml")
-			print(json.dumps(output, indent=4))
+			client_info["lang"] = data.get('localization')
 
 		with open(os.path.join(client, "paths.xml"), 'r', encoding="utf-8") as f:
 			xpars = xmltodict.parse(f.read())
@@ -87,15 +62,20 @@ def get_cliens_info(cliens):
 					path = os.path.normpath(path.get("#text"))
 					arr = os.path.split(path)
 					output[arr[-2]] = arr[-1]
-			print("paths.xml")
-			print(json.dumps(output, indent=4))
-			
-		print()
+
+			client_info["mods_folders"] = output
+
+		all_clients.append(client_info)
+	return all_clients
 
 
-# print(get_cliens_info(search_clients()))
-# import sys
-# sys.exit(0)
+###
+@eel.expose
+def get_clients():
+	clients = search_clients()
+	return get_clients_info(clients)
+
+
 
 # MAIN
 eel.init(resource_path("web"))
