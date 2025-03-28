@@ -1,0 +1,137 @@
+html, body{
+	padding: 0; margin: 0;
+}
+body{
+	font-family: sans-serif;
+	cursor: url(/images/cursor-normal.png), auto;
+	background: #0f0f0f;
+	color: #f1f1f1;
+}
+
+.hover:hover{
+	cursor: url(/images/cursor-pointer.png), pointer;
+}
+
+.button{
+	display: inline-block;
+	background: linear-gradient(0deg, #4b4a3b, #969775);
+	color: #cecebc;
+	padding: 5px 10px 5px 10px;
+	font-weight: bold;
+	text-shadow: 0px 0px 2px #322A2A, 0px 0px 2px #3F3939;
+	user-select: none;
+	border-radius: 5px;
+	border: none;
+	outline: none;
+}
+.button:hover{
+	background: linear-gradient(0deg, #403f32, #808063);
+}
+.button:active{
+	background: linear-gradient(0deg, #343429, #696a52);
+}
+select.button option{
+	background: #4b4a3b;
+}
+
+
+input[type=checkbox]{
+	appearance: none;
+	font-size: inherit;
+	width: 1em;
+	height: 1em;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	border: solid 2px transparent;
+	border-radius: 2px;
+	background:
+		radial-gradient(#2e2e28 25%, black) padding-box,
+		linear-gradient(0deg, #6e3f15, #f7d670) border-box;
+}
+input[type=checkbox]::before {
+	content: "";
+	width: 75%;
+	height: 75%;
+	clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+	background: #ea850a;
+	opacity: 0;
+}
+input[type=checkbox]:hover::before {
+	opacity: 0.4;
+}
+input[type=checkbox]:checked::before {
+	opacity: 1;
+}
+
+
+input[type=radio]{
+	appearance: none;
+	font-size: inherit;
+	width: 1em;
+	height: 1em;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	border: solid 2px transparent;
+	border-radius: 50%;
+	background:
+		radial-gradient(#2e2e28 25%, black) padding-box,
+		linear-gradient(0deg, #6e3f15, #f7d670) border-box;
+}
+input[type=radio]::before {
+	content: "";
+	width: 50%;
+	height: 50%;
+	border-radius: 50%;
+	background: linear-gradient(0deg, #ea850a, yellow);
+	opacity: 0;
+}
+input[type=radio]:hover::before {
+	opacity: 0.3;
+}
+input[type=radio]:checked::before {
+	opacity: 1;
+}
+
+label{
+	display: flex;
+	align-items: center;
+	gap: 4px;
+	user-select: none;
+}
+
+
+.group .details {
+	display: none;
+	margin-left: 1.5em;
+}
+.group .summary:has(input[type=checkbox]:checked) + .details {
+	display: block;
+}
+
+
+
+.loader {
+	position: relative;
+}
+.loader::before, .loader::after{
+	position: absolute;
+	content: '';
+	inset: 0;
+}
+.loader::before{
+	background-image: url(/images/gear.png);
+	background-repeat: no-repeat;
+	background-size: contain;
+	animation: spin 4s infinite linear;
+}
+.loader::after{
+	background-image: url(/images/logo.png);
+	background-repeat: no-repeat;
+	background-size: contain;
+}
+@keyframes spin {
+	0% {transform: rotate(0deg);}
+	100% {transform: rotate(360deg);}
+}
