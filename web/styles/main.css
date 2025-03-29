@@ -24,8 +24,20 @@ header{
 	grid-template-columns: 1fr 1fr;
 }
 
+#mod-preview{
+	padding: 5px;
+	padding-left: 0;
+}
 #mod-image{
-	background: grey;
+	background: black;
 	height: 300px;
 	width: 100%;
+	object-fit: contain;
+	border-radius: 8px;
+}
+#mod-image[src=""]{
+	display: none;
+}
+#mod-description{
+	padding: 5px 10px;
 }

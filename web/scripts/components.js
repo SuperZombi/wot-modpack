@@ -1,7 +1,8 @@
 class ModsList{
-	constructor(parent){
+	constructor(parent, language){
 		this.root = parent
 		this.childs = []
+		this.language = language
 	}
 	add(element){
 		this.childs.push(element)
@@ -9,6 +10,35 @@ class ModsList{
 	}
 	get(){
 		return this.childs.map(child=>child.get()).flat(Infinity)
+	}
+	changeLanguage(new_language){
+		this.language = new_language
+		this.childs.map(child=>child.changeLanguage(new_language))
+	}
+	makeCategory(text_data, image=null){
+		let x = new Details()
+		x.root.classList.add("category")
+		if (image){
+			let img = document.createElement("img")
+			img.src = image
+			x.summary.appendChild(img)
+		}
+		let header = document.createElement("span")
+		x.summary.appendChild(header)
+		x.onLangChange = new_lang=>{
+			header.innerHTML = text_data[new_lang]
+		}
+		x.onLangChange(this.language)
+		return x
+	}
+	makeCheckbox(mod_info){
+		return new Checkbox(mod_info, this.language)
+	}
+	makeRadio(mod_info, group_id=null){
+		return new Checkbox(mod_info, this.language, group_id)
+	}
+	makeGroup(id, text){
+		return new Group(id, text, this.language)
 	}
 }
 
@@ -21,6 +51,7 @@ class Details{
 		this.summary.className = "summary hover"
 		this.open = document.createElement('input')
 		this.open.type = "checkbox"
+		this.summary_head = document.createElement("span")
 		let collapse = document.createElement("div")
 		collapse.className = "collapse"
 		let wrapper = document.createElement("div")
@@ -33,6 +64,8 @@ class Details{
 		this.summary.appendChild(this.open)
 		this.root.appendChild(this.summary)
 		this.root.appendChild(collapse)
+
+		this.onLangChange = _=>{}
 	}
 	add(element){
 		this.childs.push(element)
@@ -44,48 +77,61 @@ class Details{
 	get(){
 		return this.childs.map(child=>child.get()).filter(Boolean)
 	}
-}
-function makeCategory(name, image){
-	let x = new Details()
-	x.root.classList.add("category")
-	x.summary.innerHTML += `
-		<img src="${image}">
-		<span>${name}</span>
-	`
-	return x
+	changeLanguage(new_language){
+		this.childs.map(child=>child.changeLanguage(new_language))
+		this.onLangChange(new_language)
+	}
 }
 
 class Checkbox{
-	constructor(id, text, type="checkbox", group_id=null){
-		this.id = id
+	constructor(mod_info, language="en", group_id=null){
+		this.id = mod_info.id
 		this.root = document.createElement("label")
 		this.root.className = "mod hover"
-		this.root.setAttribute("id", id)
+		this.root.setAttribute("id", this.id)
 		this.input = document.createElement("input")
-		this.input.type = type
 		this.input.className = "hover"
+		this.input.type = group_id ? "radio" : "checkbox"
 		if (group_id){
 			this.input.name = group_id
 		}
-		this.text = document.createElement("span")
-		this.text.innerHTML = text
+		this.title_data = mod_info.title
+		this.description_data = mod_info.description
+		this.image = mod_info.image || ""
+		this.title = document.createElement("span")
+		this.title.innerHTML = this.title_data[language]
+		this.description = this.description_data ? this.description_data[language] : ""
 		this.root.appendChild(this.input)
-		this.root.appendChild(this.text)
+		this.root.appendChild(this.title)
+
+		this.root.addEventListener("mouseover", _=>{
+			document.querySelector("#mod-image").src = this.image
+			document.querySelector("#mod-description").innerHTML = this.description
+		})
+		this.root.addEventListener("mouseleave", _=>{
+			document.querySelector("#mod-image").src = ""
+			document.querySelector("#mod-description").innerHTML = ""
+		})
 	}
 	get(){
 		if (this.input.checked){
 			return this.id
 		}
 	}
+	changeLanguage(new_language){
+		this.title.innerHTML = this.title_data[new_language]
+		this.description = this.description_data[new_language]
+	}
 }
 
 class Group{
-	constructor(id, text){
+	constructor(id, text_data, language="en"){
 		this.id = id
 		this.details = new Details()
+		this.text_data = text_data
 		this.details.root.classList.add("group")
 		this.name = document.createElement("span")
-		this.name.innerHTML = text
+		this.name.innerHTML = this.text_data[language]
 		this.details.summary.appendChild(this.name)
 		this.root = this.details.root
 		this.content = this.details.content
@@ -100,5 +146,9 @@ class Group{
 				return checked_child.id
 			}
 		}
+	}
+	changeLanguage(new_language){
+		this.name.innerHTML = this.text_data[new_language]
+		this.details.childs.map(child=>child.changeLanguage(new_language))
 	}
 }
