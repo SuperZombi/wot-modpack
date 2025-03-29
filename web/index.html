@@ -4,81 +4,56 @@
 	<title>Modpack</title>
 	<meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>
 	<script type="text/javascript" src="/eel.js"></script>
-	<!-- 
-	<link rel="stylesheet" href="/bootstrap/bootstrap.min.css">
-	<script src="/bootstrap/bootstrap.min.js" defer></script>
- -->
 	<link rel="stylesheet" href="/styles/base.css">
 	<link rel="stylesheet" href="/styles/main.css">
-<!-- 
-	<script src="/scripts/component.js"></script>
-	<script src="/scripts/main.js" defer></script> -->
+	<script src="/scripts/components.js"></script>
+	<script src="/scripts/main.js" defer></script>
 </head>
 <body>
-<!-- 	<div class="tab">
-		<h3>Select game folder:</h3>
-		<div class="button hover">Some button</div>
-	</div>
-	<hr>
+	<header>
+		<h3>Modpack</h3>
+		<svg id="setting_button" class="hover" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 46 46">
+			<path d="M43.45 18.44h-2.43a18.11 18.11 0 0 0-2.08-4.93l1.75-1.76a2.5 2.5 0 0 0 0-3.54l-2.92-2.92a2.57 2.57 0 0 0-3.55 0L32.4 7.1c-1.5-.87-3.1-1.54-4.87-1.97V2.52A2.5 2.5 0 0 0 25.04 0h-4.13a2.49 2.49 0 0 0-2.47 2.52v2.6a18.72 18.72 0 0 0-4.88 1.98l-1.82-1.8a2.57 2.57 0 0 0-3.55 0L5.27 8.2a2.52 2.52 0 0 0 0 3.54l1.75 1.76a18.11 18.11 0 0 0-2.08 4.93H2.5a2.5 2.5 0 0 0-2.5 2.5v4.12a2.47 2.47 0 0 0 2.5 2.47h2.44a18.2 18.2 0 0 0 2.08 4.94l-1.75 1.77a2.5 2.5 0 0 0 0 3.55l2.92 2.92a2.5 2.5 0 0 0 3.54 0l1.83-1.82c1.5.87 3.12 1.55 4.88 1.98v2.6c0 1.39 1.09 2.5 2.47 2.5h4.13a2.49 2.49 0 0 0 2.49-2.5v-2.6c1.77-.43 3.37-1.1 4.87-1.98l1.81 1.81a2.5 2.5 0 0 0 3.55 0l2.92-2.91a2.5 2.5 0 0 0 0-3.55l-1.75-1.77a18.27 18.27 0 0 0 2.08-4.94h2.44a2.49 2.49 0 0 0 2.52-2.47v-4.13a2.5 2.5 0 0 0-2.52-2.49zM22.98 30.85A7.9 7.9 0 0 1 15.05 23a7.89 7.89 0 0 1 7.93-7.85A7.89 7.89 0 0 1 30.9 23a7.9 7.9 0 0 1-7.93 7.85z"/>
+		</svg>
+	</header>
 
-	<select class="button hover">
-		<option title="hello world">WoT EU 1.28.0</option>
-		<option>WoT CT 1.28.1</option>
-		<option>Custom</option>
-	</select> -->
+
+	<div id="tabs-area">
+		<div class="tab">
+			<div class="flex-center">
+				<h3>Select game folder:</h3>
+				<select class="button hover">
+					<option title="hello world">WoT EU 1.28.0</option>
+					<option>WoT CT 1.28.1</option>
+					<option>Custom</option>
+				</select>
+				<br>
+				<div class="button hover">Next</div>
+			</div>
+		</div>
+
+		<div class="tab active">
+			<div id="mods-area">
+				<div id="mods-list"></div>
+				<div id="mod-preview">
+					<div id="mod-image"></div>
+					<div id="mod-description">
+						Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sequi dolore laboriosam vel omnis, perferendis ducimus corporis laudantium, placeat? Dicta architecto quia aspernatur assumenda natus voluptatibus nam repellendus laborum quasi consectetur.
+					</div>
+				</div>
+			</div>
+			<div class="button hover" id="main_button">Next</div>
+			
+
+		</div>
+		
+
+	</div>
+
 
 	<!-- <div class="loader" style="height: 120px;width:120px;"></div> -->
 
 
-<div class="mods-list">
-	<div class="group">
-		<label class="summary hover">
-			<input type="checkbox" class="hover" checked>
-			<span>Изменить прицел</span>
-		</label>
-		<div class="details">
-			<label class="hover">
-				<input type="radio" name="armor" class="hover">
-				<span>Прицел 1</span>
-			</label>
-			<label class="hover">
-				<input type="radio" name="armor" class="hover">
-				<span>Прицел 2</span>
-			</label>
-			<label class="hover">
-				<input type="radio" name="armor" class="hover">
-				<span>Прицел 3</span>
-			</label>
-		</div>
-	</div>
-	
-</div>
 
-
-
-
-
-<!-- 
-	<div class="nav nav-tabs" id="nav-tabs">
-		<a class="nav-link active" href="#game">Пошук гри</a>
-		<a class="nav-link" href="#mods">Модифікації</a>
-		<a class="nav-link" href="#about">Про модпак</a>
-	</div>
-
-	<div id="tab-content" class="container-fluid">
-		<tab name="#game">
-			<h3>Select game folder:</h3>
-
-			<div class="simple-select" id="game-select">
-				<div class="select-placeholder">Select</div>
-				<div class="select-data"></div>	
-			</div>
-		</tab>
-
-		<tab name="#mods">
-			<div id="main-container"></div>
-		</tab>
-	</div>
- -->
 </body>
 </html>

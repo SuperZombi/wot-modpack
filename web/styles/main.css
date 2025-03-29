@@ -1,3 +1,31 @@
-.mods-list{
-	
+header{
+	height: 50px;
+	background-image: url(/images/header.jpg);
+	background-repeat: no-repeat;
+	background-size: cover;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 0 12px;
+}
+
+#setting_button{
+	height: 30px;
+	transition: 0.2s;
+}
+#setting_button:hover{
+	transform: rotate(90deg);
+}
+
+
+
+#mods-area{
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+}
+
+#mod-image{
+	background: grey;
+	height: 300px;
+	width: 100%;
 }
