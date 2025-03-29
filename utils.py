@@ -1,6 +1,7 @@
 import win32api
 import os, sys
 import xmltodict
+import shutil
 
 
 def get_disks():
@@ -60,5 +61,8 @@ class Client:
 					elif 'mods' in folder:
 						self.mods_folder = path
 	
-	def delete_old_mods(self):
-		pass
+	def delete_mods(self):
+		for path in [self.mods_folder, self.res_mods]:
+			if os.path.exists(path):
+				shutil.rmtree(path)
+				os.makedirs(path)
