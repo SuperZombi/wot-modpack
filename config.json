@@ -36,7 +36,10 @@
 	"mods": [
 		{
 			"id": "tv.protanki.damagestickers",
-			"url": "https://github.com/SuperZombi/wot-modpack/raw/refs/heads/mods/mods/battle/tv.protanki.damagestickers.wotmod",
+			"files": [{
+				"url": "https://github.com/SuperZombi/wot-modpack/raw/refs/heads/mods/mods/battle/tv.protanki.damagestickers.wotmod",
+				"dest": "mods"
+			}],
 			"image": "https://raw.githubusercontent.com/SuperZombi/wot-modpack/refs/heads/mods/images/battle/tv.protanki.damagestickers.jpg",
 			"title": {
 				"en": "Colored hitmarks (Protanki)",
@@ -54,7 +57,10 @@
 		},
 		{
 			"id": "just.DamageStickers",
-			"url": "https://github.com/SuperZombi/wot-modpack/raw/refs/heads/mods/mods/battle/just.DamageStickers.wotmod",
+			"files": [{
+				"url": "https://github.com/SuperZombi/wot-modpack/raw/refs/heads/mods/mods/battle/just.DamageStickers.wotmod",
+				"dest": "mods"
+			}],
 			"image": "https://raw.githubusercontent.com/SuperZombi/wot-modpack/refs/heads/mods/images/battle/just.DamageStickers.jpg",
 			"title": {
 				"en": "Colored hitmarks (Simplified)",
@@ -72,7 +78,10 @@
 		},
 		{
 			"id": "tv.protanki.enemyannouncer",
-			"url": "https://github.com/SuperZombi/wot-modpack/raw/refs/heads/mods/mods/battle/tv.protanki.enemyannouncer.wotmod",
+			"files": [{
+				"url": "https://github.com/SuperZombi/wot-modpack/raw/refs/heads/mods/mods/battle/tv.protanki.enemyannouncer.wotmod",
+				"dest": "mods"
+			}],
 			"image": "https://raw.githubusercontent.com/SuperZombi/wot-modpack/refs/heads/mods/images/battle/tv.protanki.enemyannouncer.jpg",
 			"title": {
 				"en": "Enemy announcer",
@@ -89,7 +98,10 @@
 		},
 		{
 			"id": "me.poliroid.battlehits",
-			"url": "https://github.com/SuperZombi/wot-modpack/raw/refs/heads/mods/mods/hangar/me.poliroid.battlehits.wotmod",
+			"files": [{
+				"url": "https://github.com/SuperZombi/wot-modpack/raw/refs/heads/mods/mods/hangar/me.poliroid.battlehits.wotmod",
+				"dest": "mods"
+			}],
 			"image": "https://raw.githubusercontent.com/SuperZombi/wot-modpack/refs/heads/mods/images/hangar/me.poliroid.battlehits.jpg",
 			"title": {
 				"en": "Browsing hits",
