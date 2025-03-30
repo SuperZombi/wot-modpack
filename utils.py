@@ -2,6 +2,7 @@ import win32api
 import os, sys
 import xmltodict
 import shutil
+import requests
 
 
 def get_disks():
@@ -82,21 +83,56 @@ class Client:
 				os.makedirs(path)
 
 	def install_mod(self, mod):
-		mod.install(self.mods_folder)
+		mod.install(self)
 
+
+
+def download_progress(current, total):
+	print(round(current / total * 100), "%", end="\r")
 
 
 class Mod:
-	def __init__(self, id, path):
+	def __init__(self, id, files):
 		self.id = id
-		self.path = path
-	def install(self, target_dir):
-		shutil.copy(self.path, target_dir)
+		self.files = files
+
+	def install(self, client):
+		target_map = {
+			"mods": client.mods_folder,
+			"res_mods": client.res_mods,
+			"configs": client.configs_path
+		}
+		for file in self.files:
+			os.makedirs(target_map[file["dest"]], exist_ok=True)
+
+			if file["url"].startswith("http"):
+				self.download(file["url"], target_map[file["dest"]], on_progress=download_progress)
+			else:
+				shutil.copy(file["url"], target_map[file["dest"]])
+
+	def download(self, url, target_folder, on_progress=None):
+		filename = os.path.basename(url)
+		r = requests.get(url, stream=True)
+		if r.ok:
+			total_size = int(r.headers.get("content-length", 0))
+			downloaded = 0
+			if on_progress: on_progress(downloaded, total_size)
+			with open(os.path.join(target_folder, filename), "wb") as f:
+				for data in r.iter_content(1024):
+					downloaded+=len(data)
+					if on_progress: on_progress(downloaded, total_size)
+					f.write(data)
 
 
 
-# mods_list = Mod("me.poliroid.modslistapi", resource_path(os.path.join("mods", "me.poliroid.modslistapi.wotmod")))
-# settings_api = Mod("izeberg.modssettingsapi", resource_path(os.path.join("mods", "izeberg.modssettingsapi.wotmod")))
+# mods_list = Mod("me.poliroid.modslistapi", [{
+# 	"url": os.path.abspath(os.path.join("mods", "me.poliroid.modslistapi.wotmod")),
+# 	"dest": "mods"
+# }])
+# settings_api = Mod("izeberg.modssettingsapi", [{
+# 	"url": os.path.join("mods", "izeberg.modssettingsapi.wotmod"),
+# 	"dest": "mods"
+# }])
 
 
 # client = Client("C:\\Games\\World_of_Tanks_CT")
