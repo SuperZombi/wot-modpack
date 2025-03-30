@@ -1,6 +1,9 @@
 import eel
 import sys, os
 import json
+import re
+import requests
+from json_minify import json_minify
 from utils import *
 
 
@@ -20,6 +23,14 @@ def get_clients():
 	for path in search_clients():
 		clients.append(Client(path))
 	return json.loads(json.dumps(clients, default=Client.to_json))
+
+@eel.expose
+def load_mods_info():
+	r = requests.get('https://raw.githubusercontent.com/SuperZombi/wot-modpack/refs/heads/mods/config.json')
+	if r.ok:
+		string = json_minify(r.content.decode()) # remove comments
+		string = re.sub(r'''(?<=[}\]"']),(?!\s*[{["'])''', "", string, 0) # remove coma at the end
+		return json.loads(string)
 
 
 # MAIN

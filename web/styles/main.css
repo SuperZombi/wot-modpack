@@ -46,3 +46,6 @@ header{
 	justify-content: space-between;
 	gap: 5px;
 }
+#mod-description ul{
+	padding-left: 0;
+}

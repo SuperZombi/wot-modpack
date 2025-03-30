@@ -69,6 +69,7 @@ input[type=checkbox]{
 	font-size: inherit;
 	width: 1em;
 	height: 1em;
+	margin: 0;
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
@@ -99,6 +100,7 @@ input[type=radio]{
 	font-size: inherit;
 	width: 1em;
 	height: 1em;
+	margin: 0;
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
@@ -159,9 +161,10 @@ progress::-webkit-progress-value {
 label{
 	display: flex;
 	align-items: center;
-	gap: 4px;
+	gap: 5px;
 	user-select: none;
 	width: fit-content;
+	line-height: 1em;
 }
 
 
@@ -170,6 +173,15 @@ label{
 	grid-template-rows: 0fr;
 	transition: grid-template-rows 0.3s;
 	overflow: hidden;
+}
+.details > .collapse > .wrapper > .content {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+	padding: 0.5rem;
+}
+.details.category > .collapse > .wrapper > .content {
+	padding-top: 0;
 }
 .details .collapse .wrapper{
 	min-height: 0;
@@ -211,7 +223,10 @@ label{
 
 
 .group .content {
-	margin-left: 1.25em;
+	margin-left: 1em;
+}
+.group .summary::after{
+	content: '⯆';
 }
 
 
