@@ -1,0 +1,65 @@
+{
+	"categories": [
+		{
+			"name": "battle",
+			"title": {
+				"en": "Battle",
+				"ru": "Боевые",
+				"uk": "Бойові"
+			},
+			"image": "/images/battle.png"
+		}
+	],
+
+
+	"groups": [
+		{
+			"id": "colored_hitmarks",
+			"title": {
+				"en": "Colored hit marks",
+				"ru": "Цветные отметки попаданий",
+				"uk": "Кольорові позначки влучень"
+			}
+		}
+	],
+
+
+	"mods": [
+		{
+			"id": "tv.protanki.damagestickers",
+			"url": "https://github.com/SuperZombi/wot-modpack/raw/refs/heads/mods/mods/battle/tv.protanki.damagestickers.wotmod",
+			"image": "https://raw.githubusercontent.com/SuperZombi/wot-modpack/refs/heads/mods/images/battle/tv.protanki.damagestickers.jpg",
+			"title": {
+				"en": "Colored hitmarks (Protanki)",
+				"ru": "Цветные отметки попаданий (Протанки)",
+				"uk": "Кольорові позначки влучень (Протанки)"
+			},
+			"author": "protanki",
+				"description": {
+				"en": "<ul><li>Red — penetration of AP.</li><li>Yellow — cumulative or high explosive.</li><li>Green — did not penetrate.</li></ul>",
+				"ru": "<ul><li>Красний — пробитие ББ\\БП.</li><li>Желтый — кумулятив или фугас.</li><li>Зеленый — не пробил.</li></ul>",
+				"uk": "<ul><li>Червоний — пробиття ББ\\БП.</li><li>Жовтий — кумулятив або фугас.</li><li>Зелений — не пробив.</li></ul>"
+			},
+			"category": "battle",
+			"group": "colored_hitmarks"
+		},
+		{
+			"id": "just.DamageStickers",
+			"url": "https://github.com/SuperZombi/wot-modpack/raw/refs/heads/mods/mods/battle/just.DamageStickers.wotmod",
+			"image": "https://raw.githubusercontent.com/SuperZombi/wot-modpack/refs/heads/mods/images/battle/just.DamageStickers.jpg",
+			"title": {
+				"en": "Colored hitmarks (Simplified)",
+				"ru": "Цветные отметки попаданий (Упрощенные)",
+				"uk": "Кольорові позначки влучень (Спрощені)"
+			},
+			"author": "protanki",
+				"description": {
+				"en": "<ul><li>Red — penetration of AP.</li><li>Yellow — cumulative or high explosive.</li><li>Green — did not penetrate.</li></ul>",
+				"ru": "<ul><li>Красний — пробитие ББ\\БП.</li><li>Желтый — кумулятив или фугас.</li><li>Зеленый — не пробил.</li></ul>",
+				"uk": "<ul><li>Червоний — пробиття ББ\\БП.</li><li>Жовтий — кумулятив або фугас.</li><li>Зелений — не пробив.</li></ul>"
+			},
+			"category": "battle",
+			"group": "colored_hitmarks"
+		}
+	]
+}
