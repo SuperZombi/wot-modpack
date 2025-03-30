@@ -1,5 +1,10 @@
 window.onload=async _=>{
-	// await load_game_clients()
+	await load_game_clients()
+
+	document.querySelector("#navigate_to_mods").onclick = _=>changeTab("mods")
+	changeTab("home")
+	document.querySelector("#loader").classList.add("hide")
+
 
 	let main = new ModsList(document.querySelector("#mods-list"), "uk")
 
@@ -33,19 +38,34 @@ window.onload=async _=>{
 	}
 
 }
+function changeTab(tab_name){
+	document.querySelectorAll("#tabs-area .tab.active").forEach(tab=>tab.classList.remove("active"))
+	let target = document.querySelector(`#tabs-area .tab[name="${tab_name}"]`)
+	if (target){
+		target.classList.add("active")
+	} else {
+		console.error(`Tab "${tab_name}" is not definded!`)
+	}
+}
 
 async function load_game_clients(){
+	let parent = document.querySelector("#client_select")
 	let clientsInfo = await eel.get_clients()()
-	let parent = document.querySelector("#game-select .select-data")
 	clientsInfo.forEach(client=>{
 		let option = document.createElement("option")
 		option.innerHTML = client.title
 		option.title = client.path
 		option.value = client.path
-		option.setAttribute("data-bs-placement", "right")
 		parent.appendChild(option)
 	})
-	new simpleSelect(Select("#game-select"))
+	parent.appendChild(parent.querySelector("option[value='custom']"))
+	parent.querySelector("option").selected = true
+	
+	parent.onchange = async _=>{
+		if (parent.value == "custom"){
+			console.log("Custom")
+		}
+	}
 }
 
 

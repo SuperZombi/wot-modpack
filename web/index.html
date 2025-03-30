@@ -19,20 +19,18 @@
 
 
 	<div id="tabs-area">
-		<div class="tab">
+		<div class="tab" name="home">
 			<div class="flex-center">
 				<h3>Select game folder:</h3>
-				<select class="button hover">
-					<option title="hello world">WoT EU 1.28.0</option>
-					<option>WoT CT 1.28.1</option>
-					<option>Custom</option>
+				<select class="button hover" id="client_select">
+					<option value="custom">Custom</option>
 				</select>
 				<br>
-				<div class="button hover">Next</div>
+				<div class="button hover" id="navigate_to_mods">Next</div>
 			</div>
 		</div>
 
-		<div class="tab active">
+		<div class="tab" name="mods">
 			<div id="mods-area">
 				<div id="mods-list"></div>
 				<div id="mod-preview">
@@ -53,9 +51,10 @@
 	</div>
 
 
-	<!-- <div class="loader" style="height: 120px;width:120px;"></div> -->
-
-
+	<div id="loader" class="shade flex-center">
+		<div class="loader" style="height: 120px;width:120px;"></div>
+	</div>
+	
 
 </body>
 </html>

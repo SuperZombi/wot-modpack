@@ -34,6 +34,17 @@ class Client:
 
 	def __str__(self): return self.title
 	def __repr__(self): return f"<{str(self)}>"
+	def to_json(self):
+		return {
+			"path": self.path,
+			"title": self.title,
+			"realm": self.realm,
+			"version": self.version,
+			"lang": self.lang,
+			"res_mods": self.res_mods,
+			"mods_folder": self.mods_folder,
+			"configs_path": self.configs_path,
+		}
 
 	def parse_info(self):
 		with open(os.path.join(self.path, "version.xml"), 'r', encoding="utf-8") as f:
@@ -81,3 +92,13 @@ class Mod:
 		self.path = path
 	def install(self, target_dir):
 		shutil.copy(self.path, target_dir)
+
+
+
+# mods_list = Mod("me.poliroid.modslistapi", resource_path(os.path.join("mods", "me.poliroid.modslistapi.wotmod")))
+# settings_api = Mod("izeberg.modssettingsapi", resource_path(os.path.join("mods", "izeberg.modssettingsapi.wotmod")))
+
+
+# client = Client("C:\\Games\\World_of_Tanks_CT")
+# client.install_mod(mods_list)
+# client.install_mod(settings_api)

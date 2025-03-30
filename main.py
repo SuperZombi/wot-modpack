@@ -1,5 +1,6 @@
 import eel
 import sys, os
+import json
 from utils import *
 
 
@@ -18,9 +19,7 @@ def get_clients():
 	clients = []
 	for path in search_clients():
 		clients.append(Client(path))
-	return clients
-
-print(get_clients())
+	return json.loads(json.dumps(clients, default=Client.to_json))
 
 
 # MAIN

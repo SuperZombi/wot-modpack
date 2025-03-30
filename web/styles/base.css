@@ -25,6 +25,16 @@ svg{
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	justify-content: center;
+}
+.shade{
+	position: fixed;
+	inset: 0;
+	background: rgb(0, 0, 0, 0.5);
+}
+
+#loader.hide{
+	display: none;
 }
 
 .hover:hover{
