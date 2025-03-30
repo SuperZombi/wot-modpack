@@ -60,9 +60,12 @@ class Client:
 						self.res_mods = path
 					elif 'mods' in folder:
 						self.mods_folder = path
+						self.configs_path = os.path.abspath(os.path.join(self.mods_folder, "..", "configs"))
 	
-	def delete_mods(self):
-		for path in [self.mods_folder, self.res_mods]:
+	def delete_mods(self, delete_configs=False):
+		arr = [self.mods_folder, self.res_mods]
+		if delete_configs: arr.append(self.configs_path)
+		for path in arr:
 			if os.path.exists(path):
 				shutil.rmtree(path)
 				os.makedirs(path)
