@@ -69,3 +69,15 @@ class Client:
 			if os.path.exists(path):
 				shutil.rmtree(path)
 				os.makedirs(path)
+
+	def install_mod(self, mod):
+		mod.install(self.mods_folder)
+
+
+
+class Mod:
+	def __init__(self, id, path):
+		self.id = id
+		self.path = path
+	def install(self, target_dir):
+		shutil.copy(self.path, target_dir)
