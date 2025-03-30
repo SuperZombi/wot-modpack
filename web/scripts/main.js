@@ -50,6 +50,14 @@ async function load_game_clients(){
 
 
 
+let LOCALES = {
+	"author": {
+		"en": "Author",
+		"ru": "Автор",
+		"uk": "Автор"
+	}
+}
+
 let categories = [
 	{
 		"name": "aim",
@@ -77,6 +85,7 @@ let mods = [
 			"en": "Reduce Aim by 25%",
 			"uk": "Зменшити приціл на 25%"
 		},
+		"author": "P0LIR0ID",
 		"category": "aim",
 		"image": "https://wotsite.net/images/2016/5/6/4.jpg",
 		"description": {
@@ -104,7 +113,9 @@ let mods = [
 		"group": "custom_aim",
 		"category": "aim",
 		"image": "",
-		"description": ""
+		"description": {
+			"uk": "Приціл 1"
+		}
 	},
 	{
 		"id": 5,

@@ -38,6 +38,11 @@ header{
 #mod-image[src=""]{
 	display: none;
 }
-#mod-description{
-	padding: 5px 10px;
+#mod-description-text{
+	margin: 0 10px;
+}
+#mod-author{
+	display: flex;
+	justify-content: space-between;
+	gap: 5px;
 }

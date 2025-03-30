@@ -86,6 +86,7 @@ class Details{
 class Checkbox{
 	constructor(mod_info, language="en", group_id=null){
 		this.id = mod_info.id
+		this.language = language
 		this.root = document.createElement("label")
 		this.root.className = "mod hover"
 		this.root.setAttribute("id", this.id)
@@ -99,18 +100,28 @@ class Checkbox{
 		this.description_data = mod_info.description
 		this.image = mod_info.image || ""
 		this.title = document.createElement("span")
-		this.title.innerHTML = this.title_data[language]
-		this.description = this.description_data ? this.description_data[language] : ""
+		this.title.innerHTML = this.title_data[this.language]
+		this.description = this.description_data ? (this.description_data[this.language] ? this.description_data[this.language] : "") : ""
+		this.author = mod_info.author || ""
 		this.root.appendChild(this.input)
 		this.root.appendChild(this.title)
 
 		this.root.addEventListener("mouseover", _=>{
 			document.querySelector("#mod-image").src = this.image
+			document.querySelector("#mod-title").innerHTML = this.title_data[this.language]
 			document.querySelector("#mod-description").innerHTML = this.description
+			if (this.author){
+				document.querySelector("#mod-author").innerHTML = `
+					<span>${LOCALES['author'][this.language]}</span>
+					<span>${this.author}</span>
+				`
+			}
 		})
 		this.root.addEventListener("mouseleave", _=>{
 			document.querySelector("#mod-image").src = ""
+			document.querySelector("#mod-title").innerHTML = ""
 			document.querySelector("#mod-description").innerHTML = ""
+			document.querySelector("#mod-author").innerHTML = ""
 		})
 	}
 	get(){
@@ -119,8 +130,9 @@ class Checkbox{
 		}
 	}
 	changeLanguage(new_language){
+		this.language = new_language
 		this.title.innerHTML = this.title_data[new_language]
-		this.description = this.description_data[new_language]
+		this.description = this.description_data ? (this.description_data[this.language] ? this.description_data[this.language] : "") : ""
 	}
 }
 
