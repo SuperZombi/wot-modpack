@@ -113,6 +113,39 @@ input[type=radio]:checked::before {
 	opacity: 1;
 }
 
+
+input[type=text]{
+	appearance: none;
+	outline: none;
+	color: #f1f1f1;
+	padding: 1px 4px;
+	font-size: inherit;
+	border: solid 2px transparent;
+	border-radius: 2px;
+	background:
+		radial-gradient(#2e2e28 25%, black) padding-box,
+		linear-gradient(0deg, #6e3f15, #f7d670) border-box;
+}
+input[type=text]::selection {
+	background: #ea850a;
+	color: black;
+}
+
+progress{
+	appearance: none;
+	height: 15px;
+	border: solid 2px transparent;
+	border-radius: 2px;
+	background: linear-gradient(0deg, #6e3f15, #f7d670) border-box;
+}
+progress::-webkit-progress-bar {
+	background: radial-gradient(#2e2e28 25%, black);
+}
+progress::-webkit-progress-value {
+	background: linear-gradient(0deg, #6e3f15, gold);
+	transition: 1s;
+}
+
 label{
 	display: flex;
 	align-items: center;
