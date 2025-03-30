@@ -9,6 +9,15 @@
 			},
 			"image": "/images/battle.png"
 		},
+		{
+			"name": "hangar",
+			"title": {
+				"en": "Hangar",
+				"ru": "Ангарные",
+				"uk": "Гаражні",
+			},
+			"image": "/images/hangar.png"
+		},
 	],
 
 
@@ -34,7 +43,7 @@
 				"ru": "Цветные отметки попаданий (Протанки)",
 				"uk": "Кольорові позначки влучень (Протанки)",
 			},
-			"author": "protanki",
+			"author": "Protanki",
 				"description": {
 				"en": "<ul><li>Red — penetration of AP.</li><li>Yellow — cumulative or high explosive.</li><li>Green — did not penetrate.</li></ul>",
 				"ru": "<ul><li>Красний — пробитие ББ\\БП.</li><li>Желтый — кумулятив или фугас.</li><li>Зеленый — не пробил.</li></ul>",
@@ -52,7 +61,7 @@
 				"ru": "Цветные отметки попаданий (Упрощенные)",
 				"uk": "Кольорові позначки влучень (Спрощені)",
 			},
-			"author": "protanki",
+			"author": "Just",
 				"description": {
 				"en": "<ul><li>Red — penetration of AP.</li><li>Yellow — cumulative or high explosive.</li><li>Green — did not penetrate.</li></ul>",
 				"ru": "<ul><li>Красний — пробитие ББ\\БП.</li><li>Желтый — кумулятив или фугас.</li><li>Зеленый — не пробил.</li></ul>",
@@ -70,13 +79,30 @@
 				"ru": "Опасный светофор",
 				"uk": "Світлофор небезпеки",
 			},
-			"author": "protanki",
+			"author": "Protanki",
 				"description": {
 				"en": "<ul><li>Red — enemy at 50 meters.</li><li>Yellow — enemy is out of sight and can cause damage.</li><li>Green — enemy is illuminated out of sight.</li></ul>",
 				"ru": "<ul><li>Красний — противник в 50 метрах.</li><li>Желтый — противник вне поля зрения и может нанести урон.</li><li>Зеленый — противник засвечен вне поля зрения.</li></ul>",
 				"uk": "<ul><li>Червоний — ворог в 50 метрах.</li><li>Жовтий — ворог поза полем зору і може завдати шкоди.</li><li>Зелений — ворог засвічений поза полем зору.</li></ul>",
 			},
 			"category": "battle"
+		},
+		{
+			"id": "me.poliroid.battlehits",
+			"url": "https://github.com/SuperZombi/wot-modpack/raw/refs/heads/mods/mods/hangar/me.poliroid.battlehits.wotmod",
+			"image": "https://raw.githubusercontent.com/SuperZombi/wot-modpack/refs/heads/mods/images/hangar/me.poliroid.battlehits.jpg",
+			"title": {
+				"en": "Browsing hits",
+				"ru": "Просмотр попаданий",
+				"uk": "Перегляд влучень",
+			},
+			"author": "P0LIR0ID",
+				"description": {
+				"en": "The mod allows you to view all hits on the tank received in battle.",
+				"ru": "Мод позволяет рассмотреть все попадания по танку полученные в бою.",
+				"uk": "Мод дозволяє розглянути всі влучання по танку, отримані в бою.",
+			},
+			"category": "hangar"
 		},
 	]
 }
