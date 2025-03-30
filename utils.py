@@ -82,21 +82,18 @@ class Client:
 				shutil.rmtree(path)
 				os.makedirs(path)
 
-	def install_mod(self, mod):
-		mod.install(self)
-
-
-
-def download_progress(current, total):
-	print(round(current / total * 100), "%", end="\r")
+	def install_mod(self, mod, on_progress=None):
+		mod.install(self, on_progress=on_progress)
 
 
 class Mod:
 	def __init__(self, id, files):
 		self.id = id
 		self.files = files
+	def __str__(self): return f'<Mod "{self.id}">'
+	def __repr__(self): return str(self)
 
-	def install(self, client):
+	def install(self, client, on_progress=None):
 		target_map = {
 			"mods": client.mods_folder,
 			"res_mods": client.res_mods,
@@ -106,7 +103,7 @@ class Mod:
 			os.makedirs(target_map[file["dest"]], exist_ok=True)
 
 			if file["url"].startswith("http"):
-				self.download(file["url"], target_map[file["dest"]], on_progress=download_progress)
+				self.download(file["url"], target_map[file["dest"]], on_progress=on_progress)
 			else:
 				shutil.copy(file["url"], target_map[file["dest"]])
 

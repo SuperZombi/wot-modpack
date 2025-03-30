@@ -42,12 +42,53 @@
 					</div>
 				</div>
 			</div>
-			<div class="button hover" onclick="changeTab('home')">Preview</div>
-			<div class="button hover" id="main_button">Next</div>
+			<div class="bottom-buttons">
+				<div class="button hover" onclick="changeTab('home')">Preview</div>
+				<div class="button hover" id="main_button">Next</div>
+			</div>
 		</div>
 
 		<div class="tab" name="install">
-			<h3>Mods to install:</h3>
+			<div class="flex-center" style="max-height: calc(100vh - 100px);">
+				<p class="flex-center">
+					<br>
+					<input type="text" readonly id="client_path" style="width:300px">
+					<br>
+					<label class="hover">
+						<input type="checkbox" checked id="delete_all_mods">
+						<span>Удалить все установленные моды</span>
+					</label>
+					<br>
+					<label class="hover">
+						<input type="checkbox" id="delete_mods_configs">
+						<span>Удалить настройки модов</span>
+					</label>
+				</p>
+				<h3>Mods to install:</h3>
+				<ul id="mods-install-list"></ul>
+			</div>
+			<div class="bottom-buttons">
+				<div class="button hover" onclick="changeTab('mods')">Preview</div>
+				<div class="button hover" id="run_main_button">Next</div>
+			</div>
+		</div>
+		<div class="tab" name="main_installer">
+			<div class="flex-center">
+				<h4>Установка модификаций</h4>
+				<div id="progress-files">
+					<progress></progress> <span>0/0</span>
+				</div>
+				<br>
+				<div id="progress-download">
+					<progress value="0" max="100"></progress> <span>0%</span>
+				</div>
+			</div>
+		</div>
+		<div class="tab" name="finish">
+			<div class="flex-center">
+				<h3>Моди успішно встановлено!</h3>
+				<div class="button hover" onclick="changeTab('home')">Home</div>
+			</div>
 		</div>
 	</div>
 

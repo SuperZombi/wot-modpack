@@ -1,4 +1,6 @@
 var modsManager;
+var modsData;
+var currentLang = "uk";
 
 window.onload=async _=>{
 	await load_game_clients()
@@ -16,8 +18,25 @@ window.onload=async _=>{
 
 
 	document.querySelector("#main_button").onclick = _=>{
-		console.log(modsManager.get())
-		modsManager.changeLanguage("en")
+		changeTab("install")
+		let selectedModsIds = modsManager.get()
+		let selectedMods = modsData.mods.filter(mod => selectedModsIds.includes(mod.id))
+		// console.log(modsManager.get())
+		// modsManager.changeLanguage("en")
+		buildModsInstallList(selectedMods)
+	}
+
+	document.querySelector("#run_main_button").onclick = async _=>{
+		changeTab("main_installer")
+		let selectedModsIds = modsManager.get()
+		let selectedMods = modsData.mods.filter(mod => selectedModsIds.includes(mod.id))
+		let client = document.querySelector("#client_path").value
+		let args = {
+			"delete_mods": document.querySelector("#delete_all_mods").checked,
+			"delete_configs": document.querySelector("#delete_mods_configs").checked
+		}
+		await eel.main_install(client, args, selectedMods)()
+		changeTab("finish")
 	}
 
 }
@@ -47,21 +66,24 @@ async function load_game_clients(){
 	parent.onchange = async _=>{
 		if (parent.value == "custom"){
 			console.log("Custom")
+		} else {
+			document.querySelector("#client_path").value = parent.value
 		}
 	}
+	parent.onchange()
 }
 async function load_mods_info(){
-	let data = await eel.load_mods_info()()
-	if (data){
-		modsManager = new ModsList(document.querySelector("#mods-list"), "uk")
+	modsData = await eel.load_mods_info()()
+	if (modsData){
+		modsManager = new ModsList(document.querySelector("#mods-list"), currentLang)
 
-		data.categories.forEach(category=>{
-			let avalible_mods = data.mods.filter(mod => mod.category == category.name)
+		modsData.categories.forEach(category=>{
+			let avalible_mods = modsData.mods.filter(mod => mod.category == category.name)
 
 			let category_element = modsManager.makeCategory(category.title, category.image)
 			avalible_mods.forEach(mod=>{
 				if (mod.group){
-					let group = data.groups.find(x => x.id == mod.group)
+					let group = modsData.groups.find(x => x.id == mod.group)
 					if (group){
 						let group_element = category_element.getGroup(group.id)
 						if (!group_element){
@@ -84,6 +106,37 @@ async function load_mods_info(){
 	}
 }
 
+function buildModsInstallList(mods){
+	let parent = document.querySelector("#mods-install-list")
+	if (mods.length > 0){
+		parent.innerHTML = ""
+		mods.forEach(mod=>{
+			let el = document.createElement("li")
+			el.innerHTML = mod.title[currentLang]
+			parent.appendChild(el)
+		})
+	} else {
+		parent.innerHTML = "Ничего установлено не будет"
+	}
+}
+
+
+eel.expose(installing_progress);
+function installing_progress(message) {
+	if (message.total){
+		let e = document.querySelector("#progress-files")
+		let bar = e.querySelector("progress")
+		bar.value = message.current
+		bar.max = message.total
+		e.querySelector("span").innerHTML = `${message.current}/${message.total}`
+	}
+	else if (message.download_progress){
+		let e = document.querySelector("#progress-download")
+		e.querySelector("progress").value = message.download_progress
+		e.querySelector("span").innerHTML = `${message.download_progress}%`
+	}
+}
+
 
 
 let LOCALES = {
@@ -93,88 +146,3 @@ let LOCALES = {
 		"uk": "Автор"
 	}
 }
-
-// let categories = [
-// 	{
-// 		"name": "aim",
-// 		"title": {
-// 			"en": "Aim",
-// 			"uk": "Приціл"
-// 		},
-// 		"image": "/images/aim.png"
-// 	}
-// ]
-// let groups = [
-// 	{
-// 		"id": "custom_aim",
-// 		"title": {
-// 			"en": "Custom aim",
-// 			"uk": "Кастомний приціл"
-// 		}
-// 	}
-// ]
-// let mods = [
-// 	{
-// 		"id": 1,
-// 		"name": "reduce_aim",
-// 		"title": {
-// 			"en": "Reduce Aim by 25%",
-// 			"uk": "Зменшити приціл на 25%"
-// 		},
-// 		"author": "P0LIR0ID",
-// 		"category": "aim",
-// 		"image": "https://wotsite.net/images/2016/5/6/4.jpg",
-// 		"description": {
-// 			"en": "Mod description",
-// 			"uk": "Разработчики сделали круг сведения намного больше нежели круг реального разброса орудия"
-// 		}
-// 	},
-// 	{
-// 		"id": 2,
-// 		"name": "aiming_time",
-// 		"title": {
-// 			"en": "Aiming time",
-// 			"uk": "Час зведення прицілу"
-// 		},
-// 		"category": "aim",
-// 		"image": "https://wotspeak.org/uploads/posts/2016-08/1471265165_2.jpg"
-// 	},
-// 	{
-// 		"id": 4,
-// 		"name": "custom_aim_1",
-// 		"title": {
-// 			"en": "Aim 1",
-// 			"uk": "Приціл 1"
-// 		},
-// 		"group": "custom_aim",
-// 		"category": "aim",
-// 		"image": "",
-// 		"description": {
-// 			"uk": "Приціл 1"
-// 		}
-// 	},
-// 	{
-// 		"id": 5,
-// 		"name": "custom_aim_2",
-// 		"title": {
-// 			"en": "Aim 2",
-// 			"uk": "Приціл 2"
-// 		},
-// 		"group": "custom_aim",
-// 		"category": "aim",
-// 		"image": "",
-// 		"description": ""
-// 	},
-// 	{
-// 		"id": 6,
-// 		"name": "custom_aim_3",
-// 		"title": {
-// 			"en": "Aim 3",
-// 			"uk": "Приціл 3"
-// 		},
-// 		"group": "custom_aim",
-// 		"category": "aim",
-// 		"image": "",
-// 		"description": ""
-// 	}
-// ]

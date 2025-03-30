@@ -16,6 +16,7 @@ svg{
 
 #tabs-area .tab{
 	display: none;
+	height: calc(100vh - 50px);
 }
 #tabs-area .tab.active{
 	display: block;
@@ -142,6 +143,12 @@ input[type=text]::selection {
 	background: #ea850a;
 	color: black;
 }
+textarea{
+	color: #f1f1f1;
+	background: #222;
+	border-radius: 8px;
+	font-size: 16px;
+}
 
 progress{
 	appearance: none;
@@ -155,7 +162,6 @@ progress::-webkit-progress-bar {
 }
 progress::-webkit-progress-value {
 	background: linear-gradient(0deg, #6e3f15, gold);
-	transition: 1s;
 }
 
 label{

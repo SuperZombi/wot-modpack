@@ -22,6 +22,7 @@ header{
 #mods-area{
 	display: grid;
 	grid-template-columns: 1fr 1fr;
+	height: calc(100vh - 100px);
 }
 
 #mod-preview{
@@ -48,4 +49,16 @@ header{
 }
 #mod-description ul{
 	padding-left: 0;
+}
+
+.bottom-buttons{
+	display: flex;
+	justify-content: space-between;
+	padding: 0 20px;
+}
+
+#mods-install-list{
+	padding-left: 40px;
+	margin-left: -40px;
+	overflow: auto;
 }

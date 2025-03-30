@@ -15,6 +15,17 @@ def resource_path(relative_path=""):
 def exe_path(relative_path=""):
 	return os.path.join(os.getcwd(), relative_path)
 
+settings_mods = [
+	Mod("me.poliroid.modslistapi", [{
+		"url": os.path.abspath(os.path.join("mods", "me.poliroid.modslistapi.wotmod")),
+		"dest": "mods"
+	}]),
+	Mod("izeberg.modssettingsapi", [{
+		"url": os.path.join("mods", "izeberg.modssettingsapi.wotmod"),
+		"dest": "mods"
+	}])
+]
+
 
 ###
 @eel.expose
@@ -33,12 +44,32 @@ def load_mods_info():
 		return json.loads(string)
 
 
+def download_progress(current, total):
+	eel.installing_progress({"download_progress":round(current / total * 100)})
+
+@eel.expose
+def main_install(client_path, args, mods):
+	# client = Client(client_path)
+	client = Client("C:\\Games\\World_of_Tanks_CT")
+	if args.get("delete_mods", False):
+		client.delete_mods(args.get("delete_configs", False))
+	if len(mods) > 0:
+		for mod in settings_mods:
+			client.install_mod(mod)
+
+		mods_arr = list(map(lambda x: Mod(x.get('id'), x.get('files')), mods))
+		total_mods = len(mods_arr)
+		for index, mod in enumerate(mods_arr):
+			eel.installing_progress({"current":index, "total":total_mods, "download_progress":0})
+			client.install_mod(mod, on_progress=download_progress)
+
+
 # MAIN
 eel.init(resource_path("web"))
 # browsers = ['chrome', 'edge', 'default']
 browsers = ['default']
 for browser in browsers:
 	try:
-		eel.start("index.html", mode=browser)
+		eel.start("index.html", mode=browser, size=(1000, 800))
 		break
 	except: None
