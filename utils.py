@@ -26,6 +26,11 @@ def search_clients():
 	return clients
 
 
+def local():
+	data_dir = os.path.join(os.getenv('APPDATA'), 'Web_Modpack')
+	os.makedirs(data_dir, exist_ok=True)
+	return data_dir
+
 
 class Client:
 	def __init__(self, path):

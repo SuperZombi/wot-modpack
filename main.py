@@ -18,6 +18,13 @@ def resource_path(relative_path=""):
 @eel.expose
 def app_version(): return __version__
 
+@eel.expose
+def load_settings():
+	path = os.path.join(local(), "settings.json")
+	if os.path.exists(path):
+		with open(path, 'r', encoding='utf-8') as f:
+			return json.loads(f.read())
+
 settings_mods = [
 	Mod("me.poliroid.modslistapi", [{
 		"url": resource_path(os.path.join("mods", "me.poliroid.modslistapi.wotmod")),
@@ -38,17 +45,19 @@ def get_clients():
 	return json.loads(json.dumps(clients, default=Client.to_json))
 
 @eel.expose
+def get_client_info_by_path(path):
+	try: return Client(path).to_json()
+	except: return
+
+@eel.expose
 def request_custom_client():
 	root = Tk()
 	root.withdraw()
 	root.wm_attributes('-topmost', 1)
 	folder = askdirectory(parent=root)
 	if folder:
-		try:
-			client = Client(os.path.normpath(folder))
-			return client.to_json()
-		except:
-			return
+		try: return Client(os.path.normpath(folder)).to_json()
+		except: return
 
 @eel.expose
 def load_mods_info():
@@ -81,6 +90,16 @@ def main_install(client_path, args, mods):
 			eel.installing_progress({"current":index, "total":total_mods, "download_progress":0})
 			result = client.install_mod(mod, on_progress=download_progress)
 			if not result: fails.append(mod.id)
+
+	mods_ids = list(map(lambda x: x.get('id'), mods))
+	SETTINGS = {
+		"lang": args.get('language'),
+		"client": client_path,
+		"mods": mods_ids
+	}
+	with open(os.path.join(local(), "settings.json"), 'w', encoding="utf-8") as f:
+		f.write(json.dumps(SETTINGS, indent=4, ensure_ascii=False))
+
 	return fails
 
 

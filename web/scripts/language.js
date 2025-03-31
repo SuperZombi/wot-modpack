@@ -97,7 +97,7 @@ function detect_lang(){
 	return ['en', 'ru', 'uk'].includes(user_lang) ? user_lang : "en"
 }
 function initLanguage(){
-	currentLang = detect_lang()
+	currentLang = currentLang || detect_lang()
 	let lang_el = document.querySelector('.setting_element[name="language"]')
 	lang_el.value = currentLang
 	lang_el.onchange = _=>{

@@ -33,7 +33,8 @@ window.onload=async _=>{
 		let client = document.querySelector("#client_path").value
 		let args = {
 			"delete_mods": document.querySelector("#delete_all_mods").checked,
-			"delete_configs": document.querySelector("#delete_mods_configs").checked
+			"delete_configs": document.querySelector("#delete_mods_configs").checked,
+			"language": document.querySelector('.setting_element[name="language"]').value
 		}
 		let fails = await eel.main_install(client, args, selectedMods)()
 		let result_area = document.querySelector("#install_results")
@@ -84,6 +85,27 @@ async function load_game_clients(){
 	opt.value = "custom"
 	opt.innerHTML = LANG("custom_game_folder")
 	parent.appendChild(opt)
+
+	let settings = await eel.load_settings()()
+	if (settings){
+		if (settings.client){
+			let client_info = await eel.get_client_info_by_path(settings.client)()
+			let target = [...parent.querySelectorAll('option')].filter(opt=>opt.value==client_info.path).shift()
+			if (target){
+				parent.value = client_info.path
+			} else {
+				target = document.createElement("option")
+				target.title = client_info.path
+				target.value = client_info.path
+				target.innerHTML = client_info.title
+				parent.appendChild(target)
+				parent.appendChild(parent.querySelector('option[value="custom"]'))
+				parent.value = target.value
+				let empty = parent.querySelector("option[value='']")
+				empty ? empty.remove() : null
+			}
+		}
+	}
 	
 	parent.onchange = async _=>{
 		if (parent.value == "custom"){
@@ -140,6 +162,26 @@ async function load_mods_info(){
 			})
 			modsManager.add(category_element)
 		})
+		let settings = await eel.load_settings()()
+		if (settings){
+			if (settings.mods){
+				settings.mods.forEach(mod_id=>{
+					let el = modsManager.root.querySelector(`label[id="${mod_id}"]`)
+					if (el){
+						let input = el.querySelector("input")
+						if (input.type == "checkbox"){
+							input.checked = true
+						}
+						else if (input.type == "radio"){
+							input.checked = true
+							let parent_group = el.closest(".group")
+							let group_checkbox = parent_group.querySelector(".summary input[type=checkbox]")
+							group_checkbox.checked = true
+						}
+					}
+				})
+			}
+		}
 		document.querySelector("#mods-area").setAttribute("loaded", "true")
 	} else {
 		alert(LANG("mods_info_parse_fail"))
@@ -182,4 +224,10 @@ async function initSettings(){
 	document.querySelector("#setting_button").onclick = _=>document.querySelector("#settings").classList.add("show")
 	document.querySelector("#settings .close").onclick = _=>document.querySelector("#settings").classList.remove("show")
 	document.querySelector("#app-version").innerHTML = await eel.app_version()()
+	let settings = await eel.load_settings()()
+	if (settings){
+		if (settings.lang){
+			currentLang = settings.lang
+		}
+	}
 }
