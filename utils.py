@@ -119,19 +119,3 @@ class Mod:
 					downloaded+=len(data)
 					if on_progress: on_progress(downloaded, total_size)
 					f.write(data)
-
-
-
-# mods_list = Mod("me.poliroid.modslistapi", [{
-# 	"url": os.path.abspath(os.path.join("mods", "me.poliroid.modslistapi.wotmod")),
-# 	"dest": "mods"
-# }])
-# settings_api = Mod("izeberg.modssettingsapi", [{
-# 	"url": os.path.join("mods", "izeberg.modssettingsapi.wotmod"),
-# 	"dest": "mods"
-# }])
-
-
-# client = Client("C:\\Games\\World_of_Tanks_CT")
-# client.install_mod(mods_list)
-# client.install_mod(settings_api)
