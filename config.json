@@ -47,7 +47,7 @@
 				"uk": "Кольорові позначки влучень (Протанки)",
 			},
 			"author": "Protanki",
-				"description": {
+			"description": {
 				"en": "<ul><li>Red — penetration of AP.</li><li>Yellow — cumulative or high explosive.</li><li>Green — did not penetrate.</li></ul>",
 				"ru": "<ul><li>Красний — пробитие ББ\\БП.</li><li>Желтый — кумулятив или фугас.</li><li>Зеленый — не пробил.</li></ul>",
 				"uk": "<ul><li>Червоний — пробиття ББ\\БП.</li><li>Жовтий — кумулятив або фугас.</li><li>Зелений — не пробив.</li></ul>",
@@ -68,7 +68,7 @@
 				"uk": "Кольорові позначки влучень (Спрощені)",
 			},
 			"author": "Just",
-				"description": {
+			"description": {
 				"en": "<ul><li>Red — penetration of AP.</li><li>Yellow — cumulative or high explosive.</li><li>Green — did not penetrate.</li></ul>",
 				"ru": "<ul><li>Красний — пробитие ББ\\БП.</li><li>Желтый — кумулятив или фугас.</li><li>Зеленый — не пробил.</li></ul>",
 				"uk": "<ul><li>Червоний — пробиття ББ\\БП.</li><li>Жовтий — кумулятив або фугас.</li><li>Зелений — не пробив.</li></ul>",
@@ -89,7 +89,7 @@
 				"uk": "Світлофор небезпеки",
 			},
 			"author": "Protanki",
-				"description": {
+			"description": {
 				"en": "<ul><li>Red — enemy at 50 meters.</li><li>Yellow — enemy is out of sight and can cause damage.</li><li>Green — enemy is illuminated out of sight.</li></ul>",
 				"ru": "<ul><li>Красний — противник в 50 метрах.</li><li>Желтый — противник вне поля зрения и может нанести урон.</li><li>Зеленый — противник засвечен вне поля зрения.</li></ul>",
 				"uk": "<ul><li>Червоний — ворог в 50 метрах.</li><li>Жовтий — ворог поза полем зору і може завдати шкоди.</li><li>Зелений — ворог засвічений поза полем зору.</li></ul>",
@@ -109,7 +109,7 @@
 				"uk": "Перегляд влучень",
 			},
 			"author": "P0LIR0ID",
-				"description": {
+			"description": {
 				"en": "The mod allows you to view all hits on the tank received in battle.",
 				"ru": "Мод позволяет рассмотреть все попадания по танку полученные в бою.",
 				"uk": "Мод дозволяє розглянути всі влучання по танку, отримані в бою.",
