@@ -116,7 +116,7 @@
 				"url": "https://github.com/SuperZombi/wot-modpack/raw/refs/heads/mods/mods/hangar/me.poliroid.battlehits.wotmod",
 				"dest": "mods"
 			}],
-			"image": "https://raw.githubusercontent.com/SuperZombi/wot-modpack/refs/heads/mods/images/hangar/me.poliroid.battlehits.jpg",
+			"image": "https://raw.githubusercontent.com/SuperZombi/wot-modpack/refs/heads/mods/images/hangar/poliroid.battlehits.jpg",
 			"title": {
 				"en": "Browsing hits",
 				"ru": "Просмотр попаданий",
@@ -127,6 +127,26 @@
 				"en": "The mod allows you to view all hits on the tank received in battle.",
 				"ru": "Мод позволяет рассмотреть все попадания по танку полученные в бою.",
 				"uk": "Мод дозволяє розглянути всі влучання по танку, отримані в бою.",
+			},
+			"category": "hangar"
+		},
+		{
+			"id": "tv.protanki.reducedarmor",
+			"files": [{
+				"url": "https://github.com/SuperZombi/wot-modpack/raw/refs/heads/mods/mods/hangar/tv.protanki.reducedarmor.wotmod",
+				"dest": "mods"
+			}],
+			"image": "https://raw.githubusercontent.com/SuperZombi/wot-modpack/refs/heads/mods/images/hangar/protanki.reducedarmor.jpg",
+			"title": {
+				"en": "Tank armor calculator",
+				"ru": "Калькулятор брони танков",
+				"uk": "Калькулятор броні танків",
+			},
+			"author": "Protanki",
+			"description": {
+				"en": "The mod allows you to analyze the armor of the selected tank in the hangar.<br>It will show the real thickness of the tank's armor in the selected place.",
+				"ru": "Мод позволяет анализировать броню выбранного танка в ангаре.<br>Он покажет реальную толщину брони танка в выбранном месте с учетом приведенной брони и экранов.",
+				"uk": "Мод дозволяє аналізувати броню вибраного танка в ангарі. Він покаже реальну товщину броні танка у вибраному місці з урахуванням наведеної броні та екранів.",
 			},
 			"category": "hangar"
 		},
