@@ -97,6 +97,20 @@
 			"category": "battle"
 		},
 		{
+			"id": "battleClock",
+			"files": [{
+				"url": "https://github.com/SuperZombi/wot-modpack/raw/refs/heads/mods/mods/battle/battleClock.wotmod",
+				"dest": "mods"
+			}],
+			"image": "https://raw.githubusercontent.com/SuperZombi/wot-modpack/refs/heads/mods/images/battle/battleClock.jpg",
+			"title": {
+				"en": "Clock in battle",
+				"ru": "Часы в бою",
+				"uk": "Годинник у бою",
+			},
+			"category": "battle"
+		},
+		{
 			"id": "me.poliroid.battlehits",
 			"files": [{
 				"url": "https://github.com/SuperZombi/wot-modpack/raw/refs/heads/mods/mods/hangar/me.poliroid.battlehits.wotmod",
