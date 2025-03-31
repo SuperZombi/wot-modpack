@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<hangarClock align="right" offsetX="0" offsetY="0">
+
+	<!-- Background for Date, Clock, Day -->
+	<ConfigBackground visible="true" alpha="0.7">
+		<position x="-15" y="48"/>
+		<gType>LINEAR</gType>
+		<gColors>0x000000, 0x000000</gColors>
+		<gAlphas>1, 0</gAlphas>
+		<gRatios>0, 143</gRatios>
+		<gFocalPtRatio focalPtRatio="0"/>
+		<gBox width="320" height="320" rotation="135"/>
+		<gTxy tx="0" ty="0"/>
+		<gRectangle x="10" y="10" width="320" height="27"/>
+	</ConfigBackground>
+
+	<!-- Clock -->
+	<ConfigClock visible="true" AMPM="false" blink="false" sepWidth="2">
+		<position x="-10" y="57"/>
+		<text bold="false" color="0xFFFFCC" font="Arial" size="22"/>
+		<filters enable="true" filter="shadow">
+			<glow blurX="4" blurY="4" color="0x000000" strength="1"/>
+			<shadow angle="45" blurX="2" blurY="2" color="0x000000" distance="2" strength="1"/>
+		</filters>
+		<formatHrs offsetHrs="2">{HH}</formatHrs>
+		<formatMin offsetMin="2">{mm}</formatMin>
+		<formatSec offsetSec="2" visible="true">{ss}</formatSec>
+	</ConfigClock>
+
+</hangarClock>

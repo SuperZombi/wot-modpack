@@ -116,5 +116,26 @@
 			},
 			"category": "hangar"
 		},
+		{
+			"id": "AntonVK.HangarClock",
+			"files": [
+				{
+					"url": "https://github.com/SuperZombi/wot-modpack/raw/refs/heads/mods/mods/hangar/HangarClock.wotmod",
+					"dest": "mods"
+				},
+				{
+					"url": "https://github.com/SuperZombi/wot-modpack/raw/refs/heads/mods/configs/hangar/configHangarClock.xml",
+					"dest": "configs", "folder": "AntonVK"
+				}
+			],
+			"image": "https://raw.githubusercontent.com/SuperZombi/wot-modpack/refs/heads/mods/images/hangar/hangarClock.jpg",
+			"title": {
+				"en": "Hangar clock",
+				"ru": "Часы в ангаре",
+				"uk": "Годинник в гаражі",
+			},
+			"author": "AntonVK",
+			"category": "hangar"
+		},
 	]
 }
