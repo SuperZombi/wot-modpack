@@ -108,9 +108,11 @@ class Mod:
 			os.makedirs(target_map[file["dest"]], exist_ok=True)
 
 			if file["url"].startswith("http"):
-				return self.download(file["url"], target_map[file["dest"]], on_progress=on_progress)
+				success = self.download(file["url"], target_map[file["dest"]], on_progress=on_progress)
+				if not success: return False
 			else:
 				shutil.copy(file["url"], target_map[file["dest"]])
+		return True
 
 	def download(self, url, target_folder, on_progress=None):
 		filename = os.path.basename(url)
