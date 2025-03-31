@@ -171,5 +171,25 @@
 			"author": "AntonVK",
 			"category": "hangar"
 		},
+		{
+			"id": "me.poliroid.replaysmanager",
+			"files": [{
+				"url": "https://github.com/SuperZombi/wot-modpack/raw/refs/heads/mods/mods/hangar/me.poliroid.replaysmanager.wotmod",
+				"dest": "mods"
+			}],
+			"image": "https://raw.githubusercontent.com/SuperZombi/wot-modpack/refs/heads/mods/images/hangar/poliroid.replaysmanager.jpg",
+			"title": {
+				"en": "Replays Manager",
+				"ru": "Менеджер Реплеев",
+				"uk": "Менеджер Реплеїв",
+			},
+			"description": {
+				"en": "The mod lets you manage replays directly from the game client.<br>It can also be used to upload the selected replay to the wotreplays site.",
+				"ru": "Мод позволяет управлять реплями прямо из клиента игры.<br>Также с его помощью можно загрузить выбранный реплей на сайт wotreplays.",
+				"uk": "Мод дозволяє керувати реплями прямо з клієнта гри. Також з його допомогою можна завантажити вибраний реплей на сайт wotreplays.",
+			},
+			"author": "P0LIR0ID",
+			"category": "hangar"
+		},
 	]
 }
