@@ -1,0 +1,6 @@
+Eel
+pywin32
+requests
+pyinstaller
+JSON_minify
+xmltodict
