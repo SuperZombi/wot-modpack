@@ -94,12 +94,12 @@ class Mod:
 	def __repr__(self): return str(self)
 
 	def install(self, client, on_progress=None):
-		target_map = {
-			"mods": client.mods_folder,
-			"res_mods": client.res_mods,
-			"configs": client.configs_path
-		}
 		for file in self.files:
+			target_map = {
+				"mods": client.mods_folder,
+				"res_mods": client.res_mods,
+				"configs": os.path.join(client.configs_path, file.get("folder", ""))
+			}
 			os.makedirs(target_map[file["dest"]], exist_ok=True)
 
 			if file["url"].startswith("http"):
