@@ -17,11 +17,11 @@ def exe_path(relative_path=""):
 
 settings_mods = [
 	Mod("me.poliroid.modslistapi", [{
-		"url": os.path.abspath(os.path.join("mods", "me.poliroid.modslistapi.wotmod")),
+		"url": resource_path(os.path.join("mods", "me.poliroid.modslistapi.wotmod")),
 		"dest": "mods"
 	}]),
 	Mod("izeberg.modssettingsapi", [{
-		"url": os.path.join("mods", "izeberg.modssettingsapi.wotmod"),
+		"url": resource_path(os.path.join("mods", "izeberg.modssettingsapi.wotmod")),
 		"dest": "mods"
 	}])
 ]

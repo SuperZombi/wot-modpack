@@ -7,6 +7,7 @@ header{
 	justify-content: space-between;
 	align-items: center;
 	padding: 0 12px;
+	user-select: none;
 }
 
 #setting_button{
