@@ -5,6 +5,11 @@ let LOCALES = {
 		"ru": "Автор",
 		"uk": "Автор"
 	},
+	"version": {
+		"en": "Version:",
+		"ru": "Версия:",
+		"uk": "Версія:"
+	},
 	"settings": {
 		"en": "Settings",
 		"ru": "Настройки",
@@ -79,6 +84,11 @@ let LOCALES = {
 		"en": "Failed to get client info!",
 		"ru": "Не удалось получить информацию о клиенте!",
 		"uk": "Не вдалося отримати інформацію про клієнта!"
+	},
+	"failed_to_install": {
+		"en": "Failed to install the following mods",
+		"ru": "Не удалось установить следующие моды",
+		"uk": "Неможливо встановити наступні моди"
 	}
 }
 

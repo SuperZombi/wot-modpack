@@ -64,7 +64,7 @@
 					</label>
 				</p>
 				<h3 lang_="selected_mods">Mods to install:</h3>
-				<ul id="mods-install-list"></ul>
+				<ul class="mods-install-list" id="mods-install-list"></ul>
 			</div>
 			<div class="bottom-buttons">
 				<div class="button hover" onclick="changeTab('mods')" lang_="back">Back</div>
@@ -85,7 +85,7 @@
 		</div>
 		<div class="tab" name="finish">
 			<div class="flex-center">
-				<h3 lang_="installed_success">Mods installed successfully!</h3>
+				<div id="install_results"></div>
 				<div class="button hover" onclick="changeTab('home')" lang_="home">Home</div>
 			</div>
 		</div>
@@ -94,6 +94,7 @@
 	<div class="popup" id="settings">
 		<img src="/images/close.svg" class="close hover">
 		<h3 align="center" lang_="settings">Settings</h3>
+		<div><span lang_="version">Version</span> <span id="app-version"></span></div>
 		<div class="flex-row">
 			<img src="/images/planet.svg" height="20">
 			<span><span lang_="language">Language</span>:</span>

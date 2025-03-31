@@ -58,8 +58,16 @@ header{
 	padding: 0 20px;
 }
 
-#mods-install-list{
+.mods-install-list{
 	padding-left: 40px;
 	margin-left: -40px;
 	overflow: auto;
+}
+
+#app-version{
+	font-family: monospace;
+	font-size: 14px;
+	background: #666;
+	padding: 2px 6px;
+	border-radius: 12px;
 }

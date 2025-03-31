@@ -8,14 +8,15 @@ from tkinter import Tk
 from tkinter.filedialog import askdirectory
 from utils import *
 
+__version__ = "0.0.1"
 
 # Resources
 def resource_path(relative_path=""):
 	base_path = getattr(sys, '_MEIPASS', os.path.dirname(os.path.abspath(__file__)))
 	return os.path.join(base_path, relative_path)
 
-def exe_path(relative_path=""):
-	return os.path.join(os.getcwd(), relative_path)
+@eel.expose
+def app_version(): return __version__
 
 settings_mods = [
 	Mod("me.poliroid.modslistapi", [{
@@ -27,7 +28,6 @@ settings_mods = [
 		"dest": "mods"
 	}])
 ]
-
 
 ###
 @eel.expose
@@ -70,6 +70,7 @@ def main_install(client_path, args, mods):
 	client = Client(client_path)
 	if args.get("delete_mods", False):
 		client.delete_mods(args.get("delete_configs", False))
+	fails = []
 	if len(mods) > 0:
 		for mod in settings_mods:
 			client.install_mod(mod)
@@ -78,7 +79,9 @@ def main_install(client_path, args, mods):
 		total_mods = len(mods_arr)
 		for index, mod in enumerate(mods_arr):
 			eel.installing_progress({"current":index, "total":total_mods, "download_progress":0})
-			client.install_mod(mod, on_progress=download_progress)
+			result = client.install_mod(mod, on_progress=download_progress)
+			if not result: fails.append(mod.id)
+	return fails
 
 
 # MAIN
@@ -88,4 +91,4 @@ for browser in browsers:
 	try:
 		eel.start("index.html", mode=browser, size=(1000, 800), port=0)
 		break
-	except: None
+	except Exception: None

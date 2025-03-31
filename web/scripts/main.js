@@ -2,8 +2,8 @@ var modsManager;
 var modsData;
 
 window.onload=async _=>{
+	await initSettings()
 	initLanguage()
-
 	await load_game_clients()
 
 	document.querySelector("#navigate_to_mods").onclick = async _=>{
@@ -16,7 +16,6 @@ window.onload=async _=>{
 			}
 		}
 	}
-	initSettings()
 	changeTab("home")
 	document.querySelector("#loader").classList.add("hide")
 
@@ -36,7 +35,21 @@ window.onload=async _=>{
 			"delete_mods": document.querySelector("#delete_all_mods").checked,
 			"delete_configs": document.querySelector("#delete_mods_configs").checked
 		}
-		await eel.main_install(client, args, selectedMods)()
+		let fails = await eel.main_install(client, args, selectedMods)()
+		let result_area = document.querySelector("#install_results")
+		if (fails.length > 0){
+			result_area.innerHTML = `<h3>${LANG("failed_to_install")}:</h3>`
+			let list = document.createElement("ul")
+			list.className = "mods-install-list"
+			fails.forEach(fail=>{
+				let li = document.createElement("li")
+				li.innerHTML = fail
+				list.appendChild(li)
+			})
+			result_area.appendChild(list)
+		} else {
+			result_area.innerHTML = `<h3>${LANG("installed_success")}</h3>`
+		}
 		changeTab("finish")
 	}
 }
@@ -165,7 +178,8 @@ function installing_progress(message) {
 }
 
 
-function initSettings(){
+async function initSettings(){
 	document.querySelector("#setting_button").onclick = _=>document.querySelector("#settings").classList.add("show")
 	document.querySelector("#settings .close").onclick = _=>document.querySelector("#settings").classList.remove("show")
+	document.querySelector("#app-version").innerHTML = await eel.app_version()()
 }

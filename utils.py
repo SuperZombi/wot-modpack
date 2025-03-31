@@ -83,7 +83,7 @@ class Client:
 				os.makedirs(path)
 
 	def install_mod(self, mod, on_progress=None):
-		mod.install(self, on_progress=on_progress)
+		return mod.install(self, on_progress=on_progress)
 
 
 class Mod:
@@ -103,19 +103,23 @@ class Mod:
 			os.makedirs(target_map[file["dest"]], exist_ok=True)
 
 			if file["url"].startswith("http"):
-				self.download(file["url"], target_map[file["dest"]], on_progress=on_progress)
+				return self.download(file["url"], target_map[file["dest"]], on_progress=on_progress)
 			else:
 				shutil.copy(file["url"], target_map[file["dest"]])
 
 	def download(self, url, target_folder, on_progress=None):
 		filename = os.path.basename(url)
-		r = requests.get(url, stream=True)
-		if r.ok:
-			total_size = int(r.headers.get("content-length", 0))
-			downloaded = 0
-			if on_progress: on_progress(downloaded, total_size)
-			with open(os.path.join(target_folder, filename), "wb") as f:
-				for data in r.iter_content(1024):
-					downloaded+=len(data)
-					if on_progress: on_progress(downloaded, total_size)
-					f.write(data)
+		try:
+			r = requests.get(url, stream=True)
+			if r.ok:
+				total_size = int(r.headers.get("content-length", 0))
+				downloaded = 0
+				if on_progress: on_progress(downloaded, total_size)
+				with open(os.path.join(target_folder, filename), "wb") as f:
+					for data in r.iter_content(1024):
+						downloaded+=len(data)
+						if on_progress: on_progress(downloaded, total_size)
+						f.write(data)
+				return True
+		except:
+			None
