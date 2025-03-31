@@ -112,7 +112,7 @@ class Checkbox{
 			document.querySelector("#mod-description").innerHTML = this.description
 			if (this.author){
 				document.querySelector("#mod-author").innerHTML = `
-					<span>${LOCALES['author'][this.language]}</span>
+					<span>${LANG('author')}</span>
 					<span>${this.author}</span>
 				`
 			}

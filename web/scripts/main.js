@@ -1,8 +1,9 @@
 var modsManager;
 var modsData;
-var currentLang = "uk";
 
 window.onload=async _=>{
+	initLanguage()
+
 	await load_game_clients()
 
 	document.querySelector("#navigate_to_mods").onclick = async _=>{
@@ -102,7 +103,7 @@ async function load_mods_info(){
 		})
 		document.querySelector("#mods-area").setAttribute("loaded", "true")
 	} else {
-		alert("Failed to load mod info. Try again latter.")
+		alert(LANG("mods_info_parse_fail"))
 	}
 }
 
@@ -116,7 +117,7 @@ function buildModsInstallList(mods){
 			parent.appendChild(el)
 		})
 	} else {
-		parent.innerHTML = "Ничего установлено не будет"
+		parent.innerHTML = LANG("nothing_selected")
 	}
 }
 
@@ -137,12 +138,3 @@ function installing_progress(message) {
 	}
 }
 
-
-
-let LOCALES = {
-	"author": {
-		"en": "Author",
-		"ru": "Автор",
-		"uk": "Автор"
-	}
-}

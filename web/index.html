@@ -6,6 +6,7 @@
 	<script type="text/javascript" src="/eel.js"></script>
 	<link rel="stylesheet" href="/styles/base.css">
 	<link rel="stylesheet" href="/styles/main.css">
+	<script src="/scripts/language.js"></script>
 	<script src="/scripts/components.js"></script>
 	<script src="/scripts/main.js" defer></script>
 </head>
@@ -21,12 +22,12 @@
 	<div id="tabs-area">
 		<div class="tab" name="home">
 			<div class="flex-center">
-				<h3>Select game folder:</h3>
+				<h3 lang_="select_game_folder">Select game folder:</h3>
 				<select class="button hover" id="client_select">
-					<option value="custom">Custom</option>
+					<option value="custom" lang_="custom_game_folder">Custom</option>
 				</select>
 				<br>
-				<div class="button hover" id="navigate_to_mods">Next</div>
+				<div class="button hover" id="navigate_to_mods" lang_="next">Next</div>
 			</div>
 		</div>
 
@@ -43,8 +44,8 @@
 				</div>
 			</div>
 			<div class="bottom-buttons">
-				<div class="button hover" onclick="changeTab('home')">Preview</div>
-				<div class="button hover" id="main_button">Next</div>
+				<div class="button hover" onclick="changeTab('home')" lang_="back">Back</div>
+				<div class="button hover" id="main_button" lang_="next">Next</div>
 			</div>
 		</div>
 
@@ -56,25 +57,25 @@
 					<br>
 					<label class="hover">
 						<input type="checkbox" checked id="delete_all_mods">
-						<span>Удалить все установленные моды</span>
+						<span lang_="remove_all_mods">Remove all installed mods</span>
 					</label>
 					<br>
 					<label class="hover">
 						<input type="checkbox" id="delete_mods_configs">
-						<span>Удалить настройки модов</span>
+						<span lang_="remove_mod_configs">Delete mod configs</span>
 					</label>
 				</p>
-				<h3>Mods to install:</h3>
+				<h3 lang_="selected_mods">Mods to install:</h3>
 				<ul id="mods-install-list"></ul>
 			</div>
 			<div class="bottom-buttons">
-				<div class="button hover" onclick="changeTab('mods')">Preview</div>
-				<div class="button hover" id="run_main_button">Next</div>
+				<div class="button hover" onclick="changeTab('mods')" lang_="back">Back</div>
+				<div class="button hover" id="run_main_button" lang_="next">Next</div>
 			</div>
 		</div>
 		<div class="tab" name="main_installer">
 			<div class="flex-center">
-				<h4>Установка модификаций</h4>
+				<h4 lang_="installing_mods">Installing modifications</h4>
 				<div id="progress-files">
 					<progress></progress> <span>0/0</span>
 				</div>
@@ -86,8 +87,8 @@
 		</div>
 		<div class="tab" name="finish">
 			<div class="flex-center">
-				<h3>Моди успішно встановлено!</h3>
-				<div class="button hover" onclick="changeTab('home')">Home</div>
+				<h3 lang_="installed_success">Mods installed successfully!</h3>
+				<div class="button hover" onclick="changeTab('home')" lang_="home">Home</div>
 			</div>
 		</div>
 	</div>
