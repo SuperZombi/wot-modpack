@@ -23,7 +23,7 @@ jobs:
         pip install -r ../github/requirements.txt
 
     - name: Build
-      run: pyinstaller --noconfirm --onefile --noconsole --name "WebModpack" --add-data "web\\;.\\web" --add-data "mods\\;.\\mods" main.py
+      run: pyinstaller --noconfirm --onefile --noconsole --name "Web Modpack" --add-data "web\\;.\\web" --add-data "mods\\;.\\mods" main.py
 
     - name: Upload
       uses: actions/upload-artifact@v4
