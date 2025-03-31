@@ -23,9 +23,7 @@
 		<div class="tab" name="home">
 			<div class="flex-center">
 				<h3 lang_="select_game_folder">Select game folder:</h3>
-				<select class="button hover" id="client_select">
-					<option value="custom" lang_="custom_game_folder">Custom</option>
-				</select>
+				<select class="button hover" id="client_select"></select>
 				<br>
 				<div class="button hover" id="navigate_to_mods" lang_="next">Next</div>
 			</div>
@@ -90,6 +88,20 @@
 				<h3 lang_="installed_success">Mods installed successfully!</h3>
 				<div class="button hover" onclick="changeTab('home')" lang_="home">Home</div>
 			</div>
+		</div>
+	</div>
+
+	<div class="popup" id="settings">
+		<img src="/images/close.svg" class="close hover">
+		<h3 align="center" lang_="settings">Settings</h3>
+		<div class="flex-row">
+			<img src="/images/planet.svg" height="20">
+			<span><span lang_="language">Language</span>:</span>
+			<select class="setting_element button hover" name="language">
+				<option value="en">English</option>
+				<option value="uk">Українська</option>
+				<option value="ru">Русский</option>
+			</select>
 		</div>
 	</div>
 

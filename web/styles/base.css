@@ -28,6 +28,11 @@ svg{
 	align-items: center;
 	justify-content: center;
 }
+.flex-row {
+	display: flex;
+	align-items: center;
+	gap: 5px;
+}
 .shade{
 	position: fixed;
 	inset: 0;
@@ -233,6 +238,32 @@ label{
 }
 .group .summary::after{
 	content: '⯆';
+}
+
+
+.popup {
+	position: fixed;
+	background: inherit;
+	width: fit-content;
+	min-width: 400px;
+	height: 70vh;
+	inset: 0;
+	margin: auto;
+	display: none;
+	filter: drop-shadow(0 0 6px #666);
+	border-radius: 12px;
+	padding: 20px;
+}
+.popup.show {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+.popup .close{
+	height: 24px;
+	position: absolute;
+	top: 12px;
+	right: 12px;
 }
 
 

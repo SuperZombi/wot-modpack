@@ -7,23 +7,23 @@ window.onload=async _=>{
 	await load_game_clients()
 
 	document.querySelector("#navigate_to_mods").onclick = async _=>{
-		changeTab("mods")
-		if (document.querySelector("#mods-area").getAttribute("loaded") == "false"){
-			document.querySelector("#loader").classList.remove("hide")
-			await load_mods_info()
-			document.querySelector("#loader").classList.add("hide")
+		if (document.querySelector("#client_path").value){
+			changeTab("mods")
+			if (document.querySelector("#mods-area").getAttribute("loaded") == "false"){
+				document.querySelector("#loader").classList.remove("hide")
+				await load_mods_info()
+				document.querySelector("#loader").classList.add("hide")
+			}
 		}
 	}
+	initSettings()
 	changeTab("home")
 	document.querySelector("#loader").classList.add("hide")
-
 
 	document.querySelector("#main_button").onclick = _=>{
 		changeTab("install")
 		let selectedModsIds = modsManager.get()
 		let selectedMods = modsData.mods.filter(mod => selectedModsIds.includes(mod.id))
-		// console.log(modsManager.get())
-		// modsManager.changeLanguage("en")
 		buildModsInstallList(selectedMods)
 	}
 
@@ -39,7 +39,6 @@ window.onload=async _=>{
 		await eel.main_install(client, args, selectedMods)()
 		changeTab("finish")
 	}
-
 }
 function changeTab(tab_name){
 	document.querySelectorAll("#tabs-area .tab.active").forEach(tab=>tab.classList.remove("active"))
@@ -54,19 +53,46 @@ function changeTab(tab_name){
 async function load_game_clients(){
 	let parent = document.querySelector("#client_select")
 	let clientsInfo = await eel.get_clients()()
-	clientsInfo.forEach(client=>{
-		let option = document.createElement("option")
-		option.innerHTML = client.title
-		option.title = client.path
-		option.value = client.path
-		parent.appendChild(option)
-	})
-	parent.appendChild(parent.querySelector("option[value='custom']"))
-	parent.querySelector("option").selected = true
+	if (clientsInfo.length > 0){
+		clientsInfo.forEach(client=>{
+			let option = document.createElement("option")
+			option.innerHTML = client.title
+			option.title = client.path
+			option.value = client.path
+			parent.appendChild(option)
+		})
+	} else {
+		let empt = document.createElement("option")
+		empt.value = ""
+		parent.appendChild(empt)
+	}
+
+	let opt = document.createElement("option")
+	opt.value = "custom"
+	opt.innerHTML = LANG("custom_game_folder")
+	parent.appendChild(opt)
 	
 	parent.onchange = async _=>{
 		if (parent.value == "custom"){
-			console.log("Custom")
+			let selected_client = await eel.request_custom_client()()
+			if (!selected_client){
+				parent.value = parent.firstChild.value
+				alert(LANG("failed_get_client"))
+			} else {
+				let target = [...parent.querySelectorAll('option')].filter(opt=>opt.value==selected_client.path).shift()
+				if (!target){
+					target = document.createElement("option")
+					target.title = selected_client.path
+					target.value = selected_client.path
+					target.innerHTML = selected_client.title
+					parent.appendChild(target)
+					parent.appendChild(parent.querySelector('option[value="custom"]'))
+					let empty = parent.querySelector("option[value='']")
+					empty ? empty.remove() : null
+				}
+				parent.value = target.value
+				document.querySelector("#client_path").value = target.value
+			}
 		} else {
 			document.querySelector("#client_path").value = parent.value
 		}
@@ -138,3 +164,8 @@ function installing_progress(message) {
 	}
 }
 
+
+function initSettings(){
+	document.querySelector("#setting_button").onclick = _=>document.querySelector("#settings").classList.add("show")
+	document.querySelector("#settings .close").onclick = _=>document.querySelector("#settings").classList.remove("show")
+}

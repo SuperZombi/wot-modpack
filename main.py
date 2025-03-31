@@ -4,6 +4,8 @@ import json
 import re
 import requests
 from json_minify import json_minify
+from tkinter import Tk
+from tkinter.filedialog import askdirectory
 from utils import *
 
 
@@ -36,12 +38,28 @@ def get_clients():
 	return json.loads(json.dumps(clients, default=Client.to_json))
 
 @eel.expose
+def request_custom_client():
+	root = Tk()
+	root.withdraw()
+	root.wm_attributes('-topmost', 1)
+	folder = askdirectory(parent=root)
+	if folder:
+		try:
+			client = Client(os.path.normpath(folder))
+			return client.to_json()
+		except:
+			return
+
+@eel.expose
 def load_mods_info():
-	r = requests.get('https://raw.githubusercontent.com/SuperZombi/wot-modpack/refs/heads/mods/config.json')
-	if r.ok:
-		string = json_minify(r.content.decode()) # remove comments
-		string = re.sub(r'''(?<=[}\]"']),(?!\s*[{["'])''', "", string, 0) # remove coma at the end
-		return json.loads(string)
+	try:
+		r = requests.get('https://raw.githubusercontent.com/SuperZombi/wot-modpack/refs/heads/mods/config.json')
+		if r.ok:
+			string = json_minify(r.content.decode()) # remove comments
+			string = re.sub(r'''(?<=[}\]"']),(?!\s*[{["'])''', "", string, 0) # remove coma at the end
+			return json.loads(string)
+	except:
+		return
 
 
 def download_progress(current, total):
@@ -49,8 +67,7 @@ def download_progress(current, total):
 
 @eel.expose
 def main_install(client_path, args, mods):
-	# client = Client(client_path)
-	client = Client("C:\\Games\\World_of_Tanks_CT")
+	client = Client(client_path)
 	if args.get("delete_mods", False):
 		client.delete_mods(args.get("delete_configs", False))
 	if len(mods) > 0:
@@ -66,10 +83,9 @@ def main_install(client_path, args, mods):
 
 # MAIN
 eel.init(resource_path("web"))
-# browsers = ['chrome', 'edge', 'default']
-browsers = ['default']
+browsers = ['chrome', 'edge', 'default']
 for browser in browsers:
 	try:
-		eel.start("index.html", mode=browser, size=(1000, 800))
+		eel.start("index.html", mode=browser, size=(1000, 800), port=0)
 		break
 	except: None

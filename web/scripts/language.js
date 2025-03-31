@@ -5,6 +5,16 @@ let LOCALES = {
 		"ru": "Автор",
 		"uk": "Автор"
 	},
+	"settings": {
+		"en": "Settings",
+		"ru": "Настройки",
+		"uk": "Налаштування"
+	},
+	"language": {
+		"en": "Language",
+		"ru": "Язык",
+		"uk": "Мова"
+	},
 	"select_game_folder": {
 		"en": "Select game folder",
 		"ru": "Выберите папку с игрой",
@@ -64,6 +74,11 @@ let LOCALES = {
 		"en": "Failed to load mods info. Try again latter.",
 		"ru": "Не удалось загрузить информацию о модах. Попробуйте позже.",
 		"uk": "Не вдалося завантажити інформацію про моди. Спробуйте пізніше."
+	},
+	"failed_get_client": {
+		"en": "Failed to get client info!",
+		"ru": "Не удалось получить информацию о клиенте!",
+		"uk": "Не вдалося отримати інформацію про клієнта!"
 	}
 }
 
@@ -73,6 +88,16 @@ function detect_lang(){
 }
 function initLanguage(){
 	currentLang = detect_lang()
+	let lang_el = document.querySelector('.setting_element[name="language"]')
+	lang_el.value = currentLang
+	lang_el.onchange = _=>{
+		currentLang = lang_el.value
+		localizePage()
+		modsManager ? modsManager.changeLanguage(lang_el.value) : null
+	}
+	localizePage()
+}
+function localizePage(){
 	document.querySelectorAll("[lang_]").forEach(el=>{
 		el.innerHTML = LANG(el.getAttribute("lang_"))
 	})
