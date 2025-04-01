@@ -97,6 +97,26 @@
 			"category": "battle"
 		},
 		{
+			"id": "master_xh.battleatlas",
+			"files": [{
+				"url": "https://github.com/SuperZombi/wot-modpack/raw/refs/heads/mods/mods/battle/master_xh.battleatlas.wotmod",
+				"dest": "mods"
+			}],
+			"image": "https://raw.githubusercontent.com/SuperZombi/wot-modpack/refs/heads/mods/images/battle/master_xh.battleatlas.jpg",
+			"title": {
+				"en": "Colored tank icons",
+				"ru": "Цветные иконки танков",
+				"uk": "Кольорові іконки танків",
+			},
+			"description": {
+				"en": "The mod allows you to analyze vehicle types before the battle faster.",
+				"ru": "Мод позволяет быстрее анализировать типы техники перед началом боя.",
+				"uk": "Мод дозволяє швидше аналізувати типи техніки перед початком бою.",
+			},
+			"author": "Master_XH",
+			"category": "battle"
+		},
+		{
 			"id": "battleClock",
 			"files": [{
 				"url": "https://github.com/SuperZombi/wot-modpack/raw/refs/heads/mods/mods/battle/battleClock.wotmod",
