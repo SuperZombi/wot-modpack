@@ -1,6 +1,8 @@
 name: Build
 
 on:
+  release:
+    types: [published]
   workflow_dispatch:
 
 jobs:
@@ -26,7 +28,8 @@ jobs:
       run: pyinstaller --noconfirm --onefile --noconsole --name "Web Modpack" --add-data "web\\;.\\web" --add-data "mods\\;.\\mods" main.py
 
     - name: Upload
-      uses: actions/upload-artifact@v4
+      uses: xresloader/upload-to-github-release@v1
       with:
-        name: Web Modpack
-        path: ./src/dist/Web Modpack.exe
+        file: "./src/dist/Web Modpack.exe"
+        overwrite: true
+        update_latest_release: true
