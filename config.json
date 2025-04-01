@@ -42,9 +42,9 @@
 			}],
 			"image": "https://raw.githubusercontent.com/SuperZombi/wot-modpack/refs/heads/mods/images/battle/tv.protanki.damagestickers.jpg",
 			"title": {
-				"en": "Colored hitmarks (Protanki)",
-				"ru": "Цветные отметки попаданий (Протанки)",
-				"uk": "Кольорові позначки влучень (Протанки)",
+				"en": "Colored hitmarks (Classic)",
+				"ru": "Цветные отметки попаданий (Классические)",
+				"uk": "Кольорові позначки влучень (Класичні)",
 			},
 			"author": "Protanki",
 			"description": {
