@@ -27,6 +27,14 @@
 			},
 			"image": "/images/hangar.png"
 		},
+		{
+			"name": "other",
+			"title": {
+				"en": "Other",
+				"ru": "Другое",
+				"uk": "Інше",
+			}
+		},
 	],
 
 
@@ -245,6 +253,26 @@
 			},
 			"author": "P0LIR0ID",
 			"category": "hangar"
+		},
+		{
+			"id": "alphasave1.ReplayFreeCam",
+			"files": [{
+				"url": "https://github.com/SuperZombi/wot-modpack/raw/refs/heads/mods/mods/other/alphasave1.ReplayFreeCam.wotmod",
+				"dest": "mods"
+			}],
+			"image": "https://raw.githubusercontent.com/SuperZombi/wot-modpack/refs/heads/mods/images/other/ReplayFreeCam.jpg",
+			"title": {
+				"en": "Replays Free Camera",
+				"ru": "Свободная камера в реплеях",
+				"uk": "Вільна камера в реплеях",
+			},
+			"description": {
+				"en": "Caps Lock + F3 — Turn on camera<br>Q/E/mouse wheel — camera movement up/down<br>1-0 — camera flight speed<br>P — smooth camera flight<br>X — camera moves parallel to ground<br>C — camera rotation around a point<br>B — attach the camera to the tank body<br>Insert/Delete — camera zoom<br>Num lock — camera tilt<br>O/L — camera tilt sensitivity",
+				"ru": "Caps Lock + F3 — Включить камеру<br>Q/E/колесико мыши — движение камеры вверх/вниз<br>1-0 — скорость полета камеры<br>P — активация плавного полета камеры<br>X — камера передвигается параллельно земле<br>C — вращение камеры вокруг точки<br>B — закрепить камеру на корпус танка<br>Insert/Delete — зум камеры<br>Num lock — наклон камеры<br>O/L — чувствительность наклона камеры",
+				"uk": "Caps Lock + F3 — Увімкнути камеру<br>Q/E/колесо миші — рух камери вгору/вниз<br>1-0 — швидкість польоту камери<br>P — активація плавного польоту камери<br>X — камера пересувається паралельно землі<br>C — обертання камери навколо точки<br>B — закріпити камеру на корпус танка<br>Insert/Delete — зум камери<br>Num lock — нахил камери<br>O/L — чутливість нахилу камери",
+			},
+			"author": "alphasave1",
+			"category": "other"
 		},
 	]
 }
