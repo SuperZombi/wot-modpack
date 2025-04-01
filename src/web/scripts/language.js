@@ -89,6 +89,16 @@ let LOCALES = {
 		"en": "Failed to install the following mods",
 		"ru": "Не удалось установить следующие моды",
 		"uk": "Неможливо встановити наступні моди"
+	},
+	"download": {
+		"en": "Download",
+		"ru": "Скачать",
+		"uk": "Завантажити"
+	},
+	"update_available": {
+		"en": "Update available!",
+		"ru": "Доступно обновление!",
+		"uk": "Доступне оновлення!"
 	}
 }
 

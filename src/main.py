@@ -25,6 +25,14 @@ def load_settings():
 		with open(path, 'r', encoding='utf-8') as f:
 			return json.loads(f.read())
 
+@eel.expose
+def check_updates():
+	r = requests.get('https://api.github.com/repos/SuperZombi/wot-modpack/releases/latest')
+	if r.ok:
+		remote_version = Version(r.json()['tag_name'])
+		current_version = Version(__version__)
+		return remote_version > current_version
+
 settings_mods = [
 	Mod("me.poliroid.modslistapi", [{
 		"url": resource_path(os.path.join("mods", "me.poliroid.modslistapi.wotmod")),

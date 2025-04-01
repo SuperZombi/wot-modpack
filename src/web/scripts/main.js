@@ -65,26 +65,24 @@ function changeTab(tab_name){
 }
 
 async function load_game_clients(){
+	function createOption(value, text){
+		let e = document.createElement("option")
+		e.value = value
+		e.title = value
+		e.innerHTML = text
+		return e
+	}
+
 	let parent = document.querySelector("#client_select")
 	let clientsInfo = await eel.get_clients()()
 	if (clientsInfo.length > 0){
 		clientsInfo.forEach(client=>{
-			let option = document.createElement("option")
-			option.innerHTML = client.title
-			option.title = client.path
-			option.value = client.path
-			parent.appendChild(option)
+			parent.appendChild(createOption(client.path, client.title))
 		})
 	} else {
-		let empt = document.createElement("option")
-		empt.value = ""
-		parent.appendChild(empt)
+		parent.appendChild(createOption("", ""))
 	}
-
-	let opt = document.createElement("option")
-	opt.value = "custom"
-	opt.innerHTML = LANG("custom_game_folder")
-	parent.appendChild(opt)
+	parent.appendChild(createOption("custom", LANG("custom_game_folder")))
 
 	let settings = await eel.load_settings()()
 	if (settings){
@@ -94,10 +92,7 @@ async function load_game_clients(){
 			if (target){
 				parent.value = client_info.path
 			} else {
-				target = document.createElement("option")
-				target.title = client_info.path
-				target.value = client_info.path
-				target.innerHTML = client_info.title
+				target = createOption(client_info.path, client_info.title)
 				parent.appendChild(target)
 				parent.appendChild(parent.querySelector('option[value="custom"]'))
 				parent.value = target.value
@@ -116,10 +111,7 @@ async function load_game_clients(){
 			} else {
 				let target = [...parent.querySelectorAll('option')].filter(opt=>opt.value==selected_client.path).shift()
 				if (!target){
-					target = document.createElement("option")
-					target.title = selected_client.path
-					target.value = selected_client.path
-					target.innerHTML = selected_client.title
+					target = createOption(selected_client.path, selected_client.title)
 					parent.appendChild(target)
 					parent.appendChild(parent.querySelector('option[value="custom"]'))
 					let empty = parent.querySelector("option[value='']")
@@ -221,9 +213,18 @@ function installing_progress(message) {
 
 
 async function initSettings(){
+	document.querySelectorAll(".popup").forEach(popup=>{
+		let x = popup.querySelector(".close")
+		if (x){
+			x.onclick = _=>popup.classList.remove("show")
+		}
+	})
 	document.querySelector("#setting_button").onclick = _=>document.querySelector("#settings").classList.add("show")
-	document.querySelector("#settings .close").onclick = _=>document.querySelector("#settings").classList.remove("show")
 	document.querySelector("#app-version").innerHTML = await eel.app_version()()
+	let update_available = await eel.check_updates()()
+	if (update_available){
+		document.querySelector("#update_popup").classList.add("show")
+	}
 	let settings = await eel.load_settings()()
 	if (settings){
 		if (settings.lang){
