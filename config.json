@@ -1,6 +1,15 @@
 {
 	"categories": [
 		{
+			"name": "aim",
+			"title": {
+				"en": "Aim",
+				"ru": "Прицел",
+				"uk": "Приціл",
+			},
+			"image": "/images/aim.png"
+		},
+		{
 			"name": "battle",
 			"title": {
 				"en": "Battle",
@@ -34,6 +43,32 @@
 
 
 	"mods": [
+		{
+			"id": "tv.protanki.reductioninfo",
+			"files": [
+				{
+					"url": "https://github.com/SuperZombi/wot-modpack/raw/refs/heads/mods/mods/aim/tv.protanki.reductioninfo.wotmod",
+					"dest": "mods"
+				},
+				{
+					"url": "https://raw.githubusercontent.com/SuperZombi/wot-modpack/refs/heads/mods/configs/aim/reductioninfo.json",
+					"dest": "configs", "folder": "protanki"
+				}
+			],
+			"image": "https://raw.githubusercontent.com/SuperZombi/wot-modpack/refs/heads/mods/images/aim/protanki.reductioninfo.jpg",
+			"title": {
+				"en": "Aiming timer",
+				"ru": "Таймер сведения",
+				"uk": "Таймер зведення",
+			},
+			"author": "Protanki",
+			"description": {
+				"en": "The mod shows the time to complete sighting.",
+				"ru": "Мод показывает время до полного сведения прицела.",
+				"uk": "Мод показує час до повного зведення прицілу.",
+			},
+			"category": "aim",
+		},
 		{
 			"id": "tv.protanki.damagestickers",
 			"files": [{
