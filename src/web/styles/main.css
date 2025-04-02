@@ -69,6 +69,7 @@ header a:hover{
 	padding-left: 40px;
 	margin-left: -40px;
 	overflow: auto;
+	max-width: 50vw;
 }
 
 #app-version{

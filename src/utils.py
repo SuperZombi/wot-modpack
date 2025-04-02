@@ -47,6 +47,7 @@ class Client:
 		self.path = path
 		self.parse_info()
 		self.title = f"WoT {self.realm} {self.version}"
+		self.installed = []
 
 	def __str__(self): return self.title
 	def __repr__(self): return f"<{str(self)}>"
@@ -90,6 +91,7 @@ class Client:
 						self.configs_path = os.path.abspath(os.path.join(self.mods_folder, "..", "configs"))
 	
 	def delete_mods(self, delete_configs=False):
+		self.installed = []
 		arr = [self.mods_folder, self.res_mods]
 		if delete_configs: arr.append(self.configs_path)
 		for path in arr:
@@ -98,17 +100,26 @@ class Client:
 				os.makedirs(path)
 
 	def install_mod(self, mod, on_progress=None):
-		return mod.install(self, on_progress=on_progress)
+		if not mod.id in self.installed:
+			result = mod.install(self, on_progress=on_progress)
+			if result: self.installed.append(mod.id)
+			return result
+		return True
 
 
 class Mod:
-	def __init__(self, id, files):
+	def __init__(self, id, files, requires=None):
 		self.id = id
 		self.files = files
+		self.requires = requires or []
 	def __str__(self): return f'<Mod "{self.id}">'
 	def __repr__(self): return str(self)
 
 	def install(self, client, on_progress=None):
+		if self.requires and len(self.requires) > 0:
+			for mod in self.requires:
+				client.install_mod(mod)
+
 		for file in self.files:
 			target_map = {
 				"mods": client.mods_folder,

@@ -8,7 +8,7 @@ from tkinter import Tk
 from tkinter.filedialog import askdirectory
 from utils import *
 
-__version__ = "0.0.1"
+__version__ = "0.0.2"
 
 # Resources
 def resource_path(relative_path=""):
@@ -33,16 +33,18 @@ def check_updates():
 		current_version = Version(__version__)
 		return remote_version > current_version
 
-settings_mods = [
-	Mod("me.poliroid.modslistapi", [{
-		"url": resource_path(os.path.join("mods", "me.poliroid.modslistapi.wotmod")),
-		"dest": "mods"
-	}]),
-	Mod("izeberg.modssettingsapi", [{
-		"url": resource_path(os.path.join("mods", "izeberg.modssettingsapi.wotmod")),
-		"dest": "mods"
-	}])
-]
+modslistapi = Mod("me.poliroid.modslistapi", [{
+	"url": resource_path(os.path.join("mods", "me.poliroid.modslistapi.wotmod")),
+	"dest": "mods"
+}])
+modssettingsapi = Mod("izeberg.modssettingsapi", [{
+	"url": resource_path(os.path.join("mods", "izeberg.modssettingsapi.wotmod")),
+	"dest": "mods"
+}], requires=[modslistapi])
+dependencies = {
+	"modslistapi": modslistapi,
+	"modssettingsapi": modssettingsapi
+}
 
 ###
 @eel.expose
@@ -82,17 +84,31 @@ def load_mods_info():
 def download_progress(current, total):
 	eel.installing_progress({"download_progress":round(current / total * 100)})
 
+def json_to_mod(data):
+	id = data.get('id')
+	files = data.get('files')
+	requires = data.get('requires', [])
+	requirements = []
+	if len(requires) > 0:
+		for req in requires:
+			mod = dependencies[req]
+			if mod: requirements.append(mod)
+	return Mod(id, files, requirements)
+
+
 @eel.expose
 def main_install(client_path, args, mods):
+	fails = []
 	client = Client(client_path)
 	if args.get("delete_mods", False):
-		client.delete_mods(args.get("delete_configs", False))
-	fails = []
+		try:
+			client.delete_mods(args.get("delete_configs", False))
+		except Exception as e:
+			fails.append(str(e))
+			return fails
+	
 	if len(mods) > 0:
-		for mod in settings_mods:
-			client.install_mod(mod)
-
-		mods_arr = list(map(lambda x: Mod(x.get('id'), x.get('files')), mods))
+		mods_arr = list(map(json_to_mod, mods))
 		total_mods = len(mods_arr)
 		for index, mod in enumerate(mods_arr):
 			eel.installing_progress({"current":index, "total":total_mods, "download_progress":0})
