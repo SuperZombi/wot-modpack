@@ -7,7 +7,7 @@
 				"ru": "Прицел",
 				"uk": "Приціл",
 			},
-			"image": "/images/aim.png"
+			"image": "https://raw.githubusercontent.com/SuperZombi/wot-modpack/refs/heads/mods/images/categories/aim.png"
 		},
 		{
 			"name": "battle",
@@ -16,7 +16,7 @@
 				"ru": "Боевые",
 				"uk": "Бойові",
 			},
-			"image": "/images/battle.png"
+			"image": "https://raw.githubusercontent.com/SuperZombi/wot-modpack/refs/heads/mods/images/categories/battle.png"
 		},
 		{
 			"name": "hangar",
@@ -25,7 +25,7 @@
 				"ru": "Ангарные",
 				"uk": "Гаражні",
 			},
-			"image": "/images/hangar.png"
+			"image": "https://raw.githubusercontent.com/SuperZombi/wot-modpack/refs/heads/mods/images/categories/hangar.png"
 		},
 		{
 			"name": "other",
