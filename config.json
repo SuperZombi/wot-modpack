@@ -270,9 +270,9 @@
 				"uk": "Вільна камера в реплеях",
 			},
 			"description": {
-				"en": "Caps Lock + F3 — Turn on camera<br>Q/E/mouse wheel — camera movement up/down<br>1-0 — camera flight speed<br>P — smooth camera flight<br>X — camera moves parallel to ground<br>C — camera rotation around a point<br>B — attach the camera to the tank body<br>Insert/Delete — camera zoom<br>Num lock — camera tilt<br>O/L — camera tilt sensitivity",
-				"ru": "Caps Lock + F3 — Включить камеру<br>Q/E/колесико мыши — движение камеры вверх/вниз<br>1-0 — скорость полета камеры<br>P — активация плавного полета камеры<br>X — камера передвигается параллельно земле<br>C — вращение камеры вокруг точки<br>B — закрепить камеру на корпус танка<br>Insert/Delete — зум камеры<br>Num lock — наклон камеры<br>O/L — чувствительность наклона камеры",
-				"uk": "Caps Lock + F3 — Увімкнути камеру<br>Q/E/колесо миші — рух камери вгору/вниз<br>1-0 — швидкість польоту камери<br>P — активація плавного польоту камери<br>X — камера пересувається паралельно землі<br>C — обертання камери навколо точки<br>B — закріпити камеру на корпус танка<br>Insert/Delete — зум камери<br>Num lock — нахил камери<br>O/L — чутливість нахилу камери",
+				"en": "<ul><li>Caps Lock + F3 — Turn on camera</li><li>Q/E/mouse wheel — camera movement up/down</li><li>1-0 — camera flight speed</li><li>P — smooth camera flight</li><li>X — camera moves parallel to ground</li><li>C — camera rotation around a point</li><li>B — attach the camera to the tank body</li><li>Insert/Delete — camera zoom</li><li>Num lock — camera tilt</li><li>O/L — camera tilt sensitivity</li></ul>",
+				"ru": "<ul><li>Caps Lock + F3 — Включить камеру</li><li>Q/E/колесико мыши — движение камеры вверх/вниз</li><li>1-0 — скорость полета камеры</li><li>P — активация плавного полета камеры</li><li>X — камера передвигается параллельно земле</li><li>C — вращение камеры вокруг точки</li><li>B — закрепить камеру на корпус танка</li><li>Insert/Delete — зум камеры</li><li>Num lock — наклон камеры</li><li>O/L — чувствительность наклона камеры</li></ul>",
+				"uk": "<ul><li>Caps Lock + F3 — Увімкнути камеру</li><li>Q/E/колесо миші — рух камери вгору/вниз</li><li>1-0 — швидкість польоту камери</li><li>P — активація плавного польоту камери</li><li>X — камера пересувається паралельно землі</li><li>C — обертання камери навколо точки</li><li>B — закріпити камеру на корпус танка</li><li>Insert/Delete — зум камери</li><li>Num lock — нахил камери</li><li>O/L — чутливість нахилу камери</li></ul>",
 			},
 			"author": "alphasave1",
 			"category": "other"
