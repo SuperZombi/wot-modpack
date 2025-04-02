@@ -35,6 +35,16 @@ let LOCALES = {
 		"ru": "Назад",
 		"uk": "Назад"
 	},
+	"reset": {
+		"en": "Reset",
+		"ru": "Сбросить",
+		"uk": "Скинути"
+	},
+	"reset_confirm": {
+		"en": "Reset all selected mods?",
+		"ru": "Сбросить все выбранные моды?",
+		"uk": "Скинути всі вибрані моди?"
+	},
 	"custom_game_folder": {
 		"en": "Custom",
 		"ru": "Выбрать",

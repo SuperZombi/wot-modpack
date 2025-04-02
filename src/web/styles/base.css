@@ -193,7 +193,7 @@ label{
 	padding: 0.5rem;
 }
 .details.category > .collapse > .wrapper > .content {
-	padding-top: 0;
+	padding-top: 1px;
 }
 .details .collapse .wrapper{
 	min-height: 0;
@@ -218,6 +218,11 @@ label{
 	width: 100%;
 	font-size: 20px;
 	padding: 10px 5px;
+	height: 50px;
+	gap: 0;
+}
+.category > .summary > span {
+	margin-left: 5px;
 }
 .category > .summary::after{
 	content: '⯆';

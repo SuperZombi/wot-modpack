@@ -30,12 +30,26 @@ header a:hover{
 #mods-area{
 	display: grid;
 	grid-template-columns: 1fr 1fr;
-	height: calc(100vh - 100px);
+	gap: 5px;
+	height: calc(100vh - 115px);
+	margin-bottom: 15px;
+	position: relative;
 }
-
+#mods-list{
+	overflow: auto;
+	scrollbar-width: thin;
+	color-scheme: dark;
+}
 #mod-preview{
 	padding: 5px;
 	padding-left: 0;
+	visibility: hidden;
+	opacity: 0;
+	transition: 0.25s;
+}
+#mod-preview.show{
+	visibility: visible;
+	opacity: 1;
 }
 #mod-image{
 	background: black;
@@ -56,7 +70,7 @@ header a:hover{
 	gap: 5px;
 }
 #mod-description ul{
-	padding-left: 0;
+	padding-left: 1em;
 }
 
 .bottom-buttons{
@@ -70,6 +84,8 @@ header a:hover{
 	margin-left: -40px;
 	overflow: auto;
 	max-width: 50vw;
+	scrollbar-width: thin;
+	color-scheme: dark;
 }
 
 #app-version{

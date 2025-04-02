@@ -115,13 +115,21 @@ class Checkbox{
 					<span>${LANG('author')}</span>
 					<span>${this.author}</span>
 				`
+			} else {
+				document.querySelector("#mod-author").innerHTML = ""
 			}
+			document.querySelector("#mod-preview").classList.add("show")
 		})
 		this.root.addEventListener("mouseleave", _=>{
-			document.querySelector("#mod-image").src = ""
-			document.querySelector("#mod-title").innerHTML = ""
-			document.querySelector("#mod-description").innerHTML = ""
-			document.querySelector("#mod-author").innerHTML = ""
+			document.querySelector("#mod-preview").classList.remove("show")
+			setTimeout(_=>{
+				if (!document.querySelector("#mod-preview").classList.contains("show")){
+					document.querySelector("#mod-image").src = ""
+					document.querySelector("#mod-title").innerHTML = ""
+					document.querySelector("#mod-description").innerHTML = ""
+					document.querySelector("#mod-author").innerHTML = ""
+				}
+			}, 250)
 		})
 	}
 	get(){

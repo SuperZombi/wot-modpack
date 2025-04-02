@@ -180,6 +180,23 @@ async function load_mods_info(){
 	}
 }
 
+function resetSelectedMods(){
+	if (confirm(LANG("reset_confirm"))){
+		modsManager.root.querySelectorAll('label[id]').forEach(el=>{
+			let input = el.querySelector("input")
+			if (input.type == "checkbox"){
+				input.checked = false
+			}
+			else if (input.type == "radio"){
+				input.checked = false
+				let parent_group = el.closest(".group")
+				let group_checkbox = parent_group.querySelector(".summary input[type=checkbox]")
+				group_checkbox.checked = false
+			}
+		})
+	}
+}
+
 function buildModsInstallList(mods){
 	let parent = document.querySelector("#mods-install-list")
 	if (mods.length > 0){
