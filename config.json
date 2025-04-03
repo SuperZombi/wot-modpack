@@ -195,6 +195,27 @@
 			"category": "battle"
 		},
 		{
+			"id": "me.kurzdor.battleequipment",
+			"files": [{
+				"url": "https://github.com/SuperZombi/wot-modpack/raw/refs/heads/mods/mods/battle/me.kurzdor.battleequipment.wotmod",
+				"dest": "mods"
+			}],
+			"image": "https://raw.githubusercontent.com/SuperZombi/wot-modpack/refs/heads/mods/images/battle/kurzdor.battleequipment.jpg",
+			"title": {
+				"en": "Battle Equipment",
+				"ru": "Оборудование в бою",
+				"uk": "Обладнання в бою",
+			},
+			"description": {
+				"en": "Shows the equipment installed on your tank in battle.",
+				"ru": "Показывает установленное на вашем танке оборудование в бою.",
+				"uk": "Показує встановлене на вашому танку обладнання у бою.",
+			},
+			"author": "Kurzdor",
+			"category": "battle",
+			"requires": ["modssettingsapi"]
+		},
+		{
 			"id": "me.poliroid.battlehits",
 			"files": [{
 				"url": "https://github.com/SuperZombi/wot-modpack/raw/refs/heads/mods/mods/hangar/me.poliroid.battlehits.wotmod",
