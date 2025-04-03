@@ -368,5 +368,25 @@
 			"author": "Kurzdor",
 			"category": "other"
 		},
+		{
+			"id": "better_sixth_sense",
+			"files": [{
+				"url": "https://github.com/SuperZombi/wot-modpack/raw/refs/heads/mods/mods/battle/better_sixth_sense.wotmod",
+				"dest": "mods"
+			}],
+			"image": "https://raw.githubusercontent.com/SuperZombi/wot-modpack/refs/heads/mods/images/battle/better_sixth_sense.jpg",
+			"title": {
+				"en": "Sixth sense 12sec",
+				"ru": "Лампочка 12сек",
+				"uk": "Лампочка 12сек",
+			},
+			"description": {
+				"en": "Increases the duration of the «Sixth Sense» skill to 12 seconds.",
+				"ru": "Увеличивает время действия навыка «Шестое чувство» до 12 секунд.",
+				"uk": "Збільшує час дії навички «Шосте чуття» до 12 секунд.",
+			},
+			"author": "pe3pa",
+			"category": "battle"
+		},
 	]
 }
