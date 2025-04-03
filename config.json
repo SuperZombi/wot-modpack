@@ -161,6 +161,26 @@
 			"category": "battle"
 		},
 		{
+			"id": "me.poliroid.gunmarks",
+			"files": [{
+				"url": "https://github.com/SuperZombi/wot-modpack/raw/refs/heads/mods/mods/battle/me.poliroid.gunmarks.wotmod",
+				"dest": "mods"
+			}],
+			"image": "https://raw.githubusercontent.com/SuperZombi/wot-modpack/refs/heads/mods/images/battle/poliroid.gunmarks.jpg",
+			"title": {
+				"en": "Gun marks percentage",
+				"ru": "Процент отметки",
+				"uk": "Відсоток позначки",
+			},
+			"description": {
+				"en": "The mod calculates the required damage in battle and shows the percentage of the mark increase.",
+				"ru": "Мод высчитывает необходимый урон в бою и показывает процент роста отметки.",
+				"uk": "Мод вираховує необхідну шкоду в бою і показує відсоток зростання позначки.",
+			},
+			"author": "P0LIR0ID",
+			"category": "battle"
+		},
+		{
 			"id": "battleClock",
 			"files": [{
 				"url": "https://github.com/SuperZombi/wot-modpack/raw/refs/heads/mods/mods/battle/battleClock.wotmod",
