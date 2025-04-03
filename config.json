@@ -348,5 +348,25 @@
 			"author": "alphasave1",
 			"category": "other"
 		},
+		{
+			"id": "kurzdor.presence",
+			"files": [{
+				"url": "https://github.com/SuperZombi/wot-modpack/raw/refs/heads/mods/mods/other/kurzdor.presence.wotmod",
+				"dest": "mods"
+			}],
+			"image": "https://raw.githubusercontent.com/SuperZombi/wot-modpack/refs/heads/mods/images/other/kurzdor.presence.jpg",
+			"title": {
+				"en": "Discord Activity",
+				"ru": "Активность в Discord",
+				"uk": "Активність у Discord",
+			},
+			"description": {
+				"en": "The mod shows detailed information about your activity in the game in the profile status.<br>Discord must be running.",
+				"ru": "Мод показывает детальную информацию об активности в игре в статусе профиля.<br>Необходимо запустить Discord.",
+				"uk": "Мод показує детальну інформацію про активність у грі в статусі профілю.<br>Необхідно запустити Discord.",
+			},
+			"author": "Kurzdor",
+			"category": "other"
+		},
 	]
 }
