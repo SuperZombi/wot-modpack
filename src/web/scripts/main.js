@@ -214,7 +214,8 @@ function buildModsInstallList(mods){
 
 eel.expose(installing_progress);
 function installing_progress(message) {
-	if (message.total){
+	if (message.id){
+		document.querySelector("#current_mod_id").innerHTML = message.id
 		let e = document.querySelector("#progress-files")
 		let bar = e.querySelector("progress")
 		bar.value = message.current

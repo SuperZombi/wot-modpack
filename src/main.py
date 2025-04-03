@@ -111,7 +111,12 @@ def main_install(client_path, args, mods):
 		mods_arr = list(map(json_to_mod, mods))
 		total_mods = len(mods_arr)
 		for index, mod in enumerate(mods_arr):
-			eel.installing_progress({"current":index, "total":total_mods, "download_progress":0})
+			eel.installing_progress({
+				"id": mod.id,
+				"current": index,
+				"total": total_mods,
+				"download_progress": 0
+			})
 			result = client.install_mod(mod, on_progress=download_progress)
 			if not result: fails.append(mod.id)
 
