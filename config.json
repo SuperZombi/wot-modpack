@@ -216,6 +216,27 @@
 			"requires": ["modssettingsapi"]
 		},
 		{
+			"id": "github.pruszko.distancemarker",
+			"files": [{
+				"url": "https://github.com/SuperZombi/wot-modpack/raw/refs/heads/mods/mods/battle/DistanceMarker.wotmod",
+				"dest": "mods"
+			}],
+			"image": "https://raw.githubusercontent.com/SuperZombi/wot-modpack/refs/heads/mods/images/battle/pruszko.distancemarker.jpg",
+			"title": {
+				"en": "Distance Marker",
+				"ru": "Дистанкция до танков",
+				"uk": "Дистанція до танків",
+			},
+			"description": {
+				"en": "The mod displays the distance to tanks.",
+				"ru": "Мод отображает расстояние до танков.",
+				"uk": "Мод відображає відстань до танків.",
+			},
+			"author": "Pruszko",
+			"category": "battle",
+			"requires": ["modssettingsapi"]
+		},
+		{
 			"id": "me.poliroid.battlehits",
 			"files": [{
 				"url": "https://github.com/SuperZombi/wot-modpack/raw/refs/heads/mods/mods/hangar/me.poliroid.battlehits.wotmod",
