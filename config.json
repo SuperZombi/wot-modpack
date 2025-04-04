@@ -37,6 +37,15 @@
 			"image": "https://raw.githubusercontent.com/SuperZombi/wot-modpack/refs/heads/mods/images/categories/stat.png"
 		},
 		{
+			"name": "art",
+			"title": {
+				"en": "Visual",
+				"ru": "Визуальные",
+				"uk": "Візуальні",
+			},
+			"image": "https://raw.githubusercontent.com/SuperZombi/wot-modpack/refs/heads/mods/images/categories/art.png"
+		},
+		{
 			"name": "other",
 			"title": {
 				"en": "Other",
@@ -54,6 +63,14 @@
 				"en": "Colored hit marks",
 				"ru": "Цветные отметки попаданий",
 				"uk": "Кольорові позначки влучень",
+			}
+		},
+		{
+			"id": "sky_change",
+			"title": {
+				"en": "Change the sky",
+				"ru": "Изменить небо",
+				"uk": "Змінити небо",
 			}
 		},
 	],
@@ -407,6 +424,22 @@
 			},
 			"category": "stats",
 			"requires": ["modssettingsapi"]
+		},
+		{
+			"id": "RainyWeather",
+			"files": [{
+				"url": "https://github.com/SuperZombi/wot-modpack/raw/refs/heads/mods/mods/art/RainyWeather.wotmod",
+				"dest": "mods"
+			}],
+			"image": "https://raw.githubusercontent.com/SuperZombi/wot-modpack/refs/heads/mods/images/art/RainyWeather.jpg",
+			"title": {
+				"en": "Rainy Weather",
+				"ru": "Дождливая погода",
+				"uk": "Дощова погода",
+			},
+			"author": "P_H_A_R_A_O_N",
+			"category": "art",
+			"group": "sky_change"
 		},
 	]
 }
