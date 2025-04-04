@@ -426,6 +426,22 @@
 			"requires": ["modssettingsapi"]
 		},
 		{
+			"id": "tv.protanki.StarrySky",
+			"files": [{
+				"url": "https://github.com/SuperZombi/wot-modpack/raw/refs/heads/mods/mods/art/tv.protanki.StarrySky.wotmod",
+				"dest": "mods"
+			}],
+			"image": "https://raw.githubusercontent.com/SuperZombi/wot-modpack/refs/heads/mods/images/art/protanki.StarrySky.jpg",
+			"title": {
+				"en": "Starry sky",
+				"ru": "Звездное небо",
+				"uk": "Зоряне небо",
+			},
+			"author": "Protanki",
+			"category": "art",
+			"group": "sky_change"
+		},
+		{
 			"id": "RainyWeather",
 			"files": [{
 				"url": "https://github.com/SuperZombi/wot-modpack/raw/refs/heads/mods/mods/art/RainyWeather.wotmod",
