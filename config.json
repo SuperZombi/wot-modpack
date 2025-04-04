@@ -172,10 +172,10 @@
 		{
 			"id": "me.poliroid.gunmarks",
 			"files": [{
-				"url": "https://github.com/SuperZombi/wot-modpack/raw/refs/heads/mods/mods/battle/me.poliroid.gunmarks.wotmod",
+				"url": "https://github.com/SuperZombi/wot-modpack/raw/refs/heads/mods/mods/stats/me.poliroid.gunmarks.wotmod",
 				"dest": "mods"
 			}],
-			"image": "https://raw.githubusercontent.com/SuperZombi/wot-modpack/refs/heads/mods/images/battle/poliroid.gunmarks.jpg",
+			"image": "https://raw.githubusercontent.com/SuperZombi/wot-modpack/refs/heads/mods/images/stats/poliroid.gunmarks.jpg",
 			"title": {
 				"en": "Gun marks percentage",
 				"ru": "Процент отметки",
