@@ -388,5 +388,25 @@
 			"author": "pe3pa",
 			"category": "battle"
 		},
+		{
+			"id": "calcElo",
+			"files": [
+				{"url": "https://github.com/SuperZombi/wot-modpack/raw/refs/heads/mods/mods/stats/calcElo/calcElo.wotmod", "dest": "mods"},
+				{"url": "https://github.com/SuperZombi/wot-modpack/raw/refs/heads/mods/mods/stats/calcElo/gambiter.guiflash.wotmod", "dest": "mods"}
+			],
+			"image": "https://raw.githubusercontent.com/SuperZombi/wot-modpack/refs/heads/mods/images/stats/calcElo.jpg",
+			"title": {
+				"en": "Elo Clan Rating",
+				"ru": "Рейтинг Эло клана",
+				"uk": "Рейтинг Ело клану",
+			},
+			"description": {
+				"en": "The mod shows the Elo values of your clan and the enemy clan. And also the number of points for winning or losing this battle.",
+				"ru": "Мод показывает значения Эло вашего клана и клана противника. А также количество очков за победу или поражение в этом бою.",
+				"uk": "Мод показує значення Ело вашого клану та клану супротивника. А також кількість очок за перемогу чи поразку у цьому бою.",
+			},
+			"category": "stats",
+			"requires": ["modssettingsapi"]
+		},
 	]
 }
