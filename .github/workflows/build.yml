@@ -25,7 +25,7 @@ jobs:
         pip install -r ../github/requirements.txt
 
     - name: Build
-      run: pyinstaller --noconfirm --onefile --noconsole --name "Web Modpack" --icon="../github/icon.ico" --add-data "web\\;.\\web" --add-data "mods\\;.\\mods" main.py
+      run: pyinstaller --noconfirm --onefile --noconsole --name "Web Modpack" --icon="../github/icon.ico" --version-file="../github/ver" --add-data "web\\;.\\web" --add-data "mods\\;.\\mods" main.py
 
     - name: Upload
       uses: xresloader/upload-to-github-release@v1
