@@ -496,5 +496,65 @@
 			"category": "six_sense",
 			"group": "six_sense",
 		},
+		{
+			"id": "sixth_sense.blue_timer",
+			"files": [
+				{"url": "https://github.com/SuperZombi/wot-modpack/raw/refs/heads/mods/mods/six_sense/sixthsense_core.wotmod", "dest": "mods"},
+				{"url": "https://github.com/SuperZombi/wot-modpack/raw/refs/heads/mods/configs/six_sense/blue_timer.zip", "dest": "configs"}
+			],
+			"image": "https://raw.githubusercontent.com/SuperZombi/wot-modpack/refs/heads/mods/images/six_sense/blue_timer.jpg",
+			"title": {
+				"en": "Sixth sense «Blue timer»",
+				"ru": "Лампочка «Синий таймер»",
+				"uk": "Лампочка «Синій таймер»",
+			},
+			"description": {
+				"en": "Animated «Sixth Sense» skill.",
+				"ru": "Анимированная лампочка навыка «Шестое чувство».",
+				"uk": "Анімована лампочка навички «Шосте почуття».",
+			},
+			"category": "six_sense",
+			"group": "six_sense",
+		},
+		{
+			"id": "sixth_sense.green_radar",
+			"files": [
+				{"url": "https://github.com/SuperZombi/wot-modpack/raw/refs/heads/mods/mods/six_sense/sixthsense_core.wotmod", "dest": "mods"},
+				{"url": "https://github.com/SuperZombi/wot-modpack/raw/refs/heads/mods/configs/six_sense/green_radar.zip", "dest": "configs"}
+			],
+			"image": "https://raw.githubusercontent.com/SuperZombi/wot-modpack/refs/heads/mods/images/six_sense/green_radar.jpg",
+			"title": {
+				"en": "Sixth sense «Green radar»",
+				"ru": "Лампочка «Зеленый радар»",
+				"uk": "Лампочка «Зелений радар»",
+			},
+			"description": {
+				"en": "Animated «Sixth Sense» skill.",
+				"ru": "Анимированная лампочка навыка «Шестое чувство».",
+				"uk": "Анімована лампочка навички «Шосте почуття».",
+			},
+			"category": "six_sense",
+			"group": "six_sense",
+		},
+		{
+			"id": "sixth_sense.orange_timer",
+			"files": [
+				{"url": "https://github.com/SuperZombi/wot-modpack/raw/refs/heads/mods/mods/six_sense/sixthsense_core.wotmod", "dest": "mods"},
+				{"url": "https://github.com/SuperZombi/wot-modpack/raw/refs/heads/mods/configs/six_sense/orange_timer.zip", "dest": "configs"}
+			],
+			"image": "https://raw.githubusercontent.com/SuperZombi/wot-modpack/refs/heads/mods/images/six_sense/orange_timer.jpg",
+			"title": {
+				"en": "Sixth sense «Steel Hunter»",
+				"ru": "Лампочка «Стальной охотник»",
+				"uk": "Лампочка «Сталевий мисливець»",
+			},
+			"description": {
+				"en": "Animated «Sixth Sense» skill.",
+				"ru": "Анимированная лампочка навыка «Шестое чувство».",
+				"uk": "Анімована лампочка навички «Шосте почуття».",
+			},
+			"category": "six_sense",
+			"group": "six_sense",
+		},
 	]
 }
