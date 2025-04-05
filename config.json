@@ -55,6 +55,14 @@
 			"image": "https://raw.githubusercontent.com/SuperZombi/wot-modpack/refs/heads/mods/images/categories/art.png"
 		},
 		{
+			"name": "models",
+			"title": {
+				"en": "Remodeling",
+				"ru": "Ремоделинг",
+				"uk": "Ремоделінг",
+			}
+		},
+		{
 			"name": "other",
 			"title": {
 				"en": "Other",
@@ -555,6 +563,34 @@
 			},
 			"category": "six_sense",
 			"group": "six_sense",
+		},
+		{
+			"id": "ebr105.bmw_m3",
+			"files": [{
+				"url": "https://github.com/SuperZombi/wot-modpack/raw/refs/heads/mods/mods/models/ebr105.bmw_m3.zip", "dest": "res_mods"
+			}],
+			"image": "https://raw.githubusercontent.com/SuperZombi/wot-modpack/refs/heads/mods/images/models/ebr105.bmw_m3.jpg",
+			"title": {
+				"en": "EBR-105 > BMW M3",
+				"ru": "EBR-105 > BMW M3",
+				"uk": "EBR-105 > BMW M3",
+			},
+			"author": "MrJuice",
+			"category": "models"
+		},
+		{
+			"id": "amx30.police",
+			"files": [{
+				"url": "https://github.com/SuperZombi/wot-modpack/raw/refs/heads/mods/mods/models/amx30.police.zip", "dest": "res_mods"
+			}],
+			"image": "https://raw.githubusercontent.com/SuperZombi/wot-modpack/refs/heads/mods/images/models/amx30.police.jpg",
+			"title": {
+				"en": "AMX-30 Police",
+				"ru": "AMX-30 Полиция",
+				"uk": "АМХ-30 Поліція",
+			},
+			"author": "MrJuice",
+			"category": "models"
 		},
 	]
 }
