@@ -3,6 +3,8 @@ import os, sys
 import xmltodict
 import shutil
 import requests
+import zipfile
+from io import BytesIO
 
 
 class Version:
@@ -129,25 +131,36 @@ class Mod:
 			os.makedirs(target_map[file["dest"]], exist_ok=True)
 
 			if file["url"].startswith("http"):
-				success = self.download(file["url"], target_map[file["dest"]], on_progress=on_progress)
-				if not success: return False
+				file_io = self.download(file["url"], on_progress=on_progress)
+				if not file_io: return False
+
+				if file["url"].endswith(".zip"):
+					with zipfile.ZipFile(file_io, 'r') as zip_ref:
+						zip_ref.extractall(target_map[file["dest"]])
+				else:
+					target_file = os.path.join(target_map[file["dest"]], os.path.basename(file["url"]))
+					with open(target_file, "wb") as f:
+						f.write(file_io.read())
 			else:
-				shutil.copy(file["url"], target_map[file["dest"]])
+				if file["url"].endswith(".zip"):
+					with zipfile.ZipFile(file["url"], 'r') as zip_ref:
+						zip_ref.extractall(target_map[file["dest"]])
+				else:
+					shutil.copy(file["url"], target_map[file["dest"]])
 		return True
 
-	def download(self, url, target_folder, on_progress=None):
-		filename = os.path.basename(url)
+	def download(self, url, on_progress=None):
 		try:
 			r = requests.get(url, stream=True)
 			if r.ok:
 				total_size = int(r.headers.get("content-length", 0))
 				downloaded = 0
 				if on_progress: on_progress(downloaded, total_size)
-				with open(os.path.join(target_folder, filename), "wb") as f:
-					for data in r.iter_content(1024):
-						downloaded+=len(data)
-						if on_progress: on_progress(downloaded, total_size)
-						f.write(data)
-				return True
-		except:
-			None
+				file = BytesIO()
+				for data in r.iter_content(1024):
+					downloaded+=len(data)
+					if on_progress: on_progress(downloaded, total_size)
+					file.write(data)
+				file.seek(0)
+				return file
+		except: None

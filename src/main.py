@@ -8,7 +8,7 @@ from tkinter import Tk
 from tkinter.filedialog import askdirectory
 from utils import *
 
-__version__ = "0.0.2"
+__version__ = "0.0.3"
 
 # Resources
 def resource_path(relative_path=""):
