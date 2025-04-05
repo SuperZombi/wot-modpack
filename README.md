@@ -9,4 +9,4 @@ This modpack downloads only those mods that the user selected at runtime.<br>
 Also it has a modern Web interface.<br>
 Supports all client versions (including CT and SB)<br>
 
-<img src="https://github.com/user-attachments/assets/858b5051-d2d4-494f-82f6-8ceab8c0d8b2" width="700">
+<img src="https://github.com/user-attachments/assets/046b33cb-5c0e-485d-980b-faee16a51076" width="700">
