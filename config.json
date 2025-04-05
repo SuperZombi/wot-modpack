@@ -371,6 +371,27 @@
 			"requires": ["modslistapi"]
 		},
 		{
+			"id": "phantasm.hangarswitcher",
+			"files": [{
+				"url": "https://github.com/SuperZombi/wot-modpack/raw/refs/heads/mods/mods/hangar/phantasm.hangarswitcher.wotmod",
+				"dest": "mods"
+			}],
+			"image": "https://raw.githubusercontent.com/SuperZombi/wot-modpack/refs/heads/mods/images/hangar/phantasm.hangarswitcher.jpg",
+			"title": {
+				"en": "Hangars manager",
+				"ru": "Менеджер ангаров",
+				"uk": "Менеджер ангарів",
+			},
+			"author": "Phantasm",
+			"description": {
+				"en": "The mod switches the hangars built into the game.",
+				"ru": "Мод переключает ангары, встроенные в игру.",
+				"uk": "Мод перемикає ангари, вбудовані у гру.",
+			},
+			"category": "hangar",
+			"requires": ["modslistapi"]
+		},
+		{
 			"id": "alphasave1.ReplayFreeCam",
 			"files": [{
 				"url": "https://github.com/SuperZombi/wot-modpack/raw/refs/heads/mods/mods/other/alphasave1.ReplayFreeCam.wotmod",
