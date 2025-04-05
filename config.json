@@ -10,6 +10,15 @@
 			"image": "https://raw.githubusercontent.com/SuperZombi/wot-modpack/refs/heads/mods/images/categories/aim.png"
 		},
 		{
+			"name": "six_sense",
+			"title": {
+				"en": "Sixth sense",
+				"ru": "Лампочки",
+				"uk": "Лампочки",
+			},
+			"image": "https://raw.githubusercontent.com/SuperZombi/wot-modpack/refs/heads/mods/images/categories/six_sense.png"
+		},
+		{
 			"name": "battle",
 			"title": {
 				"en": "Battle",
@@ -71,6 +80,14 @@
 				"en": "Change the sky",
 				"ru": "Изменить небо",
 				"uk": "Змінити небо",
+			}
+		},
+		{
+			"id": "six_sense",
+			"title": {
+				"en": "Change sixth sense",
+				"ru": "Изменить лампочку",
+				"uk": "Змінити лампочку",
 			}
 		},
 	],
@@ -386,26 +403,6 @@
 			"category": "other"
 		},
 		{
-			"id": "better_sixth_sense",
-			"files": [{
-				"url": "https://github.com/SuperZombi/wot-modpack/raw/refs/heads/mods/mods/battle/better_sixth_sense.wotmod",
-				"dest": "mods"
-			}],
-			"image": "https://raw.githubusercontent.com/SuperZombi/wot-modpack/refs/heads/mods/images/battle/better_sixth_sense.jpg",
-			"title": {
-				"en": "Sixth sense 12sec",
-				"ru": "Лампочка 12сек",
-				"uk": "Лампочка 12сек",
-			},
-			"description": {
-				"en": "Increases the duration of the «Sixth Sense» skill to 12 seconds.",
-				"ru": "Увеличивает время действия навыка «Шестое чувство» до 12 секунд.",
-				"uk": "Збільшує час дії навички «Шосте чуття» до 12 секунд.",
-			},
-			"author": "pe3pa",
-			"category": "battle"
-		},
-		{
 			"id": "calcElo",
 			"files": [
 				{"url": "https://github.com/SuperZombi/wot-modpack/raw/refs/heads/mods/mods/stats/calcElo/calcElo.wotmod", "dest": "mods"},
@@ -456,6 +453,48 @@
 			"author": "P_H_A_R_A_O_N",
 			"category": "art",
 			"group": "sky_change"
+		},
+		{
+			"id": "sixth_sense_10",
+			"files": [
+				{"url": "https://github.com/SuperZombi/wot-modpack/raw/refs/heads/mods/mods/six_sense/sixthsense_core.wotmod", "dest": "mods"},
+				{"url": "https://github.com/SuperZombi/wot-modpack/raw/refs/heads/mods/configs/six_sense/sixthSense.xml", "dest": "configs"}
+			],
+			"image": "https://raw.githubusercontent.com/SuperZombi/wot-modpack/refs/heads/mods/images/six_sense/better_sixth_sense.jpg",
+			"title": {
+				"en": "Sixth sense 10sec",
+				"ru": "Лампочка 10сек",
+				"uk": "Лампочка 10сек",
+			},
+			"description": {
+				"en": "Increases the duration of the «Sixth Sense» skill to 10 seconds.",
+				"ru": "Увеличивает время действия навыка «Шестое чувство» до 10 секунд.",
+				"uk": "Збільшує час дії навички «Шосте чуття» до 10 секунд.",
+			},
+			"author": "MLG",
+			"category": "six_sense",
+			"group": "six_sense",
+		},
+		{
+			"id": "sixth_sense_12",
+			"files": [{
+				"url": "https://github.com/SuperZombi/wot-modpack/raw/refs/heads/mods/mods/six_sense/better_sixth_sense.wotmod",
+				"dest": "mods"
+			}],
+			"image": "https://raw.githubusercontent.com/SuperZombi/wot-modpack/refs/heads/mods/images/six_sense/better_sixth_sense.jpg",
+			"title": {
+				"en": "Sixth sense 12sec",
+				"ru": "Лампочка 12сек",
+				"uk": "Лампочка 12сек",
+			},
+			"description": {
+				"en": "Increases the duration of the «Sixth Sense» skill to 12 seconds.",
+				"ru": "Увеличивает время действия навыка «Шестое чувство» до 12 секунд.",
+				"uk": "Збільшує час дії навички «Шосте чуття» до 12 секунд.",
+			},
+			"author": "pe3pa",
+			"category": "six_sense",
+			"group": "six_sense",
 		},
 	]
 }
