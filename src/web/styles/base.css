@@ -4,7 +4,7 @@ html, body{
 body{
 	font-family: sans-serif;
 	cursor: url(/images/cursor-normal.png), auto;
-	background: #0f0f0f;
+	background: #111;
 	color: #f1f1f1;
 }
 svg{

@@ -39,6 +39,7 @@ window.onload=async _=>{
 		let fails = await eel.main_install(client, args, selectedMods)()
 		let result_area = document.querySelector("#install_results")
 		if (fails.length > 0){
+			document.querySelector("#refs").classList.remove("show")
 			result_area.innerHTML = `<h3>${LANG("failed_to_install")}:</h3>`
 			let list = document.createElement("ul")
 			list.className = "mods-install-list"
@@ -50,6 +51,7 @@ window.onload=async _=>{
 			result_area.appendChild(list)
 		} else {
 			result_area.innerHTML = `<h3>${LANG("installed_success")}</h3>`
+			document.querySelector("#refs").classList.add("show")
 		}
 		changeTab("finish")
 	}
