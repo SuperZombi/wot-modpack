@@ -357,9 +357,9 @@
 			}],
 			"image": "https://raw.githubusercontent.com/SuperZombi/wot-modpack/refs/heads/mods/images/hangar/poliroid.replaysmanager.jpg",
 			"title": {
-				"en": "Replays Manager",
-				"ru": "Менеджер Реплеев",
-				"uk": "Менеджер Реплеїв",
+				"en": "Replays manager",
+				"ru": "Менеджер реплеев",
+				"uk": "Менеджер реплеїв",
 			},
 			"description": {
 				"en": "The mod lets you manage replays directly from the game client.<br>It can also be used to upload the selected replay to the wotreplays site.",
