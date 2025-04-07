@@ -1,0 +1,126 @@
+header{
+	height: 50px;
+	background-image: url(/images/header.jpg);
+	background-repeat: no-repeat;
+	background-size: cover;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 0 12px;
+	user-select: none;
+}
+header img {
+	height: 30px;
+}
+header a {
+	color: inherit;
+	text-decoration: none;
+	font-size: 20px;
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+header a:hover{
+	text-decoration: underline;
+}
+
+#setting_button{
+	height: 30px;
+	transition: 0.2s;
+}
+#setting_button:hover{
+	transform: rotate(90deg);
+}
+
+
+
+#mods-area{
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 5px;
+	height: calc(100vh - 115px);
+	margin-bottom: 15px;
+	position: relative;
+}
+#mods-list{
+	overflow: auto;
+	scrollbar-width: thin;
+	color-scheme: dark;
+}
+#mod-preview{
+	padding: 5px;
+	padding-left: 0;
+	visibility: hidden;
+	opacity: 0;
+	transition: 0.25s;
+}
+#mod-preview.show{
+	visibility: visible;
+	opacity: 1;
+}
+#mod-image{
+	background: black;
+	height: 300px;
+	width: 100%;
+	object-fit: contain;
+	border-radius: 8px;
+}
+#mod-image[src=""]{
+	display: none;
+}
+#mod-description-text{
+	margin: 0 10px;
+}
+#mod-author{
+	display: flex;
+	justify-content: space-between;
+	gap: 5px;
+}
+#mod-description ul{
+	padding-left: 1em;
+}
+
+.bottom-buttons{
+	display: flex;
+	justify-content: space-between;
+	padding: 0 20px;
+}
+
+.mods-install-list{
+	padding-left: 40px;
+	margin-left: -40px;
+	overflow: auto;
+	max-width: 50vw;
+	scrollbar-width: thin;
+	color-scheme: dark;
+}
+
+#app-version{
+	font-family: monospace;
+	font-size: 14px;
+	background: #666;
+	padding: 2px 6px;
+	border-radius: 12px;
+}
+
+#refs {
+	display: none;
+}
+#refs.show{
+	display: flex;
+	gap: 1em;
+	user-select: none;	
+}
+#refs a:hover{
+	opacity: 0.75;
+}
+#refs img{
+	height: 60px;
+}
+
+#settings .popup_wraper{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 1em;
+}
