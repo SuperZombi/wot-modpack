@@ -1,9 +1,7 @@
 import eel
 import sys, os
 import json
-import re
 import requests
-from json_minify import json_minify
 from tkinter import Tk
 from tkinter.filedialog import askdirectory
 from utils import *
@@ -72,9 +70,7 @@ def load_mods_info():
 	try:
 		r = requests.get('https://raw.githubusercontent.com/SuperZombi/wot-modpack/refs/heads/mods/config.json')
 		if r.ok:
-			string = json_minify(r.content.decode()) # remove comments
-			string = re.sub(r'''(?<=[}\]"']),(?!\s*[{["'])''', "", string, 0) # remove coma at the end
-			return json.loads(string)
+			return json.loads(r.content.decode())
 	except:
 		return
 

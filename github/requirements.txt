@@ -2,5 +2,4 @@ Eel
 psutil
 requests
 pyinstaller
-JSON_minify
 xmltodict
