@@ -45,7 +45,7 @@ class Launchers:
 				files = get_all_files(apps)
 				for file in files:
 					client_path = self.get_client_path(file)
-					if not client_path in self.clients: self.clients.append(client_path)
+					if client_path and not client_path in self.clients: self.clients.append(client_path)
 		return self.clients
 
 	def get_client_path(self, file):
