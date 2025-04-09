@@ -93,16 +93,18 @@ async function load_game_clients(){
 	if (settings){
 		if (settings.client){
 			let client_info = await eel.get_client_info_by_path(settings.client)()
-			let target = [...parent.querySelectorAll('option')].filter(opt=>opt.value==client_info.path).shift()
-			if (target){
-				parent.value = client_info.path
-			} else {
-				target = createOption(client_info.path, client_info.title)
-				parent.appendChild(target)
-				parent.appendChild(parent.querySelector('option[value="custom"]'))
-				parent.value = target.value
-				let empty = parent.querySelector("option[value='']")
-				empty ? empty.remove() : null
+			if (client_info){
+				let target = [...parent.querySelectorAll('option')].filter(opt=>opt.value==client_info.path).shift()
+				if (target){
+					parent.value = client_info.path
+				} else {
+					target = createOption(client_info.path, client_info.title)
+					parent.appendChild(target)
+					parent.appendChild(parent.querySelector('option[value="custom"]'))
+					parent.value = target.value
+					let empty = parent.querySelector("option[value='']")
+					empty ? empty.remove() : null
+				}
 			}
 		}
 	}
