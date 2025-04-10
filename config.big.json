@@ -137,6 +137,36 @@
 			"category": "aim",
 		},
 		{
+			"id": "poliroid.pmod.reducedArmor",
+			"files": [
+				{
+					"url": "https://github.com/SuperZombi/wot-modpack/raw/refs/heads/mods/mods/me.poliroid.pmod.wotmod",
+					"dest": "mods"
+				},
+				{
+					"url": "https://raw.githubusercontent.com/SuperZombi/wot-modpack/refs/heads/mods/configs/pmod/pmod.json",
+					"dest": "configs", "folder": "pmod"
+				},
+				{
+					"url": "https://raw.githubusercontent.com/SuperZombi/wot-modpack/refs/heads/mods/configs/pmod/reducedArmor.json",
+					"dest": "configs", "folder": "pmod"
+				}
+			],
+			"image": "https://raw.githubusercontent.com/SuperZombi/wot-modpack/refs/heads/mods/images/aim/poliroid.pmod.reducedArmor.jpg",
+			"title": {
+				"en": "Armor penetration calculator",
+				"ru": "Калькулятор бронепробития",
+				"uk": "Калькулятор бронепробиття",
+			},
+			"author": "P0LIR0ID",
+			"description": {
+				"en": "The mod shows the enemy's armor and the actual penetration (taking into account the distance) of your tank.",
+				"ru": "Мод показывает приведенную броню противника, а также реальное пробитие (с учетом дистанции) вашего танка.",
+				"uk": "Мод показує наведену броню супротивника, а також реальне пробиття (з урахуванням дистанції) вашого танка.",
+			},
+			"category": "aim"
+		},
+		{
 			"id": "tv.protanki.damagestickers",
 			"files": [{
 				"url": "https://github.com/SuperZombi/wot-modpack/raw/refs/heads/mods/mods/battle/tv.protanki.damagestickers.wotmod",
