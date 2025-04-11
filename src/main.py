@@ -19,7 +19,9 @@ def load_settings():
 	path = os.path.join(local(), "settings.json")
 	if os.path.exists(path):
 		with open(path, 'r', encoding='utf-8') as f:
-			return json.loads(f.read())
+			sets = json.loads(f.read())
+			sets["cache"] = get_folder_size(os.path.join(local(), 'cache'))
+			return sets
 
 @eel.expose
 def check_updates():
@@ -28,6 +30,13 @@ def check_updates():
 		remote_version = Version(r.json()['tag_name'])
 		current_version = Version(__version__)
 		return remote_version > current_version
+
+@eel.expose
+def delete_cache():
+	cache_file = os.path.join(local(), 'cache.json')
+	cache_folder = os.path.join(local(), 'cache')
+	if os.path.exists(cache_file): os.remove(cache_file)
+	if os.path.exists(cache_folder): shutil.rmtree(cache_folder)
 
 ###
 @eel.expose
@@ -73,18 +82,19 @@ def json_to_mod(mod_id):
 	id = mod_info.get('id')
 	files = mod_info.get('files')
 	requires = mod_info.get('requires', [])
+	version = mod_info.get('ver', None)
 	requirements = []
 	if len(requires) > 0:
 		for req in requires:
 			req_mod = json_to_mod(req)
 			if req_mod: requirements.append(req_mod)
-	return Mod(id, files, requirements)
+	return Mod(id, files, requirements, version)
 
 
 @eel.expose
 def main_install(client_path, args, mods):
 	fails = []
-	client = Client(client_path)
+	client = Client(client_path, use_cache=args.get("use_cache", True))
 	if client.is_running:
 		fails.append("The client is running. Please shut it down and try again.")
 		return fails

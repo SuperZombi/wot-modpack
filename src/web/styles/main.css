@@ -124,3 +124,14 @@ header a:hover{
 	align-items: center;
 	gap: 1em;
 }
+#settings .popup_wraper hr{
+	width: 100%;
+}
+
+.file_size{
+	font-family: monospace;
+	font-size: 14px;
+}
+#cache_size{
+	margin-right: 2px;
+}

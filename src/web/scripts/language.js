@@ -119,6 +119,26 @@ let LOCALES = {
 		"en": "Remember selected mods",
 		"ru": "Запомнить выбранные моды",
 		"uk": "Запам'ятати вибрані моди"
+	},
+	"cache_size": {
+		"en": "Cache size",
+		"ru": "Размер кэша",
+		"uk": "Розмір кешу"
+	},
+	"clear_cache": {
+		"en": "Clear cache",
+		"ru": "Очистить кэш",
+		"uk": "Очистити кеш"
+	},
+	"use_cache": {
+		"en": "Use cache",
+		"ru": "Использовать кэш",
+		"uk": "Використовувати кеш",
+	},
+	"megabytes": {
+		"en": "Mb",
+		"ru": "Мб",
+		"uk": "Мб"
 	}
 }
 

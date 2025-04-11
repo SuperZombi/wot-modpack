@@ -34,7 +34,8 @@ window.onload=async _=>{
 			"delete_mods": document.querySelector("#delete_all_mods").checked,
 			"delete_configs": document.querySelector("#delete_mods_configs").checked,
 			"save_selected_mods": document.querySelector("#save_selected_mods").checked,
-			"language": document.querySelector('.setting_element[name="language"]').value
+			"language": document.querySelector('.setting_element[name="language"]').value,
+			"use_cache": document.querySelector('.setting_element[name="use_cache"]').checked
 		}
 		let fails = await eel.main_install(client, args, selectedMods)()
 		let result_area = document.querySelector("#install_results")
@@ -55,6 +56,7 @@ window.onload=async _=>{
 			document.querySelector("#refs").classList.add("show")
 			document.querySelector("#report_bug").style.display = "none"
 		}
+		await update_cache_size()
 		changeTab("finish")
 	}
 }
@@ -254,5 +256,24 @@ async function initSettings(){
 		if (settings.lang){
 			currentLang = settings.lang
 		}
+		if (settings.use_cache){
+			document.querySelector('.setting_element[name="use_cache"]').checked = settings.use_cache
+		}
+		if (settings.cache != null){
+			document.querySelector("#cache_size").innerHTML = `${bytesToMb(settings.cache)}`
+		}
+	}
+}
+function bytesToMb(bytes) {
+	return Math.round(bytes / (1024 * 1024));
+}
+async function clear_cache(){
+	await eel.delete_cache()()
+	await update_cache_size()
+}
+async function update_cache_size(){
+	let settings = await eel.load_settings()()
+	if (settings && settings.cache != null){
+		document.querySelector("#cache_size").innerHTML = `${bytesToMb(settings.cache)}`
 	}
 }

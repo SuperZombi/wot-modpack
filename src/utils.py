@@ -4,6 +4,7 @@ import shutil
 import requests
 import zipfile
 import psutil
+import json
 from io import BytesIO
 
 
@@ -28,6 +29,14 @@ def get_all_files(folder):
 		for filename in filenames:
 			files.append(os.path.join(dirpath, filename))
 	return files
+
+def get_folder_size(path):
+	total_size = 0
+	for dirpath, dirnames, filenames in os.walk(path):
+		for f in filenames:
+			fp = os.path.join(dirpath, f)
+			if os.path.exists(fp): total_size += os.path.getsize(fp)
+	return total_size
 
 
 class Launchers:
@@ -56,12 +65,13 @@ class Launchers:
 
 
 class Client:
-	def __init__(self, path):
+	def __init__(self, path, use_cache=True):
 		self.path = path
 		self.parse_info()
 		self.title = f"WoT {self.realm} {self.version}"
 		self.exe = "WorldOfTanks.exe"
 		self.installed = []
+		self.use_cache = use_cache
 
 	def __str__(self): return self.title
 	def __repr__(self): return f"<{str(self)}>"
@@ -124,24 +134,37 @@ class Client:
 
 	def install_mod(self, mod, on_progress=None):
 		if not mod.id in self.installed:
-			result = mod.install(self, on_progress=on_progress)
+			result = mod.install(self, on_progress=on_progress, use_cache=self.use_cache)
 			if result: self.installed.append(mod.id)
 			return result
 		return True
 
 
 class Mod:
-	def __init__(self, id, files, requires=None):
+	def __init__(self, id, files, requires=None, version=None):
 		self.id = id
 		self.files = files
 		self.requires = requires or []
+		self.version = version
 	def __str__(self): return f'<Mod "{self.id}">'
 	def __repr__(self): return str(self)
 
-	def install(self, client, on_progress=None):
+	def install(self, client, on_progress=None, use_cache=True):
 		if self.requires and len(self.requires) > 0:
 			for mod in self.requires:
 				client.install_mod(mod)
+
+		write_cache = True
+		if use_cache:
+			self.init_cache()
+			have_cache = self.load_cache_files()
+			if have_cache:
+				print("[Cache]", self.id)
+				write_cache = False
+			else:
+				self.delete_from_cache()
+
+		cache_files = []
 
 		for file in self.files:
 			target_map = {
@@ -162,12 +185,31 @@ class Mod:
 					target_file = os.path.join(target_map[file["dest"]], os.path.basename(file["url"]))
 					with open(target_file, "wb") as f:
 						f.write(file_io.read())
+
+				if use_cache and write_cache:
+					file_io.seek(0)
+					os.makedirs(self.cache_folder, exist_ok=True)
+					target_file = os.path.join(self.cache_folder, os.path.basename(file["url"]))
+					with open(target_file, "wb") as f:
+						f.write(file_io.read())
+					cache_files.append({**file,
+						"url": target_file
+					})
 			else:
+				if not os.path.exists(file["url"]): return False
 				if file["url"].endswith(".zip"):
 					with zipfile.ZipFile(file["url"], 'r') as zip_ref:
 						zip_ref.extractall(target_map[file["dest"]])
 				else:
 					shutil.copy(file["url"], target_map[file["dest"]])
+
+		if use_cache and write_cache:
+			self.update_cache_file(lambda data: data + [{
+				"id": self.id,
+				"ver": self.version,
+				"files": cache_files
+			}])
+
 		return True
 
 	def download(self, url, on_progress=None):
@@ -187,3 +229,35 @@ class Mod:
 			else:
 				print(f"[{r.status_code}] Failed to download: {url}")
 		except: None
+
+	def init_cache(self):
+		self.cache = []
+		self.cache_file = os.path.join(local(), 'cache.json')
+		self.cache_folder = os.path.join(local(), 'cache', self.id)
+		if os.path.exists(self.cache_file):
+			with open(self.cache_file, 'r', encoding='utf-8') as f:
+				self.cache = json.load(f)
+
+	def update_cache_file(self, callback):
+		data = []
+		if os.path.exists(self.cache_file):
+			with open(self.cache_file, 'r', encoding='utf-8') as f:
+				data = json.loads(f.read() or "[]")
+		new_data = callback(data)
+		with open(self.cache_file, 'w', encoding='utf-8') as f:
+			f.write(json.dumps(new_data, indent=4, ensure_ascii=False))
+
+	def load_cache_files(self):
+		cached_mod = next((d for d in self.cache if d["id"] == self.id), None)
+		if cached_mod:
+			cached_ver = cached_mod.get("ver", None)
+			if self.version == cached_ver:
+				cached_files = cached_mod.get("files", [])
+				if all(os.path.exists(f["url"]) for f in cached_files):
+					self.files = cached_files
+					return True
+
+	def delete_from_cache(self):
+		if os.path.exists(self.cache_folder):
+			shutil.rmtree(self.cache_folder)
+		self.update_cache_file(lambda data: list(filter(lambda x: x["id"] != self.id, data)))
