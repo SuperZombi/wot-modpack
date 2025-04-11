@@ -124,6 +124,7 @@
 				"url": "https://github.com/SuperZombi/wot-modpack/raw/refs/heads/mods/mods/izeberg.modssettingsapi.wotmod",
 				"dest": "mods"
 			}],
+			"requires": ["modslistapi"],
 			"ver": "1.6.2"
 		},
 		{
