@@ -111,21 +111,21 @@
 
 	"mods": [
 		{
-			"id": "me.poliroid.modslistapi",
+			"id": "modslistapi",
 			"files": [{
 				"url": "https://github.com/SuperZombi/wot-modpack/raw/refs/heads/mods/mods/me.poliroid.modslistapi.wotmod",
 				"dest": "mods"
 			}]
 		},
 		{
-			"id": "izeberg.modssettingsapi",
+			"id": "modssettingsapi",
 			"files": [{
 				"url": "https://github.com/SuperZombi/wot-modpack/raw/refs/heads/mods/mods/izeberg.modssettingsapi.wotmod",
 				"dest": "mods"
 			}]
 		},
 		{
-			"id": "me.poliroid.pmod",
+			"id": "pmod",
 			"files": [
 				{
 					"url": "https://github.com/SuperZombi/wot-modpack/raw/refs/heads/mods/mods/me.poliroid.pmod.wotmod",
