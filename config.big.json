@@ -111,6 +111,34 @@
 
 	"mods": [
 		{
+			"id": "me.poliroid.modslistapi",
+			"files": [{
+				"url": "https://github.com/SuperZombi/wot-modpack/raw/refs/heads/mods/mods/me.poliroid.modslistapi.wotmod",
+				"dest": "mods"
+			}]
+		},
+		{
+			"id": "izeberg.modssettingsapi",
+			"files": [{
+				"url": "https://github.com/SuperZombi/wot-modpack/raw/refs/heads/mods/mods/izeberg.modssettingsapi.wotmod",
+				"dest": "mods"
+			}]
+		},
+		{
+			"id": "me.poliroid.pmod",
+			"files": [
+				{
+					"url": "https://github.com/SuperZombi/wot-modpack/raw/refs/heads/mods/mods/me.poliroid.pmod.wotmod",
+					"dest": "mods"
+				},
+				{
+					"url": "https://raw.githubusercontent.com/SuperZombi/wot-modpack/refs/heads/mods/configs/pmod/pmod.json",
+					"dest": "configs", "folder": "pmod"
+				}
+			]
+		},
+
+		{
 			"id": "tv.protanki.reductioninfo",
 			"files": [
 				{
