@@ -6,15 +6,13 @@ from tkinter import Tk
 from tkinter.filedialog import askdirectory
 from utils import *
 
+MODS_DATA = {}
 __version__ = "0.0.4"
-
-# Resources
+@eel.expose
+def app_version(): return __version__
 def resource_path(relative_path=""):
 	base_path = getattr(sys, '_MEIPASS', os.path.dirname(os.path.abspath(__file__)))
 	return os.path.join(base_path, relative_path)
-
-@eel.expose
-def app_version(): return __version__
 
 @eel.expose
 def load_settings():
@@ -30,19 +28,6 @@ def check_updates():
 		remote_version = Version(r.json()['tag_name'])
 		current_version = Version(__version__)
 		return remote_version > current_version
-
-modslistapi = Mod("me.poliroid.modslistapi", [{
-	"url": resource_path(os.path.join("mods", "me.poliroid.modslistapi.wotmod")),
-	"dest": "mods"
-}])
-modssettingsapi = Mod("izeberg.modssettingsapi", [{
-	"url": resource_path(os.path.join("mods", "izeberg.modssettingsapi.wotmod")),
-	"dest": "mods"
-}], requires=[modslistapi])
-dependencies = {
-	"modslistapi": modslistapi,
-	"modssettingsapi": modssettingsapi
-}
 
 ###
 @eel.expose
@@ -67,10 +52,13 @@ def request_custom_client():
 
 @eel.expose
 def load_mods_info():
+	global MODS_DATA
 	try:
 		r = requests.get('https://raw.githubusercontent.com/SuperZombi/wot-modpack/refs/heads/mods/config.json')
 		if r.ok:
-			return json.loads(r.content.decode())
+			mods_info = json.loads(r.content.decode())
+			MODS_DATA = mods_info["mods"]
+			return mods_info
 	except:
 		return
 
@@ -78,15 +66,18 @@ def load_mods_info():
 def download_progress(current, total):
 	eel.installing_progress({"download_progress":round(current / total * 100)})
 
-def json_to_mod(data):
-	id = data.get('id')
-	files = data.get('files')
-	requires = data.get('requires', [])
+def json_to_mod(mod_id):
+	mod_info = next((d for d in MODS_DATA if d["id"] == mod_id), None)
+	if not mod_info: return
+
+	id = mod_info.get('id')
+	files = mod_info.get('files')
+	requires = mod_info.get('requires', [])
 	requirements = []
 	if len(requires) > 0:
 		for req in requires:
-			mod = dependencies[req]
-			if mod: requirements.append(mod)
+			req_mod = json_to_mod(req)
+			if req_mod: requirements.append(req_mod)
 	return Mod(id, files, requirements)
 
 
@@ -105,7 +96,7 @@ def main_install(client_path, args, mods):
 			return fails
 	
 	if len(mods) > 0:
-		mods_arr = list(map(json_to_mod, mods))
+		mods_arr = list(filter(bool, map(json_to_mod, mods)))
 		total_mods = len(mods_arr)
 		for index, mod in enumerate(mods_arr):
 			eel.installing_progress({
@@ -118,11 +109,10 @@ def main_install(client_path, args, mods):
 			if not result: fails.append(mod.id)
 
 	if args.get("save_selected_mods", True):
-		mods_ids = list(map(lambda x: x.get('id'), mods))
 		SETTINGS = {
 			"lang": args.get('language'),
 			"client": client_path,
-			"mods": mods_ids
+			"mods": mods
 		}
 		with open(os.path.join(local(), "settings.json"), 'w', encoding="utf-8") as f:
 			f.write(json.dumps(SETTINGS, indent=4, ensure_ascii=False))

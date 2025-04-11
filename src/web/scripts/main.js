@@ -28,8 +28,7 @@ window.onload=async _=>{
 
 	document.querySelector("#run_main_button").onclick = async _=>{
 		changeTab("main_installer")
-		let selectedModsIds = modsManager.get()
-		let selectedMods = modsData.mods.filter(mod => selectedModsIds.includes(mod.id))
+		let selectedMods = modsManager.get()
 		let client = document.querySelector("#client_path").value
 		let args = {
 			"delete_mods": document.querySelector("#delete_all_mods").checked,
