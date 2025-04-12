@@ -141,6 +141,14 @@
 			],
 			"ver": "1.78.1"
 		},
+		{
+			"id": "sixthsense_core",
+			"files": [{
+				"url": "https://github.com/SuperZombi/wot-modpack/raw/refs/heads/mods/mods/six_sense/sixthsense_core.wotmod",
+				"dest": "mods"
+			}],
+			"ver": "1"
+		},
 
 		{
 			"id": "tv.protanki.reductioninfo",
@@ -171,20 +179,10 @@
 		},
 		{
 			"id": "poliroid.pmod.reducedArmor",
-			"files": [
-				{
-					"url": "https://github.com/SuperZombi/wot-modpack/raw/refs/heads/mods/mods/me.poliroid.pmod.wotmod",
-					"dest": "mods"
-				},
-				{
-					"url": "https://raw.githubusercontent.com/SuperZombi/wot-modpack/refs/heads/mods/configs/pmod/pmod.json",
-					"dest": "configs", "folder": "pmod"
-				},
-				{
-					"url": "https://raw.githubusercontent.com/SuperZombi/wot-modpack/refs/heads/mods/configs/pmod/reducedArmor.json",
-					"dest": "configs", "folder": "pmod"
-				}
-			],
+			"files": [{
+				"url": "https://raw.githubusercontent.com/SuperZombi/wot-modpack/refs/heads/mods/configs/pmod/reducedArmor.json",
+				"dest": "configs", "folder": "pmod"
+			}],
 			"image": "https://raw.githubusercontent.com/SuperZombi/wot-modpack/refs/heads/mods/images/aim/poliroid.pmod.reducedArmor.jpg",
 			"title": {
 				"en": "Armor penetration calculator",
@@ -197,7 +195,8 @@
 				"ru": "Мод показывает приведенную броню противника, а также реальное пробитие (с учетом дистанции) вашего танка.",
 				"uk": "Мод показує наведену броню супротивника, а також реальне пробиття (з урахуванням дистанції) вашого танка.",
 			},
-			"category": "aim"
+			"category": "aim",
+			"requires": ["pmod"]
 		},
 		{
 			"id": "tv.protanki.damagestickers",
@@ -673,10 +672,11 @@
 		},
 		{
 			"id": "sixth_sense_10",
-			"files": [
-				{"url": "https://github.com/SuperZombi/wot-modpack/raw/refs/heads/mods/mods/six_sense/sixthsense_core.wotmod", "dest": "mods"},
-				{"url": "https://github.com/SuperZombi/wot-modpack/raw/refs/heads/mods/configs/six_sense/sixth_sense_10/sixthSense.xml", "dest": "configs"}
-			],
+			"files": [{
+				"url": "https://github.com/SuperZombi/wot-modpack/raw/refs/heads/mods/configs/six_sense/sixth_sense_10/sixthSense.xml",
+				"dest": "configs"
+			}],
+			"requires": ["sixthsense_core"],
 			"image": "https://raw.githubusercontent.com/SuperZombi/wot-modpack/refs/heads/mods/images/six_sense/better_sixth_sense.jpg",
 			"title": {
 				"en": "Sixth sense 10sec",
@@ -718,13 +718,13 @@
 		{
 			"id": "sixth_sense.blue_timer",
 			"files": [
-				{"url": "https://github.com/SuperZombi/wot-modpack/raw/refs/heads/mods/mods/six_sense/sixthsense_core.wotmod", "dest": "mods"},
 				{"url": "https://github.com/SuperZombi/wot-modpack/raw/refs/heads/mods/configs/six_sense/blue_timer/sixthSense.xml", "dest": "configs"},
 				{
 					"url": "https://github.com/SuperZombi/wot-modpack/raw/refs/heads/mods/configs/six_sense/blue_timer/blue_timer.zip",
 					"dest": "configs", "folder": "sixthSense", "delete_folder": true
 				}
 			],
+			"requires": ["sixthsense_core"],
 			"image": "https://raw.githubusercontent.com/SuperZombi/wot-modpack/refs/heads/mods/images/six_sense/blue_timer.jpg",
 			"title": {
 				"en": "Sixth sense «Blue timer»",
@@ -743,13 +743,13 @@
 		{
 			"id": "sixth_sense.green_radar",
 			"files": [
-				{"url": "https://github.com/SuperZombi/wot-modpack/raw/refs/heads/mods/mods/six_sense/sixthsense_core.wotmod", "dest": "mods"},
 				{"url": "https://github.com/SuperZombi/wot-modpack/raw/refs/heads/mods/configs/six_sense/green_radar/sixthSense.xml", "dest": "configs"},
 				{
 					"url": "https://github.com/SuperZombi/wot-modpack/raw/refs/heads/mods/configs/six_sense/green_radar/green_radar.zip",
 					"dest": "configs", "folder": "sixthSense", "delete_folder": true
 				}
 			],
+			"requires": ["sixthsense_core"],
 			"image": "https://raw.githubusercontent.com/SuperZombi/wot-modpack/refs/heads/mods/images/six_sense/green_radar.jpg",
 			"title": {
 				"en": "Sixth sense «Green radar»",
@@ -768,13 +768,13 @@
 		{
 			"id": "sixth_sense.orange_timer",
 			"files": [
-				{"url": "https://github.com/SuperZombi/wot-modpack/raw/refs/heads/mods/mods/six_sense/sixthsense_core.wotmod", "dest": "mods"},
 				{"url": "https://github.com/SuperZombi/wot-modpack/raw/refs/heads/mods/configs/six_sense/orange_timer/sixthSense.xml", "dest": "configs"},
 				{
 					"url": "https://github.com/SuperZombi/wot-modpack/raw/refs/heads/mods/configs/six_sense/orange_timer/orange_timer.zip",
 					"dest": "configs", "folder": "sixthSense", "delete_folder": true
 				}
 			],
+			"requires": ["sixthsense_core"],
 			"image": "https://raw.githubusercontent.com/SuperZombi/wot-modpack/refs/heads/mods/images/six_sense/orange_timer.jpg",
 			"title": {
 				"en": "Sixth sense «Steel Hunter»",
@@ -793,13 +793,13 @@
 		{
 			"id": "sixth_sense.custom",
 			"files": [
-				{"url": "https://github.com/SuperZombi/wot-modpack/raw/refs/heads/mods/mods/six_sense/sixthsense_core.wotmod", "dest": "mods"},
 				{"url": "https://github.com/SuperZombi/wot-modpack/raw/refs/heads/mods/configs/six_sense/custom/sixthSense.xml", "dest": "configs"},
 				{
 					"url": "https://github.com/SuperZombi/wot-modpack/raw/refs/heads/mods/configs/six_sense/custom/custom.zip",
 					"dest": "configs", "folder": "sixthSense", "delete_folder": true
 				}
 			],
+			"requires": ["sixthsense_core"],
 			"image": "https://raw.githubusercontent.com/SuperZombi/wot-modpack/refs/heads/mods/images/six_sense/better_sixth_sense.jpg",
 			"title": {
 				"en": "Custom sixth sense",
