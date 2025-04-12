@@ -791,6 +791,31 @@
 			"ver": "1"
 		},
 		{
+			"id": "sixth_sense.custom",
+			"files": [
+				{"url": "https://github.com/SuperZombi/wot-modpack/raw/refs/heads/mods/mods/six_sense/sixthsense_core.wotmod", "dest": "mods"},
+				{"url": "https://github.com/SuperZombi/wot-modpack/raw/refs/heads/mods/configs/six_sense/custom/sixthSense.xml", "dest": "configs"},
+				{
+					"url": "https://github.com/SuperZombi/wot-modpack/raw/refs/heads/mods/configs/six_sense/custom/custom.zip",
+					"dest": "configs", "folder": "sixthSense", "delete_folder": true
+				}
+			],
+			"image": "https://raw.githubusercontent.com/SuperZombi/wot-modpack/refs/heads/mods/images/six_sense/better_sixth_sense.jpg",
+			"title": {
+				"en": "Custom sixth sense",
+				"ru": "Пользовательская лампочка",
+				"uk": "Індивідуальна лампочка",
+			},
+			"description": {
+				"en": "Go to the path <code>World_of_Tanks/mods/configs/sixthSense</code> and replace the file with your image with the same name.",
+				"ru": "Перейдите по пути <code>World_of_Tanks/mods/configs/sixthSense</code> и замените файл на свою картинку с таким же названием.",
+				"uk": "Перейдіть по шляху <code>World_of_Tanks/mods/configs/sixthSense</code> і замініть файл на свою картинку з такою самою назвою.",
+			},
+			"category": "six_sense",
+			"group": "six_sense",
+			"ver": "1"
+		},
+		{
 			"id": "ebr105.bmw_m3",
 			"files": [{
 				"url": "https://github.com/SuperZombi/wot-modpack/raw/refs/heads/mods/mods/models/ebr105.bmw_m3.zip",
