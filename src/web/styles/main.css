@@ -79,6 +79,10 @@ header a:hover{
 #mod-description ul{
 	padding-left: 1em;
 }
+#mod-description code{
+	font-size: 1rem;
+	color: #a9a9a9;
+}
 
 .bottom-buttons{
 	display: flex;
