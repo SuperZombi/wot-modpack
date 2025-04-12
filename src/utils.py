@@ -179,6 +179,9 @@ class Mod:
 				if not file_io: return False
 
 				if file["url"].endswith(".zip"):
+					if file["dest"] == "configs" and file.get("delete_folder", False):
+						shutil.rmtree(target_map[file["dest"]])
+
 					with zipfile.ZipFile(file_io, 'r') as zip_ref:
 						zip_ref.extractall(target_map[file["dest"]])
 				else:
@@ -198,6 +201,9 @@ class Mod:
 			else:
 				if not os.path.exists(file["url"]): return False
 				if file["url"].endswith(".zip"):
+					if file["dest"] == "configs" and file.get("delete_folder", False):
+						shutil.rmtree(target_map[file["dest"]])
+
 					with zipfile.ZipFile(file["url"], 'r') as zip_ref:
 						zip_ref.extractall(target_map[file["dest"]])
 				else:
@@ -222,7 +228,7 @@ class Mod:
 				file = BytesIO()
 				for data in r.iter_content(1024):
 					downloaded+=len(data)
-					if on_progress: on_progress(downloaded, total_size)
+					if on_progress: on_progress(min(downloaded,total_size), total_size)
 					file.write(data)
 				file.seek(0)
 				return file
