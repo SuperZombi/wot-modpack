@@ -2,7 +2,7 @@
 
 # Web Modpack
 ### Lightweight and modern modpack for World of Tanks
-<img src="https://shields.io/badge/version-0.0.4-blue">
+<img src="https://shields.io/badge/version-0.0.5-blue">
 
 ### <a href="https://github.com/SuperZombi/wot-modpack/releases/latest/download/Web.Modpack.exe"><img src="https://github.com/user-attachments/assets/2a418b60-b0a1-462d-afc3-0270ba5c0e83" height="26" align=top> Download</a>
 
