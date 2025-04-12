@@ -183,7 +183,7 @@
 				"url": "https://raw.githubusercontent.com/SuperZombi/wot-modpack/refs/heads/mods/configs/pmod/reducedArmor.json",
 				"dest": "configs", "folder": "pmod"
 			}],
-			"image": "https://raw.githubusercontent.com/SuperZombi/wot-modpack/refs/heads/mods/images/aim/poliroid.pmod.reducedArmor.jpg",
+			"image": "https://raw.githubusercontent.com/SuperZombi/wot-modpack/refs/heads/mods/images/aim/pmod.reducedArmor.jpg",
 			"title": {
 				"en": "Armor penetration calculator",
 				"ru": "Калькулятор бронепробития",
@@ -195,6 +195,7 @@
 				"ru": "Мод показывает приведенную броню противника, а также реальное пробитие (с учетом дистанции) вашего танка.",
 				"uk": "Мод показує наведену броню супротивника, а також реальне пробиття (з урахуванням дистанції) вашого танка.",
 			},
+			"ver": "1",
 			"category": "aim",
 			"requires": ["pmod"]
 		},
@@ -878,6 +879,23 @@
 			"author": "MrJuice",
 			"category": "models",
 			"ver": "1"
+		},
+		{
+			"id": "poliroid.pmod.team_damages",
+			"files": [{
+				"url": "https://raw.githubusercontent.com/SuperZombi/wot-modpack/refs/heads/mods/configs/pmod/battleGUI.json",
+				"dest": "configs", "folder": "pmod"
+			}],
+			"image": "https://raw.githubusercontent.com/SuperZombi/wot-modpack/refs/heads/mods/images/battle/pmod.team_damages.jpg",
+			"title": {
+				"en": "HP in the command list",
+				"ru": "ХП в ушах команд",
+				"uk": "ХП у вухах команд",
+			},
+			"author": "P0LIR0ID",
+			"category": "battle",
+			"ver": "1",
+			"requires": ["pmod"]
 		},
 		{
 			"id": "FiT.VisibleRailcars",
