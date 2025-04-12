@@ -19,9 +19,7 @@ def load_settings():
 	path = os.path.join(local(), "settings.json")
 	if os.path.exists(path):
 		with open(path, 'r', encoding='utf-8') as f:
-			sets = json.loads(f.read())
-			sets["cache"] = get_folder_size(os.path.join(local(), 'cache'))
-			return sets
+			return json.loads(f.read())
 
 @eel.expose
 def check_updates():
@@ -31,6 +29,8 @@ def check_updates():
 		current_version = Version(__version__)
 		return remote_version > current_version
 
+@eel.expose
+def get_cache_size(): return get_folder_size(os.path.join(local(), 'cache'))
 @eel.expose
 def delete_cache():
 	cache_file = os.path.join(local(), 'cache.json')

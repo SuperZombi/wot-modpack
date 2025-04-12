@@ -259,10 +259,8 @@ async function initSettings(){
 		if (settings.use_cache){
 			document.querySelector('.setting_element[name="use_cache"]').checked = settings.use_cache
 		}
-		if (settings.cache != null){
-			document.querySelector("#cache_size").innerHTML = `${bytesToMb(settings.cache)}`
-		}
 	}
+	update_cache_size()
 }
 function bytesToMb(bytes) {
 	return Math.round(bytes / (1024 * 1024));
@@ -272,8 +270,6 @@ async function clear_cache(){
 	await update_cache_size()
 }
 async function update_cache_size(){
-	let settings = await eel.load_settings()()
-	if (settings && settings.cache != null){
-		document.querySelector("#cache_size").innerHTML = `${bytesToMb(settings.cache)}`
-	}
+	let cache = await eel.get_cache_size()()
+	document.querySelector("#cache_size").innerHTML = `${bytesToMb(cache)}`
 }
