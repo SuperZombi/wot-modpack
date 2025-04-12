@@ -199,6 +199,28 @@
 			"requires": ["pmod"]
 		},
 		{
+			"id": "phantasm.gun_constraints",
+			"files": [{
+				"url": "https://github.com/SuperZombi/wot-modpack/raw/refs/heads/mods/mods/aim/phantasm.gun_constraints.wotmod",
+				"dest": "mods"
+			}],
+			"image": "https://raw.githubusercontent.com/SuperZombi/wot-modpack/refs/heads/mods/images/aim/phantasm.gun_constraints.jpg",
+			"title": {
+				"en": "Horizontal aiming angles",
+				"ru": "Углы горизонтальной наводки",
+				"uk": "Кути горизонтального наведення",
+			},
+			"author": "Phantasm",
+			"description": {
+				"en": "The mod adds horizontal aiming angles for tank destroyers without turrets.",
+				"ru": "Мод добавляет углы горизонтальной наводки для пт-сау без башен.",
+				"uk": "Мод додає кути горизонтального наведення для пт-сау без башти.",
+			},
+			"category": "aim",
+			"ver": "1",
+			"requires": ["modssettingsapi"]
+		},
+		{
 			"id": "tv.protanki.damagestickers",
 			"files": [{
 				"url": "https://github.com/SuperZombi/wot-modpack/raw/refs/heads/mods/mods/battle/tv.protanki.damagestickers.wotmod",
