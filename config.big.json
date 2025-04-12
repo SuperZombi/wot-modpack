@@ -879,5 +879,26 @@
 			"category": "models",
 			"ver": "1"
 		},
+		{
+			"id": "FiT.VisibleRailcars",
+			"files": [{
+				"url": "https://github.com/SuperZombi/wot-modpack/raw/refs/heads/mods/mods/battle/FiT.VisibleRailcars.wotmod",
+				"dest": "mods"
+			}],
+			"image": "https://raw.githubusercontent.com/SuperZombi/wot-modpack/refs/heads/mods/images/battle/FiT.VisibleRailcars.jpg",
+			"title": {
+				"en": "Visible railway cars",
+				"ru": "Видимые железнодорожные вагоны",
+				"uk": "Видимі залізничні вагони",
+			},
+			"description": {
+				"en": "Adds yellow tape to train cars. Now the cars are hard to miss.",
+				"ru": "Добавляет на железнодорожные вагоны желтую ленту. Теперь вагоны трудно не заметить.",
+				"uk": "Додає на залізничні вагони жовту стрічку. Тепер вагони важко не помітити.",
+			},
+			"author": "Farts In Tanks",
+			"category": "battle",
+			"ver": "1"
+		},
 	]
 }
