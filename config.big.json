@@ -651,7 +651,7 @@
 			"id": "sixth_sense_10",
 			"files": [
 				{"url": "https://github.com/SuperZombi/wot-modpack/raw/refs/heads/mods/mods/six_sense/sixthsense_core.wotmod", "dest": "mods"},
-				{"url": "https://github.com/SuperZombi/wot-modpack/raw/refs/heads/mods/configs/six_sense/sixthSense.xml", "dest": "configs"}
+				{"url": "https://github.com/SuperZombi/wot-modpack/raw/refs/heads/mods/configs/six_sense/sixth_sense_10/sixthSense.xml", "dest": "configs"}
 			],
 			"image": "https://raw.githubusercontent.com/SuperZombi/wot-modpack/refs/heads/mods/images/six_sense/better_sixth_sense.jpg",
 			"title": {
@@ -693,7 +693,11 @@
 			"id": "sixth_sense.blue_timer",
 			"files": [
 				{"url": "https://github.com/SuperZombi/wot-modpack/raw/refs/heads/mods/mods/six_sense/sixthsense_core.wotmod", "dest": "mods"},
-				{"url": "https://github.com/SuperZombi/wot-modpack/raw/refs/heads/mods/configs/six_sense/blue_timer.zip", "dest": "configs"}
+				{"url": "https://github.com/SuperZombi/wot-modpack/raw/refs/heads/mods/configs/six_sense/blue_timer/sixthSense.xml", "dest": "configs"},
+				{
+					"url": "https://github.com/SuperZombi/wot-modpack/raw/refs/heads/mods/configs/six_sense/blue_timer/blue_timer.zip",
+					"dest": "configs", "folder": "sixthSense", "delete_folder": true
+				}
 			],
 			"image": "https://raw.githubusercontent.com/SuperZombi/wot-modpack/refs/heads/mods/images/six_sense/blue_timer.jpg",
 			"title": {
@@ -713,7 +717,11 @@
 			"id": "sixth_sense.green_radar",
 			"files": [
 				{"url": "https://github.com/SuperZombi/wot-modpack/raw/refs/heads/mods/mods/six_sense/sixthsense_core.wotmod", "dest": "mods"},
-				{"url": "https://github.com/SuperZombi/wot-modpack/raw/refs/heads/mods/configs/six_sense/green_radar.zip", "dest": "configs"}
+				{"url": "https://github.com/SuperZombi/wot-modpack/raw/refs/heads/mods/configs/six_sense/green_radar/sixthSense.xml", "dest": "configs"},
+				{
+					"url": "https://github.com/SuperZombi/wot-modpack/raw/refs/heads/mods/configs/six_sense/green_radar/green_radar.zip",
+					"dest": "configs", "folder": "sixthSense", "delete_folder": true
+				}
 			],
 			"image": "https://raw.githubusercontent.com/SuperZombi/wot-modpack/refs/heads/mods/images/six_sense/green_radar.jpg",
 			"title": {
@@ -733,7 +741,11 @@
 			"id": "sixth_sense.orange_timer",
 			"files": [
 				{"url": "https://github.com/SuperZombi/wot-modpack/raw/refs/heads/mods/mods/six_sense/sixthsense_core.wotmod", "dest": "mods"},
-				{"url": "https://github.com/SuperZombi/wot-modpack/raw/refs/heads/mods/configs/six_sense/orange_timer.zip", "dest": "configs"}
+				{"url": "https://github.com/SuperZombi/wot-modpack/raw/refs/heads/mods/configs/six_sense/orange_timer/sixthSense.xml", "dest": "configs"},
+				{
+					"url": "https://github.com/SuperZombi/wot-modpack/raw/refs/heads/mods/configs/six_sense/orange_timer/orange_timer.zip",
+					"dest": "configs", "folder": "sixthSense", "delete_folder": true
+				}
 			],
 			"image": "https://raw.githubusercontent.com/SuperZombi/wot-modpack/refs/heads/mods/images/six_sense/orange_timer.jpg",
 			"title": {
