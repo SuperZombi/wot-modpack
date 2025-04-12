@@ -167,6 +167,7 @@
 				"uk": "Мод показує час до повного зведення прицілу.",
 			},
 			"category": "aim",
+			"ver": "3.1.02"
 		},
 		{
 			"id": "poliroid.pmod.reducedArmor",
@@ -217,7 +218,8 @@
 				"uk": "<ul><li>Червоний — пробиття ББ\\БП.</li><li>Жовтий — кумулятив або фугас.</li><li>Зелений — не пробив.</li></ul>",
 			},
 			"category": "battle",
-			"group": "colored_hitmarks"
+			"group": "colored_hitmarks",
+			"ver": "1.5.1.0"
 		},
 		{
 			"id": "just.DamageStickers",
@@ -238,7 +240,8 @@
 				"uk": "<ul><li>Червоний — пробиття ББ\\БП.</li><li>Жовтий — кумулятив або фугас.</li><li>Зелений — не пробив.</li></ul>",
 			},
 			"category": "battle",
-			"group": "colored_hitmarks"
+			"group": "colored_hitmarks",
+			"ver": "1.0.0"
 		},
 		{
 			"id": "tv.protanki.enemyannouncer",
@@ -259,6 +262,7 @@
 				"uk": "<ul><li>Червоний — ворог в 50 метрах.</li><li>Жовтий — ворог поза полем зору і може завдати шкоди.</li><li>Зелений — ворог засвічений поза полем зору.</li></ul>",
 			},
 			"category": "battle",
+			"ver": "3.4.08",
 			"requires": ["modssettingsapi"]
 		},
 		{
@@ -279,7 +283,8 @@
 				"uk": "Мод дозволяє швидше аналізувати типи техніки перед початком бою.",
 			},
 			"author": "Master_XH",
-			"category": "battle"
+			"category": "battle",
+			"ver": "1.28.0.1"
 		},
 		{
 			"id": "me.poliroid.gunmarks",
@@ -299,7 +304,8 @@
 				"uk": "Мод вираховує необхідну шкоду в бою і показує відсоток зростання позначки.",
 			},
 			"author": "P0LIR0ID",
-			"category": "stats"
+			"category": "stats",
+			"ver": "3.8.04"
 		},
 		{
 			"id": "battleClock",
@@ -313,7 +319,8 @@
 				"ru": "Часы в бою",
 				"uk": "Годинник у бою",
 			},
-			"category": "battle"
+			"category": "battle",
+			"ver": "1"
 		},
 		{
 			"id": "me.kurzdor.battleequipment",
@@ -334,6 +341,7 @@
 			},
 			"author": "Kurzdor",
 			"category": "battle",
+			"ver": "3.4.4",
 			"requires": ["modssettingsapi"]
 		},
 		{
@@ -355,6 +363,7 @@
 			},
 			"author": "Pruszko",
 			"category": "battle",
+			"ver": "2.1.3",
 			"requires": ["modssettingsapi"]
 		},
 		{
@@ -376,6 +385,7 @@
 				"uk": "Мод дозволяє розглянути всі влучання по танку, отримані в бою.",
 			},
 			"category": "hangar",
+			"ver": "2.2.3",
 			"requires": ["modslistapi"]
 		},
 		{
@@ -396,7 +406,8 @@
 				"ru": "Мод позволяет анализировать броню выбранного танка в ангаре.<br>Он покажет реальную толщину брони танка в выбранном месте с учетом приведенной брони и экранов.",
 				"uk": "Мод дозволяє аналізувати броню вибраного танка в ангарі. Він покаже реальну товщину броні танка у вибраному місці з урахуванням наведеної броні та екранів.",
 			},
-			"category": "hangar"
+			"category": "hangar",
+			"ver": "3.4.6"
 		},
 		{
 			"id": "AntonVK.HangarClock",
@@ -417,7 +428,8 @@
 				"uk": "Годинник в гаражі",
 			},
 			"author": "AntonVK",
-			"category": "hangar"
+			"category": "hangar",
+			"ver": "1.13.0.0"
 		},
 		{
 			"id": "me.poliroid.replaysmanager",
@@ -438,6 +450,7 @@
 			},
 			"author": "P0LIR0ID",
 			"category": "hangar",
+			"ver": "3.8.01",
 			"requires": ["modslistapi"]
 		},
 		{
@@ -459,6 +472,7 @@
 				"uk": "Мод перемикає ангари, вбудовані у гру.",
 			},
 			"category": "hangar",
+			"ver": "1",
 			"requires": ["modslistapi"]
 		},
 		{
@@ -479,7 +493,8 @@
 				"ru": "Мод добавляет кнопку рядом с фильтром танков.<br>После нажатия появится рулетка.<br>В пул включаются только отфильтрованные танки.",
 				"uk": "Мод додає кнопку біля фільтрів танків.<br>Після натискання з'явиться рулетка.<br>До пулу включаються лише відфільтровані танки.",
 			},
-			"category": "hangar"
+			"category": "hangar",
+			"ver": "1.6.1"
 		},
 		{
 			"id": "tv.protanki.uniquestyles",
@@ -500,6 +515,7 @@
 				"uk": "Дозволяє увімкнути відображення унікальних 3D стилів, які є у грі.<br>Стилі відображаються лише у гравця.",
 			},
 			"category": "hangar",
+			"ver": "3.0.2",
 			"requires": ["modslistapi"]
 		},
 		{
@@ -520,7 +536,8 @@
 				"uk": "<ul><li>Caps Lock + F3 — Увімкнути камеру</li><li>Q/E/колесо миші — рух камери вгору/вниз</li><li>1-0 — швидкість польоту камери</li><li>P — активація плавного польоту камери</li><li>X — камера пересувається паралельно землі</li><li>C — обертання камери навколо точки</li><li>B — закріпити камеру на корпус танка</li><li>Insert/Delete — зум камери</li><li>Num lock — нахил камери</li><li>O/L — чутливість нахилу камери</li></ul>",
 			},
 			"author": "alphasave1",
-			"category": "other"
+			"category": "other",
+			"ver": "1.1.1"
 		},
 		{
 			"id": "goofy67.FreeCam",
@@ -541,6 +558,7 @@
 			},
 			"author": "goofy67",
 			"category": "other",
+			"ver": "2.12",
 			"requires": ["modslistapi"]
 		},
 		{
@@ -561,7 +579,8 @@
 				"uk": "Мод показує детальну інформацію про активність у грі в статусі профілю.<br>Необхідно запустити Discord.",
 			},
 			"author": "Kurzdor",
-			"category": "other"
+			"category": "other",
+			"ver": "3.10.1"
 		},
 		{
 			"id": "calcElo",
@@ -581,23 +600,25 @@
 				"uk": "Мод показує значення Ело вашого клану та клану супротивника. А також кількість очок за перемогу чи поразку у цьому бою.",
 			},
 			"category": "stats",
+			"ver": "1",
 			"requires": ["modssettingsapi"]
 		},
 		{
 			"id": "tv.protanki.StarrySky",
 			"files": [{
-				"url": "https://github.com/SuperZombi/wot-modpack/raw/refs/heads/mods/mods/art/tv.protanki.StarrySky.wotmod",
+				"url": "https://github.com/SuperZombi/wot-modpack/raw/refs/heads/mods/mods/art/StarrySky.wotmod",
 				"dest": "mods"
 			}],
-			"image": "https://raw.githubusercontent.com/SuperZombi/wot-modpack/refs/heads/mods/images/art/protanki.StarrySky.jpg",
+			"image": "https://raw.githubusercontent.com/SuperZombi/wot-modpack/refs/heads/mods/images/art/StarrySky.jpg",
 			"title": {
 				"en": "Starry sky",
 				"ru": "Звездное небо",
 				"uk": "Зоряне небо",
 			},
-			"author": "Protanki",
+			"author": "P_H_A_R_A_O_N",
 			"category": "art",
-			"group": "sky_change"
+			"group": "sky_change",
+			"ver": "0.1"
 		},
 		{
 			"id": "RainyWeather",
@@ -613,7 +634,8 @@
 			},
 			"author": "P_H_A_R_A_O_N",
 			"category": "art",
-			"group": "sky_change"
+			"group": "sky_change",
+			"ver": "0.1"
 		},
 		{
 			"id": "hell.hangar.asphalt",
@@ -629,7 +651,8 @@
 			},
 			"author": "Hellinger",
 			"category": "art",
-			"group": "hangar_change"
+			"group": "hangar_change",
+			"ver": "1"
 		},
 		{
 			"id": "hell.hangar.paving_stones",
@@ -645,7 +668,8 @@
 			},
 			"author": "Hellinger",
 			"category": "art",
-			"group": "hangar_change"
+			"group": "hangar_change",
+			"ver": "1"
 		},
 		{
 			"id": "sixth_sense_10",
@@ -667,6 +691,7 @@
 			"author": "MLG",
 			"category": "six_sense",
 			"group": "six_sense",
+			"ver": "1"
 		},
 		{
 			"id": "sixth_sense_12",
@@ -688,6 +713,7 @@
 			"author": "pe3pa",
 			"category": "six_sense",
 			"group": "six_sense",
+			"ver": "1"
 		},
 		{
 			"id": "sixth_sense.blue_timer",
@@ -712,6 +738,7 @@
 			},
 			"category": "six_sense",
 			"group": "six_sense",
+			"ver": "1"
 		},
 		{
 			"id": "sixth_sense.green_radar",
@@ -736,6 +763,7 @@
 			},
 			"category": "six_sense",
 			"group": "six_sense",
+			"ver": "1"
 		},
 		{
 			"id": "sixth_sense.orange_timer",
@@ -760,6 +788,7 @@
 			},
 			"category": "six_sense",
 			"group": "six_sense",
+			"ver": "1"
 		},
 		{
 			"id": "ebr105.bmw_m3",
@@ -779,7 +808,8 @@
 				"uk": "Мод не гарантує стабільність гри. Можливі вильоти.",
 			},
 			"author": "MrJuice",
-			"category": "models"
+			"category": "models",
+			"ver": "1"
 		},
 		{
 			"id": "amx30.police",
@@ -799,7 +829,8 @@
 				"uk": "Мод не гарантує стабільність гри. Можливі вильоти.",
 			},
 			"author": "MrJuice",
-			"category": "models"
+			"category": "models",
+			"ver": "1"
 		},
 	]
 }
