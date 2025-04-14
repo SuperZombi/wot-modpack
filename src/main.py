@@ -121,6 +121,7 @@ def main_install(client_path, args, mods):
 	if args.get("save_selected_mods", True):
 		SETTINGS = {
 			"lang": args.get('language'),
+			"use_cache": args.get('use_cache', True),
 			"client": client_path,
 			"mods": mods
 		}
