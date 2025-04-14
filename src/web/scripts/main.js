@@ -256,7 +256,7 @@ async function initSettings(){
 		if (settings.lang){
 			currentLang = settings.lang
 		}
-		if (settings.use_cache){
+		if (settings.use_cache != null){
 			document.querySelector('.setting_element[name="use_cache"]').checked = settings.use_cache
 		}
 	}
