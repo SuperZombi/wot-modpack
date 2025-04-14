@@ -72,6 +72,8 @@ class Client:
 		self.exe = "WorldOfTanks.exe"
 		self.installed = []
 		self.use_cache = use_cache
+		appdata = os.path.join(os.getenv('APPDATA'), 'Wargaming.net', 'WorldOfTanks')
+		self.appdata = appdata if os.path.exists(appdata) else None
 
 	def __str__(self): return self.title
 	def __repr__(self): return f"<{str(self)}>"
@@ -123,7 +125,9 @@ class Client:
 	def delete_mods(self, delete_configs=False, delete_logs=True):
 		self.installed = []
 		arr = [self.mods_folder, self.res_mods]
-		if delete_configs: arr.append(self.configs_path)
+		if delete_configs:
+			arr.append(self.configs_path)
+			if self.appdata: arr.append(os.path.join(self.appdata, 'mods'))
 		for path in arr:
 			if os.path.exists(path):
 				shutil.rmtree(path)
