@@ -106,6 +106,14 @@
 				"uk": "Змінити лампочку",
 			}
 		},
+		{
+			"id": "last_battle_result",
+			"title": {
+				"en": "Last battle result in chat",
+				"ru": "Результаты прошлого боя в чате",
+				"uk": "Підсумки минулого бою в чаті",
+			}
+		},
 	],
 
 
@@ -946,6 +954,35 @@
 			"author": "Farts In Tanks",
 			"category": "battle",
 			"ver": "1"
+		},
+
+		{
+			"id": "pmod.last_battle_result.vlad_cs_sr_RU",
+			"files": [
+				{
+					"url": "https://raw.githubusercontent.com/SuperZombi/wot-modpack/refs/heads/mods/configs/pmod/battleChat.json",
+					"dest": "configs", "folder": "pmod"
+				},
+				{
+					"url": "https://raw.githubusercontent.com/SuperZombi/wot-modpack/refs/heads/mods/configs/pmod/skinLoader.zip",
+					"dest": "configs", "folder": "pmod"
+				},
+				{
+					"url": "https://raw.githubusercontent.com/SuperZombi/wot-modpack/refs/heads/mods/configs/pmod/battleChat/vlad_cs_sr_RU.zip",
+					"dest": "configs", "folder": "pmod"
+				}
+			],
+			// "image": "https://raw.githubusercontent.com/SuperZombi/wot-modpack/refs/heads/mods/images/aim/pmod.reducedArmor.jpg",
+			"title": {
+				"en": "Результаты боя vlad_cs_sr (Ру)",
+				"ru": "Результаты боя vlad_cs_sr (Ру)",
+				"uk": "Результаты боя vlad_cs_sr (Ру)",
+			},
+			"author": "P0LIR0ID",
+			"ver": "1",
+			"category": "stats",
+			"group": "last_battle_result",
+			"requires": ["pmod"]
 		},
 	]
 }

@@ -7,15 +7,13 @@
 			"enable": true,
 			"position": [90, 3],
 			"size": [80, 20],
-			"text": "<font face=\"$FieldFont\" size=\"14\" color=\"#FFFFFF\"><p align=\"center\">{{hp_current}}</p></font>",
-			"_backup_enable": true
+			"text": "<font face=\"$FieldFont\" size=\"14\" color=\"#FFFFFF\"><p align=\"center\">{{hp_current}}</p></font>"
 		},
 		"healthBar": {
 			"enable": true,
 			"position": [90, 6],
 			"size": [80, 16],
-			"skin": "default",
-			"_backup_enable": false
+			"skin": "default"
 		}
 	},
 	"right": {
@@ -23,15 +21,13 @@
 			"enable": true,
 			"position": [-170, 3],
 			"size": [80, 20],
-			"text": "<font face=\"$FieldFont\" size=\"14\" color=\"#FFFFFF\"><p align=\"center\">{{hp_current}}</p></font>",
-			"_backup_enable": true
+			"text": "<font face=\"$FieldFont\" size=\"14\" color=\"#FFFFFF\"><p align=\"center\">{{hp_current}}</p></font>"
 		},
 		"healthBar": {
 			"enable": true,
 			"position": [-170, 6],
 			"size": [80, 16],
-			"skin": "default",
-			"_backup_enable": false
+			"skin": "default"
 		}
 	},
 	"shadow": {
@@ -42,6 +38,5 @@
 		"strength": 2,
 		"distance": 0,
 		"angle": 0
-	},
-	"_backup_enable": false
+	}
 }
