@@ -972,7 +972,7 @@
 					"dest": "configs", "folder": "pmod"
 				}
 			],
-			"image": "https://raw.githubusercontent.com/SuperZombi/wot-modpack/refs/heads/mods/images/aim/pmod.reducedArmor.jpg",
+			"image": "https://raw.githubusercontent.com/SuperZombi/wot-modpack/refs/heads/mods/images/stats/battle_result/vlad_cs_sr_ru.jpg",
 			"title": {
 				"en": "Battle results vlad_cs_sr (Ru)",
 				"ru": "Результаты боя vlad_cs_sr (Ру)",
@@ -1000,7 +1000,7 @@
 					"dest": "configs", "folder": "pmod"
 				}
 			],
-			"image": "https://raw.githubusercontent.com/SuperZombi/wot-modpack/refs/heads/mods/images/aim/pmod.reducedArmor.jpg",
+			"image": "https://raw.githubusercontent.com/SuperZombi/wot-modpack/refs/heads/mods/images/stats/battle_result/vlad_cs_sr_uk.jpg",
 			"title": {
 				"en": "Battle results vlad_cs_sr (Ukr)",
 				"ru": "Результаты боя vlad_cs_sr (Укр)",
@@ -1028,7 +1028,7 @@
 					"dest": "configs", "folder": "pmod"
 				}
 			],
-			"image": "https://raw.githubusercontent.com/SuperZombi/wot-modpack/refs/heads/mods/images/aim/pmod.reducedArmor.jpg",
+			"image": "https://raw.githubusercontent.com/SuperZombi/wot-modpack/refs/heads/mods/images/stats/battle_result/vlad_cs_sr_en.jpg",
 			"title": {
 				"en": "Battle results vlad_cs_sr (En)",
 				"ru": "Результаты боя vlad_cs_sr (Англ)",
