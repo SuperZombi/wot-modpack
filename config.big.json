@@ -972,7 +972,7 @@
 					"dest": "configs", "folder": "pmod"
 				}
 			],
-			// "image": "https://raw.githubusercontent.com/SuperZombi/wot-modpack/refs/heads/mods/images/aim/pmod.reducedArmor.jpg",
+			"image": "https://raw.githubusercontent.com/SuperZombi/wot-modpack/refs/heads/mods/images/aim/pmod.reducedArmor.jpg",
 			"title": {
 				"en": "Результаты боя vlad_cs_sr (Ру)",
 				"ru": "Результаты боя vlad_cs_sr (Ру)",
