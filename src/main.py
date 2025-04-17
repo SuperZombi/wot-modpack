@@ -7,7 +7,7 @@ from tkinter.filedialog import askdirectory
 from utils import *
 
 MODS_DATA = {}
-__version__ = "0.0.5"
+__version__ = "0.5.1"
 @eel.expose
 def app_version(): return __version__
 def resource_path(relative_path=""):
@@ -133,7 +133,7 @@ def main_install(client_path, args, mods):
 
 # MAIN
 eel.init(resource_path("web"))
-browsers = ['chrome', 'edge', 'default']
+browsers = ['chrome', 'default']
 for browser in browsers:
 	try:
 		eel.start("index.html", mode=browser, size=(1000, 800), port=0)

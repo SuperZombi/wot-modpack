@@ -124,14 +124,20 @@ class Client:
 	
 	def delete_mods(self, delete_configs=False, delete_logs=True):
 		self.installed = []
-		arr = [self.mods_folder, self.res_mods]
-		if delete_configs:
-			arr.append(self.configs_path)
-			if self.appdata: arr.append(os.path.join(self.appdata, 'mods'))
-		for path in arr:
-			if os.path.exists(path):
-				shutil.rmtree(path)
-				os.makedirs(path)
+		mods_f = os.path.join(self.path, "mods")
+		res_mods = os.path.join(self.path, "res_mods")
+		for path in [mods_f, res_mods]:
+			for item in os.listdir(path):
+				item_path = os.path.join(path, item)
+				if (delete_configs==False) and os.path.isdir(item_path) and item == "configs": continue
+				if os.path.isfile(item_path): os.remove(item_path)
+				elif os.path.isdir(item_path): shutil.rmtree(item_path)
+		os.makedirs(self.res_mods)
+		os.makedirs(self.mods_folder)
+
+		if delete_configs and self.appdata:
+			temp_configs = os.path.join(self.appdata, 'mods')
+			if os.path.exists(temp_configs): shutil.rmtree(path)
 		if delete_logs:
 			logfile = os.path.join(self.path, "python.log")
 			if os.path.exists(logfile): os.remove(logfile)
