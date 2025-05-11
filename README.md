@@ -2,7 +2,11 @@
 
 # Web Modpack
 ### Lightweight and modern modpack for World of Tanks
-<img src="https://shields.io/badge/version-0.5.1-blue">
+
+<p align="right">
+    <img align="left" src="https://shields.io/badge/version-0.5.1-blue">
+    <a href="#donate"><img src="https://shields.io/badge/💲-Support_the_Project-2ea043"></a>
+</p>
 
 ### <a href="https://github.com/SuperZombi/wot-modpack/releases/latest/download/Web.Modpack.exe"><img src="https://github.com/user-attachments/assets/2a418b60-b0a1-462d-afc3-0270ba5c0e83" height="26" align=top> Download</a>
 
@@ -24,3 +28,24 @@ Supports all client versions (including CT and SB)
 <hr>
 
 ### <a href="https://github.com/SuperZombi/wot-modpack/issues/new"><img src="https://github.com/user-attachments/assets/322af33a-dcd0-4e59-8a0e-61e10edbc09f" height="26" align=top> Report a Bug</a>
+
+
+#### 💲Donate
+<table>
+  <tr>
+    <td>
+       <img width="18px" src="https://www.google.com/s2/favicons?domain=https://donatello.to&sz=256">
+    </td>
+    <td>
+      <a href="https://donatello.to/super_zombi">Donatello</a>
+    </td>
+  </tr>
+  <tr>
+    <td>
+       <img width="18px" src="https://www.google.com/s2/favicons?domain=https://www.donationalerts.com&sz=256">
+    </td>
+    <td>
+      <a href="https://www.donationalerts.com/r/super_zombi">Donation Alerts</a>
+    </td>
+  </tr>
+</table>
