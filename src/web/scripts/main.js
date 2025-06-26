@@ -19,11 +19,12 @@ window.onload=async _=>{
 	changeTab("home")
 	document.querySelector("#loader").classList.add("hide")
 
-	document.querySelector("#main_button").onclick = _=>{
+	document.querySelector("#main_button").onclick = async _=>{
 		changeTab("install")
 		let selectedModsIds = modsManager.get()
 		let selectedMods = modsData.mods.filter(mod => selectedModsIds.includes(mod.id))
-		buildModsInstallList(selectedMods)
+		let cached = await eel.get_cache_info()()
+		buildModsInstallList(selectedMods, cached)
 	}
 
 	document.querySelector("#run_main_button").onclick = async _=>{
@@ -136,6 +137,7 @@ async function load_game_clients(){
 }
 async function load_mods_info(){
 	modsData = await eel.load_mods_info()()
+	let cached = await eel.get_cache_info()()
 	if (modsData){
 		modsManager = new ModsList(document.querySelector("#mods-list"), currentLang)
 
@@ -144,6 +146,7 @@ async function load_mods_info(){
 
 			let category_element = modsManager.makeCategory(category.title, category.image)
 			avalible_mods.forEach(mod=>{
+				mod.cached_ver = (cached.find(el=>el.id==mod.id)||{}).ver || null;
 				if (mod.group){
 					let group = modsData.groups.find(x => x.id == mod.group)
 					if (group){
@@ -205,13 +208,28 @@ function resetSelectedMods(){
 	}
 }
 
-function buildModsInstallList(mods){
+function buildModsInstallList(mods, cached){
 	let parent = document.querySelector("#mods-install-list")
 	if (mods.length > 0){
 		parent.innerHTML = ""
 		mods.forEach(mod=>{
-			let el = document.createElement("li")
-			el.innerHTML = mod.title[currentLang]
+			let el = document.createElement("div")
+			el.className = "mod-item"
+			let icon = document.createElement("img")
+			let cached_ver = (cached.find(el=>el.id==mod.id)||{}).ver || null;
+			if (cached_ver && cached_ver === mod.ver){
+				icon.src = "images/check.svg"
+				icon.title = LANG("mod_in_cache")
+				icon.setAttribute("lang_title", "mod_in_cache")
+			} else {
+				icon.src = "images/down-arrow.svg"
+				icon.title = LANG("mod_will_be_downloaded")
+				icon.setAttribute("lang_title", "mod_will_be_downloaded")
+			}
+			let title = document.createElement("span")
+			title.textContent = mod.title[currentLang]
+			el.appendChild(icon)
+			el.appendChild(title)
 			parent.appendChild(el)
 		})
 	} else {

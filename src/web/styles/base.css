@@ -81,7 +81,7 @@ input[type=checkbox]{
 	align-items: center;
 	justify-content: center;
 	border: solid 2px transparent;
-	border-radius: 2px;
+	border-radius: 3px;
 	background:
 		radial-gradient(#2e2e28 25%, black) padding-box,
 		linear-gradient(0deg, #6e3f15, #f7d670) border-box;
@@ -140,7 +140,7 @@ input[type=text]{
 	padding: 1px 4px;
 	font-size: inherit;
 	border: solid 2px transparent;
-	border-radius: 2px;
+	border-radius: 4px;
 	background:
 		radial-gradient(#2e2e28 25%, black) padding-box,
 		linear-gradient(0deg, #6e3f15, #f7d670) border-box;

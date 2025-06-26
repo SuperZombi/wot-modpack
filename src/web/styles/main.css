@@ -91,12 +91,22 @@ header a:hover{
 }
 
 .mods-install-list{
-	padding-left: 40px;
-	margin-left: -40px;
 	overflow: auto;
 	max-width: 50vw;
 	scrollbar-width: thin;
 	color-scheme: dark;
+	display: flex;
+	flex-direction: column;
+	gap: 5px;
+}
+.mods-install-list .mod-item {
+	display: flex;
+	align-items: center;
+	gap: 5px;
+}
+.mods-install-list .mod-item img{
+	height: 16px;
+	cursor: help;
 }
 
 #app-version{
@@ -138,4 +148,11 @@ header a:hover{
 }
 #cache_size{
 	margin-right: 2px;
+}
+
+.new-badge{
+	width: 10px;
+	height: 10px;
+	background: red;
+	border-radius: 50%;
 }

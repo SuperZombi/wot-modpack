@@ -7,7 +7,7 @@ from tkinter.filedialog import askdirectory
 from utils import *
 
 MODS_DATA = {}
-__version__ = "0.5.1"
+__version__ = "0.5.2"
 @eel.expose
 def app_version(): return __version__
 def resource_path(relative_path=""):
@@ -37,6 +37,15 @@ def delete_cache():
 	cache_folder = os.path.join(local(), 'cache')
 	if os.path.exists(cache_file): os.remove(cache_file)
 	if os.path.exists(cache_folder): shutil.rmtree(cache_folder)
+@eel.expose
+def get_cache_info():
+	cache_file = os.path.join(local(), 'cache.json')
+	if os.path.exists(cache_file):
+		with open(cache_file, 'r', encoding='utf-8') as f:
+			data = json.load(f)
+			result = [{"id": item["id"], "ver": item["ver"]} for item in data]
+			return result
+	return []
 
 ###
 @eel.expose

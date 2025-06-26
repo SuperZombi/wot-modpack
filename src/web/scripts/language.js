@@ -139,6 +139,21 @@ let LOCALES = {
 		"en": "Mb",
 		"ru": "Мб",
 		"uk": "Мб"
+	},
+	"mod_updated": {
+		"en": "Mod updated",
+		"ru": "Мод обновлён",
+		"uk": "Мод оновлено"
+	},
+	"mod_in_cache": {
+		"en": "Mod in cache",
+		"ru": "Мод в кэше",
+		"uk": "Мод у кеші"
+	},
+	"mod_will_be_downloaded": {
+		"en": "Mod will be downloaded",
+		"ru": "Мод будет скачан",
+		"uk": "Мод буде завантажено"
 	}
 }
 
@@ -160,6 +175,9 @@ function initLanguage(){
 function localizePage(){
 	document.querySelectorAll("[lang_]").forEach(el=>{
 		el.innerHTML = LANG(el.getAttribute("lang_"))
+	})
+	document.querySelectorAll("[lang_title]").forEach(el=>{
+		el.title = LANG(el.getAttribute("lang_title"))
 	})
 }
 function LANG(code){

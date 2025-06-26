@@ -105,6 +105,16 @@ class Checkbox{
 		this.author = mod_info.author || ""
 		this.root.appendChild(this.input)
 		this.root.appendChild(this.title)
+		if (mod_info.cached_ver){
+			if (mod_info.ver !== mod_info.cached_ver){
+				let badge = document.createElement("span")
+				badge.className = "new-badge"
+				badge.style.cursor = "help"
+				badge.title = LANG("mod_updated")
+				badge.setAttribute("lang_title", "mod_updated")
+				this.root.appendChild(badge)
+			}
+		}
 
 		this.root.addEventListener("mouseover", _=>{
 			document.querySelector("#mod-image").src = this.image
