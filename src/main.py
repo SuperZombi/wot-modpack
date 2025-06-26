@@ -10,9 +10,9 @@ MODS_DATA = {}
 __version__ = "0.5.2"
 @eel.expose
 def app_version(): return __version__
-def resource_path(relative_path=""):
-	base_path = getattr(sys, '_MEIPASS', os.path.dirname(os.path.abspath(__file__)))
-	return os.path.join(base_path, relative_path)
+LOCALES = load_locales()
+@eel.expose
+def get_locales(): return LOCALES
 
 @eel.expose
 def load_settings():
@@ -102,16 +102,17 @@ def json_to_mod(mod_id):
 
 @eel.expose
 def main_install(client_path, args, mods):
+	LANG = LangEngine(LOCALES, args.get("language"))
 	fails = []
 	client = Client(client_path, use_cache=args.get("use_cache", True))
 	if client.is_running:
-		fails.append("The client is running. Please shut it down and try again.")
+		fails.append({"error": LANG("client_is_running_error")})
 		return fails
 	if args.get("delete_mods", False):
 		try:
 			client.delete_mods(args.get("delete_configs", False))
 		except Exception as e:
-			fails.append(str(e))
+			fails.append({"error": str(e)})
 			return fails
 	
 	if len(mods) > 0:

@@ -3,7 +3,7 @@ var modsData;
 
 window.onload=async _=>{
 	await initSettings()
-	initLanguage()
+	await initLanguage()
 	await load_game_clients()
 
 	document.querySelector("#navigate_to_mods").onclick = async _=>{
@@ -44,14 +44,22 @@ window.onload=async _=>{
 			document.querySelector("#refs").classList.remove("show")
 			document.querySelector("#report_bug").style.display = "block"
 			result_area.innerHTML = `<h3>${LANG("failed_to_install")}:</h3>`
-			let list = document.createElement("ul")
-			list.className = "mods-install-list"
-			fails.forEach(fail=>{
-				let li = document.createElement("li")
-				li.innerHTML = fail
-				list.appendChild(li)
-			})
-			result_area.appendChild(list)
+			if (fails.length == 1 && fails[0] instanceof Object){
+				result_area.innerHTML = `
+					<h3 style="color:red;line-height:30px;">${fails[0]['error']}</h3>
+				`
+			} else {
+				let list = document.createElement("ul")
+				list.className = "mods-install-list"
+				list.style.paddingLeft = "30px"
+				list.style.marginLeft = "-30px"
+				fails.forEach(fail=>{
+					let li = document.createElement("li")
+					li.innerHTML = fail
+					list.appendChild(li)
+				})
+				result_area.appendChild(list)
+			}
 		} else {
 			result_area.innerHTML = `<h3>${LANG("installed_success")}</h3>`
 			document.querySelector("#refs").classList.add("show")
@@ -227,7 +235,7 @@ function buildModsInstallList(mods, cached){
 				icon.setAttribute("lang_title", "mod_will_be_downloaded")
 			}
 			let title = document.createElement("span")
-			title.textContent = mod.title[currentLang]
+			title.innerHTML = mod.title[currentLang]
 			el.appendChild(icon)
 			el.appendChild(title)
 			parent.appendChild(el)
