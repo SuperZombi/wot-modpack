@@ -1,0 +1,26 @@
+name: ➕ Request to add a new mod
+description: Suggest a mod to add to the modpack
+labels: ["Mod request"]
+body:
+  - type: input
+    id: mod-name
+    attributes:
+      label: Mod name
+    validations:
+      required: true
+
+  - type: textarea
+    id: mod-description
+    attributes:
+      label: Description of the mod
+      description: What does this mod do? Where can it be downloaded?
+    validations:
+      required: true
+
+  - type: textarea
+    id: mod-images
+    attributes:
+      label: Pictures (optional)
+      description: Attach some screenshots or images if you have them.
+    validations:
+      required: false
