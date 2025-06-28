@@ -5,8 +5,7 @@ body:
   - type: checkboxes
     id: duplicate-check
     attributes:
-      label: "Before submitting..."
-      description: "Please confirm the following:"
+      label: "Please confirm the following:"
       options:
         - label: I have searched the existing issues and didn’t find a duplicate.
           required: true
@@ -18,7 +17,6 @@ body:
       options:
         - Modpack
         - Mod
-      default: 0
     validations:
       required: true
 
@@ -44,7 +42,7 @@ body:
       label: Steps to reproduce
       description: Describe how to reproduce it
     validations:
-      required: true
+      required: false
 
   - type: textarea
     id: bug-images

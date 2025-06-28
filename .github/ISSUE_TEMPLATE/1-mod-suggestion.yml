@@ -1,4 +1,4 @@
-name: ➕ Request to add a new mod
+name: ➕ Request a new mod
 description: Suggest a mod to add to the modpack
 labels: ["Mod request"]
 body:
