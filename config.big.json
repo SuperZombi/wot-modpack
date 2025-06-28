@@ -1040,5 +1040,32 @@
 			"group": "last_battle_result",
 			"requires": ["pmod"]
 		},
+		{
+			"id": "rajcel.unanonymizer",
+			"files": [
+				{
+					"url": "https://raw.githubusercontent.com/SuperZombi/wot-modpack/refs/heads/mods/hangar/rajcel.unanonymizer.zip",
+					"dest": "mods"
+				},
+				{
+					"url": "https://raw.githubusercontent.com/SuperZombi/wot-modpack/refs/heads/mods/configs/hangar/rajcel.unanonymizer.zip",
+					"dest": "configs", "folder": "rajcel"
+				}
+			],
+			"image": "https://raw.githubusercontent.com/SuperZombi/wot-modpack/refs/heads/mods/images/hangar/rajcel.unanonymizer.jpg",
+			"title": {
+				"en": "Unanonymizer",
+				"ru": "Деанонимайзер",
+				"uk": "Деанонімайзер",
+			},
+			"description": {
+				"en": "Shows the real player name in the battle results.",
+				"ru": "Показывает настоящее имя игрока в результатах боя.",
+				"uk": "Показує справжнє ім'я гравця в результатах бою.",
+			},
+			"author": "Rajcel",
+			"ver": "1",
+			"category": "hangar",
+		},
 	]
 }
