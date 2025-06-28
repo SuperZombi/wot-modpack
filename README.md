@@ -27,9 +27,9 @@ Supports all client versions (including CT and SB)
 
 <hr>
 
-### <a href="https://github.com/SuperZombi/wot-modpack/issues/new?template=3-bug-report.yml"><img src="https://github.com/user-attachments/assets/322af33a-dcd0-4e59-8a0e-61e10edbc09f" height="26" align=top> Report a Bug</a>
-
 ### <a href="https://github.com/SuperZombi/wot-modpack/issues/new?template=1-mod-suggestion"><img src="https://github.com/user-attachments/assets/998c0c5f-bae6-4d76-adba-fc94ea70350d" height="26" align=top> Request a new Mod</a>
+
+### <a href="https://github.com/SuperZombi/wot-modpack/issues/new?template=3-bug-report.yml"><img src="https://github.com/user-attachments/assets/322af33a-dcd0-4e59-8a0e-61e10edbc09f" height="26" align=top> Report a Bug</a>
 
 #### 💲Donate
 <table>
