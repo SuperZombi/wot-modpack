@@ -1,0 +1,49 @@
+name: 🐞 Report a bug
+description: Report a bug related to a modpack or a specific mod
+labels: ["bug"]
+body:
+  - type: dropdown
+    id: bug-type
+    attributes:
+      label: What is the error related to?
+      options:
+        - Modpack
+        - Mod
+      default: 0
+    validations:
+      required: true
+
+  - type: input
+    id: mod-name
+    attributes:
+      label: Mod name
+      description: Provide mod name if the error is related to the mod.
+    validations:
+      required: false
+    conditions:
+      - id: bug-type
+        value: "Mod"
+
+  - type: textarea
+    id: bug-description
+    attributes:
+      label: Bug description
+      description: Describe what happened. What did you expect to happen? What happened instead?
+    validations:
+      required: true
+
+  - type: textarea
+    id: bug-reproduce
+    attributes:
+      label: Steps to reproduce
+      description: Describe how to reproduce it
+    validations:
+      required: true
+
+  - type: textarea
+    id: bug-images
+    attributes:
+      label: Pictures (optional)
+      description: Attach some screenshots or images if you have them.
+    validations:
+      required: false
