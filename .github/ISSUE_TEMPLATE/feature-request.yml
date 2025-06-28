@@ -1,0 +1,11 @@
+name: ✨ Feature request for modpack
+description: Suggest a new feature that should be added to the modpack
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: feature-description
+    attributes:
+      label: Description
+      description: What should this function do and why is it needed?
+    validations:
+      required: true
