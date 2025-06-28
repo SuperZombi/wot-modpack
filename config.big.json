@@ -1044,7 +1044,7 @@
 			"id": "rajcel.unanonymizer",
 			"files": [
 				{
-					"url": "https://raw.githubusercontent.com/SuperZombi/wot-modpack/refs/heads/mods/hangar/rajcel.unanonymizer.zip",
+					"url": "https://github.com/SuperZombi/wot-modpack/raw/refs/heads/mods/mods/hangar/rajcel.unanonymizer.zip",
 					"dest": "mods"
 				},
 				{
