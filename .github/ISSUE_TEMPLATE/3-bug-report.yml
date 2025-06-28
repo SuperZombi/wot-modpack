@@ -2,6 +2,15 @@ name: 🐞 Report a bug
 description: Report a bug related to a modpack or a specific mod
 labels: ["bug"]
 body:
+  - type: checkboxes
+    id: duplicate-check
+    attributes:
+      label: Before submitting...
+      description: Please confirm the following:
+      options:
+        - label: I have searched the existing issues and didn’t find a duplicate.
+          required: true
+
   - type: dropdown
     id: bug-type
     attributes:
@@ -20,9 +29,6 @@ body:
       description: Provide mod name if the error is related to the mod.
     validations:
       required: false
-    conditions:
-      - id: bug-type
-        value: "Mod"
 
   - type: textarea
     id: bug-description
