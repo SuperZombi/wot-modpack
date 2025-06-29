@@ -1067,5 +1067,22 @@
 			"ver": "1",
 			"category": "hangar",
 		},
+		{
+			"id": "kurzdor.elitelevelsremover",
+			"requires": ["modssettingsapi"],
+			"files": [{
+				"url": "https://github.com/SuperZombi/wot-modpack/raw/refs/heads/mods/mods/stats/me.kurzdor.elitelevelsremover.wotmod",
+				"dest": "mods"
+			}],
+			"image": "https://raw.githubusercontent.com/SuperZombi/wot-modpack/refs/heads/mods/images/stats/kurzdor.elitelevelsremover.png",
+			"title": {
+				"en": "Elite Levels Remover",
+				"ru": "Убрать уровни элитности",
+				"uk": "Прибрати рівні елітності",
+			},
+			"author": "Kurzdor",
+			"ver": "1.6.0",
+			"category": "stats",
+		},
 	]
 }
