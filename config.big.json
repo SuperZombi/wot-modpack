@@ -393,7 +393,7 @@
 			},
 			"author": "Pruszko",
 			"category": "battle",
-			"ver": "2.1.3",
+			"ver": "2.2.0",
 			"requires": ["modssettingsapi"]
 		},
 		{
