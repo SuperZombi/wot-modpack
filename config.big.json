@@ -375,7 +375,7 @@
 			"requires": ["modssettingsapi"]
 		},
 		{
-			"id": "github.pruszko.distancemarker",
+			"id": "pruszko.distancemarker",
 			"files": [{
 				"url": "https://github.com/SuperZombi/wot-modpack/raw/refs/heads/mods/mods/battle/DistanceMarker.wotmod",
 				"dest": "mods"
@@ -1083,6 +1083,34 @@
 			"author": "Kurzdor",
 			"ver": "1.6.0",
 			"category": "stats",
+		},
+		{
+			"id": "pruszko.dispersionreticle",
+			"files": [
+				{
+					"url": "https://github.com/SuperZombi/wot-modpack/raw/refs/heads/mods/mods/aim/DispersionReticle.wotmod",
+					"dest": "mods"
+				},
+				{
+					"url": "https://raw.githubusercontent.com/SuperZombi/wot-modpack/refs/heads/mods/configs/aim/DispersionReticle/config.json",
+					"dest": "configs", "folder": "DispersionReticle"
+				}
+			],
+			"image": "https://raw.githubusercontent.com/SuperZombi/wot-modpack/refs/heads/mods/images/aim/pruszko.dispersionreticle.jpg",
+			"title": {
+				"en": "Dispersion Reticle Reducer",
+				"ru": "Уменьшить круг разброса",
+				"uk": "Зменшити коло розкиду",
+			},
+			"description": {
+				"en": "The in-game aiming circle does not match the real spread circle and is always larger.<br>This is due to the fact that in-game dispersion circle is enlarged to mask desynchronization with server and high ping.<br>Reducing the circle allows you to save time in some cases.<br>This mod does not change the actual size of the aiming circle on the server and only acts as a psychological trick.<br>Not recommended for high ping!",
+				"ru": "Круг сведения в игре не совпадает с кругом реального разброса и всегда значительно больше его.<br>Это связано с тем, что в игре сам круг разброса увеличен, чтобы замаскировать рассинхроны с сервером и высокий пинг.<br>Уменьшение круга позволяет в некоторых случаях экономить время сведения.<br>Данный мод не изменяет реальный размер круга на сервере, а действует лишь как психологический трюк.<br>Не рекомендуется при высоком пинге!",
+				"uk": "Ігрове коло зведення не відповідає реальному колу розкиду снарядів і завжди значно більше.<br>Це пов’язано з тим, що в грі коло розкиду спеціально збільшене, щоб приховати десинхронізацію з сервером та високий пінг.<br>Зменшення кола в деяких випадках дозволяє зекономити час на зведення.<br>Цей мод не змінює реальний розмір кола на сервері — він діє лише як психологічний трюк.<br>Не рекомендується при високому пінгу!",
+			},
+			"author": "Pruszko",
+			"category": "aim",
+			"ver": "3.0.14",
+			"requires": ["modssettingsapi"]
 		},
 	]
 }
