@@ -8,6 +8,7 @@
 	"next": "Next",
 	"back": "Back",
 	"reset": "Reset",
+	"remove": "Remove",
 	"reset_confirm": "Reset all selected mods?",
 	"custom_game_folder": "Custom",
 	"remove_all_mods": "Remove all installed mods",

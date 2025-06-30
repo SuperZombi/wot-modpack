@@ -211,6 +211,7 @@ function buildModsInstallList(mods, cached){
 				icon.src = "images/down-arrow.svg"
 				icon.title = LANG("mod_will_be_downloaded")
 				icon.setAttribute("lang_title", "mod_will_be_downloaded")
+				el.style.order = -1
 			}
 			let title = document.createElement("span")
 			title.innerHTML = Text(mod.title[currentLang])
@@ -219,9 +220,9 @@ function buildModsInstallList(mods, cached){
 
 			let remove_mod = document.createElement("img")
 			remove_mod.src = "images/close.svg"
-			remove_mod.title = "Remove"
-			remove_mod.style.marginLeft = "auto"
-			remove_mod.style.cursor = "pointer"
+			remove_mod.className = "remove"
+			remove_mod.title = LANG("remove")
+			remove_mod.setAttribute("lang_title", "remove")
 			remove_mod.onclick = _=>{
 				modsManager.change(mod.id, false)
 				el.remove()

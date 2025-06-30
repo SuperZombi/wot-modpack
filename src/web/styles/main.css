@@ -108,6 +108,11 @@ header a:hover{
 	height: 16px;
 	cursor: help;
 }
+.mods-install-list .mod-item .remove{
+	cursor: pointer;
+	margin-left: auto;
+	margin-right: 5px;
+}
 
 #app-version{
 	font-family: monospace;
