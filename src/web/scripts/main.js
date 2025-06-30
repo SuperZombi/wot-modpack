@@ -235,7 +235,7 @@ function buildModsInstallList(mods, cached){
 				icon.setAttribute("lang_title", "mod_will_be_downloaded")
 			}
 			let title = document.createElement("span")
-			title.innerHTML = mod.title[currentLang]
+			title.innerHTML = Text(mod.title[currentLang])
 			el.appendChild(icon)
 			el.appendChild(title)
 			parent.appendChild(el)

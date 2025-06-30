@@ -100,7 +100,7 @@ class Checkbox{
 		this.description_data = mod_info.description
 		this.image = mod_info.image || ""
 		this.title = document.createElement("span")
-		this.title.innerHTML = this.title_data[this.language]
+		this.title.innerHTML = Text(this.title_data[this.language])
 		this.description = this.description_data ? (this.description_data[this.language] ? this.description_data[this.language] : "") : ""
 		this.author = mod_info.author || ""
 		this.root.appendChild(this.input)
@@ -118,7 +118,7 @@ class Checkbox{
 
 		this.root.addEventListener("mouseover", _=>{
 			document.querySelector("#mod-image").src = this.image
-			document.querySelector("#mod-title").innerHTML = this.title_data[this.language]
+			document.querySelector("#mod-title").innerHTML = Text(this.title_data[this.language])
 			document.querySelector("#mod-description").innerHTML = this.description
 			if (this.author){
 				document.querySelector("#mod-author").innerHTML = `
@@ -149,7 +149,7 @@ class Checkbox{
 	}
 	changeLanguage(new_language){
 		this.language = new_language
-		this.title.innerHTML = this.title_data[new_language]
+		this.title.innerHTML = Text(this.title_data[new_language])
 		this.description = this.description_data ? (this.description_data[this.language] ? this.description_data[this.language] : "") : ""
 	}
 }
@@ -181,4 +181,10 @@ class Group{
 		this.name.innerHTML = this.text_data[new_language]
 		this.details.childs.map(child=>child.changeLanguage(new_language))
 	}
+}
+function Text(text){ return replaceFlags(text) }
+function replaceFlags(text) {
+	return text.replace(/:flag_([a-z]{2}):/gi, (_, code) => {
+		return `<span class="fi fi-${code}"></span>`;
+	});
 }
