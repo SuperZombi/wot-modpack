@@ -97,12 +97,12 @@ header a:hover{
 	color-scheme: dark;
 	display: flex;
 	flex-direction: column;
-	gap: 5px;
+	gap: 8px;
 }
 .mods-install-list .mod-item {
 	display: flex;
 	align-items: center;
-	gap: 5px;
+	gap: 6px;
 }
 .mods-install-list .mod-item img{
 	height: 16px;

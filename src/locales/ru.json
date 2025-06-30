@@ -14,6 +14,7 @@
 	"remove_mod_configs": "Удалить настройки модов",
 	"selected_mods": "Выбранные моды:",
 	"nothing_selected": "Ничего не выбрано",
+	"mods_will_be_deleted": "<span style='color:red'>Моды будут удалены!</span>",
 	"installing_mods": "Установка модификаций",
 	"installed_success": "Моды успешно установлены!",
 	"home": "На главную",

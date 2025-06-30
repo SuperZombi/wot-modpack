@@ -11,6 +11,30 @@ class ModsList{
 	get(){
 		return this.childs.map(child=>child.get()).flat(Infinity)
 	}
+	find(id){
+		for (let item of this.childs) {
+			let el = item.find(id)
+			if (el){ return el }
+		}
+	}
+	change(id, value){
+		let el = this.find(id)
+		if (el){ el.set(value) }
+	}
+	resetAll(){
+		this.root.querySelectorAll('label[id]').forEach(el=>{
+			let input = el.querySelector("input")
+			if (input.type == "checkbox"){
+				input.checked = false
+			}
+			else if (input.type == "radio"){
+				input.checked = false
+				let parent_group = el.closest(".group")
+				let group_checkbox = parent_group.querySelector(".summary input[type=checkbox]")
+				group_checkbox.checked = false
+			}
+		})
+	}
 	changeLanguage(new_language){
 		this.language = new_language
 		this.childs.map(child=>child.changeLanguage(new_language))
@@ -66,6 +90,12 @@ class Details{
 		this.root.appendChild(collapse)
 
 		this.onLangChange = _=>{}
+	}
+	find(id){
+		for (let item of this.childs) {
+			let el = item.find(id)
+			if (el){ return el }
+		}
 	}
 	add(element){
 		this.childs.push(element)
@@ -160,6 +190,17 @@ class Checkbox{
 			return this.id
 		}
 	}
+	set(value){
+		this.input.checked = value
+		if (this.input.type == "radio"){
+			let parent_group = this.root.closest(".group")
+			let group_checkbox = parent_group.querySelector(".summary input[type=checkbox]")
+			group_checkbox.checked = value
+		}
+	}
+	find(id){
+		return this.id == id ? this : null
+	}
 	changeLanguage(new_language){
 		this.language = new_language
 		this.title.innerHTML = Text(this.title_data[new_language])
@@ -181,6 +222,9 @@ class Group{
 	}
 	add(element){
 		this.details.add(element)
+	}
+	find(id){
+		return this.details.find(id);
 	}
 	get(){
 		if (this.details.open.checked){

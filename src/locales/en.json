@@ -14,6 +14,7 @@
 	"remove_mod_configs": "Delete mod configs",
 	"selected_mods": "Selected Mods:",
 	"nothing_selected": "Nothing selected",
+	"mods_will_be_deleted": "<span style='color:red'>Mods will be deleted!</span>",
 	"installing_mods": "Installing modifications",
 	"installed_success": "Mods installed successfully!",
 	"home": "Home",

@@ -165,7 +165,7 @@ async function load_mods_info(){
 						}
 						let mod_element = modsManager.makeRadio(mod, group.id)
 						group_element.add(mod_element)
-					}				
+					}
 				} else {
 					let mod_element = modsManager.makeCheckbox(mod)
 					category_element.add(mod_element)
@@ -177,19 +177,7 @@ async function load_mods_info(){
 		if (settings){
 			if (settings.mods){
 				settings.mods.forEach(mod_id=>{
-					let el = modsManager.root.querySelector(`label[id="${mod_id}"]`)
-					if (el){
-						let input = el.querySelector("input")
-						if (input.type == "checkbox"){
-							input.checked = true
-						}
-						else if (input.type == "radio"){
-							input.checked = true
-							let parent_group = el.closest(".group")
-							let group_checkbox = parent_group.querySelector(".summary input[type=checkbox]")
-							group_checkbox.checked = true
-						}
-					}
+					modsManager.change(mod_id, true)
 				})
 			}
 		}
@@ -201,24 +189,14 @@ async function load_mods_info(){
 
 function resetSelectedMods(){
 	if (confirm(LANG("reset_confirm"))){
-		modsManager.root.querySelectorAll('label[id]').forEach(el=>{
-			let input = el.querySelector("input")
-			if (input.type == "checkbox"){
-				input.checked = false
-			}
-			else if (input.type == "radio"){
-				input.checked = false
-				let parent_group = el.closest(".group")
-				let group_checkbox = parent_group.querySelector(".summary input[type=checkbox]")
-				group_checkbox.checked = false
-			}
-		})
+		modsManager.resetAll()
 	}
 }
 
 function buildModsInstallList(mods, cached){
 	let parent = document.querySelector("#mods-install-list")
-	if (mods.length > 0){
+	let cur_mods_leght = mods.length
+	if (cur_mods_leght > 0){
 		parent.innerHTML = ""
 		mods.forEach(mod=>{
 			let el = document.createElement("div")
@@ -238,10 +216,26 @@ function buildModsInstallList(mods, cached){
 			title.innerHTML = Text(mod.title[currentLang])
 			el.appendChild(icon)
 			el.appendChild(title)
+
+			let remove_mod = document.createElement("img")
+			remove_mod.src = "images/close.svg"
+			remove_mod.title = "Remove"
+			remove_mod.style.marginLeft = "auto"
+			remove_mod.style.cursor = "pointer"
+			remove_mod.onclick = _=>{
+				modsManager.change(mod.id, false)
+				el.remove()
+				cur_mods_leght -= 1
+				if (cur_mods_leght == 0){
+					parent.innerHTML = LANG("mods_will_be_deleted")
+				}
+			}
+
+			el.appendChild(remove_mod)
 			parent.appendChild(el)
 		})
 	} else {
-		parent.innerHTML = LANG("nothing_selected")
+		parent.innerHTML = LANG("mods_will_be_deleted")
 	}
 }
 
