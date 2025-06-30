@@ -105,6 +105,8 @@ class Checkbox{
 		this.author = mod_info.author || ""
 		this.root.appendChild(this.input)
 		this.root.appendChild(this.title)
+		this.hovered = false
+		this.audio = null
 		if (mod_info.cached_ver){
 			if (mod_info.ver !== mod_info.cached_ver){
 				let badge = document.createElement("span")
@@ -117,20 +119,30 @@ class Checkbox{
 		}
 
 		this.root.addEventListener("mouseover", _=>{
-			document.querySelector("#mod-image").src = this.image
-			document.querySelector("#mod-title").innerHTML = Text(this.title_data[this.language])
-			document.querySelector("#mod-description").innerHTML = this.description
-			if (this.author){
-				document.querySelector("#mod-author").innerHTML = `
-					<span>${LANG('author')}</span>
-					<span>${this.author}</span>
-				`
-			} else {
-				document.querySelector("#mod-author").innerHTML = ""
+			if (!this.hovered){
+				this.hovered = true
+				document.querySelector("#mod-image").src = this.image
+				document.querySelector("#mod-title").innerHTML = Text(this.title_data[this.language])
+				document.querySelector("#mod-description").innerHTML = this.description
+				if (this.author){
+					document.querySelector("#mod-author").innerHTML = `
+						<span>${LANG('author')}</span>
+						<span>${this.author}</span>
+					`
+				} else {
+					document.querySelector("#mod-author").innerHTML = ""
+				}
+				if (mod_info.audio){
+					this.audio = new Audio(mod_info.audio);
+					this.audio.play();
+				}
+				document.querySelector("#mod-preview").classList.add("show")
 			}
-			document.querySelector("#mod-preview").classList.add("show")
 		})
 		this.root.addEventListener("mouseleave", _=>{
+			if (this.audio){
+				this.audio.pause();
+			}
 			document.querySelector("#mod-preview").classList.remove("show")
 			setTimeout(_=>{
 				if (!document.querySelector("#mod-preview").classList.contains("show")){
@@ -140,6 +152,7 @@ class Checkbox{
 					document.querySelector("#mod-author").innerHTML = ""
 				}
 			}, 250)
+			this.hovered = false
 		})
 	}
 	get(){
@@ -186,5 +199,5 @@ function Text(text){ return replaceFlags(text) }
 function replaceFlags(text) {
 	return text.replace(/:flag_([a-z]{2}):/gi, (_, code) => {
 		return `<span class="fi fi-${code}"></span>`;
-	});
+	})
 }
