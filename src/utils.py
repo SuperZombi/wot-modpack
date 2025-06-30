@@ -195,7 +195,7 @@ class Mod:
 		for file in self.files:
 			target_map = {
 				"mods": client.mods_folder,
-				"res_mods": client.res_mods,
+				"res_mods": os.path.join(client.res_mods, file.get("folder", "")),
 				"configs": os.path.join(client.configs_path, file.get("folder", ""))
 			}
 			os.makedirs(target_map[file["dest"]], exist_ok=True)
