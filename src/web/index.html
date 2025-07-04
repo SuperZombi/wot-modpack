@@ -10,6 +10,7 @@
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/css/flag-icons.min.css"/>
 	<script src="/scripts/language.js"></script>
 	<script src="/scripts/components.js"></script>
+	<script src="/scripts/gallery.js"></script>
 	<script src="/scripts/main.js" defer></script>
 </head>
 <body>
@@ -30,7 +31,7 @@
 				<br>
 				<h3 lang_="select_game_folder">Select game folder:</h3>
 				<select class="button hover" id="client_select"></select>
-				<br>
+				<div id="gallery" class="gallery"></div>
 			</div>
 			<div class="bottom-buttons">
 				<div class="button hover" id="delete_mods" lang_="delete_mods_button">Delete mods</div>
@@ -106,6 +107,7 @@
 				<div id="progress-download">
 					<progress value="0" max="100"></progress> <span>0%</span>
 				</div>
+				<div id="gallery_install" class="gallery"></div>
 			</div>
 		</div>
 		<div class="tab" name="finish">
@@ -127,6 +129,7 @@
 						<img src="/images/donatello_logo.png">
 					</a>
 				</p>
+				<div id="gallery_finish" class="gallery"></div>
 			</div>
 		</div>
 	</div>

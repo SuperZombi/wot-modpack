@@ -182,3 +182,25 @@ header a:hover{
 	background: red;
 	border-radius: 50%;
 }
+
+.gallery{
+	margin-top: 50px;
+	height: 360px;
+	border-radius: 10px;
+	overflow: hidden;
+	mask-image:
+		linear-gradient(to top, transparent 0%, black 20%, black 80%, transparent 100%),
+		linear-gradient(to left, transparent 0%, black 20%, black 80%, transparent 100%),
+		radial-gradient(black, transparent 80%);
+	mask-composite: intersect;
+	opacity: 0;
+	transition: 3s;
+}
+.gallery.show{
+	opacity: 1;
+}
+.gallery img {
+	height: 100%;
+	width: 100%;
+	object-fit: cover;
+}

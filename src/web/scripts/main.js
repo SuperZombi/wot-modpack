@@ -5,6 +5,7 @@ window.onload=async _=>{
 	await initSettings()
 	await initLanguage()
 	await load_game_clients()
+	Gallery(document.querySelector("#gallery"))
 
 	async function load_mods_list(){
 		if (document.querySelector("#client_path").value){
@@ -48,6 +49,7 @@ window.onload=async _=>{
 
 	document.querySelector("#run_main_button").onclick = async _=>{
 		changeTab("main_installer")
+		Gallery(document.querySelector("#gallery_install"))
 		let selectedMods = [...document.querySelectorAll("#mods-install-list .mod-item")].map(item=>{
 			return item.getAttribute("mod_id")
 		})
@@ -88,6 +90,7 @@ window.onload=async _=>{
 		}
 		await update_cache_size()
 		changeTab("finish")
+		Gallery(document.querySelector("#gallery_finish"))
 	}
 }
 function changeTab(tab_name){
