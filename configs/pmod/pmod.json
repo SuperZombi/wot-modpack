@@ -1,0 +1,5 @@
+{
+	"reducedArmor": ${"reducedArmor.json"},
+	"battleGui" : ${"battleGui.json"},
+	"battleChat" : ${"battleChat.json"}
+}
