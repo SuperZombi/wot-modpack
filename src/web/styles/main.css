@@ -38,8 +38,6 @@ header a:hover{
 	display: grid;
 	grid-template-columns: 1fr 1fr;
 	gap: 5px;
-	height: calc(100vh - 115px);
-	margin-bottom: 15px;
 	position: relative;
 }
 #mods-list{
@@ -101,6 +99,11 @@ header a:hover{
 	height: 1em;
 }
 
+.top-content{
+	height: calc(100vh - 115px);
+	margin-bottom: 15px;
+	justify-content: flex-start;
+}
 .bottom-buttons{
 	display: flex;
 	justify-content: space-between;

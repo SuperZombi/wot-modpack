@@ -17,10 +17,15 @@ window.onload=async _=>{
 		}
 	}
 
-	document.querySelector("#navigate_to_mods").onclick = _=>{
-		changeTab("mods")
-		load_mods_list()
-	}
+	[
+		document.querySelector("#navigate_to_mods_list"),
+		document.querySelector("#back_to_mods_list")
+	].forEach(button=>{
+		button.onclick = _=>{
+			changeTab("mods")
+			load_mods_list()
+		}
+	})
 	document.querySelector("#retry_button").onclick = _=>{load_mods_list()}
 	changeTab("home")
 	document.querySelector("#loader").classList.add("hide")
@@ -36,10 +41,16 @@ window.onload=async _=>{
 			buildModsInstallList([], [])
 		}
 	}
+	document.querySelector("#delete_mods").onclick = async _=>{
+		changeTab("install")
+		buildModsInstallList([], [])
+	}
 
 	document.querySelector("#run_main_button").onclick = async _=>{
 		changeTab("main_installer")
-		let selectedMods = modsData ? modsManager.get() : []
+		let selectedMods = [...document.querySelectorAll("#mods-install-list .mod-item")].map(item=>{
+			return item.getAttribute("mod_id")
+		})
 		let client = document.querySelector("#client_path").value
 		let args = {
 			"delete_mods": document.querySelector("#delete_all_mods").checked,
@@ -213,6 +224,7 @@ function buildModsInstallList(mods, cached){
 		mods.forEach(mod=>{
 			let el = document.createElement("div")
 			el.className = "mod-item"
+			el.setAttribute("mod_id", mod.id)
 			let icon = document.createElement("img")
 			let cached_ver = (cached.find(el=>el.id==mod.id)||{}).ver || null;
 			if (cached_ver && cached_ver === mod.ver){

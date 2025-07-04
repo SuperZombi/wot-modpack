@@ -26,17 +26,20 @@
 
 	<div id="tabs-area">
 		<div class="tab" name="home">
-			<div class="flex-center">
+			<div class="flex-center top-content">
 				<br>
 				<h3 lang_="select_game_folder">Select game folder:</h3>
 				<select class="button hover" id="client_select"></select>
 				<br>
-				<div class="button hover" id="navigate_to_mods" lang_="next">Next</div>
+			</div>
+			<div class="bottom-buttons">
+				<div class="button hover" id="delete_mods" lang_="delete_mods_button">Delete mods</div>
+				<div class="button hover" id="navigate_to_mods_list" lang_="next">Next</div>
 			</div>
 		</div>
 
 		<div class="tab" name="mods">
-			<div id="mods-area" loaded="false">
+			<div id="mods-area" class="top-content" loaded="false">
 				<div id="mods-list"></div>
 				<div id="mod-preview">
 					<img id="mod-image" src=""/>
@@ -63,7 +66,7 @@
 		</div>
 
 		<div class="tab" name="install">
-			<div class="flex-center" style="max-height: calc(100vh - 100px);">
+			<div class="flex-center top-content">
 				<p class="flex-center">
 					<br>
 					<input type="text" readonly id="client_path" style="width:300px">
@@ -87,7 +90,7 @@
 				<div class="mods-install-list" id="mods-install-list"></div>
 			</div>
 			<div class="bottom-buttons">
-				<div class="button hover" onclick="changeTab('mods')" lang_="back">Back</div>
+				<div class="button hover" id="back_to_mods_list" lang_="back">Back</div>
 				<div class="button hover" id="run_main_button" lang_="next">Next</div>
 			</div>
 		</div>

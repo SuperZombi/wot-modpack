@@ -33,5 +33,6 @@
 	"mod_updated": "Мод оновлено",
 	"mod_in_cache": "Мод у кеші",
 	"mod_will_be_downloaded": "Мод буде завантажено",
-	"client_is_running_error": "Клієнт запущений!<br>Закрийте його і спробуйте знову."
+	"client_is_running_error": "Клієнт запущений!<br>Закрийте його і спробуйте знову.",
+	"delete_mods_button": "Видалити моди"
 }

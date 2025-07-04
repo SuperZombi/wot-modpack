@@ -33,5 +33,6 @@
 	"mod_updated": "Mod updated",
 	"mod_in_cache": "Mod in cache",
 	"mod_will_be_downloaded": "Mod will be downloaded",
-	"client_is_running_error": "The client is running!<br>Please close it and try again."
+	"client_is_running_error": "The client is running!<br>Please close it and try again.",
+	"delete_mods_button": "Delete mods"
 }
