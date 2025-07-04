@@ -6,30 +6,40 @@ window.onload=async _=>{
 	await initLanguage()
 	await load_game_clients()
 
-	document.querySelector("#navigate_to_mods").onclick = async _=>{
+	async function load_mods_list(){
 		if (document.querySelector("#client_path").value){
-			changeTab("mods")
 			if (document.querySelector("#mods-area").getAttribute("loaded") == "false"){
+				document.querySelector("#retry_button").classList.add("hide")
 				document.querySelector("#loader").classList.remove("hide")
 				await load_mods_info()
 				document.querySelector("#loader").classList.add("hide")
 			}
 		}
 	}
+
+	document.querySelector("#navigate_to_mods").onclick = _=>{
+		changeTab("mods")
+		load_mods_list()
+	}
+	document.querySelector("#retry_button").onclick = _=>{load_mods_list()}
 	changeTab("home")
 	document.querySelector("#loader").classList.add("hide")
 
 	document.querySelector("#main_button").onclick = async _=>{
 		changeTab("install")
-		let selectedModsIds = modsManager.get()
-		let selectedMods = modsData.mods.filter(mod => selectedModsIds.includes(mod.id))
-		let cached = await eel.get_cache_info()()
-		buildModsInstallList(selectedMods, cached)
+		if (modsData){
+			let selectedModsIds = modsManager.get()
+			let selectedMods = modsData.mods.filter(mod => selectedModsIds.includes(mod.id))
+			let cached = await eel.get_cache_info()()
+			buildModsInstallList(selectedMods, cached)
+		} else{
+			buildModsInstallList([], [])
+		}
 	}
 
 	document.querySelector("#run_main_button").onclick = async _=>{
 		changeTab("main_installer")
-		let selectedMods = modsManager.get()
+		let selectedMods = modsData ? modsManager.get() : []
 		let client = document.querySelector("#client_path").value
 		let args = {
 			"delete_mods": document.querySelector("#delete_all_mods").checked,
@@ -147,6 +157,7 @@ async function load_mods_info(){
 	modsData = await eel.load_mods_info()()
 	let cached = await eel.get_cache_info()()
 	if (modsData){
+		document.querySelector("#retry_button").classList.add("hide")
 		modsManager = new ModsList(document.querySelector("#mods-list"), currentLang)
 
 		modsData.categories.forEach(category=>{
@@ -184,6 +195,7 @@ async function load_mods_info(){
 		document.querySelector("#mods-area").setAttribute("loaded", "true")
 	} else {
 		alert(LANG("mods_info_parse_fail"))
+		document.querySelector("#retry_button").classList.remove("hide")
 	}
 }
 
@@ -220,7 +232,7 @@ function buildModsInstallList(mods, cached){
 
 			let remove_mod = document.createElement("img")
 			remove_mod.src = "images/close.svg"
-			remove_mod.className = "remove"
+			remove_mod.className = "remove hover"
 			remove_mod.title = LANG("remove")
 			remove_mod.setAttribute("lang_title", "remove")
 			remove_mod.onclick = _=>{

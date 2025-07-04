@@ -84,6 +84,23 @@ header a:hover{
 	color: #a9a9a9;
 }
 
+#retry_button{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	display: flex;
+	align-items: center;
+	gap: 0.3em;
+	font-size: 18px;
+}
+#retry_button.hide{
+	display: none;
+}
+#retry_button svg{
+	height: 1em;
+}
+
 .bottom-buttons{
 	display: flex;
 	justify-content: space-between;
@@ -106,10 +123,11 @@ header a:hover{
 }
 .mods-install-list .mod-item img{
 	height: 16px;
+}
+.mods-install-list .mod-item img:not(.remove){
 	cursor: help;
 }
 .mods-install-list .mod-item .remove{
-	cursor: pointer;
 	margin-left: auto;
 	margin-right: 5px;
 }

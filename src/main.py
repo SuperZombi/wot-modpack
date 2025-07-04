@@ -7,7 +7,7 @@ from tkinter.filedialog import askdirectory
 from utils import *
 
 MODS_DATA = {}
-__version__ = "0.6.0"
+__version__ = "0.6.1"
 @eel.expose
 def app_version(): return __version__
 LOCALES = load_locales()
@@ -23,11 +23,13 @@ def load_settings():
 
 @eel.expose
 def check_updates():
-	r = requests.get('https://api.github.com/repos/SuperZombi/wot-modpack/releases/latest')
-	if r.ok:
-		remote_version = Version(r.json()['tag_name'])
-		current_version = Version(__version__)
-		return remote_version > current_version
+	try:
+		r = requests.get('https://api.github.com/repos/SuperZombi/wot-modpack/releases/latest')
+		if r.ok:
+			remote_version = Version(r.json()['tag_name'])
+			current_version = Version(__version__)
+			return remote_version > current_version
+	except: pass
 
 @eel.expose
 def get_cache_size(): return get_folder_size(os.path.join(local(), 'cache'))
