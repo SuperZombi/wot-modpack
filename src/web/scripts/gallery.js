@@ -24,7 +24,13 @@ function getImages() {
 		"https://eu-wotp.wgcdn.co/dcont/fb/image/t95-1920x1280.jpg",
 		"https://eu-wotp.wgcdn.co/dcont/fb/image/lowe-wallpaper-1920x1280.jpg",
 		"https://eu-wotp.wgcdn.co/dcont/fb/image/sherman-wallpaper-1920x1280.jpg",
+		"https://eu-wotp.wgcdn.co/dcont/fb/image/m4a3e8-fury-1224-1920x900.jpg",
 		"https://eu-wotp.wgcdn.co/dcont/fb/image/stb-1-wallpaper-1920x1280.jpg",
+		"https://eu-wotp.wgcdn.co/dcont/fb/image/1920x900_ujQDtiL.jpg",
+		"https://eu-wotp.wgcdn.co/dcont/fb/image/strv-k-banner-1920x900.jpg",
+		"https://eu-wotp.wgcdn.co/dcont/fb/image/m54_renegade_and_vk_75_1920x900.jpg",
+		"https://eu-wotp.wgcdn.co/dcont/fb/image/autumn-marathon-wallpaper-1920x1080.jpg",
+		"https://eu-wotp.wgcdn.co/dcont/fb/image/ukrainian-independence-day-wallpaper-1920x1080.jpg",
 	]
 	for (let i = arr.length - 1; i > 0; i--) {
 		const j = Math.floor(Math.random() * (i + 1));
@@ -33,10 +39,12 @@ function getImages() {
 	return arr
 }
 function createImage(parent, image){
-	parent.innerHTML = ""
-	let img = document.createElement("img")
+	let img = parent.querySelector("img")
+	if (!img){
+		img = document.createElement("img")
+		parent.appendChild(img)	
+	}
 	img.src = image
-	parent.appendChild(img)	
 }
 async function fetchURL(url) {
 	try {
