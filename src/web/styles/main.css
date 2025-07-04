@@ -188,6 +188,7 @@ header a:hover{
 	height: 360px;
 	border-radius: 10px;
 	overflow: hidden;
+	user-select: none;
 	mask-image:
 		linear-gradient(to top, transparent 0%, black 20%, black 80%, transparent 100%),
 		linear-gradient(to left, transparent 0%, black 20%, black 80%, transparent 100%),
