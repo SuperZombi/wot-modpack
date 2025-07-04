@@ -11,6 +11,7 @@
 ### <a href="https://github.com/SuperZombi/wot-modpack/releases/latest/download/Web.Modpack.exe"><img src="https://github.com/user-attachments/assets/2a418b60-b0a1-462d-afc3-0270ba5c0e83" width="26" align="top"> Download</a>
 
 <br>
+<img src="github/images/home.png" width="700">
 <img src="github/images/preview.png" width="700">
 
 The problem of all modpacks is their greater weight.<br>
