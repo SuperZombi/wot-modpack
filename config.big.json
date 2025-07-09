@@ -164,7 +164,7 @@
 					"dest": "configs", "folder": "pmod"
 				}
 			],
-			"ver": "1.78.3"
+			"ver": "1.79.0"
 		},
 		{
 			"id": "sixthsense_core",
