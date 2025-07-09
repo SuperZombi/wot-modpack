@@ -143,11 +143,12 @@ class Client:
 		mods_f = os.path.join(self.path, "mods")
 		res_mods = os.path.join(self.path, "res_mods")
 		for path in [mods_f, res_mods]:
-			for item in os.listdir(path):
-				item_path = os.path.join(path, item)
-				if (delete_configs==False) and os.path.isdir(item_path) and item == "configs": continue
-				if os.path.isfile(item_path): os.remove(item_path)
-				elif os.path.isdir(item_path): shutil.rmtree(item_path)
+			if os.path.exists(path):
+				for item in os.listdir(path):
+					item_path = os.path.join(path, item)
+					if (delete_configs==False) and os.path.isdir(item_path) and item == "configs": continue
+					if os.path.isfile(item_path): os.remove(item_path)
+					elif os.path.isdir(item_path): shutil.rmtree(item_path)
 		os.makedirs(self.res_mods)
 		os.makedirs(self.mods_folder)
 
@@ -185,7 +186,6 @@ class Mod:
 			self.init_cache()
 			have_cache = self.load_cache_files()
 			if have_cache:
-				print("[Cache]", self.id)
 				write_cache = False
 			else:
 				self.delete_from_cache()
