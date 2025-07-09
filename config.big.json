@@ -1298,5 +1298,21 @@
 			"category": "battle",
 			"ver": "1.2.4"
 		},
+		{
+			"id": "auto_claim_clan_reward",
+			"files": [{
+				"url": "https://github.com/SuperZombi/wot-modpack/raw/refs/heads/mods/mods/hangar/auto_claim_clan_reward.wotmod",
+				"dest": "mods"
+			}],
+			"image": "https://raw.githubusercontent.com/SuperZombi/wot-modpack/refs/heads/mods/images/hangar/auto_claim_clan_reward.jpg",
+			"title": {
+				"en": "Auto-claim Clan Rewards",
+				"ru": "Авто-сбор наград клана",
+				"uk": "Авто-отримання нагород клану",
+			},
+			"author": "AnNE_DoMini",
+			"category": "hangar",
+			"ver": "1"
+		},
 	]
 }
