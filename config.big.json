@@ -150,7 +150,7 @@
 				"dest": "mods"
 			}],
 			"requires": ["modslistapi"],
-			"ver": "1.6.2"
+			"ver": "1.6.3"
 		},
 		{
 			"id": "pmod",
