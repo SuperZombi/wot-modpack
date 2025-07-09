@@ -1326,6 +1326,11 @@
 				"ru": "Автосброс ЛБЗ на Об.279",
 				"uk": "Автоскидання ЛБЗ на Об.279",
 			},
+			"description": {
+				"en": "Automatically resets mission progress for Object 279 if main condition was not fulfilled in first battle.",
+				"ru": "Автоматически сбрасывает прогресс задачи, на Объект 279 (р), если основное условие не выполнено в первом бою.",
+				"uk": "Автоматично скидає прогрес завдання на Об'єкт 279 (р), якщо основна умова не виконана в першому бою.",
+			},
 			"author": "WoT Base",
 			"category": "hangar",
 			"ver": "1.1.0"
