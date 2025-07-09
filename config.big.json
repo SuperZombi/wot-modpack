@@ -1212,5 +1212,21 @@
 			"group": "voiceover",
 			"ver": "1"
 		},
+		{
+			"id": "robik.hideServer",
+			"files": [{
+				"url": "https://github.com/SuperZombi/wot-modpack/raw/refs/heads/mods/mods/other/robik.hideserver.wotmod",
+				"dest": "mods"
+			}],
+			"image": "https://raw.githubusercontent.com/SuperZombi/wot-modpack/refs/heads/mods/images/other/robik.hideserver.png",
+			"title": {
+				"en": "Hide server",
+				"ru": "Скрыть сервер",
+				"uk": "Приховати сервер",
+			},
+			"author": "ROBIK",
+			"category": "other",
+			"ver": "1.0.0"
+		},
 	]
 }
