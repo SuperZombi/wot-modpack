@@ -378,7 +378,7 @@
 			"ver": "1"
 		},
 		{
-			"id": "me.kurzdor.battleequipment",
+			"id": "kurzdor.battleequipment",
 			"files": [{
 				"url": "https://github.com/SuperZombi/wot-modpack/raw/refs/heads/mods/mods/battle/me.kurzdor.battleequipment.wotmod",
 				"dest": "mods"
@@ -617,7 +617,7 @@
 			"requires": ["modslistapi"]
 		},
 		{
-			"id": "me.kurzdor.presence",
+			"id": "kurzdor.presence",
 			"files": [{
 				"url": "https://github.com/SuperZombi/wot-modpack/raw/refs/heads/mods/mods/other/me.kurzdor.presence.wotmod",
 				"dest": "mods"
@@ -1229,7 +1229,7 @@
 			"ver": "1.0.0"
 		},
 		{
-			"id": "me.kurzdor.autoequipmentreturn",
+			"id": "kurzdor.autoequipmentreturn",
 			"files": [{
 				"url": "https://github.com/SuperZombi/wot-modpack/raw/refs/heads/mods/mods/hangar/me.kurzdor.autoequipmentreturn.wotmod",
 				"dest": "mods"
@@ -1241,13 +1241,34 @@
 				"uk": "Авто-повернення обладнання",
 			},
 			"description": {
-				"en": "Automatically return saved equipment layouts on your vehicle.",
-				"ru": "Автоматически возвращает сохраненные схемы оборудования на вашем танке.",
-				"uk": "Автоматично повертає збережені схеми обладнання на вашому танку.",
+				"en": "Automatically return saved equipment layouts on your vehicle. [WoT Plus]",
+				"ru": "Автоматически возвращает сохраненные схемы оборудования на вашем танке. [WoT Plus]",
+				"uk": "Автоматично повертає збережені схеми обладнання на вашому танку. [WoT Plus]",
 			},
 			"author": "Kurzdor",
 			"category": "hangar",
 			"ver": "1.1.5"
+		},
+		{
+			"id": "kurzdor.permanentlydestroyed",
+			"files": [{
+				"url": "https://github.com/SuperZombi/wot-modpack/raw/refs/heads/mods/mods/battle/me.kurzdor.permanentlydestroyed.wotmod",
+				"dest": "mods"
+			}],
+			"image": "https://raw.githubusercontent.com/SuperZombi/wot-modpack/refs/heads/mods/images/battle/permanentlydestroyed.jpg",
+			"title": {
+				"en": "Permanently Destroyed",
+				"ru": "Уничтоженные танки на миникарте",
+				"uk": "Знищені танки на мінікарті",
+			},
+			"description": {
+				"en": "Permanently keep destroyed vehicles visible on minimap.",
+				"ru": "Постоянно показывает уничтоженную технику на мини-карте.",
+				"uk": "Постійно показує знищену техніку на міні-мапі.",
+			},
+			"author": "Kurzdor",
+			"category": "battle",
+			"ver": "1.2.4"
 		},
 	]
 }
