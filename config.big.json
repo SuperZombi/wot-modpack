@@ -1228,5 +1228,26 @@
 			"category": "other",
 			"ver": "1.0.0"
 		},
+		{
+			"id": "me.kurzdor.autoequipmentreturn",
+			"files": [{
+				"url": "https://github.com/SuperZombi/wot-modpack/raw/refs/heads/mods/mods/hangar/me.kurzdor.autoequipmentreturn.wotmod",
+				"dest": "mods"
+			}],
+			"image": "https://raw.githubusercontent.com/SuperZombi/wot-modpack/refs/heads/mods/images/hangar/autoequipmentreturn.png",
+			"title": {
+				"en": "Auto Equipment Return",
+				"ru": "Авто-возврат оборудования",
+				"uk": "Авто-повернення обладнання",
+			},
+			"description": {
+				"en": "Automatically return saved equipment layouts on your vehicle.",
+				"ru": "Автоматически возвращает сохраненные схемы оборудования на вашем танке.",
+				"uk": "Автоматично повертає збережені схеми обладнання на вашому танку.",
+			},
+			"author": "Kurzdor",
+			"category": "hangar",
+			"ver": "1.1.5"
+		},
 	]
 }
