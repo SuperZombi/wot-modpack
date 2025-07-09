@@ -1254,7 +1254,7 @@
 			},
 			"author": "R_O_B_I_K",
 			"category": "other",
-			"ver": "1.0.0"
+			"ver": "1.0.2"
 		},
 		{
 			"id": "kurzdor.autoequipmentreturn",
@@ -1312,7 +1312,23 @@
 			},
 			"author": "AnNE_DoMini",
 			"category": "hangar",
-			"ver": "1"
+			"ver": "1.0.1"
+		},
+		{
+			"id": "pm_autoreset",
+			"files": [{
+				"url": "https://github.com/SuperZombi/wot-modpack/raw/refs/heads/mods/mods/hangar/pm_autoreset.wotmod",
+				"dest": "mods"
+			}],
+			"image": "https://raw.githubusercontent.com/SuperZombi/wot-modpack/refs/heads/mods/images/hangar/pm_autoreset.jpg",
+			"title": {
+				"en": "Auto-reset mission for Obj.279",
+				"ru": "Автосброс ЛБЗ на Об.279",
+				"uk": "Автоскидання ЛБЗ на Об.279",
+			},
+			"author": "WoT Base",
+			"category": "hangar",
+			"ver": "1.1.0"
 		},
 	]
 }
