@@ -983,7 +983,7 @@
 				"uk": "Приховати жетон гравця, який убив вас.",
 			},
 			"author": "P0LIR0ID",
-			"category": "battle",
+			"category": "stats",
 			"ver": "1",
 			"requires": ["pmod"]
 		},
