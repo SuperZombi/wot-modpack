@@ -960,6 +960,34 @@
 			"requires": ["pmod"]
 		},
 		{
+			"id": "poliroid.pmod.hide_dog_tag",
+			"files": [
+				{
+					"url": "https://raw.githubusercontent.com/SuperZombi/wot-modpack/refs/heads/mods/configs/pmod/battleGUI.json",
+					"dest": "configs", "folder": "pmod"
+				},
+				{
+					"url": "https://raw.githubusercontent.com/SuperZombi/wot-modpack/refs/heads/mods/configs/pmod/postmortemDogTag.json",
+					"dest": "configs", "folder": "pmod"
+				}
+			],
+			"image": "https://raw.githubusercontent.com/SuperZombi/wot-modpack/refs/heads/mods/images/battle/pmod.hide_dog_tag.jpg",
+			"title": {
+				"en": "Hide Dog Tags",
+				"ru": "Убрать жетоны",
+				"uk": "Прибрати жетони",
+			},
+			"description": {
+				"en": "Hide dog tag of the player who killed you.",
+				"ru": "Скрыть жетон игрока, который вас убил.",
+				"uk": "Приховати жетон гравця, який убив вас.",
+			},
+			"author": "P0LIR0ID",
+			"category": "battle",
+			"ver": "1",
+			"requires": ["pmod"]
+		},
+		{
 			"id": "FiT.VisibleRailcars",
 			"files": [{
 				"url": "https://github.com/SuperZombi/wot-modpack/raw/refs/heads/mods/mods/battle/FiT.VisibleRailcars.wotmod",
