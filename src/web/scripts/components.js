@@ -21,6 +21,15 @@ class ModsList{
 		let el = this.find(id)
 		if (el){ el.set(value) }
 	}
+	search(text){
+		this.childs.map(child=>child.search(text))
+	}
+	unsetSearch(){
+		this.root.querySelectorAll('.hide').forEach(el=>{
+			el.classList.remove("hide")
+		})
+		this.childs.map(child=>child.collapse())
+	}
 	resetAll(){
 		this.root.querySelectorAll('label[id]').forEach(el=>{
 			let input = el.querySelector("input")
@@ -103,6 +112,20 @@ class Details{
 	}
 	getGroup(id){
 		return this.childs.find(el=>el.id == id)
+	}
+	search(text){
+		let founded = false
+		this.childs.forEach(child=>{
+			if (child.search(text)){
+				founded = true
+			}
+		})
+		this.root.classList.toggle("hide", !founded)
+		founded ? this.open.checked = true : null
+		return founded
+	}
+	collapse(){
+		this.open.checked = false
 	}
 	get(){
 		return this.childs.map(child=>child.get()).filter(Boolean)
@@ -190,6 +213,23 @@ class Checkbox{
 			return this.id
 		}
 	}
+	search(text){
+		let lowerText = text.toLowerCase();
+		let check = (value) =>
+			typeof value === 'string' && value.toLowerCase().includes(lowerText);
+		if (
+			check(this.id) ||
+			check(this.author) ||
+			Object.values(this.title_data || {}).some(check) ||
+			Object.values(this.description_data || {}).some(check)
+		) {
+			this.root.classList.remove("hide")
+			return true
+		} else {
+			this.root.classList.add("hide")
+			return false
+		}
+	}
 	set(value){
 		this.input.checked = value
 		if (this.input.type == "radio"){
@@ -225,6 +265,9 @@ class Group{
 	}
 	find(id){
 		return this.details.find(id);
+	}
+	search(text){
+		return this.details.search(text)
 	}
 	get(){
 		if (this.details.open.checked){

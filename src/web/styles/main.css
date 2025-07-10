@@ -40,7 +40,7 @@ header a:hover{
 	gap: 5px;
 	position: relative;
 }
-#mods-list{
+#mods-list-area{
 	overflow: auto;
 	scrollbar-width: thin;
 	color-scheme: dark;
@@ -80,6 +80,16 @@ header a:hover{
 #mod-description code{
 	font-size: 1rem;
 	color: #a9a9a9;
+}
+
+#search-area{
+	display: flex;
+	padding: 5px;
+	padding-bottom: 0;
+}
+
+#mods-list .hide{
+	display: none;
 }
 
 #retry_button{

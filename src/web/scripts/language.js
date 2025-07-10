@@ -24,6 +24,9 @@ function localizePage(){
 	document.querySelectorAll("[lang_title]").forEach(el=>{
 		el.title = LANG(el.getAttribute("lang_title"))
 	})
+	document.querySelectorAll("[lang_placeholder]").forEach(el=>{
+		el.placeholder = LANG(el.getAttribute("lang_placeholder"))
+	})
 }
 function LANG(code){
 	return LOCALES[currentLang][code]

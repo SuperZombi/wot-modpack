@@ -4,7 +4,7 @@
 ### Lightweight and modern modpack for World of Tanks
 
 <p align="right">
-    <img align="left" src="https://shields.io/badge/version-0.6.2-blue">
+    <img align="left" src="https://shields.io/badge/version-0.7.0-blue">
     <a href="#donate"><img src="https://shields.io/badge/💲-Support_the_Project-2ea043"></a>
 </p>
 

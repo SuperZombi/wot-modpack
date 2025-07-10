@@ -6,6 +6,7 @@ window.onload=async _=>{
 	await initLanguage()
 	await load_game_clients()
 	Gallery(document.querySelector("#gallery"))
+	initSearch()
 
 	async function load_mods_list(){
 		if (document.querySelector("#client_path").value){
@@ -285,6 +286,19 @@ function installing_progress(message) {
 	}
 }
 
+function initSearch(){
+	let input = document.querySelector("#search-area input")
+	input.addEventListener("input", debounce(_=>{
+		let value = input.value.trim()
+		if (value != ""){
+			if (modsData){
+				modsManager.search(value)
+			}
+		} else {
+			modsManager.unsetSearch()
+		}
+	}, 500))
+}
 
 async function initSettings(){
 	document.querySelectorAll(".popup").forEach(popup=>{
@@ -309,6 +323,13 @@ async function initSettings(){
 		}
 	}
 	update_cache_size()
+}
+function debounce(func, delay) {
+	let timer;
+	return function(...args) {
+		clearTimeout(timer)
+		timer = setTimeout(() => func.apply(this, args), delay)
+	}
 }
 function bytesToMb(bytes) {
 	return Math.round(bytes / (1024 * 1024));

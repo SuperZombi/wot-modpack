@@ -146,6 +146,10 @@ input[type=text]{
 		radial-gradient(#2e2e28 25%, black) padding-box,
 		linear-gradient(0deg, #6e3f15, #f7d670) border-box;
 }
+input[type=text].large{
+	padding: 4px 6px 4px 6px;
+	width: 100%;
+}
 input[type=text]::selection {
 	background: #ea850a;
 	color: black;
