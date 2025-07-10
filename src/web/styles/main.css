@@ -88,6 +88,9 @@ header a:hover{
 	padding-bottom: 0;
 }
 
+#mods-list-area.hide{
+	display: none;
+}
 #mods-list .hide{
 	display: none;
 }

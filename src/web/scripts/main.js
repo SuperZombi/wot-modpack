@@ -173,6 +173,7 @@ async function load_mods_info(){
 	let cached = await eel.get_cache_info()()
 	if (modsData){
 		document.querySelector("#retry_button").classList.add("hide")
+		document.querySelector("#mods-list-area").classList.remove("hide")
 		modsManager = new ModsList(document.querySelector("#mods-list"), currentLang)
 
 		modsData.categories.forEach(category=>{
