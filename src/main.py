@@ -127,8 +127,12 @@ def main_install(client_path, args, mods):
 				"total": total_mods,
 				"download_progress": 0
 			})
-			result = client.install_mod(mod, on_progress=download_progress)
-			if not result: fails.append(mod.id)
+			try:
+				result = client.install_mod(mod, on_progress=download_progress)
+				if not result: fails.append(mod.id)
+			except Exception as e:
+				fails.append({"error": str(e)})
+				return fails
 
 	if args.get("save_selected_mods", True):
 		SETTINGS = {
