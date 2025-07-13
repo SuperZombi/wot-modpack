@@ -1,0 +1,31 @@
+name: Optimize mods branch
+
+on:
+  workflow_dispatch:
+
+jobs:
+  optimize-branch:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Switch to mods branch
+        run: git checkout mods
+
+      - name: Create orphan branch
+        run: git checkout --orphan mods-clean
+
+      - name: Add all files and make initial commit
+        run: |
+          git add .
+          git commit -m "Initial clean commit [skip ci]"
+
+      - name: Rename orphan branch to mods
+        run: git branch -M mods
+
+      - name: Force push to origin/mods
+        run: git push -f origin mods
