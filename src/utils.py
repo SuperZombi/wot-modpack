@@ -198,6 +198,9 @@ class Mod:
 				"res_mods": os.path.join(client.res_mods, file.get("folder", "")),
 				"configs": os.path.join(client.configs_path, file.get("folder", ""))
 			}
+			if file["dest"] == "configs" and file.get("folder") and file.get("delete_folder"):
+				if os.path.exists(target_map[file["dest"]]):
+					shutil.rmtree(target_map[file["dest"]])
 			os.makedirs(target_map[file["dest"]], exist_ok=True)
 
 			if file["url"].startswith("http"):
@@ -205,9 +208,6 @@ class Mod:
 				if not file_io: return False
 
 				if file["url"].endswith(".zip"):
-					if file["dest"] == "configs" and file.get("delete_folder", False):
-						shutil.rmtree(target_map[file["dest"]])
-
 					with zipfile.ZipFile(file_io, 'r') as zip_ref:
 						zip_ref.extractall(target_map[file["dest"]])
 				else:
@@ -227,9 +227,6 @@ class Mod:
 			else:
 				if not os.path.exists(file["url"]): return False
 				if file["url"].endswith(".zip"):
-					if file["dest"] == "configs" and file.get("delete_folder", False):
-						shutil.rmtree(target_map[file["dest"]])
-
 					with zipfile.ZipFile(file["url"], 'r') as zip_ref:
 						zip_ref.extractall(target_map[file["dest"]])
 				else:
