@@ -194,7 +194,7 @@ class Mod:
 
 		for file in self.files:
 			target_map = {
-				"mods": client.mods_folder,
+				"mods": os.path.join(client.mods_folder, file.get("folder", "")),
 				"res_mods": os.path.join(client.res_mods, file.get("folder", "")),
 				"configs": os.path.join(client.configs_path, file.get("folder", ""))
 			}
