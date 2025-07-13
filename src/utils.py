@@ -154,7 +154,7 @@ class Client:
 
 		if delete_configs and self.appdata:
 			temp_configs = os.path.join(self.appdata, 'mods')
-			if os.path.exists(temp_configs): shutil.rmtree(path)
+			if os.path.exists(temp_configs): shutil.rmtree(temp_configs)
 		if delete_logs:
 			logfile = os.path.join(self.path, "python.log")
 			if os.path.exists(logfile): os.remove(logfile)
