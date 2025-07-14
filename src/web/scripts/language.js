@@ -8,7 +8,7 @@ function detect_lang(){
 async function initLanguage(){
 	LOCALES = await eel.get_locales()()
 	currentLang = currentLang || detect_lang()
-	let lang_el = document.querySelector('.setting_element[name="language"]')
+	let lang_el = document.querySelector('.setting_element[name="lang"]')
 	lang_el.value = currentLang
 	lang_el.onchange = _=>{
 		currentLang = lang_el.value

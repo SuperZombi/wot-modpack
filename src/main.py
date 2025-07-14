@@ -11,15 +11,27 @@ __version__ = "0.7.1"
 @eel.expose
 def app_version(): return __version__
 LOCALES = load_locales()
+SETTINGS = {}
 @eel.expose
 def get_locales(): return LOCALES
-
 @eel.expose
+def get_settings(): return SETTINGS
+
 def load_settings():
+	global SETTINGS
 	path = os.path.join(local(), "settings.json")
 	if os.path.exists(path):
 		with open(path, 'r', encoding='utf-8') as f:
-			return json.loads(f.read())
+			SETTINGS = json.loads(f.read())
+load_settings()
+def save_settings():
+	with open(os.path.join(local(), "settings.json"), 'w', encoding="utf-8") as f:
+		f.write(json.dumps(SETTINGS, indent=4, ensure_ascii=False))
+@eel.expose
+def update_settings(data):
+	global SETTINGS
+	SETTINGS.update(data)
+	save_settings()
 
 @eel.expose
 def check_updates():
@@ -104,9 +116,9 @@ def json_to_mod(mod_id):
 
 @eel.expose
 def main_install(client_path, args, mods):
-	LANG = LangEngine(LOCALES, args.get("language"))
+	LANG = LangEngine(LOCALES, SETTINGS.get("lang"))
 	fails = []
-	client = Client(client_path, use_cache=args.get("use_cache", True))
+	client = Client(client_path, use_cache=SETTINGS.get("use_cache", True))
 	if client.is_running:
 		fails.append({"error": LANG("client_is_running_error")})
 		return fails
@@ -135,15 +147,10 @@ def main_install(client_path, args, mods):
 				return fails
 
 	if args.get("save_selected_mods", True):
-		SETTINGS = {
-			"lang": args.get('language'),
-			"use_cache": args.get('use_cache', True),
+		update_settings({
 			"client": client_path,
 			"mods": mods
-		}
-		with open(os.path.join(local(), "settings.json"), 'w', encoding="utf-8") as f:
-			f.write(json.dumps(SETTINGS, indent=4, ensure_ascii=False))
-
+		})
 	return fails
 
 

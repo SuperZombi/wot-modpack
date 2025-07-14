@@ -58,9 +58,7 @@ window.onload=async _=>{
 		let args = {
 			"delete_mods": document.querySelector("#delete_all_mods").checked,
 			"delete_configs": document.querySelector("#delete_mods_configs").checked,
-			"save_selected_mods": document.querySelector("#save_selected_mods").checked,
-			"language": document.querySelector('.setting_element[name="language"]').value,
-			"use_cache": document.querySelector('.setting_element[name="use_cache"]').checked
+			"save_selected_mods": document.querySelector("#save_selected_mods").checked
 		}
 		let fails = await eel.main_install(client, args, selectedMods)()
 		let result_area = document.querySelector("#install_results")
@@ -124,7 +122,7 @@ async function load_game_clients(){
 	}
 	parent.appendChild(createOption("custom", LANG("custom_game_folder")))
 
-	let settings = await eel.load_settings()()
+	let settings = await eel.get_settings()()
 	if (settings){
 		if (settings.client){
 			let client_info = await eel.get_client_info_by_path(settings.client)()
@@ -200,7 +198,7 @@ async function load_mods_info(){
 			})
 			modsManager.add(category_element)
 		})
-		let settings = await eel.load_settings()()
+		let settings = await eel.get_settings()()
 		if (settings){
 			if (settings.mods){
 				settings.mods.forEach(mod_id=>{
@@ -310,20 +308,40 @@ async function initSettings(){
 	})
 	document.querySelector("#setting_button").onclick = _=>document.querySelector("#settings").classList.add("show")
 	document.querySelector("#app-version").innerHTML = await eel.app_version()()
+	let settings = await eel.get_settings()()
+	if (settings){
+		Object.entries(settings).forEach(([key, val])=>{
+			let el = document.querySelector(`.setting_element[name="${key}"]`)
+			if (el){
+				if (el.type == "checkbox"){
+					el.checked = val
+				}
+				else {
+					el.value = val
+				}
+			}
+			if (key == "lang"){
+				currentLang = val
+			}
+		})
+	}
+	document.querySelectorAll(".setting_element").forEach(seti=>{
+		seti.addEventListener("change", async _=>{
+			let data = {}
+			if (seti.type == "checkbox"){
+				data[seti.name] = seti.checked
+			}
+			else {
+				data[seti.name] = seti.value
+			}
+			await eel.update_settings(data)()
+		})
+	})
+	update_cache_size()
 	let update_available = await eel.check_updates()()
 	if (update_available){
 		document.querySelector("#update_popup").classList.add("show")
 	}
-	let settings = await eel.load_settings()()
-	if (settings){
-		if (settings.lang){
-			currentLang = settings.lang
-		}
-		if (settings.use_cache != null){
-			document.querySelector('.setting_element[name="use_cache"]').checked = settings.use_cache
-		}
-	}
-	update_cache_size()
 }
 function debounce(func, delay) {
 	let timer;
