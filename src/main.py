@@ -7,7 +7,7 @@ from tkinter.filedialog import askdirectory
 from utils import *
 
 MODS_DATA = {}
-__version__ = "0.7.1"
+__version__ = "0.7.2"
 @eel.expose
 def app_version(): return __version__
 LOCALES = load_locales()
