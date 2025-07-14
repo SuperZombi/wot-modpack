@@ -18,14 +18,14 @@ The problem of all modpacks is their greater weight.<br>
 This modpack downloads only those mods that the user selected at runtime.<br>
 Also it has a modern Web interface.<br>
 Supports all client versions (including CT and SB)
-
+> Please note that the modpack version does not necessarily have to match the client version!
 <hr>
 
 Проблема всіх модпаків полягає в їх великій вазі.<br>
 Цей модпак завантажує лише ті моди, які користувач вибирає сам.<br>
 Також він має сучасний веб-інтерфейс.<br>
 Підтримує всі версії клієнтів (включаючи CT і SB)
-
+> Зверніть увагу, що версія модпака не обов'язково має співпадати із версією клієнта!
 <hr>
 
 ### <a href="https://github.com/SuperZombi/wot-modpack/issues/new?template=1-mod-suggestion.yml"><img src="https://github.com/user-attachments/assets/998c0c5f-bae6-4d76-adba-fc94ea70350d" width="26" align="top"> Request a new Mod</a>
