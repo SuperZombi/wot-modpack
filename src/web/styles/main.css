@@ -32,8 +32,6 @@ header a:hover{
 	transform: rotate(90deg);
 }
 
-
-
 #mods-area{
 	display: grid;
 	grid-template-columns: 1fr 1fr;
@@ -88,13 +86,6 @@ header a:hover{
 	padding-bottom: 0;
 }
 
-#mods-list-area.hide{
-	display: none;
-}
-#mods-list .hide{
-	display: none;
-}
-
 #retry_button{
 	position: absolute;
 	top: 50%;
@@ -104,9 +95,6 @@ header a:hover{
 	align-items: center;
 	gap: 0.3em;
 	font-size: 18px;
-}
-#retry_button.hide{
-	display: none;
 }
 #retry_button svg{
 	height: 1em;
@@ -156,18 +144,15 @@ header a:hover{
 	border-radius: 12px;
 }
 
-#refs {
-	display: none;
-}
-#refs.show{
+.links {
 	display: flex;
 	gap: 1em;
-	user-select: none;	
+	user-select: none;
 }
-#refs a:hover{
+.links a:hover{
 	opacity: 0.75;
 }
-#refs img{
+.links img{
 	height: 60px;
 }
 

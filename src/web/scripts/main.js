@@ -63,7 +63,7 @@ window.onload=async _=>{
 		let fails = await eel.main_install(client, args, selectedMods)()
 		let result_area = document.querySelector("#install_results")
 		if (fails.length > 0){
-			document.querySelector("#refs").classList.remove("show")
+			document.querySelector("#refs").classList.add("hide")
 			document.querySelector("#report_bug").style.display = "block"
 			result_area.innerHTML = `<h3>${LANG("failed_to_install")}:</h3>`
 			if (fails.length == 1 && fails[0] instanceof Object){
@@ -84,7 +84,7 @@ window.onload=async _=>{
 			}
 		} else {
 			result_area.innerHTML = `<h3>${LANG("installed_success")}</h3>`
-			document.querySelector("#refs").classList.add("show")
+			document.querySelector("#refs").classList.remove("hide")
 			document.querySelector("#report_bug").style.display = "none"
 		}
 		await update_cache_size()

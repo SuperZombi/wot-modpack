@@ -39,9 +39,8 @@ svg{
 	inset: 0;
 	background: rgb(0, 0, 0, 0.5);
 }
-
-#loader.hide{
-	display: none;
+.hide{
+	display: none !important;
 }
 
 .hover:hover{
