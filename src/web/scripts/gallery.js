@@ -1,13 +1,32 @@
 async function Gallery(root){
 	if (root.getAttribute("init")){return}
 	root.setAttribute("init", true)
+	let imgEl = document.createElement("img")
+	imgEl.draggable = false
+	root.appendChild(imgEl)
+	root.addEventListener('mousemove', e=>{
+		let tiltFactor = 25;
+		let rect = root.getBoundingClientRect()
+		let x = e.clientX - rect.left
+		let y = e.clientY - rect.top
+		let centerX = rect.width / 2
+		let centerY = rect.height / 2
+		let rotateX = -(y - centerY) / tiltFactor
+		let rotateY = (x - centerX) / tiltFactor
+		imgEl.style.transition = "0s"
+		imgEl.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`
+	})
+	root.addEventListener('mouseleave', _=>{
+		imgEl.style.transition = "1s"
+		imgEl.style.transform = `rotateX(0deg) rotateY(0deg)`
+	})
 	let images = getImages();
 	let i = 0;
 	while (true) {
 		let url = images[i];
 		let image = await fetchURL(url);
 		if (image) {
-			createImage(root, image);
+			imgEl.src = image
 			await sleep(100);
 			root.classList.add("show");
 			await sleep(10000);

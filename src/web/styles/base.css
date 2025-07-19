@@ -302,3 +302,29 @@ label{
 	0% {transform: rotate(0deg);}
 	100% {transform: rotate(360deg);}
 }
+
+.gallery{
+	margin-top: 50px;
+	height: 360px;
+	
+	opacity: 0;
+	transition: 3s;
+	perspective: 1000px;
+}
+.gallery.show{
+	opacity: 1;
+}
+.gallery img {
+	height: 100%;
+	width: 100%;
+	object-fit: cover;
+	transform-style: preserve-3d;
+	border-radius: 10px;
+	overflow: hidden;
+	user-select: none;
+	mask-image:
+		linear-gradient(to top, transparent 0%, black 20%, black 80%, transparent 100%),
+		linear-gradient(to left, transparent 0%, black 20%, black 80%, transparent 100%),
+		radial-gradient(black, transparent 80%);
+	mask-composite: intersect;
+}
