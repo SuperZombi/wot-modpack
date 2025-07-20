@@ -1,0 +1,33 @@
+{
+	"enable": true,
+	"alphaMultiplier": 100,
+	"scaleMultiplier": 85,
+	"minimized": false,
+	"colors": {
+		"percentLabel": "0xFFDB00",
+		"timeLabel": "0x00FF19",
+		"uiParts": "0xFFFFE6"
+	},
+	"displayType": {
+		"AT-SPG": true,
+		"SPG": true,
+		"heavyTank": true,
+		"lightTank": true,
+		"mediumTank": true
+	},
+	"offset": {
+        "arcade": [
+            337,
+            -144
+        ],
+        "sniper": [
+            347,
+            -73
+        ],
+        "strategic": [
+            345,
+            -65
+        ]
+	},
+	"skinVariant": "new"
+}

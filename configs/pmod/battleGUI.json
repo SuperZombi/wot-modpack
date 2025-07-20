@@ -1,0 +1,6 @@
+{
+	"enable": true,
+	"playersHealth": ${"playersHealth.json"},
+	${"minimapAnglesFix.json"},
+	${"postmortemDogTag.json"}
+}

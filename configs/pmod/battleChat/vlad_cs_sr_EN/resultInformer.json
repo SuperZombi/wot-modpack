@@ -1,0 +1,5 @@
+{
+	"resultWin":    "<font color='#99CC33' size='20'><b> Victory!</b></font>\n <font color='#878787' size='15'>Battle:</font> <font color='#D3D3D3' size='15'>{{Map}}</font>\n <font color='#878787' size='15'>Vehicle:</font> <font color='#D3D3D3' size='15'>{{VehicleLocalName}}</font>",
+	"resultDraw":   "<font color='#FF8800' size='20'><b> Draw</b></font>\n <font color='#878787' size='15'>Battle:</font> <font color='#D3D3D3' size='15'>{{Map}}</font>\n <font color='#878787' size='15'>Vehicle:</font> <font color='#D3D3D3' size='15'>{{VehicleLocalName}}</font>",
+	"resultDefeat": "<font  color='#E63628' size='20'><b> Defeat</b></font>\n <font color='#878787' size='15'>Battle:</font> <font color='#D3D3D3' size='15'>{{Map}}</font>\n <font color='#878787' size='15'>Vehicle:</font> <font color='#D3D3D3' size='15'>{{VehicleLocalName}}</font>"
+}
