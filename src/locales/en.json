@@ -30,6 +30,7 @@
 	"cache_size": "Cache size",
 	"clear_cache": "Clear cache",
 	"use_cache": "Use cache",
+	"match_client_lang": "Match game language",
 	"megabytes": "Mb",
 	"mod_updated": "Mod updated",
 	"mod_in_cache": "Mod in cache",

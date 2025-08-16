@@ -3,6 +3,7 @@ class ModsList{
 		this.root = parent
 		this.childs = []
 		this.language = language
+		this.client_lang = ""
 	}
 	add(element){
 		this.childs.push(element)
@@ -29,6 +30,7 @@ class ModsList{
 			el.classList.remove("hide")
 		})
 		this.childs.map(child=>child.collapse())
+		this.set_client_lang(this.client_lang)
 	}
 	resetAll(){
 		this.root.querySelectorAll('label[id]').forEach(el=>{
@@ -47,6 +49,10 @@ class ModsList{
 	changeLanguage(new_language){
 		this.language = new_language
 		this.childs.map(child=>child.changeLanguage(new_language))
+	}
+	set_client_lang(lang=""){
+		this.client_lang = lang
+		this.childs.map(child=>child.set_client_lang(lang))
 	}
 	makeCategory(text_data, image=null){
 		let x = new Details()
@@ -124,6 +130,9 @@ class Details{
 		founded ? this.open.checked = true : null
 		return founded
 	}
+	set_client_lang(lang){
+		this.childs.map(child=>child.set_client_lang(lang))
+	}
 	collapse(){
 		this.open.checked = false
 	}
@@ -169,6 +178,9 @@ class Checkbox{
 				badge.setAttribute("lang_title", "mod_updated")
 				this.root.appendChild(badge)
 			}
+		}
+		if (mod_info.lang){
+			this.mod_lang = mod_info.lang
 		}
 
 		this.root.addEventListener("mouseover", _=>{
@@ -223,11 +235,30 @@ class Checkbox{
 			Object.values(this.title_data || {}).some(check) ||
 			Object.values(this.description_data || {}).some(check)
 		) {
+			if (this.mod_lang){
+				if (this.client_lang && (this.mod_lang != this.client_lang)){
+					this.root.classList.add("hide")
+					return false
+				} else {
+					this.root.classList.remove("hide")
+					return true
+				}
+			}
 			this.root.classList.remove("hide")
 			return true
 		} else {
 			this.root.classList.add("hide")
 			return false
+		}
+	}
+	set_client_lang(lang){
+		if (this.mod_lang){
+			this.client_lang = lang
+			if (lang && (this.mod_lang != lang)){
+				this.root.classList.add("hide")
+			} else {
+				this.root.classList.remove("hide")
+			}
 		}
 	}
 	set(value){
@@ -268,6 +299,9 @@ class Group{
 	}
 	search(text){
 		return this.details.search(text)
+	}
+	set_client_lang(lang){
+		this.details.set_client_lang(lang)
 	}
 	get(){
 		if (this.details.open.checked){

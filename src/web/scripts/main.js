@@ -1,5 +1,6 @@
 var modsManager;
 var modsData;
+var useClientLang = true;
 
 window.onload=async _=>{
 	await initSettings()
@@ -99,6 +100,20 @@ function changeTab(tab_name){
 		target.classList.add("active")
 	} else {
 		console.error(`Tab "${tab_name}" is not definded!`)
+	}
+}
+
+async function setModsManagerClientLang(new_useClientLang){
+	useClientLang = new_useClientLang
+	if (modsManager){
+		if (useClientLang){
+			let client_info = await eel.get_client_info_by_path(document.querySelector("#client_path").value)()
+			if (client_info){
+				modsManager.set_client_lang(client_info.lang.toLowerCase())
+			}
+		} else {
+			modsManager.set_client_lang("")
+		}
 	}
 }
 
@@ -206,6 +221,7 @@ async function load_mods_info(){
 				})
 			}
 		}
+		setModsManagerClientLang(useClientLang)
 		document.querySelector("#mods-area").setAttribute("loaded", "true")
 	} else {
 		alert(LANG("mods_info_parse_fail"))
@@ -323,6 +339,9 @@ async function initSettings(){
 			if (key == "lang"){
 				currentLang = val
 			}
+			if (key == "match_client_lang"){
+				setModsManagerClientLang(val)
+			}
 		})
 	}
 	document.querySelectorAll(".setting_element").forEach(seti=>{
@@ -333,6 +352,9 @@ async function initSettings(){
 			}
 			else {
 				data[seti.name] = seti.value
+			}
+			if (seti.name == "match_client_lang"){
+				await setModsManagerClientLang(seti.checked)
 			}
 			await eel.update_settings(data)()
 		})

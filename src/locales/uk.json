@@ -30,6 +30,7 @@
 	"cache_size": "Розмір кешу",
 	"clear_cache": "Очистити кеш",
 	"use_cache": "Використовувати кеш",
+	"match_client_lang": "Враховувати мову гри",
 	"megabytes": "Мб",
 	"mod_updated": "Мод оновлено",
 	"mod_in_cache": "Мод у кеші",
