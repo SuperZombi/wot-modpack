@@ -28,6 +28,16 @@ Supports all client versions (including CT and SB)
 > Зверніть увагу, що версія модпака не обов'язково має співпадати із версією клієнта!
 <hr>
 
+## Data Collection Notice
+
+This modpack automatically collects **anonymous statistics** about which mods are selected/used.  
+- **Only the list of selected mods is collected.**
+- The collected data is used **only for ranking mods by popularity**.
+- **No personal data** (such as username, IP address, or system information).   
+
+By using this modpack, you agree to this data collection.
+<hr>
+
 ### <a href="https://github.com/SuperZombi/wot-modpack/issues/new?template=1-mod-suggestion.yml"><img src="https://github.com/user-attachments/assets/998c0c5f-bae6-4d76-adba-fc94ea70350d" width="26" align="top"> Request a new Mod</a>
 
 ### <a href="https://github.com/SuperZombi/wot-modpack/issues/new?template=3-bug-report.yml"><img src="https://github.com/user-attachments/assets/322af33a-dcd0-4e59-8a0e-61e10edbc09f" width="26" align="top"> Report a Bug</a>
