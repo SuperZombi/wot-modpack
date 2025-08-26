@@ -2,12 +2,13 @@ import eel
 import sys, os
 import json
 import requests
+from telemetry import submit_selected_mods
 from tkinter import Tk
 from tkinter.filedialog import askdirectory
 from utils import *
 
 MODS_DATA = {}
-__version__ = "0.8.0"
+__version__ = "0.8.1"
 @eel.expose
 def app_version(): return __version__
 LOCALES = load_locales()
@@ -145,6 +146,8 @@ def main_install(client_path, args, mods):
 			except Exception as e:
 				fails.append({"error": str(e)})
 				return fails
+
+		submit_selected_mods(mods)
 
 	if args.get("save_selected_mods", True):
 		update_settings({
