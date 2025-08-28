@@ -1,0 +1,12 @@
+{
+	"enable": true,
+	"hideIngameStatistic": false,
+	"autoReset": false,
+	"daysToBeSaved": 1,
+	"hourOffset": 4,
+	"processOnlyStatBattles": false,
+	"processBattleTypes": [],
+	"processBonusTypes": [],
+	"statBySession": false,
+	"group": "info"
+}

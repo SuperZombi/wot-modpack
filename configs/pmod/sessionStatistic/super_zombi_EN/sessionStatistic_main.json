@@ -1,0 +1,135 @@
+{
+	"noBattles": {
+		"background": "{{config}}images/sessionStatisticBackground.png",
+		"message": "<br><p align='center'><font face='$TitleFont' size='15' color='#E9E2BF'>Session statistic</font><br><br>To display changes in statistics, you need to fight at least one battle!</p>"
+	},
+	"pages": [
+		{
+			"pageName": "overalStatistic",
+			"macroses": "overal",
+			"messageBackground": {
+				"enable": true,
+				"path": "{{config}}images/statOnTanks.png"
+			},
+			"templateWrapper": "<textformat tabstops='[27,130]' leading='4'>{{items}}</textformat>",
+			"templateItem": [
+				"<font face='$TitleFont' size='15' color='#E9E2BF'><p align='center'>Current Session</p></font>\n",
+				"<tab>{{UM:Credits}}<tab>{{UM:Gold}}\n",
+				"<tab>{{UM:FreeXP}}<tab>{{UM:Bonds}}\n",
+				"{{CM:line}}",
+				"<tab>{{UM:WN8}}{{CM:line}}",
+				"<tab>{{UM:EFF}}{{CM:line}}",
+				" <img src='img://gui/maps/icons/library/BattleResultIcon-1.png' width='16' height='16' vspace='-2'><tab>{{UM:WinRate}}{{CM:line}}",
+				"<img src='img://gui/maps/icons/library/efficiency/48x48/damage.png' width='24' height='24' vspace='-12'><tab>{{UM:Damage}}{{CM:line}}",
+				" <img src='img://gui/maps/icons/library/efficiency/48x48/help.png' width='20' height='20' vspace='-8'><tab>{{UM:Assistance}}{{CM:line}}",
+				"<img src='img://gui/maps/icons/library/efficiency/48x48/armor.png' width='24' height='24' vspace='-10'><tab>{{UM:Block}}{{CM:line}}",
+				"<img src='img://gui/maps/icons/library/efficiency/48x48/destruction.png' width='24' height='24' vspace='-12'><tab>{{UM:Kills}}{{CM:line}}",
+				"\n<p align='center'>{{CM:buttonOveral_active}}{{CM:buttonByTanks}}{{CM:buttonReset}}</p>"
+			],
+			"userMacros": {
+				"UM:FreeXP": "<font color='{{c:AccountFreeXP}}'><b><font size='0'>freeXP </font>{{AccountFreeXP}}</b></font><img src='img://gui/maps/icons/library/FreeXpIcon-2.png' width='18' height='18' vspace='-5'><font size='0'>;</font>",
+				"UM:Credits": "<font color='{{c:AccountCredits}}'><b><font size='0'>credits </font>{{AccountCredits}}</b></font> <img src='img://gui/maps/icons/library/CreditsIcon-1.png' width='12' height='12' vspace='0'><font size='0'>;</font>",
+				"UM:Bonds": "<font color='{{c:AccountCrystal}}'><b><font size='0'>bonds </font>{{AccountCrystal}}</b></font> <img src='img://gui/maps/icons/library/CrystalIcon-24.png' width='16' height='16' vspace='-5'><font size='0'>;</font>",
+				"UM:Gold": "<font color='{{c:AccountGold}}'><b><font size='0'>gold </font>{{AccountGold}}</b></font> <img src='img://gui/maps/icons/library/GoldIcon-1.png' width='12' height='12' vspace='0'><font size='0'>;</font>",
+
+				"UM:WN8": "WN8<tab><font color='{{c:WN8}}'><b>{{WN8}}</b></font> <font size='0'>,</font>",
+				"UM:EFF": "EFF<tab><font color='{{c:EFF}}'><b>{{EFF}}</b></font> <font size='0'>,</font>",
+				"UM:WinRate": "Victories<tab><b><font color='{{c:WinRate}}'>{{WinRate}}%</font> ({{Wins}} / {{Battles}})</b><font size='0'>,</font>",
+				"UM:Damage": "Damage<tab><b><font color='{{c:AvgDamageDealt}}'>{{AvgDamageDealt}}</font></b><font size='0'>,</font>",
+				"UM:Assistance": "Assistance<tab><b><font color=''>{{AvgDamageAssisted}}</font></b><font size='0'>,</font>",
+				"UM:Kills": "Kills<tab><b><font color=''>{{AvgFrags}}</font></b><font size='0'>,</font>",
+				"UM:Block": "Blocked<tab><b><font color=''>{{AvgDamageBlockedByArmor}}</font></b><font size='0'>,</font>"
+			},
+			"colors": {
+				"WN8":     [{"value": 355,  "color": "#FE0E00"}, {"value": 820,  "color": "#FE7903"}, {"value": 1370, "color": "#F8F400"}, {"value": 2020, "color": "#60FF00"}, {"value": 2620, "color": "#02C9B3"}, {"value": 99999, "color": "#D042F3"}],
+				"EFF":     [{"value": 610,  "color": "#FE0E00"}, {"value": 850,  "color": "#FE7903"}, {"value": 1145, "color": "#F8F400"}, {"value": 1475, "color": "#60FF00"}, {"value": 1775, "color": "#02C9B3"}, {"value": 99999, "color": "#D042F3"}],
+				"WinRate": [{"value": 46.5, "color": "#FE0E00"}, {"value": 48.5, "color": "#FE7903"}, {"value": 51.5, "color": "#F8F400"}, {"value": 56.5, "color": "#60FF00"}, {"value": 64.5, "color": "#02C9B3"}, {"value": 101,   "color": "#D042F3"}],
+
+				"AvgDamageDealt": [{"value": 500,  "color": "#FE0E00"}, {"value": 1000, "color": "#FE7903"}, {"value": 1800, "color": "#F8F400"}, {"value": 2500, "color": "#60FF00"}, {"value": 3000, "color": "#02C9B3"}, {"value": 9999,  "color": "#D042F3"}],
+
+				"AccountFreeXP":  [{"value": 0, "color": "#E63628"}, {"value": 1, "color": ""}, {"value": 9999999, "color": "#ffd700"}],
+				"AccountCrystal": [{"value": 0, "color": "#E63628"}, {"value": 1, "color": ""}, {"value": 9999999, "color": "#7622B8"}],
+				"AccountCredits": [{"value": 0, "color": "#E63628"}, {"value": 1, "color": ""}, {"value": 9999999, "color": "#d9d9d9"}],
+				"AccountGold":    [{"value": 0, "color": "#E63628"}, {"value": 1, "color": ""}, {"value": 9999999, "color": "#ffd700"}]
+			}
+		},
+		{
+			"pageName": "tanksEfficiency",
+			"macroses": "byTanks",
+			"templateWrapper": [
+				"<font size='14' color='#A3A09B'><textformat leading='4' tabstops='[90,130,185]'>",
+				"<a href='event:sortPage:VehicleLocalNameShort'>Vehicle</a>",
+				"<tab><a href='event:sortPage:Battles'>Wins</a>",
+				"<tab><a href='event:sortPage:AvgDamageDealt'>Damage</a>",
+				"<tab><a href='event:sortPage:WN8'>WN8</a>",
+				"{{CM:line}}{{items}}</textformat></font>{{CM:line}}",
+				"\n<p align='center'>{{CM:buttonOveral}}{{CM:buttonByTanks_active}}{{CM:buttonReset}}</p>"
+			],
+			"templateConnector": "{{CM:line}}",
+			"templateItem": "<font size='12' color='#E5D8BE'><a href='event:showPage:tankEfficiency:{{tank_id}}'>{{UM:name}}</a>{{UM:battles}}{{UM:damage}}{{UM:rating}}</font>",
+			"itemsSortingMacros": "Battles:desc",
+			"userMacros": {
+				"UM:name": "<font color='#E4D5C2'>{{VehicleLocalNameShort}}</font>",
+				"UM:battles": "<tab><font color='{{c:WinRate}}'>{{Wins}}/{{Battles}}</font>",
+				"UM:damage": "<tab><font color='{{c:AvgDamageDealt}}'>{{AvgDamageDealt}}</font>",
+				"UM:rating": "<tab><font color='{{c:WN8}}'>{{WN8}}</font>"
+			},
+			"colors": {
+				"WN8":            [{"value": 355,  "color": "#FE0E00"}, {"value": 820,  "color": "#FE7903"}, {"value": 1370, "color": "#F8F400"}, {"value": 2020, "color": "#60FF00"}, {"value": 2620, "color": "#02C9B3"}, {"value": 99999, "color": "#D042F3"}],
+				"WinRate":        [{"value": 46.5, "color": "#FE0E00"}, {"value": 48.5, "color": "#FE7903"}, {"value": 51.5, "color": "#F8F400"}, {"value": 56.5, "color": "#60FF00"}, {"value": 64.5, "color": "#02C9B3"}, {"value": 101,   "color": "#D042F3"}],
+				"AvgDamageDealt": [{"value": 500,  "color": "#FE0E00"}, {"value": 1000, "color": "#FE7903"}, {"value": 1800, "color": "#F8F400"}, {"value": 2500, "color": "#60FF00"}, {"value": 3000, "color": "#02C9B3"}, {"value": 9999,  "color": "#D042F3"}]
+			}
+		},
+		{
+			"pageName": "tankEfficiency",
+			"macroses": "byTank",
+			"messageBackground": {
+				"enable": true,
+				"path": "{{config}}images/statOnTanks.png"
+			},
+			"templateWrapper": [
+				"<font size='14' color='#A3A09B'><textformat leading='-1'>{{items}}</textformat></font>"
+			],
+			"templateItem": [
+				"<font face='$TitleFont' size='15' color='#E9E2BF'><p align='center'>{{VehicleLocalNameShort}}</p></font>",
+				"<textformat leading='5' tabstops='[27,130]'>{{CM:line}}",
+				"<tab>{{UM:WN8}}{{CM:line}}",
+				"<tab>{{UM:EFF}}{{CM:line}}",
+				" <img src='img://gui/maps/icons/library/XpIconBig-2.png' width='18' height='18' vspace='-4'><tab>{{UM:XP}}{{CM:line}}",
+				" <img src='img://gui/maps/icons/library/BattleResultIcon-1.png' width='16' height='16' vspace='-2'><tab>{{UM:WinRate}}{{CM:line}}",
+				"<img src='img://gui/maps/icons/library/efficiency/48x48/damage.png' width='24' height='24' vspace='-12'><tab>{{UM:Damage}}{{CM:line}}",
+				" <img src='img://gui/maps/icons/library/efficiency/48x48/help.png' width='20' height='20' vspace='-8'><tab>{{UM:Assistance}}{{CM:line}}",
+				"<img src='img://gui/maps/icons/library/efficiency/48x48/armor.png' width='24' height='24' vspace='-10'><tab>{{UM:Block}}{{CM:line}}",
+				"<img src='img://gui/maps/icons/library/efficiency/48x48/destruction.png' width='24' height='24' vspace='-12'><tab>{{UM:Kills}}{{CM:line}}",
+				"</textformat>",
+				"\n<p align='center'>{{CM:buttonOveral}}{{CM:buttonByTanks}}{{CM:buttonReset}}</p>"
+			],
+			"userMacros": {
+				"UM:WN8": "WN8<tab><font color='{{c:WN8}}'>{{WN8}}</font>",
+				"UM:EFF": "EFF<tab><font color='{{c:EFF}}'>{{EFF}}</font>",
+				"UM:WinRate": "Victories<tab><font color='#F5F2E1'>{{Wins}} / {{Battles}}</font> (<font color='{{c:WinRate}}'>{{WinRate}}%</font>)",
+				"UM:XP": "XP<tab><font color='{{c:AvgOriginalXP}}'>{{AvgOriginalXP}}</font>",
+				"UM:Damage": "Damage<tab><font color='{{c:AvgDamageDealt}}'>{{AvgDamageDealt}}</font>",
+				"UM:Assistance": "Assistance<tab><font color='#F5F2E1'>{{AvgDamageAssisted}}</font>",
+				"UM:Block": "Blocked<tab><font color='#F5F2E1'>{{AvgDamageBlockedByArmor}}</font>",
+				"UM:Kills": "Kills<tab><font color='#F5F2E1'>{{AvgFrags}}</font>"
+			},
+			"colors": {
+				"WN8":            [{"value": 355,  "color": "#FE0E00"}, {"value": 820,  "color": "#FE7903"}, {"value": 1370, "color": "#F8F400"}, {"value": 2020, "color": "#60FF00"}, {"value": 2620, "color": "#02C9B3"}, {"value": 99999, "color": "#D042F3"}],
+				"EFF":            [{"value": 610,  "color": "#FE0E00"}, {"value": 850,  "color": "#FE7903"}, {"value": 1145, "color": "#F8F400"}, {"value": 1475, "color": "#60FF00"}, {"value": 1775, "color": "#02C9B3"}, {"value": 99999, "color": "#D042F3"}],
+				"WinRate":        [{"value": 46.5, "color": "#FE0E00"}, {"value": 48.5, "color": "#FE7903"}, {"value": 51.5, "color": "#F8F400"}, {"value": 56.5, "color": "#60FF00"}, {"value": 64.5, "color": "#02C9B3"}, {"value": 101,   "color": "#D042F3"}],
+				"AvgOriginalXP":  [{"value": 135,  "color": "#FE0E00"}, {"value": 201,  "color": "#FE7903"}, {"value": 401,  "color": "#F8F400"}, {"value": 535,  "color": "#60FF00"}, {"value": 735,  "color": "#02C9B3"}, {"value": 99999, "color": "#D042F3"}],
+				"AvgDamageDealt": [{"value": 500,  "color": "#FE0E00"}, {"value": 1000, "color": "#FE7903"}, {"value": 1800, "color": "#F8F400"}, {"value": 2500, "color": "#60FF00"}, {"value": 3000, "color": "#02C9B3"}, {"value": 9999,  "color": "#D042F3"}]
+			}
+		}
+	],
+	"commonMacros": {
+		"CM:line": "\n<img src='img://{{config}}images/line.png' height='2' width='220'>\n",
+		"CM:buttonOveral": "<a href='event:showPage:overalStatistic'><img src='img://{{config}}images/button_overal.png' width='44' height='32' vspace='-10'></a>",
+		"CM:buttonOveral_active": "<img src='img://{{config}}images/button_overal_active.png' width='44' height='32' vspace='-10'>",
+		"CM:buttonByTanks": "<a href='event:showPage:tanksEfficiency'><img src='img://{{config}}images/button_tanks.png' width='44' height='32' vspace='-10'></a>",
+		"CM:buttonByTanks_active": "<img src='img://{{config}}images/button_tanks_active.png' width='44' height='32' vspace='-10'>",
+		"CM:buttonReset": "<a href='event:resetStatisticConfirmation'><img src='img://{{config}}images/button_trash.png' width='44' height='32' vspace='-10'></a>",
+		"CM:buttonReload": "<a href='event:reloadConfig'>[R]</a>"
+	}
+}

@@ -1,0 +1,13 @@
+<audio_mods.xml>
+	<loadBanks>
+		<bank>
+			<name>voiceover.bnk</name>
+		</bank>
+	</loadBanks>
+	<events>
+		<event>
+			<name>lightbulb</name>
+			<mod>lightbulb_andre</mod>
+		</event>
+	</events>
+</audio_mods.xml>
