@@ -344,6 +344,9 @@ async function initSettings(){
 			}
 		})
 	}
+	if (!settings["data_collection"]){
+		document.querySelector("#data_collection_popup").classList.add("show")
+	}
 	document.querySelectorAll(".setting_element").forEach(seti=>{
 		seti.addEventListener("change", async _=>{
 			let data = {}
@@ -382,4 +385,8 @@ async function clear_cache(){
 async function update_cache_size(){
 	let cache = await eel.get_cache_size()()
 	document.querySelector("#cache_size").innerHTML = `${bytesToMb(cache)}`
+}
+async function accept_data_collection(){
+	document.querySelector("#data_collection_popup").classList.remove("show")
+	await eel.update_settings({"data_collection": true})()
 }

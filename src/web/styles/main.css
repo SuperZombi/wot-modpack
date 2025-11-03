@@ -72,7 +72,7 @@ header a:hover{
 	justify-content: space-between;
 	gap: 5px;
 }
-#mod-description ul{
+ul{
 	padding-left: 1em;
 }
 #mod-description code{

@@ -4,7 +4,7 @@
 ### Lightweight and modern modpack for World of Tanks
 
 <p align="right">
-    <img align="left" src="https://shields.io/badge/version-0.8.1-blue">
+    <img align="left" src="https://shields.io/badge/version-1.0.0-blue">
     <a href="#donate"><img src="https://shields.io/badge/💲-Support_the_Project-2ea043"></a>
 </p>
 
@@ -30,9 +30,12 @@ Supports all client versions (including CT and SB)
 
 ## Data Collection Notice
 
-This modpack automatically collects **anonymous statistics** about which mods are selected/used.  
-- **Only the list of selected mods is collected.**
-- The collected data is used **only for ranking mods by popularity**.
+This modpack automatically collects **anonymous statistics** that includes:
+- List of selected mods.
+- Modpack version.
+- WoT client version.
+
+The collected data is used **only for ranking mods by popularity**!
 - **No personal data** (such as username, IP address, or system information).   
 
 By using this modpack, you agree to this data collection.
