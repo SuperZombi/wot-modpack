@@ -184,9 +184,10 @@ async function load_game_clients(){
 }
 async function load_mods_info(){
 	modsData = await eel.load_mods_info()()
-	modsStats = await eel.get_mods_stats()()
-	let cached = await eel.get_cache_info()()
 	if (modsData){
+		modsStats = await eel.get_mods_stats()()
+		let cached = await eel.get_cache_info()()
+
 		document.querySelector("#retry_button").classList.add("hide")
 		document.querySelector("#mods-list-area").classList.remove("hide")
 		modsManager = new ModsList(document.querySelector("#mods-list"), currentLang)
