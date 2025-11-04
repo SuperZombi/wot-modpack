@@ -169,6 +169,7 @@ class Checkbox{
 		this.root.appendChild(this.title)
 		this.hovered = false
 		this.audio = null
+		this.downloads = mod_info.downloads
 		if (mod_info.cached_ver){
 			if (mod_info.ver !== mod_info.cached_ver){
 				let badge = document.createElement("span")
@@ -189,11 +190,9 @@ class Checkbox{
 				document.querySelector("#mod-image").src = this.image
 				document.querySelector("#mod-title").innerHTML = Text(this.title_data[this.language])
 				document.querySelector("#mod-description").innerHTML = this.description
+				document.querySelector("#mod-downloads span").innerHTML = this.downloads
 				if (this.author){
-					document.querySelector("#mod-author").innerHTML = `
-						<span>${LANG('author')}</span>
-						<span>${this.author}</span>
-					`
+					document.querySelector("#mod-author").innerHTML = this.author
 				} else {
 					document.querySelector("#mod-author").innerHTML = ""
 				}
@@ -215,6 +214,7 @@ class Checkbox{
 					document.querySelector("#mod-title").innerHTML = ""
 					document.querySelector("#mod-description").innerHTML = ""
 					document.querySelector("#mod-author").innerHTML = ""
+					document.querySelector("#mod-downloads span").innerHTML = ""
 				}
 			}, 250)
 			this.hovered = false

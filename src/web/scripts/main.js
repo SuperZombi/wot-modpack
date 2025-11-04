@@ -1,5 +1,6 @@
 var modsManager;
 var modsData;
+var modsStats;
 var useClientLang = true;
 
 window.onload=async _=>{
@@ -183,6 +184,7 @@ async function load_game_clients(){
 }
 async function load_mods_info(){
 	modsData = await eel.load_mods_info()()
+	modsStats = await eel.get_mods_stats()()
 	let cached = await eel.get_cache_info()()
 	if (modsData){
 		document.querySelector("#retry_button").classList.add("hide")
@@ -195,6 +197,7 @@ async function load_mods_info(){
 			let category_element = modsManager.makeCategory(category.title, category.image)
 			avalible_mods.forEach(mod=>{
 				mod.cached_ver = (cached.find(el=>el.id==mod.id)||{}).ver || null;
+				mod["downloads"] = modsStats ? modsStats[mod.id] || 0 : 0
 				if (mod.group){
 					let group = modsData.groups.find(x => x.id == mod.group)
 					if (group){

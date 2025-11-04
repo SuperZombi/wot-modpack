@@ -67,10 +67,15 @@ header a:hover{
 #mod-description-text{
 	margin: 0 10px;
 }
-#mod-author{
+#mod-subtitle{
 	display: flex;
 	justify-content: space-between;
 	gap: 5px;
+}
+#mod-downloads{
+	display: flex;
+	align-items: center;
+	gap: 0.25rem;
 }
 ul{
 	padding-left: 1em;

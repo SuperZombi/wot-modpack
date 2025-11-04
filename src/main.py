@@ -2,7 +2,7 @@ import eel
 import sys, os
 import json
 import requests
-from telemetry import send_telemetry
+import telemetry
 from tkinter import Tk
 from tkinter.filedialog import askdirectory
 from utils import *
@@ -114,6 +114,9 @@ def json_to_mod(mod_id):
 			if req_mod: requirements.append(req_mod)
 	return Mod(id, files, requirements, version)
 
+@eel.expose
+def get_mods_stats():
+	return telemetry.request_stats()
 
 @eel.expose
 def main_install(client_path, args, mods):
@@ -147,7 +150,7 @@ def main_install(client_path, args, mods):
 				fails.append({"error": str(e)})
 				return fails
 
-		send_telemetry(mods, __version__, client.version)
+		telemetry.send_telemetry(mods, __version__, client.version)
 
 	if args.get("save_selected_mods", True):
 		update_settings({
