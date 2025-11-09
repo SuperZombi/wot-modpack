@@ -21,6 +21,14 @@ const App = () => {
 
 	const [cachedMods, setCachedMods] = React.useState([])
 	const [cachedInfoLoaded, setCachedInfoLoaded] = React.useState(false)
+
+	const [installArgs, setInstallArgs] = React.useState({
+		"save_selected_mods": true,
+		"delete_mods": true,
+		"delete_configs": false
+	})
+
+	const [currentInstall, setCurrentInstall] = React.useState({})
 	
 	const [page, setPage] = React.useState("home")
 
@@ -40,7 +48,7 @@ const App = () => {
 		if (page == "mods" && Object.keys(stats).length == 0){
 			loadModsStats(setStats, console.error)
 		}
-	}, [failedToLoadModsInfo, page])
+	}, [page])
 	React.useEffect(_=>{
 		async function fetchData() {
 			let clientsInfo = await eel.get_clients()()
@@ -67,6 +75,20 @@ const App = () => {
 			setSelectedMods([])
 		}
 	}
+
+	const mainCall = async _=> {
+		setPage("install")
+		let fails = await eel.main_install(selectedClient.path, installArgs, selectedMods)()
+	}
+	React.useEffect(() => {
+		const handler = (e) => {
+			setCurrentInstall(prev => ({
+				...prev, ...e.detail
+			}))
+		}
+		window.addEventListener("updateProgress", handler)
+		return () => window.removeEventListener("updateProgress", handler)
+	}, [])
 
 	const { langData } = useApp()
 
@@ -109,6 +131,13 @@ const App = () => {
 						mods={mods}
 						setSelectedMods={setSelectedMods}
 						cachedMods={cachedMods}
+						installArgs={installArgs}
+						setInstallArgs={setInstallArgs}
+					/>
+				) : page == "install" ? (
+					<InstallTab
+						mods={mods}
+						currentInstall={currentInstall}
 					/>
 				) : null}
 			</div>
@@ -150,7 +179,7 @@ const App = () => {
 									<LANG id="back"/>
 								</div>
 							</div>
-							<div className="button hover">
+							<div className="button hover" onClick={mainCall}>
 								{selectedMods.length > 0 ? (
 									<LANG id="install"/>
 								) : (

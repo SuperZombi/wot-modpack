@@ -1,6 +1,14 @@
 const CheckoutTab = ({
-	selectedClient, selectedMods, mods, setSelectedMods, cachedMods
+	selectedClient, selectedMods, mods, setSelectedMods, cachedMods,
+	installArgs, setInstallArgs
 }) => {
+	const onArgChange = (key, val)=>{
+		setInstallArgs(prev => ({
+			...prev,
+			[key]: val
+		}))
+	}
+
 	const { language, langData } = useApp()
 	return (
 		<React.Fragment>
@@ -9,17 +17,26 @@ const CheckoutTab = ({
 				<input type="text" value={selectedClient.path} readOnly={true} style={{width: "100%"}}/>
 				<br/><br/><br/>
 				<label className="hover">
-					<input type="checkbox" className="hover"/>
+					<input type="checkbox" className="hover"
+						checked={installArgs["save_selected_mods"]}
+						onChange={e=>onArgChange("save_selected_mods", e.target.checked)}
+					/>
 					<LANG id="save_selected_mods"/>
 				</label>
 				<br/>
 				<label className="hover">
-					<input type="checkbox" className="hover"/>
+					<input type="checkbox" className="hover"
+						checked={installArgs["delete_mods"]}
+						onChange={e=>onArgChange("delete_mods", e.target.checked)}
+					/>
 					<LANG id="remove_all_mods"/>
 				</label>
 				<br/>
 				<label className="hover">
-					<input type="checkbox" className="hover"/>
+					<input type="checkbox" className="hover"
+						checked={installArgs["delete_configs"]}
+						onChange={e=>onArgChange("delete_configs", e.target.checked)}
+					/>
 					<LANG id="remove_mod_configs"/>
 				</label>
 				<br/>
