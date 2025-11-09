@@ -36,7 +36,7 @@ const HomeTab = ({
 		{ path: "custom", title: langData["custom_game_folder"] }
 	]
 	return (
-		<div className="flex-center top-content">
+		<div>
 			<br/>
 			<h3><LANG id="select_game_folder"/></h3>
 			<div>

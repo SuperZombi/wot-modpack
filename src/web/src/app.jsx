@@ -69,25 +69,34 @@ const App = () => {
 				</svg>
 			</header>
 
-			{page == "home" ? (
-				<HomeTab
-					selectedClient={selectedClient}
-					setSelectedClient={setSelectedClient}
-					clientsData={clientsData}
-					clientsLoaded={clientsLoaded}
-				/>
-			) : page == "mods" ? (
-				<ModsTab
-					mods={mods}
-					categories={categories}
-					groups={groups}
-					stats={stats}
-					failedToLoadModsInfo={failedToLoadModsInfo}
-					setFailedToLoadModsInfo={setFailedToLoadModsInfo}
-					selectedMods={selectedMods}
-					setSelectedMods={setSelectedMods}
-				/>
-			) : null}
+			<div className="flex-center top-content">
+				{page == "home" ? (
+					<HomeTab
+						selectedClient={selectedClient}
+						setSelectedClient={setSelectedClient}
+						clientsData={clientsData}
+						clientsLoaded={clientsLoaded}
+					/>
+				) : page == "mods" ? (
+					<ModsTab
+						mods={mods}
+						categories={categories}
+						groups={groups}
+						stats={stats}
+						failedToLoadModsInfo={failedToLoadModsInfo}
+						setFailedToLoadModsInfo={setFailedToLoadModsInfo}
+						selectedMods={selectedMods}
+						setSelectedMods={setSelectedMods}
+					/>
+				) : page == "checkout" ? (
+					<CheckoutTab
+						selectedClient={selectedClient}
+						selectedMods={selectedMods}
+						mods={mods}
+						setSelectedMods={setSelectedMods}
+					/>
+				) : null}
+			</div>
 
 			<div className="bottom-buttons">
 				{(selectedClient && selectedClient.path != "custom") ? (
@@ -114,8 +123,24 @@ const App = () => {
 									<LANG id="reset"/>
 								</div>
 							</div>
-							<div className="button hover">
+							<div className="button hover" onClick={_=>setPage("checkout")}>
 								<LANG id="next"/>
+							</div>
+						</React.Fragment>
+					) :
+					page == "checkout" ? (
+						<React.Fragment>
+							<div>
+								<div className="button hover" onClick={_=>setPage("mods")}>
+									<LANG id="back"/>
+								</div>
+							</div>
+							<div className="button hover">
+								{selectedMods.length > 0 ? (
+									<LANG id="install"/>
+								) : (
+									<LANG id="delete_mods_button"/>
+								)}
 							</div>
 						</React.Fragment>
 					) : null

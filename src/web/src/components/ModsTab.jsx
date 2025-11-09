@@ -40,7 +40,7 @@ const ModsTab = ({
 	}, [displayPreview])
 
 	return (
-		<div id="mods-area" className="top-content">
+		<div id="mods-area">
 			{failedToLoadModsInfo ? (
 				<div id="retry_area">
 					<LANG id="mods_info_parse_fail"/>
