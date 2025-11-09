@@ -46,12 +46,10 @@ header a:hover{
 #mod-preview{
 	padding: 5px;
 	padding-left: 0;
-	visibility: hidden;
 	opacity: 0;
 	transition: 0.25s;
 }
 #mod-preview.show{
-	visibility: visible;
 	opacity: 1;
 }
 #mod-image{
@@ -60,9 +58,10 @@ header a:hover{
 	width: 100%;
 	object-fit: contain;
 	border-radius: 8px;
+	user-select: none;
 }
 #mod-image[src=""]{
-	display: none;
+	opacity: 0;
 }
 #mod-description-text{
 	margin: 0 10px;
@@ -76,6 +75,12 @@ header a:hover{
 	display: flex;
 	align-items: center;
 	gap: 0.25rem;
+}
+#mod-downloads img {
+	user-select: none;
+}
+#mod-downloads span:empty + img{
+	display: none;
 }
 ul{
 	padding-left: 1em;

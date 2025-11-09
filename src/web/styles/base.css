@@ -227,6 +227,7 @@ label{
 }
 .category > .summary > span {
 	margin-left: 5px;
+	font-weight: bold;
 }
 .category > .summary::after{
 	content: '⯆';
