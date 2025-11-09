@@ -33,7 +33,9 @@ function ModList({
 
 	if (search && !anyMatch){
 		return (
-			<div>Ничего не найдено</div>
+			<h3 align="center">
+				<LANG id="nothing_found"/>
+			</h3>
 		)
 	}
 
@@ -133,6 +135,7 @@ function Category({
 								description={mod.description}
 								author={mod.author}
 								image={mod.image}
+								audio={mod.audio}
 								downloads={stats[mod.id] || 0}
 								checked={selectedMods.includes(mod.id) || false}
 								onChange={() => toggleMod(mod.id)}
@@ -198,6 +201,7 @@ function Group({
 								description={mod.description}
 								author={mod.author}
 								image={mod.image}
+								audio={mod.audio}
 								downloads={stats[mod.id] || 0}
 								onChange={e=>onModCheck(mod.id, e.target.checked)}
 								checked={selectedMods.includes(mod.id) || false}
@@ -219,6 +223,7 @@ function Mod({
 	description,
 	author,
 	image,
+	audio,
 	downloads,
 	checked,
 	onChange,
@@ -233,6 +238,7 @@ function Mod({
 			"description": description ? description[language] : null,
 			"author": author,
 			"image": image,
+			"audio": audio,
 			"downloads": downloads
 		})
 		setDisplayPreview(true)
@@ -247,7 +253,7 @@ function Mod({
 				onChange={onChange}
 				{...(name && { name })}
 			/>
-			<span>{title[language]}</span>
+			<span>{replaceFlags(title[language])}</span>
 		</label>
 	)
 }

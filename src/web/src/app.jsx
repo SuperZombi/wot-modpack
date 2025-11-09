@@ -22,10 +22,16 @@ const App = () => {
 			<ModsTab/>
 			<div className="bottom-buttons">
 				<div>
-					<div className="button hover">Back</div>
-					<div className="button hover" style={{marginLeft: "10px"}}>Reset</div>
+					<div className="button hover">
+						<LANG id="back"/>
+					</div>
+					<div className="button hover" style={{marginLeft: "10px"}}>
+						<LANG id="reset"/>
+					</div>
 				</div>
-				<div className="button hover">Next</div>
+				<div className="button hover">
+					<LANG id="next"/>
+				</div>
 			</div>
 		</React.Fragment>
 	)
