@@ -11,10 +11,7 @@ MODS_DATA = {}
 __version__ = "1.1.0"
 @eel.expose
 def app_version(): return __version__
-LOCALES = load_locales()
 SETTINGS = {}
-@eel.expose
-def get_locales(): return LOCALES
 @eel.expose
 def get_settings(): return SETTINGS
 
@@ -115,16 +112,11 @@ def json_to_mod(mod_id):
 	return Mod(id, files, requirements, version)
 
 @eel.expose
-def get_mods_stats():
-	return telemetry.request_stats()
-
-@eel.expose
 def main_install(client_path, args, mods):
-	LANG = LangEngine(LOCALES, SETTINGS.get("lang"))
 	fails = []
 	client = Client(client_path, use_cache=SETTINGS.get("use_cache", True))
 	if client.is_running:
-		fails.append({"error": LANG("client_is_running_error")})
+		fails.append({"error": "client_is_running_error"})
 		return fails
 	if args.get("delete_mods", False):
 		try:

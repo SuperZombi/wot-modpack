@@ -41,19 +41,6 @@ def get_folder_size(path):
 			if os.path.exists(fp): total_size += os.path.getsize(fp)
 	return total_size
 
-def load_locales():
-	folder = os.path.join(resource_path("locales"))
-	result = {}
-	for locale in os.listdir(folder):
-		file = os.path.join(folder, locale)
-		with open(file, 'r', encoding='utf-8') as f:
-			data = json.loads(f.read())
-			result[os.path.splitext(locale)[0]] = data
-	return result
-
-def LangEngine(locales, lang):
-	return lambda code: locales.get(lang).get(code) if code in locales.get(lang).keys() else locales.get('en').get(code)
-
 
 class Launchers:
 	def __init__(self):

@@ -24,24 +24,3 @@ def send_telemetry(mod_ids: list[str], modpack_ver: str, wot_ver: str):
         print(r)
     except Exception as e:
         print(e)
-
-def request_stats():
-    DOC_ID = "1GEMJfZxjUYmQAg-cDcQ7DGNjsX6pASMp9hQ1T0tVRfo"
-    SHEET_ID = "2089462923"
-    URL = f'https://docs.google.com/spreadsheets/d/{DOC_ID}/export?format=csv&gid={SHEET_ID}'
-    REFERER = f'https://docs.google.com/spreadsheets/d/{DOC_ID}/edit'
-    headers = {
-        "User-Agent": "Mozilla/5.0",
-        "Referer": REFERER,
-    }
-    try:
-        r = requests.get(URL, headers=headers, timeout=8)
-        if r.ok:
-            result = {}
-            for line in r.text.split("\n"):
-                item = line.split(",")
-                result[item[0]] = int(item[1])
-            return result
-        print(r)
-    except Exception as e:
-        print(e)

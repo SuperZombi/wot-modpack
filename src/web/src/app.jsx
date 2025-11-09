@@ -14,46 +14,40 @@ const App = () => {
 	const [failedToLoadModsInfo, setFailedToLoadModsInfo] = React.useState(false)
 
 	const [selectedMods, setSelectedMods] = React.useState([])
+	const [selectedClient, setSelectedClient] = React.useState(null)
+
+	const [clientsData, setClientsData] = React.useState([])
+	const [clientsLoaded, setClientsLoaded] = React.useState(false)
+	
+	const [page, setPage] = React.useState("home")
 
 	React.useEffect(() => {
-		fetch('https://raw.githubusercontent.com/SuperZombi/wot-modpack/refs/heads/mods/config.json')
-		.then(r=>{
-			if (!r.ok) {
-				throw new Error(`HTTP error!: ${r.status}`);
-			}
-			return r.json()
-		}).then(data=>{
-			setCategories(data.categories)
-			setMods(data.mods)
-			setGroups(data.groups)
-		})
-		.catch(err => {
-			console.error(err)
-			setFailedToLoadModsInfo(true)
-		})
-	}, [failedToLoadModsInfo])
+		if (page == "mods" && mods.length == 0){
+			loadModsInfo(data=>{
+				setCategories(data.categories)
+				setMods(data.mods)
+				setGroups(data.groups)
+			}, err=>{
+				console.error(err)
+				setFailedToLoadModsInfo(true)
+			})
+		}
+	}, [failedToLoadModsInfo, page])
 	React.useEffect(() => {
-		const DOC_ID = "1GEMJfZxjUYmQAg-cDcQ7DGNjsX6pASMp9hQ1T0tVRfo"
-    	const SHEET_ID = "2089462923"
-		fetch(`https://docs.google.com/spreadsheets/d/${DOC_ID}/export?format=csv&gid=${SHEET_ID}`)
-		.then(r=>{
-			if (!r.ok) {
-				throw new Error(`HTTP error!: ${r.status}`);
-			}
-			return r.text()
-		}).then(text=>{
-			const result = {}
-			const lines = text.split("\n")
-			for (const line of lines) {
-				const item = line.trim().split(",")
-				result[item[0]] = parseInt(item[1]);
-			}
-			setStats(result)
-		})
-		.catch(err => {
-			console.error(err)
-		})
-	}, [failedToLoadModsInfo])
+		if (page == "mods" && Object.keys(stats).length == 0){
+			loadModsStats(setStats, console.error)
+		}
+	}, [failedToLoadModsInfo, page])
+	React.useEffect(_=>{
+		async function fetchData() {
+			let clientsInfo = await eel.get_clients()()
+			setClientsData(clientsInfo)
+			setClientsLoaded(true)
+		}
+		if (page == "home" && !clientsLoaded){
+			fetchData()
+		}
+	}, [page])
 
 	const resetAllSelected = _=> {
 		if (confirm(langData["reset_confirm"])){
@@ -75,32 +69,57 @@ const App = () => {
 				</svg>
 			</header>
 
-			<ModsTab
-				mods={mods}
-				categories={categories}
-				groups={groups}
-				stats={stats}
-				failedToLoadModsInfo={failedToLoadModsInfo}
-				setFailedToLoadModsInfo={setFailedToLoadModsInfo}
-				selectedMods={selectedMods}
-				setSelectedMods={setSelectedMods}
-			/>
+			{page == "home" ? (
+				<HomeTab
+					selectedClient={selectedClient}
+					setSelectedClient={setSelectedClient}
+					clientsData={clientsData}
+					clientsLoaded={clientsLoaded}
+				/>
+			) : page == "mods" ? (
+				<ModsTab
+					mods={mods}
+					categories={categories}
+					groups={groups}
+					stats={stats}
+					failedToLoadModsInfo={failedToLoadModsInfo}
+					setFailedToLoadModsInfo={setFailedToLoadModsInfo}
+					selectedMods={selectedMods}
+					setSelectedMods={setSelectedMods}
+				/>
+			) : null}
 
 			<div className="bottom-buttons">
-				<div>
-					<div className="button hover">
-						<LANG id="back"/>
-					</div>
-					<div className="button hover"
-						style={{marginLeft: "10px"}}
-						onClick={resetAllSelected}
-					>
-						<LANG id="reset"/>
-					</div>
-				</div>
-				<div className="button hover">
-					<LANG id="next"/>
-				</div>
+				{(selectedClient && selectedClient.path != "custom") ? (
+					page == "home" ? (
+						<React.Fragment>
+							<div className="button hover">
+								<LANG id="delete_mods_button"/>
+							</div>
+							<div className="button hover" onClick={_=>setPage("mods")}>
+								<LANG id="next"/>
+							</div>
+						</React.Fragment>
+					) :
+					page == "mods" ? (
+						<React.Fragment>
+							<div>
+								<div className="button hover" onClick={_=>setPage("home")}>
+									<LANG id="back"/>
+								</div>
+								<div className="button hover"
+									style={{marginLeft: "10px"}}
+									onClick={resetAllSelected}
+								>
+									<LANG id="reset"/>
+								</div>
+							</div>
+							<div className="button hover">
+								<LANG id="next"/>
+							</div>
+						</React.Fragment>
+					) : null
+				) : null}
 			</div>
 		</React.Fragment>
 	)
@@ -111,3 +130,34 @@ ReactDOM.createRoot(document.getElementById("root")).render(
 		<App/>
 	</AppProvider>
 )
+
+function loadModsInfo(callback, error){
+	fetch('https://raw.githubusercontent.com/SuperZombi/wot-modpack/refs/heads/mods/config.json')
+	.then(r=>{
+		if (!r.ok) {
+			throw new Error(`HTTP error!: ${r.status}`);
+		}
+		return r.json()
+	}).then(callback)
+	.catch(error)
+}
+function loadModsStats(callback, error){
+	const DOC_ID = "1GEMJfZxjUYmQAg-cDcQ7DGNjsX6pASMp9hQ1T0tVRfo"
+	const SHEET_ID = "2089462923"
+	fetch(`https://docs.google.com/spreadsheets/d/${DOC_ID}/export?format=csv&gid=${SHEET_ID}`)
+	.then(r=>{
+		if (!r.ok) {
+			throw new Error(`HTTP error!: ${r.status}`);
+		}
+		return r.text()
+	}).then(text=>{
+		const result = {}
+		const lines = text.split("\n")
+		for (const line of lines) {
+			const item = line.trim().split(",")
+			result[item[0]] = parseInt(item[1]);
+		}
+		callback(result)
+	})
+	.catch(error)
+}

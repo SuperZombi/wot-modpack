@@ -66,8 +66,27 @@ svg{
 .button:active{
 	background: linear-gradient(0deg, #343429, #696a52);
 }
-select.button option{
-	background: #4b4a3b;
+
+
+.select {
+	position: relative;
+}
+.select .select-header {
+	width: 100%;
+}
+.select .select-header::after {
+	content: '⯆';
+	margin-left: 5px;
+}
+.select .select-options {
+	position: absolute;
+	top: calc(100% + 5px);
+	left: 0;
+	right: 0;
+	background: #111;
+	display: flex;
+	flex-direction: column;
+	gap: 5px;
 }
 
 
