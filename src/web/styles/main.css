@@ -141,6 +141,7 @@ ul{
 	display: flex;
 	flex-direction: column;
 	gap: 8px;
+	text-align: left;
 }
 .mods-install-list .mod-item {
 	display: flex;
@@ -171,6 +172,7 @@ ul{
 
 .links {
 	display: flex;
+	justify-content: center;
 	gap: 1em;
 	user-select: none;
 }

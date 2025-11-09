@@ -29,15 +29,17 @@ const App = () => {
 	})
 
 	const [currentInstall, setCurrentInstall] = React.useState({})
+	const [fails, setFailes] = React.useState([])
 	
 	const [page, setPage] = React.useState("home")
 
 	React.useEffect(() => {
 		if (page == "mods" && mods.length == 0){
-			loadModsInfo(data=>{
+			loadModsInfo(async data=>{
 				setCategories(data.categories)
 				setMods(data.mods)
 				setGroups(data.groups)
+				await eel.set_mods_data(data.mods)()
 			}, err=>{
 				console.error(err)
 				setFailedToLoadModsInfo(true)
@@ -79,6 +81,8 @@ const App = () => {
 	const mainCall = async _=> {
 		setPage("install")
 		let fails = await eel.main_install(selectedClient.path, installArgs, selectedMods)()
+		setPage("finish")
+		setFailes(fails)
 	}
 	React.useEffect(() => {
 		const handler = (e) => {
@@ -139,6 +143,11 @@ const App = () => {
 						mods={mods}
 						currentInstall={currentInstall}
 					/>
+				) : page == "finish" ? (
+					<FinishTab
+						fails={fails}
+						mods={mods}
+					/>
 				) : null}
 			</div>
 
@@ -185,6 +194,16 @@ const App = () => {
 								) : (
 									<LANG id="delete_mods_button"/>
 								)}
+							</div>
+						</React.Fragment>
+					) :
+					page == "finish" ? (
+						<React.Fragment>
+							<div className="button hover"
+								onClick={_=>setPage("home")}
+								style={{margin: "auto"}}
+							>
+								<LANG id="home"/>
 							</div>
 						</React.Fragment>
 					) : null

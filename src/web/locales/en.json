@@ -25,7 +25,7 @@
 	"home": "Home",
 	"mods_info_parse_fail": "Failed to load mods info!",
 	"failed_get_client": "Failed to get client info!",
-	"failed_to_install": "Failed to install the following mods",
+	"failed_to_install": "Failed to install mods:",
 	"download": "Download",
 	"update_available": "Update available!",
 	"save_selected_mods": "Remember selected mods",

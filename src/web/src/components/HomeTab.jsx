@@ -46,9 +46,6 @@ const HomeTab = ({
 					onChange={setSelectedClient}
 					placeholder={langData["custom_game_folder"]}
 				/>
-				<div style={{ marginTop: 20 }}>
-					Выбрано: {selectedClient ? selectedClient.title : "ничего"}
-				</div>
 			</div>
 		</div>
 	)

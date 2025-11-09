@@ -81,16 +81,9 @@ def request_custom_client():
 		except: return
 
 @eel.expose
-def load_mods_info():
+def set_mods_data(data):
 	global MODS_DATA
-	try:
-		r = requests.get('https://raw.githubusercontent.com/SuperZombi/wot-modpack/refs/heads/mods/config.json')
-		if r.ok:
-			mods_info = json.loads(r.content.decode())
-			MODS_DATA = mods_info["mods"]
-			return mods_info
-	except:
-		return
+	MODS_DATA = data
 
 
 def download_progress(current, total):
@@ -115,6 +108,7 @@ def json_to_mod(mod_id):
 def main_install(client_path, args, mods):
 	fails = []
 	client = Client(client_path, use_cache=SETTINGS.get("use_cache", True))
+
 	if client.is_running:
 		fails.append({"error": "client_is_running_error"})
 		return fails
@@ -137,7 +131,7 @@ def main_install(client_path, args, mods):
 			})
 			try:
 				result = client.install_mod(mod, on_progress=download_progress)
-				if not result: fails.append(mod.id)
+				if not result: fails.append({"mod": mod.id})
 			except Exception as e:
 				fails.append({"error": str(e)})
 				return fails
