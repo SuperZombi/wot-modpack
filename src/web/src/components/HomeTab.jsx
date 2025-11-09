@@ -1,5 +1,5 @@
 const HomeTab = ({
-	selectedClient, setSelectedClient, clientsData, clientsLoaded
+	selectedClient, setSelectedClient, clientsData, setClientsData, clientsLoaded
 }) => {
 	const { langData } = useApp()
 

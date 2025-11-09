@@ -1,7 +1,7 @@
 function ModList({
 	mods, groups, categories, stats, search,
 	selectedMods, setSelectedMods, setPreview, setDisplayPreview,
-	cachedMods
+	cachedMods, selectedClient
 }) {
 	const toggleMod = (modId, value=null) => {
 		setSelectedMods(prev => {
@@ -18,8 +18,11 @@ function ModList({
 			return prev;
 		})
 	}
+	const { matchClientLang } = useApp()
 
 	function matchesSearch(mod, search) {
+		if (matchClientLang && mod.lang && mod.lang !== selectedClient.lang.toLocaleLowerCase()) return false
+
 		if (!search) return true;
 		const s = search.toLowerCase();
 		if (mod.id.toLowerCase().includes(s)) return true;
@@ -89,11 +92,9 @@ function Category({
 			return popB - popA;
 		})
 	}
-
+	const { language } = useApp()
 	const filteredMods = mods.filter(mod => matchesSearch(mod, search))
 	const allModsSorted = sortByPopularityWithGroups(filteredMods)
-
-	const { language } = useApp()
 	const [opened, setOpened] = React.useState(false)
 	React.useEffect(_=>{
 		setOpened(search.length > 0)

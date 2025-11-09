@@ -2,7 +2,7 @@ const ModsTab = ({
 	mods, categories, groups, stats,
 	failedToLoadModsInfo, setFailedToLoadModsInfo,
 	selectedMods, setSelectedMods,
-	cachedMods
+	cachedMods, selectedClient
 }) => {
 	const [search, setSearch] = React.useState("")
 
@@ -69,6 +69,7 @@ const ModsTab = ({
 								setPreview={setPreview}
 								setDisplayPreview={setDisplayPreview}
 								cachedMods={cachedMods}
+								selectedClient={selectedClient}
 							/>
 						</div>
 						<div id="mod-preview" className={`${displayPreview ? "show": ""}`}

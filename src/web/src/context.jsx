@@ -4,18 +4,51 @@ function AppProvider({children}) {
 	const userLang = navigator.language?.slice(0, 2)
 	
 	const [language, setLanguage] = React.useState(supportedLangs.includes(userLang) ? userLang : 'en')
-	const [theme, setTheme] = React.useState("light")
 	const [langData, setLangData] = React.useState({})
+	const [matchClientLang, setMatchClientLang] = React.useState(true)
+	const [useCache, setUseCache] = React.useState(true)
+
+	React.useEffect(() => {
+		async function load(){
+			const settings = await eel.get_settings()()
+			if ("lang" in settings){
+				setLanguage(settings["lang"])
+			}
+			if ("match_client_lang" in settings){
+				setMatchClientLang(settings["match_client_lang"])
+			}
+			if ("use_cache" in settings){
+				setUseCache(settings["use_cache"])
+			}
+		}
+		load()
+	}, [])
 
 	React.useEffect(() => {
 		fetch(`locales/${language}.json`).then(res => res.json()).then(setLangData)
+		async function save(){
+			await eel.update_settings({"lang": language})()
+		}
+		save()
 	}, [language])
+	React.useEffect(() => {
+		async function save(){
+			await eel.update_settings({"match_client_lang": matchClientLang})()
+		}
+		save()
+	}, [matchClientLang])
+	React.useEffect(() => {
+		async function save(){
+			await eel.update_settings({"use_cache": useCache})()
+		}
+		save()
+	}, [useCache])
 
 	const value = {
 		language, setLanguage, langData,
-		theme, setTheme
+		matchClientLang, setMatchClientLang,
+		useCache, setUseCache
 	}
-
 	return (
 		<AppContext.Provider value={value}>
 			{children}

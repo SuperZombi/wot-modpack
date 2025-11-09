@@ -30,9 +30,12 @@ svg{
 	text-align: center;
 }
 .flex-row {
-	display: flex;
+	display: grid;
+	grid-template-columns: auto auto 1fr;
 	align-items: center;
-	gap: 5px;
+	gap: 10px;
+	width: fit-content;
+	margin: auto;
 }
 .shade{
 	position: fixed;
@@ -276,6 +279,7 @@ label{
 	inset: 0;
 	display: none;
 	background: rgb(0, 0, 0, 0.5);
+	z-index: 2;
 }
 .popup.show{
 	display: flex;
