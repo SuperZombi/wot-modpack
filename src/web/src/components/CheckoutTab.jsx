@@ -1,5 +1,5 @@
 const CheckoutTab = ({
-	selectedClient, selectedMods, mods, setSelectedMods
+	selectedClient, selectedMods, mods, setSelectedMods, cachedMods
 }) => {
 	const { language, langData } = useApp()
 	return (
@@ -30,11 +30,16 @@ const CheckoutTab = ({
 					<h3><LANG id="selected_mods"/></h3>
 					<div className="mods-install-list">
 						{selectedMods.map(id=>{
-							const modObj = mods.find(mod => mod.id === id);
+							const modObj = mods.find(mod => mod.id === id)
+							const cached_ver = (cachedMods.find(el=>el.id==modObj.id)||{}).ver || null
 							return (
-								<div className="mod-item" key={modObj.id}>
-									<img src="images/check.svg" title={langData["mod_in_cache"]} draggable={false}/>
-									<span>{modObj.title[language]}</span>
+								<div className={`mod-item ${(cached_ver && cached_ver == modObj.ver) ? "" : "prior"}`} key={modObj.id}>
+									{(cached_ver && cached_ver == modObj.ver) ? (
+										<img src="images/check.svg" title={langData["mod_in_cache"]} draggable={false}/>
+									) : (
+										<img src="images/down-arrow.svg" title={langData["mod_will_be_downloaded"]} draggable={false}/>
+									)}
+									<span>{replaceFlags(modObj.title[language])}</span>
 									<img src="images/close.svg" className="remove hover"
 										title={langData["remove"]} draggable={false}
 										onClick={_=>setSelectedMods(prev => prev.filter(id => id !== modObj.id))}

@@ -1,5 +1,7 @@
 function ModList({
-	mods, groups, categories, stats, search, selectedMods, setSelectedMods, setPreview, setDisplayPreview
+	mods, groups, categories, stats, search,
+	selectedMods, setSelectedMods, setPreview, setDisplayPreview,
+	cachedMods
 }) {
 	const toggleMod = (modId, value=null) => {
 		setSelectedMods(prev => {
@@ -58,6 +60,7 @@ function ModList({
 						toggleMod={toggleMod}
 						setPreview={setPreview}
 						setDisplayPreview={setDisplayPreview}
+						cachedMods={cachedMods}
 					/>
 				)
 			})}
@@ -66,7 +69,11 @@ function ModList({
 }
 
 function Category({
-	title, icon, mods, groups, stats, search, matchesSearch, selectedMods, toggleMod, setPreview, setDisplayPreview
+	title, icon, mods, groups, stats,
+	search, matchesSearch,
+	selectedMods, toggleMod,
+	setPreview, setDisplayPreview,
+	cachedMods
 }) {
 	function sortByPopularityWithGroups(mods) {
 		const groupPopularity = {}
@@ -125,6 +132,7 @@ function Category({
 										toggleMod={toggleMod}
 										setPreview={setPreview}
 										setDisplayPreview={setDisplayPreview}
+										cachedMods={cachedMods}
 									/>
 								)
 							}
@@ -141,6 +149,10 @@ function Category({
 								onChange={() => toggleMod(mod.id)}
 								setPreview={setPreview}
 								setDisplayPreview={setDisplayPreview}
+								version={mod.ver}
+								cached_ver={
+									(cachedMods.find(el=>el.id==mod.id)||{}).ver || null
+								}
 							/>
 						})}
 					</div>
@@ -153,7 +165,10 @@ function Category({
 }
 
 function Group({
-	id, title, mods, stats, selectedMods, toggleMod, setPreview, setDisplayPreview
+	id, title, mods, stats,
+	selectedMods, toggleMod,
+	setPreview, setDisplayPreview,
+	cachedMods
 }) {
 	const sortByPopularity = (arr) => arr.sort((a, b) => (stats[b.id] || 0) - (stats[a.id] || 0))
 	const [groupChecked, setGroupChecked] = React.useState(false)
@@ -210,6 +225,10 @@ function Group({
 								checked={selectedMods.includes(mod.id) || false}
 								setPreview={setPreview}
 								setDisplayPreview={setDisplayPreview}
+								version={mod.ver}
+								cached_ver={
+									(cachedMods.find(el=>el.id==mod.id)||{}).ver || null
+								}
 							/>
 						))}
 					</div>
@@ -231,9 +250,11 @@ function Mod({
 	checked,
 	onChange,
 	setPreview,
-	setDisplayPreview
+	setDisplayPreview,
+	version,
+	cached_ver
 }) {
-	const { language } = useApp()
+	const { language, langData } = useApp()
 
 	const onMouse = _=> {
 		setPreview({
@@ -257,6 +278,11 @@ function Mod({
 				{...(name && { name })}
 			/>
 			<span>{replaceFlags(title[language])}</span>
+			{
+				(cached_ver && cached_ver != version) ? (
+					<span className="new-badge" title={langData["mod_updated"]}/>
+				) : null
+			}
 		</label>
 	)
 }

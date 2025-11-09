@@ -72,6 +72,7 @@ header a:hover{
 }
 #mod-description-text{
 	margin: 0 10px;
+	text-align: left;
 }
 #mod-subtitle{
 	display: flex;
@@ -146,6 +147,9 @@ ul{
 	align-items: center;
 	gap: 6px;
 }
+.mods-install-list .mod-item.prior {
+	order: -1;
+}
 .mods-install-list .mod-item img{
 	height: 16px;
 }
@@ -200,4 +204,5 @@ ul{
 	height: 10px;
 	background: red;
 	border-radius: 50%;
+	cursor: help;
 }

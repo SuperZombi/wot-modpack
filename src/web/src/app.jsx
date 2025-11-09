@@ -18,6 +18,9 @@ const App = () => {
 
 	const [clientsData, setClientsData] = React.useState([])
 	const [clientsLoaded, setClientsLoaded] = React.useState(false)
+
+	const [cachedMods, setCachedMods] = React.useState([])
+	const [cachedInfoLoaded, setCachedInfoLoaded] = React.useState(false)
 	
 	const [page, setPage] = React.useState("home")
 
@@ -45,6 +48,16 @@ const App = () => {
 			setClientsLoaded(true)
 		}
 		if (page == "home" && !clientsLoaded){
+			fetchData()
+		}
+	}, [page])
+	React.useEffect(_=>{
+		async function fetchData() {
+			let cached = await eel.get_cache_info()()
+			setCachedMods(cached)
+			setCachedInfoLoaded(true)
+		}
+		if ((page == "mods" || page == "checkout") && !cachedInfoLoaded){
 			fetchData()
 		}
 	}, [page])
@@ -87,6 +100,7 @@ const App = () => {
 						setFailedToLoadModsInfo={setFailedToLoadModsInfo}
 						selectedMods={selectedMods}
 						setSelectedMods={setSelectedMods}
+						cachedMods={cachedMods}
 					/>
 				) : page == "checkout" ? (
 					<CheckoutTab
@@ -94,6 +108,7 @@ const App = () => {
 						selectedMods={selectedMods}
 						mods={mods}
 						setSelectedMods={setSelectedMods}
+						cachedMods={cachedMods}
 					/>
 				) : null}
 			</div>
