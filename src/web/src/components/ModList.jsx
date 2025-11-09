@@ -156,7 +156,7 @@ function Group({
 	id, title, mods, stats, selectedMods, toggleMod, setPreview, setDisplayPreview
 }) {
 	const sortByPopularity = (arr) => arr.sort((a, b) => (stats[b.id] || 0) - (stats[a.id] || 0))
-	const [groupChecked, setGroupChecked] = React.useState(mods.some(mod => selectedMods.includes(mod.id)))
+	const [groupChecked, setGroupChecked] = React.useState(false)
 	const onGroupCheck = e => {
 		const value = e.target.checked
 		setGroupChecked(value)
@@ -177,6 +177,9 @@ function Group({
 			toggleMod(mod_id, value)
 		}
 	}
+	React.useEffect(_=>{
+		setGroupChecked(mods.some(mod => selectedMods.includes(mod.id)))
+	}, [selectedMods])
 
 	const { language } = useApp()
 	return (

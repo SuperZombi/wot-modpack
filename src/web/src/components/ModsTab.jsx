@@ -1,57 +1,17 @@
-const ModsTab = () => {
-	const [mods, setMods] = React.useState([])
-	const [categories, setCategories] = React.useState([])
-	const [groups, setGroups] = React.useState([])
-
-	const [stats, setStats] = React.useState({})
-
+const ModsTab = ({
+	mods,
+	categories,
+	groups,
+	stats,
+	failedToLoadModsInfo,
+	setFailedToLoadModsInfo,
+	selectedMods,
+	setSelectedMods
+}) => {
 	const [search, setSearch] = React.useState("")
-	const [selectedMods, setSelectedMods] = React.useState([])
-
-	const [failedToLoadModsInfo, setFailedToLoadModsInfo] = React.useState(false)
 
 	const [modPreview, setPreview] = React.useState(null)
 	const [displayPreview, setDisplayPreview] = React.useState(false)
-
-	React.useEffect(() => {
-		fetch('https://raw.githubusercontent.com/SuperZombi/wot-modpack/refs/heads/mods/config.json')
-		.then(r=>{
-			if (!r.ok) {
-				throw new Error(`HTTP error!: ${r.status}`);
-			}
-			return r.json()
-		}).then(data=>{
-			setCategories(data.categories)
-			setMods(data.mods)
-			setGroups(data.groups)
-		})
-		.catch(err => {
-			console.error(err)
-			setFailedToLoadModsInfo(true)
-		})
-	}, [failedToLoadModsInfo])
-	React.useEffect(() => {
-		const DOC_ID = "1GEMJfZxjUYmQAg-cDcQ7DGNjsX6pASMp9hQ1T0tVRfo"
-    	const SHEET_ID = "2089462923"
-		fetch(`https://docs.google.com/spreadsheets/d/${DOC_ID}/export?format=csv&gid=${SHEET_ID}`)
-		.then(r=>{
-			if (!r.ok) {
-				throw new Error(`HTTP error!: ${r.status}`);
-			}
-			return r.text()
-		}).then(text=>{
-			const result = {}
-			const lines = text.split("\n")
-			for (const line of lines) {
-				const item = line.trim().split(",")
-				result[item[0]] = parseInt(item[1]);
-			}
-			setStats(result)
-		})
-		.catch(err => {
-			console.error(err)
-		})
-	}, [])
 
 	const { langData } = useApp()
 	const audioRef = React.useRef(null)
