@@ -38,9 +38,5 @@
 	"mod_in_cache": "Mod in cache",
 	"mod_will_be_downloaded": "Mod will be downloaded",
 	"client_is_running_error": "The client is running!<br>Please close it and try again.",
-	"delete_mods_button": "Delete mods",
-	"data_collection_title": "Data Collection Notice!",
-	"data_collection_subtitle": "This modpack collects next data:",
-	"data_collection_body": "<li>List of selected mods</li><li>Modpack version</li><li>WoT client version</li>",
-	"data_collection_accept": "Accept"
+	"delete_mods_button": "Delete mods"
 }

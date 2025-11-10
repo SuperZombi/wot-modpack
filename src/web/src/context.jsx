@@ -9,7 +9,7 @@ function AppProvider({children}) {
 	const [useCache, setUseCache] = React.useState(true)
 
 	React.useEffect(() => {
-		async function load(){
+		(async _=>{
 			const settings = await eel.get_settings()()
 			if ("lang" in settings){
 				setLanguage(settings["lang"])
@@ -20,28 +20,24 @@ function AppProvider({children}) {
 			if ("use_cache" in settings){
 				setUseCache(settings["use_cache"])
 			}
-		}
-		load()
+		})()
 	}, [])
 
 	React.useEffect(() => {
-		fetch(`locales/${language}.json`).then(res => res.json()).then(setLangData)
-		async function save(){
+		fetch(`locales/${language}.json`).then(res => res.json()).then(setLangData);
+		(async _=>{
 			await eel.update_settings({"lang": language})()
-		}
-		save()
+		})()
 	}, [language])
 	React.useEffect(() => {
-		async function save(){
+		(async _=>{
 			await eel.update_settings({"match_client_lang": matchClientLang})()
-		}
-		save()
+		})()
 	}, [matchClientLang])
 	React.useEffect(() => {
-		async function save(){
+		(async _=>{
 			await eel.update_settings({"use_cache": useCache})()
-		}
-		save()
+		})()
 	}, [useCache])
 
 	const value = {

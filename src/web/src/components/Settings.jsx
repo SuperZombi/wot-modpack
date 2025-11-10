@@ -14,11 +14,10 @@ const Settings = ({
 	const [cacheSize, setCacheSize] = React.useState(0)
 	
 	React.useEffect(_=>{
-		async function get(){
+		(async _=>{
 			const cache = await eel.get_cache_size()()
 			setCacheSize(bytesToMb(cache))
-		}
-		get()
+		})()
 	}, [cacheSize])
 	async function clear_cache(){
 		await eel.delete_cache()()

@@ -38,9 +38,5 @@
 	"mod_in_cache": "Мод у кеші",
 	"mod_will_be_downloaded": "Мод буде завантажено",
 	"client_is_running_error": "Клієнт запущений!<br>Закрийте його і спробуйте знову.",
-	"delete_mods_button": "Видалити моди",
-	"data_collection_title": "Повідомлення про збір даних!!",
-	"data_collection_subtitle": "Цей модпак збирає наступні дані:",
-	"data_collection_body": "<li>Список обраних модів</li><li>Версія модпаку</li><li>Версія клієнту WoT</li>",
-	"data_collection_accept": "Прийняти"
+	"delete_mods_button": "Видалити моди"
 }

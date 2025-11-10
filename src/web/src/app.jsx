@@ -22,6 +22,8 @@ const App = () => {
 	const [cachedMods, setCachedMods] = React.useState([])
 	const [cachedInfoLoaded, setCachedInfoLoaded] = React.useState(false)
 
+	const [updateAvailable, setUpdateAvailable] = React.useState(false)
+
 	const [installArgs, setInstallArgs] = React.useState({
 		"save_selected_mods": true,
 		"delete_mods": true,
@@ -36,25 +38,23 @@ const App = () => {
 	const [appVersion, setAppVersion] = React.useState(0)
 
 	React.useEffect(() => {
-		async function get(){
+		(async _=>{
 			const version = await eel.app_version()()
 			setAppVersion(version)
-		}
-		get()
+		})()
 	}, [])
 	React.useEffect(() => {
-		async function get(){
-			const settings = await eel.get_settings()()
-			if (settings.mods){
-				setSelectedMods(
-					settings.mods.filter(id => 
-						mods.some(mod => mod.id === id)
-					)
-				)
-			}
-		}
 		if (mods.length > 0){
-			get()
+			(async _=>{
+				const settings = await eel.get_settings()()
+				if (settings.mods){
+					setSelectedMods(
+						settings.mods.filter(id => 
+							mods.some(mod => mod.id === id)
+						)
+					)
+				}
+			})()
 		}
 	}, [mods])
 
@@ -77,36 +77,34 @@ const App = () => {
 		}
 	}, [page])
 	React.useEffect(_=>{
-		async function get() {
-			const clientsInfo = await eel.get_clients()()
-			setClientsData(clientsInfo)
-			const settings = await eel.get_settings()()
-			if (settings.client){
-				const client_info = await eel.get_client_info_by_path(settings.client)()
-				if (client_info){
-					const exists = clientsInfo.some(c => c.path === client_info.path);
-					if (!exists) {
-						setClientsData(prev => [
-							...prev, ...client_info
-						])
-					}
-					setSelectedClient(client_info)
-				}
-			}
-			setClientsLoaded(true)
-		}
 		if (page == "home" && !clientsLoaded){
-			get()
+			(async _=>{
+				const clientsInfo = await eel.get_clients()()
+				setClientsData(clientsInfo)
+				const settings = await eel.get_settings()()
+				if (settings.client){
+					const client_info = await eel.get_client_info_by_path(settings.client)()
+					if (client_info){
+						const exists = clientsInfo.some(c => c.path === client_info.path);
+						if (!exists) {
+							setClientsData(prev => [
+								...prev, ...client_info
+							])
+						}
+						setSelectedClient(client_info)
+					}
+				}
+				setClientsLoaded(true)
+			})()
 		}
 	}, [page])
 	React.useEffect(_=>{
-		async function fetchData() {
-			let cached = await eel.get_cache_info()()
-			setCachedMods(cached)
-			setCachedInfoLoaded(true)
-		}
 		if ((page == "mods" || page == "checkout") && !cachedInfoLoaded){
-			fetchData()
+			(async _=> {
+				let cached = await eel.get_cache_info()()
+				setCachedMods(cached)
+				setCachedInfoLoaded(true)
+			})()
 		}
 	}, [page])
 
@@ -131,6 +129,12 @@ const App = () => {
 		window.addEventListener("updateProgress", handler)
 		return () => window.removeEventListener("updateProgress", handler)
 	}, [])
+	React.useEffect(() => {
+		(async _=>{
+			const res = await eel.check_updates()()
+			setUpdateAvailable(res)
+		})()
+	}, [])
 
 	const { langData } = useApp()
 
@@ -153,6 +157,8 @@ const App = () => {
 					onClose={_=>setShowSettings(false)}
 				/>
 			) : null}
+
+			{ updateAvailable ? <UpdatePopup onClose={_=>setUpdateAvailable(false)}/> : null}
 
 			<div className="flex-center top-content">
 				{page == "home" ? (

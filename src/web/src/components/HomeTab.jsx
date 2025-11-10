@@ -11,7 +11,7 @@ const HomeTab = ({
 
 	React.useEffect(_=>{
 		if (selectedClient?.path == "custom"){
-			async function requestClient(){
+			(async _=>{
 				let selected_client = await eel.request_custom_client()()
 				if (!selected_client){
 					setSelectedClient(clientsData[0] || null)
@@ -22,8 +22,7 @@ const HomeTab = ({
 					}
 					setSelectedClient(selected_client)
 				}
-			}
-			requestClient()
+			})()
 		}
 	}, [selectedClient, clientsData])
 
