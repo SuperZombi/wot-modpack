@@ -3,7 +3,7 @@ html, body{
 }
 body{
 	font-family: sans-serif;
-	cursor: url(/images/cursor-normal.png), auto;
+	cursor: url('/images/cursor-normal.png'), auto;
 	background: #111;
 	color: #f1f1f1;
 }
@@ -47,7 +47,7 @@ svg{
 }
 
 .hover:hover{
-	cursor: url(/images/cursor-pointer.png), pointer;
+	cursor: url('/images/cursor-pointer.png'), pointer;
 }
 
 .button{
@@ -313,13 +313,13 @@ label{
 	inset: 0;
 }
 .loader::before{
-	background-image: url(/images/gear.png);
+	background-image: url('/images/gear.png');
 	background-repeat: no-repeat;
 	background-size: contain;
 	animation: spin 4s infinite linear;
 }
 .loader::after{
-	background-image: url(/images/logo.png);
+	background-image: url('/images/logo.png');
 	background-repeat: no-repeat;
 	background-size: contain;
 }
