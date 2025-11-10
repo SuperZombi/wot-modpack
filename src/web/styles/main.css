@@ -140,13 +140,19 @@ ul{
 	color-scheme: dark;
 	display: flex;
 	flex-direction: column;
-	gap: 8px;
+	gap: 4px;
 	text-align: left;
 }
 .mods-install-list .mod-item {
 	display: flex;
 	align-items: center;
 	gap: 6px;
+	padding: 5px;
+	border-radius: 25px;
+	transition: 0.2s;
+}
+.mods-install-list .mod-item:hover{
+	background: rgb(255, 255, 255, 0.1);
 }
 .mods-install-list .mod-item.prior {
 	order: -1;

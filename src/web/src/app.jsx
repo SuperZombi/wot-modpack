@@ -42,6 +42,21 @@ const App = () => {
 		}
 		get()
 	}, [])
+	React.useEffect(() => {
+		async function get(){
+			const settings = await eel.get_settings()()
+			if (settings.mods){
+				setSelectedMods(
+					settings.mods.filter(id => 
+						mods.some(mod => mod.id === id)
+					)
+				)
+			}
+		}
+		if (mods.length > 0){
+			get()
+		}
+	}, [mods])
 
 	React.useEffect(() => {
 		if (page == "mods" && mods.length == 0){
@@ -62,13 +77,26 @@ const App = () => {
 		}
 	}, [page])
 	React.useEffect(_=>{
-		async function fetchData() {
-			let clientsInfo = await eel.get_clients()()
+		async function get() {
+			const clientsInfo = await eel.get_clients()()
 			setClientsData(clientsInfo)
+			const settings = await eel.get_settings()()
+			if (settings.client){
+				const client_info = await eel.get_client_info_by_path(settings.client)()
+				if (client_info){
+					const exists = clientsInfo.some(c => c.path === client_info.path);
+					if (!exists) {
+						setClientsData(prev => [
+							...prev, ...client_info
+						])
+					}
+					setSelectedClient(client_info)
+				}
+			}
 			setClientsLoaded(true)
 		}
 		if (page == "home" && !clientsLoaded){
-			fetchData()
+			get()
 		}
 	}, [page])
 	React.useEffect(_=>{
