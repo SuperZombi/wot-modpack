@@ -14,32 +14,39 @@ const CheckoutTab = ({
 		<React.Fragment>
 			<div>
 				<br/><br/>
-				<input type="text" value={selectedClient.path} readOnly={true} style={{width: "100%"}}/>
+				<input type="text" value={selectedClient.path} readOnly={true}
+					style={{
+						width: `${selectedClient.path.length + 1}ch`,
+						maxWidth: "400px"
+					}}
+				/>
 				<br/><br/><br/>
-				<label className="hover">
-					<input type="checkbox" className="hover"
-						checked={installArgs["save_selected_mods"]}
-						onChange={e=>onArgChange("save_selected_mods", e.target.checked)}
-					/>
-					<LANG id="save_selected_mods"/>
-				</label>
-				<br/>
-				<label className="hover">
-					<input type="checkbox" className="hover"
-						checked={installArgs["delete_mods"]}
-						onChange={e=>onArgChange("delete_mods", e.target.checked)}
-					/>
-					<LANG id="remove_all_mods"/>
-				</label>
-				<br/>
-				<label className="hover">
-					<input type="checkbox" className="hover"
-						checked={installArgs["delete_configs"]}
-						onChange={e=>onArgChange("delete_configs", e.target.checked)}
-					/>
-					<LANG id="remove_mod_configs"/>
-				</label>
-				<br/>
+				<div style={{margin: "auto", display: "inline-block"}}>
+					<label className="hover">
+						<input type="checkbox" className="hover"
+							checked={installArgs["save_selected_mods"]}
+							onChange={e=>onArgChange("save_selected_mods", e.target.checked)}
+						/>
+						<LANG id="save_selected_mods"/>
+					</label>
+					<br/>
+					<label className="hover">
+						<input type="checkbox" className="hover"
+							checked={installArgs["delete_mods"]}
+							onChange={e=>onArgChange("delete_mods", e.target.checked)}
+						/>
+						<LANG id="remove_all_mods"/>
+					</label>
+					<br/>
+					<label className="hover">
+						<input type="checkbox" className="hover"
+							checked={installArgs["delete_configs"]}
+							onChange={e=>onArgChange("delete_configs", e.target.checked)}
+						/>
+						<LANG id="remove_mod_configs"/>
+					</label>
+					<br/>
+				</div>
 			</div>
 			<hr style={{width: "90%"}}/>
 			{selectedMods.length > 0 ? (
