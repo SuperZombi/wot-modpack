@@ -1,8 +1,8 @@
-name: Build
+name: Build with React
 
 on:
-  release:
-    types: [published]
+  # release:
+  #   types: [published]
   workflow_dispatch:
 
 jobs:
@@ -53,10 +53,10 @@ jobs:
       run: pyinstaller --noconfirm --onefile --noconsole --name "Web Modpack" --icon="github/icon.ico" --version-file="github/ver" --add-data "web\\;.\\web" "src/main.py"
 
     - name: Upload Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: "Web Modpack.exe"
-          path: "dist/Web Modpack.exe"
+      uses: actions/upload-artifact@v4
+      with:
+        name: "Web Modpack.exe"
+        path: "dist/Web Modpack.exe"
     # - name: Upload
     #   uses: xresloader/upload-to-github-release@v1
     #   with:
