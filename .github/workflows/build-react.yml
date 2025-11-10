@@ -1,8 +1,8 @@
 name: Build with React
 
 on:
-  # release:
-  #   types: [published]
+  release:
+    types: [published]
   workflow_dispatch:
 
 jobs:
@@ -11,8 +11,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-        with:
-          ref: react
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -37,8 +35,6 @@ jobs:
     steps:
       - name: Checkout the repo
         uses: actions/checkout@v4
-        with:
-          ref: react
 
       - name: Download artifact
         uses: actions/download-artifact@v4
@@ -56,14 +52,9 @@ jobs:
       - name: Build
         run: pyinstaller --noconfirm --onefile --noconsole --name "Web Modpack" --icon="github/icon.ico" --version-file="github/ver" --add-data "web\\;.\\web" "src/main.py"
 
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v4
+      - name: Upload
+        uses: xresloader/upload-to-github-release@v1
         with:
-          name: "Web Modpack.exe"
-          path: "dist/Web Modpack.exe"
-    # - name: Upload
-    #   uses: xresloader/upload-to-github-release@v1
-    #   with:
-    #     file: "./src/dist/Web Modpack.exe"
-    #     overwrite: true
-    #     update_latest_release: true
+          file: "dist/Web Modpack.exe"
+          overwrite: true
+          update_latest_release: true
