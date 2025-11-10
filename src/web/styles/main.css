@@ -146,7 +146,7 @@ ul{
 .mods-install-list .mod-item {
 	display: flex;
 	align-items: center;
-	gap: 6px;
+	gap: 8px;
 	padding: 5px;
 	border-radius: 25px;
 	transition: 0.2s;
@@ -158,7 +158,11 @@ ul{
 	order: -1;
 }
 .mods-install-list .mod-item img{
-	height: 16px;
+	height: 18px;
+	user-select: none;
+}
+.mods-install-list .mod-item span {
+	margin-right: 4px;
 }
 .mods-install-list .mod-item img:not(.remove){
 	cursor: help;
