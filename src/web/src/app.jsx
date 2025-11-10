@@ -119,6 +119,7 @@ const App = () => {
 		let fails = await eel.main_install(selectedClient.path, installArgs, selectedMods)()
 		setPage("finish")
 		setFailes(fails)
+		setCachedInfoLoaded(false)
 	}
 	React.useEffect(() => {
 		const handler = (e) => {
@@ -160,6 +161,7 @@ const App = () => {
 				<Settings
 					appVersion={appVersion}
 					onClose={_=>setShowSettings(false)}
+					setCachedMods={setCachedMods}
 				/>
 			) : null}
 

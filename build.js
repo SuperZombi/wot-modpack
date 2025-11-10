@@ -67,6 +67,7 @@ fs.copySync(srcDir, destDir, {
 		return true
 	}
 })
+fs.copySync('github/react', path.join(destDir, 'react'))
 const srcHtml = path.join(srcDir, 'main.html')
 const destHtml = path.join(destDir, 'index.html')
 fs.copyFileSync(srcHtml, destHtml)

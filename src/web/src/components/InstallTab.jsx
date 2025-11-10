@@ -23,8 +23,15 @@ const InstallTab = ({
 				<progress
 					value={currentInstall ? currentInstall.download_progress : 0}
 					max="100"
+					style={{
+						opacity: currentInstall?.download_progress > 0 ? 1 : 0
+					}}
 				/>
-				<span>{currentInstall ? `${currentInstall.download_progress}%` : "0%"}</span>
+				<span style={{
+					opacity: currentInstall?.download_progress > 0 ? 1 : 0
+				}}>
+					{currentInstall ? `${currentInstall.download_progress}%` : "0%"}
+				</span>
 			</div>
 			<Gallery/>
 		</div>

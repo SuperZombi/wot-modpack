@@ -1,5 +1,5 @@
 const Settings = ({
-	appVersion, onClose
+	appVersion, onClose, setCachedMods
 }) => {
 	const langOptions = [
 		{ path: "en", title: "English" },
@@ -22,6 +22,7 @@ const Settings = ({
 	async function clear_cache(){
 		await eel.delete_cache()()
 		setCacheSize(0)
+		setCachedMods([])
 	}
 
 	return (
