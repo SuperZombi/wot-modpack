@@ -44,7 +44,7 @@ const App = () => {
 		})()
 	}, [])
 	React.useEffect(() => {
-		if (mods.length > 0){
+		if (page == "mods" && mods.length > 0 && selectedMods.length == 0){
 			(async _=>{
 				const settings = await eel.get_settings()()
 				if (settings.mods){
@@ -56,7 +56,7 @@ const App = () => {
 				}
 			})()
 		}
-	}, [mods])
+	}, [mods, page])
 
 	React.useEffect(() => {
 		if (page == "mods" && mods.length == 0){
@@ -136,6 +136,11 @@ const App = () => {
 		})()
 	}, [])
 
+	const onModsDelete = _=> {
+		setSelectedMods([])
+		setPage("checkout")
+	}
+
 	const { langData } = useApp()
 
 	return (
@@ -209,7 +214,7 @@ const App = () => {
 				{(selectedClient && selectedClient.path != "custom") ? (
 					page == "home" ? (
 						<React.Fragment>
-							<div className="button hover">
+							<div className="button hover" onClick={onModsDelete}>
 								<LANG id="delete_mods_button"/>
 							</div>
 							<div className="button hover" onClick={_=>setPage("mods")}>
