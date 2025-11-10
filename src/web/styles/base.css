@@ -331,10 +331,9 @@ label{
 .gallery{
 	margin-top: 50px;
 	height: 360px;
-	
 	opacity: 0;
 	transition: 3s;
-	perspective: 1000px;
+	z-index: -1;
 }
 .gallery.show{
 	opacity: 1;
@@ -343,7 +342,6 @@ label{
 	height: 100%;
 	width: 100%;
 	object-fit: cover;
-	transform-style: preserve-3d;
 	border-radius: 10px;
 	overflow: hidden;
 	user-select: none;
