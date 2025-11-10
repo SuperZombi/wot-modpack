@@ -59,6 +59,7 @@ const FinishTab = ({
 							<img src="/images/donatello_logo.png" draggable={false}/>
 						</a>
 					</div>
+					<Gallery/>
 				</React.Fragment>
 			)}
 		</div>

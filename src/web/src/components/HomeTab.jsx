@@ -36,18 +36,21 @@ const HomeTab = ({
 		{ path: "custom", title: langData["custom_game_folder"] }
 	]
 	return (
-		<div>
-			<br/>
-			<h3><LANG id="select_game_folder"/></h3>
+		<React.Fragment>
 			<div>
-				<Select
-					options={options}
-					value={selectedClient}
-					onChange={setSelectedClient}
-					placeholder={langData["custom_game_folder"]}
-				/>
+				<br/>
+				<h3><LANG id="select_game_folder"/></h3>
+				<div>
+					<Select
+						options={options}
+						value={selectedClient}
+						onChange={setSelectedClient}
+						placeholder={langData["custom_game_folder"]}
+					/>
+				</div>
 			</div>
-		</div>
+			<Gallery/>
+		</React.Fragment>
 	)
 }
 

@@ -26,6 +26,7 @@ const InstallTab = ({
 				/>
 				<span>{currentInstall ? `${currentInstall.download_progress}%` : "0%"}</span>
 			</div>
+			<Gallery/>
 		</div>
 	)
 }
