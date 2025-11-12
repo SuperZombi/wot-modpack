@@ -45,6 +45,58 @@ header a:hover{
 	scrollbar-width: thin;
 	color-scheme: dark;
 }
+#mods-list-area.grid {
+
+}
+
+.mods-grid {
+	display: grid !important;
+	grid-template-columns: 1fr 1fr 1fr;
+}
+.mods-grid .mod{
+	height: 100px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	background: #111;
+	white-space: nowrap;
+	overflow: hidden;
+	border-radius: 8px;
+	border: 3px solid #666;
+	gap: 4px;
+	width: 100%;
+	align-items: unset;
+}
+.mods-grid .mod:hover{
+	background: #333;
+	border: 3px solid #999;
+}
+.mods-grid .mod:has(input:checked){
+	background: radial-gradient(#2e2e28 25%, black) padding-box,
+		linear-gradient(0deg, #6e3f15, #f7d670) border-box;
+	border: solid 3px transparent;
+}
+.mods-grid .mod:has(input:checked):hover{
+	background: radial-gradient(#2e2e28 25%, #333) padding-box,
+		linear-gradient(0deg, #6e3f15, #f7d670) border-box;
+}
+.mods-grid .mod img{
+	height: 100%;
+	object-fit: contain;
+	overflow: hidden;
+}
+.mods-grid .mod span{
+	padding-bottom: 6px;
+	padding-left: 5px;
+	padding-right: 5px;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+.mods-grid .mod input{
+	display: none;
+}
+
+
 #mod-preview{
 	padding: 5px;
 	padding-left: 0;
@@ -102,6 +154,7 @@ ul{
 	display: flex;
 	padding: 5px;
 	padding-bottom: 0;
+	gap: 5px;
 }
 
 #retry_area{

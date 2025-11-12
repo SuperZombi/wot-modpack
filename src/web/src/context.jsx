@@ -7,6 +7,7 @@ function AppProvider({children}) {
 	const [langData, setLangData] = React.useState({})
 	const [matchClientLang, setMatchClientLang] = React.useState(true)
 	const [useCache, setUseCache] = React.useState(true)
+	const [modsLayout, setModsLayout] = React.useState("list")
 
 	React.useEffect(() => {
 		(async _=>{
@@ -43,7 +44,8 @@ function AppProvider({children}) {
 	const value = {
 		language, setLanguage, langData,
 		matchClientLang, setMatchClientLang,
-		useCache, setUseCache
+		useCache, setUseCache,
+		modsLayout, setModsLayout
 	}
 	return (
 		<AppContext.Provider value={value}>
