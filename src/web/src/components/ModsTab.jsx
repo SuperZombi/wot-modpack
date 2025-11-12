@@ -9,7 +9,7 @@ const ModsTab = ({
 	const [modPreview, setPreview] = React.useState(null)
 	const [displayPreview, setDisplayPreview] = React.useState(false)
 
-	const { langData, modsLayout, setModsLayout } = useApp()
+	const { language, langData, modsLayout, setModsLayout } = useApp()
 	const audioRef = React.useRef(null)
 
 	React.useEffect(() => {
@@ -34,6 +34,10 @@ const ModsTab = ({
 			audio.removeEventListener('canplay', playAudio)
 		}
 	}, [displayPreview])
+	
+	React.useEffect(_=>{
+		setPreview(null)
+	}, [language])
 
 	return (
 		<div id="mods-area">
