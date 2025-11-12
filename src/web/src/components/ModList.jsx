@@ -92,7 +92,7 @@ function Category({
 			return popB - popA;
 		})
 	}
-	const { language } = useApp()
+	const { language, modsLayout } = useApp()
 	const filteredMods = mods.filter(mod => matchesSearch(mod, search))
 	const allModsSorted = sortByPopularityWithGroups(filteredMods)
 	const [opened, setOpened] = React.useState(false)
@@ -112,7 +112,7 @@ function Category({
 				
 			<div className="collapse">
 				<div className="wrapper">
-					<div className="content">
+					<div className={`content ${modsLayout == "grid" ? "mods-grid" : ""}`}>
 						{allModsSorted.map(mod => {
 							if (mod.group) {
 								const group = groups.find(g => g.id === mod.group);
@@ -197,7 +197,36 @@ function Group({
 		setGroupChecked(mods.some(mod => selectedMods.includes(mod.id)))
 	}, [selectedMods])
 
-	const { language } = useApp()
+	const { language, modsLayout } = useApp()
+
+	if (modsLayout == "grid"){
+		return (
+			<React.Fragment>
+				{sortByPopularity(mods).map(mod => (
+					<Mod
+						key={mod.id}
+						type="radio"
+						name={id}
+						title={mod.title}
+						description={mod.description}
+						author={mod.author}
+						image={mod.image}
+						audio={mod.audio}
+						downloads={stats[mod.id] || 0}
+						onChange={e=>onModCheck(mod.id, e.target.checked)}
+						checked={selectedMods.includes(mod.id) || false}
+						setPreview={setPreview}
+						setDisplayPreview={setDisplayPreview}
+						version={mod.ver}
+						cached_ver={
+							(cachedMods.find(el=>el.id==mod.id)||{}).ver || null
+						}
+					/>
+				))}
+			</React.Fragment>
+		)
+	}
+
 	return (
 		<div className="details group">
 			<label className="summary hover">
@@ -255,7 +284,7 @@ function Mod({
 	version,
 	cached_ver
 }) {
-	const { language, langData } = useApp()
+	const { language, langData, modsLayout } = useApp()
 
 	const onMouse = _=> {
 		setPreview({
@@ -269,6 +298,34 @@ function Mod({
 		setDisplayPreview(true)
 	}
 
+	const onGridClick = e=>{
+		if (type == "radio" && checked){
+			e.preventDefault()
+			onChange({
+				...e,
+				target: {
+					...e.target,
+					checked: false,
+				},
+			})
+		}
+	}
+
+	if (modsLayout == "grid"){
+		return (
+			<label className="mod hover" onClick={onGridClick} onMouseOver={onMouse} onMouseOut={_=>setDisplayPreview(false)}>
+				<input
+					className="hover"
+					type={type}
+					checked={checked}
+					onChange={onChange}
+					{...(name && { name })}
+				/>
+				<img src={image} draggable={false}/>
+				<span>{replaceFlags(title[language])}</span>
+			</label>
+		)
+	}
 	return (
 		<label className="mod hover" onMouseOver={onMouse} onMouseOut={_=>setDisplayPreview(false)}>
 			<input
