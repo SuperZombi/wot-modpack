@@ -9,7 +9,7 @@ const ModsTab = ({
 	const [modPreview, setPreview] = React.useState(null)
 	const [displayPreview, setDisplayPreview] = React.useState(false)
 
-	const { langData } = useApp()
+	const { langData, modsLayout, setModsLayout } = useApp()
 	const audioRef = React.useRef(null)
 
 	React.useEffect(() => {
@@ -57,6 +57,15 @@ const ModsTab = ({
 									value={search}
 									onChange={e => setSearch(e.target.value)}
 								/>
+								<div className="button hover" style={{display: "flex"}}
+									onClick={_=>setModsLayout(prev=>prev=="grid"?"list":"grid")}
+								>
+									{modsLayout == "grid" ? (
+										<img src="images/list.svg" draggable={false} height="20"/>
+									) : (
+										<img src="images/grid.svg" draggable={false} height="20"/>
+									)}
+								</div>
 							</div>
 							<ModList
 								mods={mods}
