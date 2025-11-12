@@ -1,0 +1,15 @@
+{	
+	"enable": true,
+	"position" : [25, 2],
+	"size" : [24, 24],
+	"texts": {
+		"notDetected": "<img src='img://{{config}}detectionState/black.png' width='19' height='19'>",
+		"missing": "<img src='img://{{config}}detectionState/red.png' width='19' height='19'>",
+		"detected": "<img src='img://{{config}}detectionState/green.png' width='19' height='19'>",
+		"dead": "",
+		"notDetectedArty": "<img src='img://{{config}}detectionState/black.png' width='19' height='19'>",
+		"missingArty": "<img src='img://{{config}}detectionState/red.png' width='19' height='19'>",
+		"detectedArty": "<img src='img://{{config}}detectionState/green.png' width='19' height='19'>",
+		"deadArty": ""
+	}
+}
