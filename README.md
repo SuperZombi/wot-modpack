@@ -12,7 +12,12 @@
 
 <br>
 <img src="github/images/home.png" width="700">
-<img src="github/images/preview.png" width="700">
+<details>
+  <summary><b>Images</b></summary>
+  <img src="github/images/preview.png" width="700">
+  <img src="github/images/grid.png" width="700">
+</details>
+<hr>
 
 The problem of all modpacks is their greater weight.<br>
 This modpack downloads only those mods that the user selected at runtime.<br>
