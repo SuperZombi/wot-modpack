@@ -230,12 +230,14 @@ const App = () => {
 								<div className="button hover" onClick={_=>setPage("home")}>
 									<LANG id="back"/>
 								</div>
-								<div className="button hover"
-									style={{marginLeft: "10px"}}
-									onClick={resetAllSelected}
-								>
-									<LANG id="reset"/>
-								</div>
+								{mods.length > 0 ? (
+									<div className="button hover"
+										style={{marginLeft: "10px"}}
+										onClick={resetAllSelected}
+									>
+										<LANG id="reset"/>
+									</div>
+								) : null}
 							</div>
 							<div className="button hover" onClick={_=>setPage("checkout")}>
 								<LANG id="next"/>

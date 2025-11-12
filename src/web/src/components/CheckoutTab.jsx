@@ -59,9 +59,9 @@ const CheckoutTab = ({
 							return (
 								<div className={`mod-item ${(cached_ver && cached_ver == modObj.ver) ? "" : "prior"}`} key={modObj.id}>
 									{(cached_ver && cached_ver == modObj.ver) ? (
-										<img src="images/check.svg" title={langData["mod_in_cache"]} draggable={false}/>
+										<img className="help" src="images/check.svg" title={langData["mod_in_cache"]} draggable={false}/>
 									) : (
-										<img src="images/down-arrow.svg" title={langData["mod_will_be_downloaded"]} draggable={false}/>
+										<img className="help" src="images/down-arrow.svg" title={langData["mod_will_be_downloaded"]} draggable={false}/>
 									)}
 									<span>{replaceFlags(modObj.title[language])}</span>
 									<img src="images/close.svg" className="remove hover"

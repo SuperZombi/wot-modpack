@@ -70,7 +70,7 @@ function replaceFlags(text) {
 		const match = part.match(/^:flag_([a-z]{2}):$/i)
 		if (match) {
 			const code = match[1].toLowerCase()
-			return <span key={i} className={`fi fi-${code}`}></span>
+			return <img className="flag" src={`/images/flags/${code}.svg`} draggable={false}/>
 		}
 		return part
 	})

@@ -217,7 +217,7 @@ ul{
 .mods-install-list .mod-item span {
 	margin-right: 4px;
 }
-.mods-install-list .mod-item img:not(.remove){
+.mods-install-list .mod-item .help{
 	cursor: help;
 }
 .mods-install-list .mod-item .remove{

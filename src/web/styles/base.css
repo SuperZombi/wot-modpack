@@ -351,3 +351,9 @@ label{
 		radial-gradient(black, transparent 80%);
 	mask-composite: intersect;
 }
+
+.flag {
+	height: 16px !important;
+	vertical-align: middle;
+	user-select: none;
+}
