@@ -2,10 +2,13 @@ html, body{
 	padding: 0; margin: 0;
 }
 body{
-	font-family: sans-serif;
 	cursor: url('/images/cursor-normal.png'), auto;
-	background: #111;
+	font-family: sans-serif;
 	color: #f1f1f1;
+	background-color: #111;
+	background-image: url('/images/sparks.png');
+	background-repeat: repeat-y;
+	background-position: top center;
 }
 svg{
 	fill: #f1f1f1;
