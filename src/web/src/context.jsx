@@ -21,6 +21,9 @@ function AppProvider({children}) {
 			if ("use_cache" in settings){
 				setUseCache(settings["use_cache"])
 			}
+			if ("layout" in settings){
+				setModsLayout(settings["layout"])
+			}
 		})()
 	}, [])
 
@@ -40,6 +43,11 @@ function AppProvider({children}) {
 			await eel.update_settings({"use_cache": useCache})()
 		})()
 	}, [useCache])
+	React.useEffect(() => {
+		(async _=>{
+			await eel.update_settings({"layout": modsLayout})()
+		})()
+	}, [modsLayout])
 
 	const value = {
 		language, setLanguage, langData,
