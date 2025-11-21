@@ -22,6 +22,7 @@
 	"mods_will_be_deleted": "Mods will be deleted!",
 	"installing_mods": "Installing modifications",
 	"installed_success": "Mods installed successfully!",
+	"deleted_success": "Mods deleted successfully!",
 	"home": "Home",
 	"mods_info_parse_fail": "Failed to load mods info!",
 	"failed_get_client": "Failed to get client info!",

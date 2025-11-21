@@ -8,6 +8,11 @@ const CheckoutTab = ({
 			[key]: val
 		}))
 	}
+	React.useEffect(_=>{
+		if (selectedMods.length == 0){
+			onArgChange("delete_mods", true)
+		}
+	}, [selectedMods, installArgs.delete_mods])
 
 	const { language, langData } = useApp()
 	return (

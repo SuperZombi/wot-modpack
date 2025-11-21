@@ -208,6 +208,7 @@ const App = () => {
 					<FinishTab
 						fails={fails}
 						mods={mods}
+						selectedMods={selectedMods}
 					/>
 				) : null}
 			</div>

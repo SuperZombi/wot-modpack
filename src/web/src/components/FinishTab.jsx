@@ -1,5 +1,5 @@
 const FinishTab = ({
-	fails, mods
+	fails, mods, selectedMods
 }) => {
 	const { language, langData } = useApp()
 	function getKnownError(){
@@ -33,7 +33,7 @@ const FinishTab = ({
 										<li key={err.mod}>{replaceFlags(title[language])}</li>
 									)
 								})}
-							</ul>							
+							</ul>
 						</React.Fragment>
 					) : null}
 					<br/>
@@ -46,7 +46,13 @@ const FinishTab = ({
 			) : (
 				<React.Fragment>
 					<br/>
-					<h3><LANG id="installed_success"/></h3>
+					<h3>
+						{selectedMods.length > 0 ? (
+							<LANG id="installed_success"/>
+						) : (
+							<LANG id="deleted_success"/>
+						)}
+					</h3>
 					<br/>
 					<div className="links">
 						<a href="https://www.youtube.com/c/SuperZombi" className="hover" target="_blank">
