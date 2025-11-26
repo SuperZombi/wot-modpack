@@ -51,13 +51,12 @@ header a:hover{
 
 .mods-grid {
 	display: grid !important;
-	grid-template-columns: 1fr 1fr 1fr;
+	grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+	grid-auto-rows: 125px;
 }
 .mods-grid .mod{
-	height: 100px;
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
+	display: grid;
+	grid-template-rows: 1fr auto;
 	background: #111;
 	white-space: nowrap;
 	overflow: hidden;
@@ -80,13 +79,19 @@ header a:hover{
 	background: radial-gradient(#2e2e28 25%, #333) padding-box,
 		linear-gradient(0deg, #6e3f15, #f7d670) border-box;
 }
+.mods-grid .mod .image-container{
+	overflow: hidden;
+	display: flex;
+	align-items: center;
+}
 .mods-grid .mod img{
 	height: 100%;
-	object-fit: contain;
-	overflow: hidden;
+	width: 100%;
+	max-height: fit-content;
+	object-fit: cover;
 }
 .mods-grid .mod span{
-	padding-bottom: 6px;
+	padding-bottom: 5px;
 	padding-left: 5px;
 	padding-right: 5px;
 	text-overflow: ellipsis;
@@ -102,15 +107,35 @@ header a:hover{
 	padding-left: 0;
 	opacity: 0;
 	transition: 0.25s;
+	overflow: auto;
+	scrollbar-width: thin;
+	color-scheme: dark;
 }
 #mod-preview.show{
 	opacity: 1;
 }
-#mod-image{
-	background: black;
+#mod-preview .image-container{
 	height: 300px;
-	width: 100%;
-	object-fit: contain;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.loading{
+	background: linear-gradient(90deg, #d6d6d6 0%, #ececec 50%, #d6d6d6 100%);
+	background-size: 200% 100%;
+	animation: image-loading 2s infinite linear;
+}
+@keyframes image-loading {
+	0% { background-position: 200% 0; }
+	100% { background-position: -200% 0; }
+}
+#mod-preview .loading {
+	min-height: 300px;
+	min-width: 300px;
+}
+#mod-image{
+	max-height: 100%;
+	max-width: 100%;
 	border-radius: 8px;
 	user-select: none;
 }
@@ -148,6 +173,26 @@ ul{
 #mod-description code{
 	font-size: 1rem;
 	color: #a9a9a9;
+}
+#mod-description key{
+	display: inline-block;
+	padding: 4px 8px;
+	margin: 4px;
+	background: #f0f0f0;
+	color: black;
+	border: 1px solid #ccc;
+	border-radius: 6px;
+	box-shadow: 0 2px #999;
+	font-family: monospace;
+	font-weight: bold;
+	cursor: pointer;
+	user-select: none;
+	transition: all 0.1s ease;
+}
+#mod-description key:active {
+	box-shadow: 0 0 #666;
+	transform: translateY(2px);
+	background: #e0e0e0;
 }
 
 #search-area{

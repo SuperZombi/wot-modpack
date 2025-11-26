@@ -11,6 +11,7 @@ const ModsTab = ({
 
 	const { language, langData, modsLayout, setModsLayout } = useApp()
 	const audioRef = React.useRef(null)
+	const [imageLoaded, setImageLoaded] = React.useState(false)
 
 	React.useEffect(() => {
 		const audio = audioRef.current
@@ -35,6 +36,9 @@ const ModsTab = ({
 		}
 	}, [displayPreview])
 	
+	React.useEffect(_=>{
+		setImageLoaded(false)
+	}, [modPreview?.image])
 	React.useEffect(_=>{
 		setPreview(null)
 	}, [language])
@@ -85,15 +89,20 @@ const ModsTab = ({
 								selectedClient={selectedClient}
 							/>
 						</div>
-						<div id="mod-preview" className={`${displayPreview ? "show": ""}`}
+						<div id="mod-preview"
+							className={`${displayPreview ? "show": ""}`}
 							onMouseOver={_=>setDisplayPreview(true)}
 							onMouseOut={_=>setDisplayPreview(false)}
 						>
-							<img id="mod-image"
-								src={modPreview?.image || ""}
-								key={modPreview?.image || ""}
-								draggable={false}
-							/>
+							<div className="image-container">
+								<img id="mod-image"
+									className={`${imageLoaded ? '' : 'loading'}`}
+									src={modPreview?.image || ""}
+									key={modPreview?.image || ""}
+									draggable={false}
+									onLoad={_=>setImageLoaded(true)}
+								/>
+							</div>
 							<div id="mod-description-text">
 								<h3 align="center" id="mod-title">{modPreview ? replaceFlags(modPreview.title) : ""}</h3>
 								<h4 id="mod-subtitle">

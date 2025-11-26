@@ -8,7 +8,7 @@ from tkinter.filedialog import askdirectory
 from utils import *
 
 MODS_DATA = {}
-__version__ = "2.1.0"
+__version__ = "2.1.1"
 @eel.expose
 def app_version(): return __version__
 SETTINGS = {}
@@ -151,6 +151,6 @@ eel.init(resource_path("web"))
 browsers = ['chrome', 'default']
 for browser in browsers:
 	try:
-		eel.start("index.html", mode=browser, size=(1000, 800), port=0)
+		eel.start("index.html", mode=browser, size=(1080, 800), port=0)
 		break
 	except Exception: None

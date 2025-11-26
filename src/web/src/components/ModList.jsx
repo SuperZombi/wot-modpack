@@ -285,6 +285,7 @@ function Mod({
 	cached_ver
 }) {
 	const { language, langData, modsLayout } = useApp()
+	const [imageLoaded, setImageLoaded] = React.useState(false)
 
 	const onMouse = _=> {
 		setPreview({
@@ -297,6 +298,9 @@ function Mod({
 		})
 		setDisplayPreview(true)
 	}
+	React.useEffect(_=>{
+		setImageLoaded(false)
+	}, [image])
 
 	const onGridClick = e=>{
 		if (type == "radio" && checked){
@@ -321,7 +325,16 @@ function Mod({
 					onChange={onChange}
 					{...(name && { name })}
 				/>
-				<img src={image} draggable={false}/>
+				<div className="image-container">
+					<img
+						src={image}
+						key={image}
+						className={`${imageLoaded ? '' : 'loading'}`}
+						draggable={false}
+						loading="lazy"
+						onLoad={_=>setImageLoaded(true)}
+					/>
+				</div>
 				<span>{replaceFlags(title[language])}</span>
 			</label>
 		)
