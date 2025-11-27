@@ -10,7 +10,7 @@ const InstallTab = ({
 			<br/>
 			<h3 style={{marginBottom: "2rem"}}><LANG id="installing_mods"/></h3>
 			<p>
-				{modObj ? (replaceFlags(modObj.title[language])) : ""}
+				{modObj?.title?.[language] ? replaceFlags(modObj.title[language]) : ""}
 			</p>
 			<br/>
 			<div className="progress-area">
