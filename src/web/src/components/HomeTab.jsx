@@ -77,6 +77,7 @@ function Select({ options=[], value, onChange, placeholder="" }) {
 			<div
 				className="select-header button hover"
 				onClick={() => setOpen(!open)}
+				title={value ? value.path : null}
 			>
 				{value ? value.title : placeholder}
 			</div>
@@ -85,7 +86,8 @@ function Select({ options=[], value, onChange, placeholder="" }) {
 					{options.map((option) => (
 						<div
 							key={option.path}
-							className="button hover"
+							title={option.path != "custom" ? option.path : null}
+							className={`button hover ${value?.path == option.path ? "selected": ""}`}
 							onClick={() => handleSelect(option)}
 						>
 							{option.title}

@@ -72,6 +72,9 @@ svg{
 .button:active{
 	background: linear-gradient(0deg, #343429, #696a52);
 }
+.button.selected{
+	background: linear-gradient(0deg, #343429, #696a52);
+}
 
 
 .select {

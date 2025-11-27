@@ -49,7 +49,8 @@ class Launchers:
 		
 	def get_clients(self):
 		for launcher in [
-			('Wargaming.net','GameCenter')
+			('Wargaming.net','GameCenter'),
+			('Wargaming.net','GameCenter for Steam')
 		]:
 			path = os.path.join(self.program_data, *launcher)
 			if os.path.exists(path):
@@ -70,8 +71,11 @@ class Launchers:
 class Client:
 	def __init__(self, path, use_cache=True):
 		self.path = path
+		self.type = "steam" if "steam" in path.lower() else "wg"
 		self.parse_info()
 		self.title = f"WoT {self.realm} {self.version}"
+		if self.type == "steam":
+			self.title = f"WoT {self.realm} {self.version} (Steam)"
 		self.exe = "WorldOfTanks.exe"
 		self.installed = []
 		self.use_cache = use_cache
@@ -84,6 +88,7 @@ class Client:
 		return {
 			"path": self.path,
 			"title": self.title,
+			"type": self.type,
 			"realm": self.realm,
 			"version": self.version,
 			"lang": self.lang,

@@ -8,7 +8,7 @@ from tkinter.filedialog import askdirectory
 from utils import *
 
 MODS_DATA = {}
-__version__ = "2.1.1"
+__version__ = "2.2.0"
 @eel.expose
 def app_version(): return __version__
 SETTINGS = {}
@@ -136,7 +136,7 @@ def main_install(client_path, args, mods):
 				fails.append({"error": str(e)})
 				return fails
 
-		telemetry.send_telemetry(mods, __version__, client.version)
+		telemetry.send_telemetry(mods, __version__, client.version, client.type.upper())
 
 	if args.get("save_selected_mods", True):
 		update_settings({
