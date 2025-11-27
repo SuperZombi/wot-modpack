@@ -15,22 +15,22 @@ const InstallTab = ({
 			<br/>
 			<div className="progress-area">
 				<progress
-					value={currentInstall ? currentInstall.current : 0}
-					max={currentInstall ? currentInstall.total : 1}
+					value={currentInstall?.current ?? 0}
+					max={currentInstall?.total ?? 1}
 				/>
-				<span>{currentInstall ? `${currentInstall.current}/${currentInstall.total}` : "0/0"}</span>
+				<span>{currentInstall ? `${currentInstall.current ?? 0}/${currentInstall.total ?? 0}` : "0/0"}</span>
 
 				<progress
-					value={currentInstall ? currentInstall.download_progress : 0}
+					value={currentInstall?.download_progress ?? 0}
 					max="100"
 					style={{
-						opacity: currentInstall?.download_progress > 0 ? 1 : 0
+						opacity: (currentInstall?.download_progress ?? 0) > 0 ? 1 : 0
 					}}
 				/>
 				<span style={{
-					opacity: currentInstall?.download_progress > 0 ? 1 : 0
+					opacity: (currentInstall?.download_progress ?? 0) > 0 ? 1 : 0
 				}}>
-					{currentInstall ? `${currentInstall.download_progress}%` : "0%"}
+					{(currentInstall?.download_progress ?? 0) + "%"}
 				</span>
 			</div>
 			<Gallery/>

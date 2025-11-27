@@ -132,6 +132,7 @@ const App = () => {
 			setPage("finish")
 			setFailes(e.detail)
 			setCachedInfoLoaded(false)
+			setCurrentInstall({})
 		}
 		window.addEventListener("install_finish", handler)
 		return () => window.removeEventListener("install_finish", handler)
