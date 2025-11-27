@@ -45,6 +45,7 @@ const HomeTab = ({
 						value={selectedClient}
 						onChange={setSelectedClient}
 						placeholder={langData["custom_game_folder"]}
+						display_hint={true}
 					/>
 				</div>
 			</div>
@@ -53,7 +54,7 @@ const HomeTab = ({
 	)
 }
 
-function Select({ options=[], value, onChange, placeholder="" }) {
+function Select({ options=[], value, onChange, placeholder="", display_hint=false }) {
 	const [open, setOpen] = React.useState(false)
 	const ref = React.useRef(null)
 
@@ -77,7 +78,7 @@ function Select({ options=[], value, onChange, placeholder="" }) {
 			<div
 				className="select-header button hover"
 				onClick={() => setOpen(!open)}
-				title={value ? value.path : null}
+				title={(display_hint && value) ? value.path : null}
 			>
 				{value ? value.title : placeholder}
 			</div>
@@ -86,7 +87,7 @@ function Select({ options=[], value, onChange, placeholder="" }) {
 					{options.map((option) => (
 						<div
 							key={option.path}
-							title={option.path != "custom" ? option.path : null}
+							title={(display_hint && option.path != "custom") ? option.path : null}
 							className={`button hover ${value?.path == option.path ? "selected": ""}`}
 							onClick={() => handleSelect(option)}
 						>

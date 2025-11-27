@@ -114,12 +114,9 @@ const App = () => {
 		}
 	}
 
-	const mainCall = async _=> {
+	const mainCall = _=> {
 		setPage("install")
-		let fails = await eel.main_install(selectedClient.path, installArgs, selectedMods)()
-		setPage("finish")
-		setFailes(fails)
-		setCachedInfoLoaded(false)
+		eel.main_install(selectedClient.path, installArgs, selectedMods)()
 	}
 	React.useEffect(() => {
 		const handler = (e) => {
@@ -129,6 +126,15 @@ const App = () => {
 		}
 		window.addEventListener("updateProgress", handler)
 		return () => window.removeEventListener("updateProgress", handler)
+	}, [])
+	React.useEffect(() => {
+		const handler = (e) => {
+			setPage("finish")
+			setFailes(e.detail)
+			setCachedInfoLoaded(false)
+		}
+		window.addEventListener("install_finish", handler)
+		return () => window.removeEventListener("install_finish", handler)
 	}, [])
 	React.useEffect(() => {
 		(async _=>{

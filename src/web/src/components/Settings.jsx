@@ -24,9 +24,14 @@ const Settings = ({
 		setCacheSize(0)
 		setCachedMods([])
 	}
+	const onPopupClick = e => {
+		if (e.target.classList.contains("popup")){
+			onClose()
+		}
+	}
 
 	return (
-		<div className="popup show">
+		<div className="popup show" onClick={onPopupClick}>
 			<div className="popup_wraper">
 				<img src="/images/close.svg" className="close hover" draggable={false}
 					onClick={onClose}

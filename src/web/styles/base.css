@@ -302,6 +302,7 @@ label{
 	padding: 20px;
 }
 .popup .close{
+	width: 24px;
 	height: 24px;
 	position: absolute;
 	top: 12px;
@@ -340,6 +341,7 @@ label{
 	opacity: 0;
 	transition: 3s;
 	z-index: -1;
+	user-select: none;
 }
 .gallery.show{
 	opacity: 1;

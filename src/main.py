@@ -2,6 +2,7 @@ import eel
 import sys, os
 import json
 import requests
+import threading
 import telemetry
 from tkinter import Tk
 from tkinter.filedialog import askdirectory
@@ -105,7 +106,14 @@ def json_to_mod(mod_id):
 	return Mod(id, files, requirements, version)
 
 @eel.expose
-def main_install(client_path, args, mods):
+def main_install(path, args, mods):
+	threading.Thread(
+		target=_main_install_worker, 
+		args=(path, args, mods),
+		daemon=True
+	).start()
+
+def _main_install_worker(client_path, args, mods):
 	fails = []
 	client = Client(client_path, use_cache=SETTINGS.get("use_cache", True))
 
@@ -143,7 +151,8 @@ def main_install(client_path, args, mods):
 			"client": client_path,
 			"mods": mods
 		})
-	return fails
+
+	eel.on_install_finish(fails)()
 
 
 # MAIN
