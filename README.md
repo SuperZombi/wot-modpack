@@ -19,14 +19,14 @@
 </details>
 <hr>
 
-The problem of all modpacks is their greater weight.<br>
+The problem of all modpacks is their large size.<br>
 This modpack downloads only those mods that the user selected at runtime.<br>
 Also it has a modern Web interface.<br>
 Supports all client versions (including CT and SB)
 > Please note that the modpack version does **NOT** necessarily have to match the client version!
 <hr>
 
-Проблема всіх модпаків полягає в їх великій вазі.<br>
+Проблема всіх модпаків полягає в їхньому великому розмірі.<br>
 Цей модпак завантажує лише ті моди, які користувач вибирає сам.<br>
 Також він має сучасний веб-інтерфейс.<br>
 Підтримує всі версії клієнтів (включаючи CT і SB)
