@@ -295,7 +295,6 @@ label{
 .popup .popup_wraper{
 	width: fit-content;
 	min-width: 400px;
-	height: 70vh;
 	background: #111;
 	filter: drop-shadow(0 0 6px #666);
 	border-radius: 12px;
