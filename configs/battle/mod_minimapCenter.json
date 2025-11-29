@@ -1,0 +1,8 @@
+﻿{
+    "enable": true,
+    "hotKey": "KEY_LCONTROL",
+    "scale": 1.3,
+    "showDeathName": false,
+    "showDestroyed": false,
+    "tacticalMap": ""
+}
