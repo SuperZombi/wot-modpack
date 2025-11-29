@@ -3,6 +3,7 @@ const App = () => {
 	const [groups, setGroups] = React.useState([])
 	const [showPreview, setShowPreview] = React.useState(false)
 	const [previewData, setPreviewData] = React.useState({})
+	const [selected, setSelected] = React.useState(null)
 	
 	const supportedLangs = ["en", "ru", "uk"]
 	const userLang = navigator.language?.slice(0, 2)
@@ -22,9 +23,47 @@ const App = () => {
 		.catch(console.error)
 	}, [])
 
-	const onPreview = data=>{
-		setPreviewData(data)
+	React.useEffect(() => {
+		const params = new URLSearchParams(window.location.search)
+		const id = params.get("id")
+		if (id){ setSelected(id) }
+	}, [])
+	React.useEffect(() => {
+		const params = new URLSearchParams(window.location.search)
+		if (selected !== null) {
+			params.set("id", selected);
+		} else {
+			params.delete("id");
+		}
+		const q = params.toString()
+		const newUrl = q ? window.location.pathname + "?" + q : window.location.pathname;
+		history.replaceState(null, "", newUrl)
+	}, [selected])
+	React.useEffect(() => {
+		if (!selected || mods.length === 0) return;
+		const mod = mods.find(m => m.id == selected);
+		if (!mod){
+			setSelected(null)
+			return
+		}
+		onPreview(mod)
+	}, [selected, mods, lang])
+
+	const onPreview = mod=>{
+		setPreviewData({
+			id: mod.id,
+			title: replaceFlags(mod.title[lang]),
+			description: mod.description?.[lang],
+			author: mod.author,
+			image: mod.image
+		})
+		setSelected(mod.id)
 		setShowPreview(true)
+	}
+	const onClosePreview = _=>{
+		setPreviewData({})
+		setShowPreview(false)
+		setSelected(null)
 	}
 
 	return (
@@ -40,10 +79,10 @@ const App = () => {
 			</p>
 			<ModsList mods={mods} groups={groups} lang={lang} onPreview={onPreview}/>
 			{showPreview ? (
-				<div className="popup" onClick={e=>e.target.classList.contains("popup") ? setShowPreview(false) : null}>
+				<div className="popup" onClick={e=>e.target.classList.contains("popup") ? onClosePreview() : null}>
 					<div className="popup-content">
 						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"
-							className="close" onClick={_=>setShowPreview(false)}
+							className="close" onClick={_=>onClosePreview()}
 						>
 							<path fill="#ec0000" d="M127.86 254.3C58.13 254.3 1.4 197.59 1.4 127.87 1.4 58.13 58.13 1.4 127.86 1.4s126.45 56.72 126.45 126.45c0 69.72-56.73 126.45-126.45 126.45"/>
 							<path fill="#fff" d="M82.62 187.14a14.04 14.04 0 0 1-9.94-23.98l90.48-90.47a14.05 14.05 0 0 1 19.86 19.87l-90.46 90.47a14 14 0 0 1-9.94 4.11"/>
@@ -81,46 +120,25 @@ const ModsList = ({ mods, groups, lang, onPreview }) => {
 						<React.Fragment key={group.id}>
 							{modsInGroup.map(gmod=>{
 								return (
-									<Mod
-										key={gmod.id}
-										title={gmod.title[lang]}
-										description={gmod.description?.[lang]}
-										author={gmod.author}
-										image={gmod.image}
-										onPreview={onPreview}
-									/>
+									<Mod key={gmod.id} mod={gmod} lang={lang} onPreview={onPreview}/>
 								)
 							})}
 						</React.Fragment>
 					)
 				}
 				return (
-					<Mod
-						key={mod.id}
-						title={mod.title[lang]}
-						description={mod.description?.[lang]}
-						author={mod.author}
-						image={mod.image}
-						onPreview={onPreview}
-					/>
+					<Mod key={mod.id} mod={mod} lang={lang} onPreview={onPreview}/>
 				)
 			})}
 		</div>
 	)
 }
 
-const Mod = ({
-	title, description, author, image, onPreview
-}) => {
+const Mod = ({ mod, lang, onPreview }) => {
 	return (
-		<div className="mod" onClick={_=>onPreview({
-			title: replaceFlags(title),
-			description: description,
-			author: author,
-			image: image
-		})}>
-			<img src={image} draggable={false}/>
-			<span>{replaceFlags(title)}</span>
+		<div className="mod" onClick={_=>onPreview(mod)}>
+			<img src={mod.image} draggable={false}/>
+			<span>{replaceFlags(mod.title[lang])}</span>
 		</div>
 	)
 }
