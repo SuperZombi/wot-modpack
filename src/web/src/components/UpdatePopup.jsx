@@ -1,9 +1,23 @@
 const Popup = ({onClose, children}) => {
+	const [show, setShow] = React.useState(false)
+	React.useEffect(_=>{
+		setTimeout(_=>setShow(true), 0)
+	}, [])
+	const BeforeClose = _=>{
+		if (show){
+			setShow(false)
+			setTimeout(_=>{
+				onClose()
+			}, 300)
+		}
+	}
 	return (
-		<div className="popup show" onClick={e=>e.target.classList.contains("popup") ? onClose() : null}>
+		<div className={`popup ${show ? "show" : ""}`}
+			onClick={e=>e.target.classList.contains("popup") ? BeforeClose() : null}
+		>
 			<div className="popup_wraper">
 				<img src="/images/close.svg" className="close hover" draggable={false}
-					onClick={onClose}
+					onClick={BeforeClose}
 				/>
 				{children}
 			</div>
