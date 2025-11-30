@@ -144,7 +144,10 @@ def _main_install_worker(client_path, args, mods):
 				fails.append({"error": str(e)})
 				return fails
 
-		telemetry.send_telemetry(mods, __version__, client.version, client.type.upper())
+		telemetry.send_telemetry(mods,
+			__version__, client.version,
+			client.type.upper(), client.lang.upper()
+		)
 
 	if args.get("save_selected_mods", True):
 		update_settings({
