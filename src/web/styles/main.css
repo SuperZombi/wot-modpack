@@ -65,6 +65,7 @@ header a:hover{
 	gap: 4px;
 	width: 100%;
 	align-items: unset;
+	position: relative;
 }
 .mods-grid .mod:hover{
 	background: #333;
@@ -99,6 +100,13 @@ header a:hover{
 }
 .mods-grid .mod input{
 	display: none;
+}
+.mods-grid .mod .new-badge{
+	position: absolute;
+	top: 4px;
+	right: 4px;
+	width: 12px;
+	height: 12px;
 }
 
 

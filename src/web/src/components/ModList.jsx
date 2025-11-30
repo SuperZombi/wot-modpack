@@ -298,6 +298,11 @@ function Mod({
 					/>
 				</div>
 				<span>{replaceFlags(mod.title[language])}</span>
+				{
+					(cached_ver && cached_ver != mod.ver) ? (
+						<i className="new-badge" title={langData["mod_updated"]}/>
+					) : null
+				}
 			</label>
 		)
 	}
@@ -313,7 +318,7 @@ function Mod({
 			<span>{replaceFlags(mod.title[language])}</span>
 			{
 				(cached_ver && cached_ver != mod.ver) ? (
-					<span className="new-badge" title={langData["mod_updated"]}/>
+					<i className="new-badge" title={langData["mod_updated"]}/>
 				) : null
 			}
 		</label>
