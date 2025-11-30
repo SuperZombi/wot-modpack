@@ -4,6 +4,7 @@ const App = () => {
 	const [showPreview, setShowPreview] = React.useState(false)
 	const [previewData, setPreviewData] = React.useState({})
 	const [selected, setSelected] = React.useState(null)
+	const [error, setError] = React.useState(false)
 	
 	const supportedLangs = ["en", "ru", "uk"]
 	const userLang = navigator.language?.slice(0, 2)
@@ -20,7 +21,10 @@ const App = () => {
 			setMods(data.mods)
 			setGroups(data.groups)
 		})
-		.catch(console.error)
+		.catch(err=>{
+			console.error(err)
+			setError(true)
+		})
 	}, [])
 
 	React.useEffect(() => {
@@ -69,7 +73,6 @@ const App = () => {
 	return (
 		<React.Fragment>
 			<h1 align="center">Web Modpack Mods list</h1>
-			<p align="center">{mods.filter(mod => mod.title).length} mods</p>
 			<p align="center">
 				<select name="lang" value={lang} onChange={e=>setLang(e.target.value)} style={{fontSize: "12pt"}}>
 					<option value="en">English</option>
@@ -77,7 +80,22 @@ const App = () => {
 					<option value="uk">Ukranian</option>
 				</select>
 			</p>
-			<ModsList mods={mods} groups={groups} lang={lang} onPreview={onPreview}/>
+			{mods.length > 0 ? (
+				<React.Fragment>
+					<p align="center">{mods.filter(mod => mod.title).length} mods</p>
+					<ModsList mods={mods} groups={groups} lang={lang} onPreview={onPreview}/>
+				</React.Fragment>
+			) : (
+				error ? <h3 align="center" style={{color: "red"}}>Failed to fetch!</h3> : (
+				<h1 align="center">
+					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" height="48">
+						<path d="M12 1a11 11 0 1 0 11 11A11 11 0 0 0 12 1m0 19a8 8 0 1 1 8-8 8 8 0 0 1-8 8" opacity=".25"/>
+						<path d="M10.14 1.16a11 11 0 0 0-9 8.92A1.6 1.6 0 0 0 2.46 12a1.5 1.5 0 0 0 1.65-1.3 8 8 0 0 1 6.66-6.61A1.4 1.4 0 0 0 12 2.69a1.57 1.57 0 0 0-1.86-1.53">
+							<animateTransform attributeName="transform" dur="0.75s" repeatCount="indefinite" type="rotate" values="0 12 12;360 12 12"/>
+						</path>
+					</svg>
+				</h1>)
+			)}
 			{showPreview ? (
 				<div className="popup" onClick={e=>e.target.classList.contains("popup") ? onClosePreview() : null}>
 					<div className="popup-content">
