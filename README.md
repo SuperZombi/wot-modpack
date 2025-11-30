@@ -10,6 +10,18 @@
 
 ### <a href="https://github.com/SuperZombi/wot-modpack/releases/latest/download/Web.Modpack.exe"><img src="https://github.com/user-attachments/assets/2a418b60-b0a1-462d-afc3-0270ba5c0e83" width="26" align="top"> Download</a>
 
+
+The problem of all modpacks is their large size.<br>
+This modpack downloads only those mods that the user selected at runtime.<br>
+Also it has a modern Web interface.<br>
+Supports all client versions (including CT and SB)
+
+> [!WARNING]  
+> For the first installation, it is recommended to check the «Delete mod configs» option to avoid conflicts with previous modpacks.
+
+> [!NOTE]  
+> Modpack version does **NOT** necessarily have to match the client version!
+
 <br>
 <img src="github/images/home.png" width="700">
 <details>
@@ -17,28 +29,15 @@
   <img src="github/images/preview.png" width="700">
   <img src="github/images/grid.png" width="700">
 </details>
-<hr>
-
-The problem of all modpacks is their large size.<br>
-This modpack downloads only those mods that the user selected at runtime.<br>
-Also it has a modern Web interface.<br>
-Supports all client versions (including CT and SB)
-> Please note that the modpack version does **NOT** necessarily have to match the client version!
-<hr>
-
-Проблема всіх модпаків полягає в їхньому великому розмірі.<br>
-Цей модпак завантажує лише ті моди, які користувач вибирає сам.<br>
-Також він має сучасний веб-інтерфейс.<br>
-Підтримує всі версії клієнтів (включаючи CT і SB)
-> Зверніть увагу, що версія модпака **НЕ** обов'язково має співпадати із версією клієнта!
-<hr>
 
 ## Data Collection Notice
 
 This modpack automatically collects **anonymous statistics** that includes:
 - List of selected mods.
 - Modpack version.
-- WoT client version.
+- WoT version.
+- Client type (Steam or WGC).
+- Client language.
 
 The collected data is used **only for ranking mods by popularity**!
 - **No personal data** (such as username, IP address, or system information).   
