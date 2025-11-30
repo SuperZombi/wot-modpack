@@ -137,23 +137,14 @@ function Category({
 									/>
 								)
 							}
-
 							return <Mod
 								key={mod.id}
-								title={mod.title}
-								description={mod.description}
-								author={mod.author}
-								image={mod.image}
-								audio={mod.audio}
-								downloads={stats[mod.id] || 0}
-								checked={selectedMods.includes(mod.id) || false}
+								mod={mod}
+								selectedMods={selectedMods}
+								cachedMods={cachedMods}
 								onChange={() => toggleMod(mod.id)}
 								setPreview={setPreview}
 								setDisplayPreview={setDisplayPreview}
-								version={mod.ver}
-								cached_ver={
-									(cachedMods.find(el=>el.id==mod.id)||{}).ver || null
-								}
 							/>
 						})}
 					</div>
@@ -207,26 +198,17 @@ function Group({
 						key={mod.id}
 						type="radio"
 						name={id}
-						title={mod.title}
-						description={mod.description}
-						author={mod.author}
-						image={mod.image}
-						audio={mod.audio}
-						downloads={stats[mod.id] || 0}
+						mod={mod}
+						selectedMods={selectedMods}
+						cachedMods={cachedMods}
 						onChange={e=>onModCheck(mod.id, e.target.checked)}
-						checked={selectedMods.includes(mod.id) || false}
 						setPreview={setPreview}
 						setDisplayPreview={setDisplayPreview}
-						version={mod.ver}
-						cached_ver={
-							(cachedMods.find(el=>el.id==mod.id)||{}).ver || null
-						}
 					/>
 				))}
 			</React.Fragment>
 		)
 	}
-
 	return (
 		<div className="details group">
 			<label className="summary hover">
@@ -245,20 +227,12 @@ function Group({
 								key={mod.id}
 								type="radio"
 								name={id}
-								title={mod.title}
-								description={mod.description}
-								author={mod.author}
-								image={mod.image}
-								audio={mod.audio}
-								downloads={stats[mod.id] || 0}
+								mod={mod}
+								selectedMods={selectedMods}
+								cachedMods={cachedMods}
 								onChange={e=>onModCheck(mod.id, e.target.checked)}
-								checked={selectedMods.includes(mod.id) || false}
 								setPreview={setPreview}
 								setDisplayPreview={setDisplayPreview}
-								version={mod.ver}
-								cached_ver={
-									(cachedMods.find(el=>el.id==mod.id)||{}).ver || null
-								}
 							/>
 						))}
 					</div>
@@ -271,36 +245,23 @@ function Group({
 function Mod({
 	type="checkbox",
 	name="",
-	title,
-	description,
-	author,
-	image,
-	audio,
-	downloads,
-	checked,
+	mod,
 	onChange,
 	setPreview,
 	setDisplayPreview,
-	version,
-	cached_ver
+	selectedMods,
+	cachedMods,
 }) {
 	const { language, langData, modsLayout } = useApp()
 	const [imageLoaded, setImageLoaded] = React.useState(false)
 
 	const onMouse = _=> {
-		setPreview({
-			"title": title[language],
-			"description": description ? description[language] : null,
-			"author": author,
-			"image": image,
-			"audio": audio,
-			"downloads": downloads
-		})
+		setPreview(mod)
 		setDisplayPreview(true)
 	}
 	React.useEffect(_=>{
 		setImageLoaded(false)
-	}, [image])
+	}, [mod.image])
 
 	const onGridClick = e=>{
 		if (type == "radio" && checked){
@@ -314,6 +275,7 @@ function Mod({
 			})
 		}
 	}
+	const cached_ver = (cachedMods.find(el=>el.id==mod.id)||{}).ver || null
 
 	if (modsLayout == "grid"){
 		return (
@@ -321,21 +283,21 @@ function Mod({
 				<input
 					className="hover"
 					type={type}
-					checked={checked}
+					checked={selectedMods.includes(mod.id) || false}
 					onChange={onChange}
 					{...(name && { name })}
 				/>
 				<div className="image-container">
 					<img
-						src={image}
-						key={image}
+						src={mod.image}
+						key={mod.image}
 						className={`${imageLoaded ? '' : 'loading'}`}
 						draggable={false}
 						loading="lazy"
 						onLoad={_=>setImageLoaded(true)}
 					/>
 				</div>
-				<span>{replaceFlags(title[language])}</span>
+				<span>{replaceFlags(mod.title[language])}</span>
 			</label>
 		)
 	}
@@ -344,13 +306,13 @@ function Mod({
 			<input
 				className="hover"
 				type={type}
-				checked={checked}
+				checked={selectedMods.includes(mod.id) || false}
 				onChange={onChange}
 				{...(name && { name })}
 			/>
-			<span>{replaceFlags(title[language])}</span>
+			<span>{replaceFlags(mod.title[language])}</span>
 			{
-				(cached_ver && cached_ver != version) ? (
+				(cached_ver && cached_ver != mod.ver) ? (
 					<span className="new-badge" title={langData["mod_updated"]}/>
 				) : null
 			}

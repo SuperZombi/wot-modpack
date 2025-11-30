@@ -39,9 +39,6 @@ const ModsTab = ({
 	React.useEffect(_=>{
 		setImageLoaded(false)
 	}, [modPreview?.image])
-	React.useEffect(_=>{
-		setPreview(null)
-	}, [language])
 
 	return (
 		<div id="mods-area">
@@ -104,11 +101,11 @@ const ModsTab = ({
 								/>
 							</div>
 							<div id="mod-description-text">
-								<h3 align="center" id="mod-title">{modPreview ? replaceFlags(modPreview.title) : ""}</h3>
+								<h3 align="center" id="mod-title">{modPreview ? replaceFlags(modPreview.title[language]) : ""}</h3>
 								<h4 id="mod-subtitle">
 									<div id="mod-author">{modPreview?.author}</div>
 									<div id="mod-downloads">
-										<span>{modPreview?.downloads}</span>
+										<span>{modPreview ? (stats[modPreview.id] || 0) : null}</span>
 										<img src="images/download.svg" height="18" draggable={false}/>
 									</div>
 								</h4>
@@ -120,7 +117,7 @@ const ModsTab = ({
 									/>
 								) : null}
 								<div id="mod-description"
-									dangerouslySetInnerHTML={{ __html: modPreview?.description}}
+									dangerouslySetInnerHTML={{ __html: modPreview?.description?.[language]}}
 								></div>
 							</div>
 						</div>

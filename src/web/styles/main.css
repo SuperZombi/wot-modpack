@@ -121,7 +121,7 @@ header a:hover{
 	justify-content: center;
 }
 .loading{
-	background: linear-gradient(90deg, #d6d6d6 0%, #ececec 50%, #d6d6d6 100%);
+	background: linear-gradient(90deg, #ddd 0%, #bbb 50%, #ddd 100%);
 	background-size: 200% 100%;
 	animation: image-loading 2s infinite linear;
 }
@@ -131,7 +131,8 @@ header a:hover{
 }
 #mod-preview .loading {
 	min-height: 300px;
-	min-width: 300px;
+	width: 85%;
+	object-fit: cover;
 }
 #mod-image{
 	max-height: 100%;
