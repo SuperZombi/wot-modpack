@@ -59,7 +59,8 @@ const App = () => {
 			title: replaceFlags(mod.title[lang]),
 			description: mod.description?.[lang],
 			author: mod.author,
-			image: mod.image
+			image: mod.image,
+			audio: mod.audio
 		})
 		setSelected(mod.id)
 		setShowPreview(true)
@@ -72,7 +73,13 @@ const App = () => {
 
 	return (
 		<React.Fragment>
-			<h1 align="center">Web Modpack Mods list</h1>
+			<p align="center">
+				<img src="favicon.png" height="128" draggable={false} style={{userSelect: "none"}}/>
+			</p>
+			<h1 align="center">
+				<span>Web Modpack</span><br/>
+				<span>{LANG.mods_list[lang]}</span>
+			</h1>
 			<p align="center">
 				<select name="lang" value={lang} onChange={e=>setLang(e.target.value)} style={{fontSize: "12pt"}}>
 					<option value="en">English</option>
@@ -82,7 +89,9 @@ const App = () => {
 			</p>
 			{mods.length > 0 ? (
 				<React.Fragment>
-					<p align="center">{mods.filter(mod => mod.title).length} mods</p>
+					<p align="center">
+						{LANG.mods_count[lang].replace("{%}", mods.filter(mod => mod.title).length)}
+					</p>
 					<ModsList mods={mods} groups={groups} lang={lang} onPreview={onPreview}/>
 				</React.Fragment>
 			) : (
@@ -106,12 +115,23 @@ const App = () => {
 							<path fill="#fff" d="M82.62 187.14a14.04 14.04 0 0 1-9.94-23.98l90.48-90.47a14.05 14.05 0 0 1 19.86 19.87l-90.46 90.47a14 14 0 0 1-9.94 4.11"/>
 							<path fill="#fff" d="M173.1 187.14a14 14 0 0 1-9.94-4.11L72.69 92.56a14.05 14.05 0 1 1 19.87-19.87l90.47 90.47a14.04 14.04 0 0 1-9.94 23.98z"/>
 						</svg>
+						<h3 align="center">{previewData.title}</h3>
 						<div className="image-container">
 							<img src={previewData.image} draggable={false}/>
 						</div>
-						<h3 align="center">{previewData.title}</h3>
+						{previewData.audio ? (
+							<p style={{width: "100%"}}>
+								<audio src={previewData.audio}
+									controls autoPlay controlsList="nodownload"
+									style={{width: "100%"}}
+								/>
+							</p>
+						) : null}
+						{previewData.author ? (
+							<p>{LANG.author[lang]}: {previewData.author}</p>
+						) : null}
 						{previewData.description ? (
-							<p dangerouslySetInnerHTML={{ __html: previewData.description}}></p>
+							<p dangerouslySetInnerHTML={{ __html: previewData.description}}/>
 						) : null}
 					</div>
 				</div>
@@ -170,4 +190,21 @@ function replaceFlags(text) {
 		}
 		return part
 	})
+}
+const LANG = {
+	"mods_list": {
+		"en": "Mods list",
+		"ru": "Список модов",
+		"uk": "Список модів"
+	},
+	"mods_count": {
+		"en": "{%} mods",
+		"ru": "{%} модов",
+		"uk": "{%} модів"
+	},
+	"author": {
+		"en": "Author",
+		"ru": "Автор",
+		"uk": "Автор"
+	}
 }
