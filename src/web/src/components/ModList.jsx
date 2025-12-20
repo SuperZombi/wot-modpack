@@ -263,6 +263,8 @@ function Mod({
 		setImageLoaded(false)
 	}, [mod.image])
 
+	const checked = selectedMods.includes(mod.id) || false
+
 	const onGridClick = e=>{
 		if (type == "radio" && checked){
 			e.preventDefault()
@@ -283,7 +285,7 @@ function Mod({
 				<input
 					className="hover"
 					type={type}
-					checked={selectedMods.includes(mod.id) || false}
+					checked={checked}
 					onChange={onChange}
 					{...(name && { name })}
 				/>
@@ -311,7 +313,7 @@ function Mod({
 			<input
 				className="hover"
 				type={type}
-				checked={selectedMods.includes(mod.id) || false}
+				checked={checked}
 				onChange={onChange}
 				{...(name && { name })}
 			/>
