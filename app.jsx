@@ -132,7 +132,7 @@ const App = () => {
 							<p>{LANG.author[lang]}: {previewData.author}</p>
 						)}
 						{previewData.version && (
-							<span>Version: <code className="version">{previewData.version}</code></span>
+							<span>{LANG.version[lang]}: <code className="version">{previewData.version}</code></span>
 						)}
 						{previewData.description && (
 							<p dangerouslySetInnerHTML={{ __html: previewData.description}}/>
@@ -210,5 +210,10 @@ const LANG = {
 		"en": "Author",
 		"ru": "Автор",
 		"uk": "Автор"
+	},
+	"version": {
+		"en": "Version",
+		"ru": "Версия",
+		"uk": "Версія"
 	}
 }
