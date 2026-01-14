@@ -13,7 +13,7 @@ const Popup = ({onClose, children}) => {
 	}
 	return (
 		<div className={`popup ${show ? "show" : ""}`}
-			onClick={e=>e.target.classList.contains("popup") ? BeforeClose() : null}
+			onClick={e=>e.target.classList.contains("popup") && BeforeClose()}
 		>
 			<div className="popup_wraper">
 				<img src="/images/close.svg" className="close hover" draggable={false}

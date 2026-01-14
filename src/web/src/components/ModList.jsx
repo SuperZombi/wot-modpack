@@ -106,7 +106,7 @@ function Category({
 		<div className="details category">
 			<label className="summary hover">
 				<input type="checkbox" checked={opened} onChange={e=>setOpened(e.target.checked)}/>
-				{icon ? <img src={icon} draggable={false}/> : null}
+				{icon && <img src={icon} draggable={false}/>}
 				<span>{title[language]}</span>
 			</label>
 				
@@ -301,9 +301,9 @@ function Mod({
 				</div>
 				<span>{replaceFlags(mod.title[language])}</span>
 				{
-					(cached_ver && cached_ver != mod.ver) ? (
+					(cached_ver && cached_ver != mod.ver) && (
 						<i className="new-badge" title={langData["mod_updated"]}/>
-					) : null
+					)
 				}
 			</label>
 		)
@@ -319,9 +319,9 @@ function Mod({
 			/>
 			<span>{replaceFlags(mod.title[language])}</span>
 			{
-				(cached_ver && cached_ver != mod.ver) ? (
+				(cached_ver && cached_ver != mod.ver) && (
 					<i className="new-badge" title={langData["mod_updated"]}/>
-				) : null
+				)
 			}
 		</label>
 	)

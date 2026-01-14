@@ -164,15 +164,15 @@ const App = () => {
 				/>
 			</header>
 
-			{showSettings ? (
+			{showSettings && (
 				<Settings
 					appVersion={appVersion}
 					onClose={_=>setShowSettings(false)}
 					setCachedMods={setCachedMods}
 				/>
-			) : null}
+			)}
 
-			{ updateAvailable ? <UpdatePopup onClose={_=>setUpdateAvailable(false)}/> : null}
+			{ updateAvailable && <UpdatePopup onClose={_=>setUpdateAvailable(false)}/>}
 
 			<div className="flex-center top-content">
 				{page == "home" ? (
@@ -221,7 +221,7 @@ const App = () => {
 			</div>
 
 			<div className="bottom-buttons">
-				{(selectedClient && selectedClient.path != "custom") ? (
+				{(selectedClient && selectedClient.path != "custom") && (
 					page == "home" ? (
 						<React.Fragment>
 							<div className="button hover" onClick={onModsDelete}>
@@ -238,14 +238,14 @@ const App = () => {
 								<div className="button hover" onClick={_=>setPage("home")}>
 									<LANG id="back"/>
 								</div>
-								{mods.length > 0 ? (
+								{mods.length > 0 && (
 									<div className="button hover"
 										style={{marginLeft: "10px"}}
 										onClick={resetAllSelected}
 									>
 										<LANG id="reset"/>
 									</div>
-								) : null}
+								)}
 							</div>
 							<div className="button hover" onClick={_=>setPage("checkout")}>
 								<LANG id="next"/>
@@ -278,7 +278,7 @@ const App = () => {
 							</div>
 						</React.Fragment>
 					) : null
-				) : null}
+				)}
 			</div>
 		</React.Fragment>
 	)

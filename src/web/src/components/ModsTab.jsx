@@ -105,17 +105,17 @@ const ModsTab = ({
 								<h4 id="mod-subtitle">
 									<div id="mod-author">{modPreview?.author}</div>
 									<div id="mod-downloads">
-										<span>{modPreview ? (stats[modPreview.id] || 0) : null}</span>
+										<span>{modPreview && (stats[modPreview.id] || 0)}</span>
 										<img src="images/download.svg" height="18" draggable={false}/>
 									</div>
 								</h4>
-								{modPreview?.audio ? (
+								{modPreview?.audio && (
 									<audio id="mod-audio"
 										src={modPreview.audio || ""}
 										ref={audioRef} controls
 										controlsList="nodownload"
 									/>
-								) : null}
+								)}
 								<div id="mod-description"
 									dangerouslySetInnerHTML={{ __html: modPreview?.description?.[language]}}
 								></div>
