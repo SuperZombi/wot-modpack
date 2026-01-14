@@ -60,7 +60,8 @@ const App = () => {
 			description: mod.description?.[lang],
 			author: mod.author,
 			image: mod.image,
-			audio: mod.audio
+			audio: mod.audio,
+			version: mod.ver
 		})
 		setSelected(mod.id)
 		setShowPreview(true)
@@ -105,8 +106,8 @@ const App = () => {
 					</svg>
 				</h1>)
 			)}
-			{showPreview ? (
-				<div className="popup" onClick={e=>e.target.classList.contains("popup") ? onClosePreview() : null}>
+			{showPreview && (
+				<div className="popup" onClick={e=>e.target.classList.contains("popup") && onClosePreview()}>
 					<div className="popup-content">
 						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"
 							className="close" onClick={_=>onClosePreview()}
@@ -119,23 +120,26 @@ const App = () => {
 						<div className="image-container">
 							<img src={previewData.image} draggable={false}/>
 						</div>
-						{previewData.audio ? (
+						{previewData.audio && (
 							<p style={{width: "100%"}}>
 								<audio src={previewData.audio}
 									controls autoPlay controlsList="nodownload"
 									style={{width: "100%"}}
 								/>
 							</p>
-						) : null}
-						{previewData.author ? (
+						)}
+						{previewData.author && (
 							<p>{LANG.author[lang]}: {previewData.author}</p>
-						) : null}
-						{previewData.description ? (
+						)}
+						{previewData.version && (
+							<span>Version: <code className="version">{previewData.version}</code></span>
+						)}
+						{previewData.description && (
 							<p dangerouslySetInnerHTML={{ __html: previewData.description}}/>
-						) : null}
+						)}
 					</div>
 				</div>
-			) : null}
+			)}
 		</React.Fragment>
 	)
 }
