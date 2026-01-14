@@ -14,6 +14,15 @@ const CheckoutTab = ({
 		}
 	}, [selectedMods, installArgs.delete_mods])
 
+	const onClearInstall = _=>{
+		onArgChange("delete_mods", true)
+		onArgChange("delete_configs", true)
+	}
+	const onUpdateInstall = _=>{
+		onArgChange("delete_mods", true)
+		onArgChange("delete_configs", false)
+	}
+
 	const { language, langData } = useApp()
 	return (
 		<React.Fragment>
@@ -25,13 +34,23 @@ const CheckoutTab = ({
 						maxWidth: "400px"
 					}}
 				/>
-				<br/><br/><br/>
+				<br/><br/>
+				<div className="flex-center-row" style={{fontSize: "0.85rem"}}>
+					<Button onClick={onClearInstall}>
+						<LANG id="clear_install_button"/>
+					</Button>
+					<Button onClick={onUpdateInstall}>
+						<LANG id="update_install_button"/>
+					</Button>
+				</div>
+				<br/>
 				<div style={{margin: "auto", display: "inline-block"}}>
 					<label className="hover">
 						<input type="checkbox" className="hover"
 							checked={installArgs["save_selected_mods"]}
 							onChange={e=>onArgChange("save_selected_mods", e.target.checked)}
 						/>
+						<img src="images/bookmark.svg" height="16" draggable={false}/>
 						<LANG id="save_selected_mods"/>
 					</label>
 					<br/>
@@ -40,6 +59,7 @@ const CheckoutTab = ({
 							checked={installArgs["delete_mods"]}
 							onChange={e=>onArgChange("delete_mods", e.target.checked)}
 						/>
+						<img src="images/delete.svg" height="16" draggable={false}/>
 						<LANG id="remove_all_mods"/>
 					</label>
 					<br/>
@@ -48,6 +68,7 @@ const CheckoutTab = ({
 							checked={installArgs["delete_configs"]}
 							onChange={e=>onArgChange("delete_configs", e.target.checked)}
 						/>
+						<img src="images/delete-settings.svg" height="16" draggable={false}/>
 						<LANG id="remove_mod_configs"/>
 					</label>
 					<br/>

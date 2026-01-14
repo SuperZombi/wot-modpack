@@ -335,3 +335,18 @@ ul{
 	align-items: center;
 	justify-items: start;
 }
+
+#drag-area{
+	background: rgb(255, 255, 255, 0.2);
+	position: absolute;
+	inset: 0;
+	backdrop-filter: blur(2px);
+	z-index: 1;
+	visibility: hidden;
+	opacity: 0;
+	transition: 0.15s;
+}
+#drag-area.show{
+	opacity: 1;
+	visibility: visible;
+}

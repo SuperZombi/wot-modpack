@@ -224,59 +224,51 @@ const App = () => {
 				{(selectedClient && selectedClient.path != "custom") && (
 					page == "home" ? (
 						<React.Fragment>
-							<div className="button hover" onClick={onModsDelete}>
+							<Button onClick={onModsDelete}>
 								<LANG id="delete_mods_button"/>
-							</div>
-							<div className="button hover" onClick={_=>setPage("mods")}>
-								<LANG id="next"/>
-							</div>
+							</Button>
+							<NextButton onClick={_=>setPage("mods")}/>
 						</React.Fragment>
 					) :
 					page == "mods" ? (
 						<React.Fragment>
-							<div>
-								<div className="button hover" onClick={_=>setPage("home")}>
-									<LANG id="back"/>
-								</div>
+							<div style={{display: "flex", gap: "0.5em"}}>
+								<BackButton onClick={_=>setPage("home")}/>
 								{mods.length > 0 && (
-									<div className="button hover"
-										style={{marginLeft: "10px"}}
-										onClick={resetAllSelected}
-									>
+									<Button onClick={resetAllSelected}>
 										<LANG id="reset"/>
-									</div>
+									</Button>
 								)}
 							</div>
-							<div className="button hover" onClick={_=>setPage("checkout")}>
-								<LANG id="next"/>
-							</div>
+							<NextButton onClick={_=>setPage("checkout")}/>
 						</React.Fragment>
 					) :
 					page == "checkout" ? (
 						<React.Fragment>
-							<div>
-								<div className="button hover" onClick={_=>setPage("mods")}>
-									<LANG id="back"/>
-								</div>
-							</div>
-							<div className="button hover" onClick={mainCall}>
+							<BackButton onClick={_=>setPage("mods")}/>
+							{selectedMods.length > 0 && (
+								<Button className="flex-center-row" style={{display: "flex"}}
+									onClick={_=>writeToFile(JSON.stringify(selectedMods, null, 4), "my-mods.json")}
+								>
+									<img src="images/share.svg" height="18" draggable={false}/>
+									<LANG id="share"/>
+								</Button>
+							)}
+							<Button onClick={mainCall}>
 								{selectedMods.length > 0 ? (
 									<LANG id="install"/>
 								) : (
 									<LANG id="delete_mods_button"/>
 								)}
-							</div>
+							</Button>
 						</React.Fragment>
 					) :
 					page == "finish" ? (
-						<React.Fragment>
-							<div className="button hover"
-								onClick={_=>setPage("home")}
-								style={{margin: "auto"}}
-							>
-								<LANG id="home"/>
-							</div>
-						</React.Fragment>
+						<Button onClick={_=>setPage("home")}
+							style={{margin: "auto"}}
+						>
+							<LANG id="home"/>
+						</Button>
 					) : null
 				)}
 			</div>
@@ -289,6 +281,18 @@ ReactDOM.createRoot(document.getElementById("root")).render(
 		<App/>
 	</AppProvider>
 )
+
+function writeToFile(data, filename){
+	const blob = new Blob([data])
+	const url = URL.createObjectURL(blob)
+	const a = document.createElement("a")
+	a.href = url;
+	a.download = filename;
+	document.body.appendChild(a)
+	a.click()
+	document.body.removeChild(a)
+	URL.revokeObjectURL(url)
+}
 
 function loadModsInfo(callback, error){
 	fetch('https://raw.githubusercontent.com/SuperZombi/wot-modpack/refs/heads/mods/config.json')

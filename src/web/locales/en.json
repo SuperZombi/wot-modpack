@@ -12,6 +12,7 @@
 	"retry": "Retry",
 	"search": "Search",
 	"install": "Install",
+	"share": "Share",
 	"reset_confirm": "Reset all selected mods?",
 	"custom_game_folder": "Custom",
 	"remove_all_mods": "Remove all installed mods",
@@ -39,5 +40,7 @@
 	"mod_in_cache": "Mod in cache",
 	"mod_will_be_downloaded": "Mod will be downloaded",
 	"client_is_running_error": "The client is running!<br>Please close it and try again.",
-	"delete_mods_button": "Delete mods"
+	"delete_mods_button": "Delete mods",
+	"clear_install_button": "Clean installation",
+	"update_install_button": "Update"
 }

@@ -12,6 +12,7 @@
 	"retry": "Повторить",
 	"search": "Поиск",
 	"install": "Установить",
+	"share": "Поделиться",
 	"reset_confirm": "Сбросить все выбранные моды?",
 	"custom_game_folder": "Выбрать",
 	"remove_all_mods": "Удалить все установленные моды",
@@ -39,5 +40,7 @@
 	"mod_in_cache": "Мод в кэше",
 	"mod_will_be_downloaded": "Мод будет скачан",
 	"client_is_running_error": "Клиент запущен!<br>Пожалуйста, закройте его и попробуйте снова.",
-	"delete_mods_button": "Удалить моды"
+	"delete_mods_button": "Удалить моды",
+	"clear_install_button": "Чистая установка",
+	"update_install_button": "Обновление"
 }

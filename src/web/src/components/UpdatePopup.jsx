@@ -33,9 +33,9 @@ const UpdatePopup = ({
 			<div className="flex-center">
 				<img src="/images/up-arrow.svg" height="64" draggable={false} style={{userSelect: "none"}}/>
 				<h3 align="center"><LANG id="update_available"/></h3>
-				<a className="button hover" href="https://github.com/SuperZombi/wot-modpack/releases" target="_blank">
+				<Button href="https://github.com/SuperZombi/wot-modpack/releases">
 					<LANG id="download"/>
-				</a>
+				</Button>
 			</div>
 		</Popup>
 	)

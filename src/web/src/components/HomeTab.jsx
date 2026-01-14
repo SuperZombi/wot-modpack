@@ -75,27 +75,67 @@ function Select({ options=[], value, onChange, placeholder="", display_hint=fals
 
 	return (
 		<div ref={ref} className="select">
-			<div
-				className="select-header button hover"
+			<Button className="select-header"
 				onClick={() => setOpen(!open)}
 				title={(display_hint && value) ? value.path : null}
 			>
 				{value ? value.title : placeholder}
-			</div>
+			</Button>
 			{open && (
 				<div className="select-options">
 					{options.map((option) => (
-						<div
-							key={option.path}
+						<Button key={option.path}
 							title={(display_hint && option.path != "custom") ? option.path : null}
-							className={`button hover ${value?.path == option.path ? "selected": ""}`}
+							className={(value?.path == option.path) ? "selected": ""}
 							onClick={() => handleSelect(option)}
 						>
 							{option.title}
-						</div>
+						</Button>
 					))}
 				</div>
 			)}
 		</div>
+	)
+}
+const Button = ({children, href=null, className="", ...props})=>{
+	if (href){
+		return (
+			<a className={`button hover ${className}`.trim()}
+				href={href} target="_blank" {...props}
+			>
+				{children}
+			</a>
+		)
+	}
+	return (
+		<div className={`button hover ${className}`.trim()}
+			{...props}
+		>
+			{children}
+		</div>
+	)
+}
+const BackButton = ({className="", style, ...props})=>{
+	return (
+		<Button
+			className={`flex-center-row ${className}`}
+			style={{ display: "inline-flex", gap: "5px", ...style }}
+			{...props}
+		>
+			<img src="images/back.svg" height="18" draggable={false}/>
+			<LANG id="back"/>
+		</Button>
+	)
+}
+const NextButton = ({className="", style, ...props})=>{
+	return (
+		<Button
+			className={`flex-center-row ${className}`}
+			style={{ display: "inline-flex", gap: "5px", ...style }}
+			{...props}
+		>
+			<LANG id="next"/>
+			<img src="images/next.svg" height="18" draggable={false}/>
+		</Button>
 	)
 }

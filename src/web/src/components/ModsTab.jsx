@@ -40,19 +40,58 @@ const ModsTab = ({
 		setImageLoaded(false)
 	}, [modPreview?.image])
 
+	const [drag, setDrag] = React.useState(false)
+
+	const onDragEnter = e => {
+		e.preventDefault()
+		setDrag(true)
+	}
+	const onDragOver = e => {
+		e.preventDefault()
+		setDrag(true)
+	}
+	const onDragLeave = e => {
+		e.preventDefault()
+		setDrag(false)
+	}
+	const onDrop = e => {
+		e.preventDefault()
+		setDrag(false)
+
+		const droppedFile = e.dataTransfer.files[0]
+		if (!droppedFile) return
+
+		const reader = new FileReader()
+		reader.onload = () => {
+			const text = reader.result
+			const data = JSON.parse(text)
+			const filtered = data.filter(id => 
+				mods.some(mod => mod.id === id)
+			)
+			setSelectedMods(filtered)
+		}
+		reader.readAsText(droppedFile)
+	}
+
 	return (
-		<div id="mods-area">
+		<div id="mods-area"
+			onDragEnter={onDragEnter}
+			onDragLeave={onDragLeave}
+			onDragOver={onDragOver}
+			onDrop={onDrop}
+		>
 			{failedToLoadModsInfo ? (
 				<div id="retry_area">
 					<LANG id="mods_info_parse_fail"/>
-					<div className="button hover" onClick={_=>setFailedToLoadModsInfo(false)}>
+					<Button onClick={_=>setFailedToLoadModsInfo(false)}>
 						<img src="images/retry.svg" height="18" draggable={false}/>
 						<LANG id="retry"/>
-					</div>
+					</Button>
 				</div>
 			) : (
 				mods.length > 0 ? (
 					<React.Fragment>
+						<div id="drag-area" className={drag ? "show":""}></div>
 						<div id="mods-list-area">
 							<div id="search-area">
 								<input
@@ -62,7 +101,7 @@ const ModsTab = ({
 									value={search}
 									onChange={e => setSearch(e.target.value)}
 								/>
-								<div className="button hover" style={{display: "flex"}}
+								<Button style={{display: "flex"}}
 									onClick={_=>setModsLayout(prev=>prev=="grid"?"list":"grid")}
 								>
 									{modsLayout == "grid" ? (
@@ -70,7 +109,7 @@ const ModsTab = ({
 									) : (
 										<img src="images/grid.svg" draggable={false} height="20"/>
 									)}
-								</div>
+								</Button>
 							</div>
 							<ModList
 								mods={mods}

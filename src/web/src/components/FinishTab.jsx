@@ -37,11 +37,9 @@ const FinishTab = ({
 						</React.Fragment>
 					) : null}
 					<br/>
-					<a className="button hover" href="https://github.com/SuperZombi/wot-modpack/issues" target="_blank"
-						style={{fontSize: "12px"}}
-					>
+					<Button href="https://github.com/SuperZombi/wot-modpack/issues" style={{fontSize: "12px"}}>
 						<LANG id="report_bug"/>
-					</a>
+					</Button>
 				</React.Fragment>
 			) : (
 				<React.Fragment>

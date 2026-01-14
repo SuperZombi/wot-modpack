@@ -32,6 +32,13 @@ svg{
 	justify-content: center;
 	text-align: center;
 }
+.flex-center-row {
+	display: flex;
+	flex-direction: row;
+	gap: 0.5em;
+	justify-content: center;
+	align-items: center;
+}
 .flex-row {
 	display: grid;
 	grid-template-columns: auto auto 1fr;

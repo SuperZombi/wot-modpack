@@ -70,9 +70,9 @@ const Settings = ({
 				</span>
 			</p>
 			<div style={{textAlign: "center", fontSize: "14px"}}>
-				<div className="button hover" onClick={clear_cache}>
+				<Button onClick={clear_cache}>
 					<LANG id="clear_cache"/>
-				</div>
+				</Button>
 			</div>
 			<hr/>
 			<p className="links">
@@ -87,9 +87,9 @@ const Settings = ({
 				</a>
 			</p>
 			<div style={{textAlign: "center", fontSize: "12px"}}>
-				<a className="button hover" href="https://github.com/SuperZombi/wot-modpack/issues" target="_blank">
+				<Button href="https://github.com/SuperZombi/wot-modpack/issues">
 					<LANG id="report_bug"/>
-				</a>
+				</Button>
 			</div>
 		</Popup>
 	)
