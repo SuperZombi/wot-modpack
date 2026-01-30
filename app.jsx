@@ -4,6 +4,7 @@ const App = () => {
 	const [stats, setStats] = React.useState({})
 	const [langStats, setLangStats] = React.useState({})
 	const [clientStats, setClientStats] = React.useState({})
+	const [totalInstalls, setTotalInstalls] = React.useState(0)
 
 	const [showPreview, setShowPreview] = React.useState(false)
 	const [previewData, setPreviewData] = React.useState({})
@@ -33,16 +34,19 @@ const App = () => {
 		})
 	}, [])
 	React.useEffect(() => {
-		loadStatsPage('2089462923', setStats)
+		loadStatsPage('2089462923', data=>setStats(statsAsNumber(data)))
 	}, [])
 	
 	React.useEffect(() => {
 		if (tab == "otherStats"){
 			if (Object.keys(langStats).length == 0){
-				loadStatsPage("1884858162", setLangStats)
+				loadStatsPage("1884858162", data=>setLangStats(statsAsNumber(data)))
 			}
 			if (Object.keys(clientStats).length == 0){
-				loadStatsPage("224300057", setClientStats)
+				loadStatsPage("224300057", data=>setClientStats(statsAsNumber(data)))
+			}
+			if (totalInstalls == 0){
+				loadStatsPage("342255871", data=>setTotalInstalls(Math.max(0, data.length-1)))
 			}
 		}
 	}, [tab])
@@ -124,7 +128,7 @@ const App = () => {
 					{LANG.statsTab[lang]}
 				</span>
 				<span className={tab == "otherStats" ? "active" : null} onClick={_=>setTab("otherStats")}>
-					{LANG.statsTab[lang]} 2
+					{LANG.otherStatsTab[lang]}
 				</span>
 			</div>
 			{mods.length > 0 ? (
@@ -134,7 +138,7 @@ const App = () => {
 							<ModStats mods={mods} stats={stats} lang={lang} onPreview={onPreview}/>
 						</React.Fragment>
 					) : tab == "otherStats" ? (
-						<OtherStats langStats={langStats} clientStats={clientStats}/>
+						<OtherStats langStats={langStats} clientStats={clientStats} totalInstalls={totalInstalls} lang={lang}/>
 					) : (
 						<React.Fragment>
 							<p align="center">
@@ -263,12 +267,15 @@ const ModStats = ({mods, stats, lang, onPreview}) => {
 	)
 }
 
-const OtherStats = ({langStats, clientStats}) => {
+const OtherStats = ({langStats, clientStats, totalInstalls, lang}) => {
 	return (
-		<div className="row">
-			<OtherStatsTable caption="Languages" data={langStats}/>
-			<OtherStatsTable caption="Clients" data={clientStats}/>
-		</div>
+		<React.Fragment>
+			<p align="center">{LANG.installations[lang]}: {totalInstalls}</p>
+			<div className="row">
+				<OtherStatsTable caption={LANG.languagesTable[lang]} data={langStats}/>
+				<OtherStatsTable caption={LANG.clientsTable[lang]} data={clientStats}/>
+			</div>
+		</React.Fragment>
 	)
 }
 const OtherStatsTable = ({caption, data}) => {
@@ -326,14 +333,12 @@ function loadStatsPage(SHEET_ID, callback){
 		}
 		return r.text()
 	}).then(text=>{
-		callback(Object.fromEntries(
-			text.split("\n").map(line => {
-				const [key, value] = line.split(",")
-				return [key, Number(value)]
-			})
-		))
+		callback(text.split("\n").map(line => line.trim().split(",")))
 	})
 	.catch(console.error)
+}
+function statsAsNumber(array){
+	return Object.fromEntries(array.map(([key, value]) => [key, Number(value)]))
 }
 const LANG = {
 	"mods_list": {
@@ -375,5 +380,25 @@ const LANG = {
 		"en": "Stats",
 		"ru": "Статистика",
 		"uk": "Статистика"
+	},
+	"otherStatsTab": {
+		"en": "Other",
+		"ru": "Другое",
+		"uk": "Інше"
+	},
+	"installations": {
+		"en": "Installations",
+		"ru": "Установок",
+		"uk": "Встановлень"
+	},
+	"languagesTable": {
+		"en": "Languages",
+		"ru": "Языки",
+		"uk": "Мови"
+	},
+	"clientsTable": {
+		"en": "Clients",
+		"ru": "Клиенты",
+		"uk": "Клієнти"
 	},
 }
