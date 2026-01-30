@@ -38,7 +38,14 @@ const App = () => {
 	}, [])
 	
 	React.useEffect(() => {
-		if (tab == "otherStats"){
+		if (tab == "mods"){
+			document.title = "Web Modpack • Mods"
+		}
+		else if (tab == "stats"){
+			document.title = "Web Modpack • Stats"
+		}
+		else if (tab == "otherStats"){
+			document.title = "Web Modpack • Stats"
 			if (Object.keys(langStats).length == 0){
 				loadStatsPage("1884858162", data=>setLangStats(statsAsNumber(data)))
 			}
@@ -198,8 +205,7 @@ const App = () => {
 						)}
 						<button className="button" onClick={_=>share({
 							title: previewData.title,
-							text: previewData.title,
-							url: window.location.href
+							mod_id: previewData.id
 						})}>
 							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
 								<path d="M49.8 3.3C24 3.3 3.1 24.2 3.1 50S24 96.7 49.8 96.7 96.5 75.8 96.5 50 75.6 3.3 49.8 3.3m5.8 64.2V55.8s-23.4-5.8-35 11.7c0-19.3 15.7-35 35-35V20.8L79 44.2z"/>
@@ -318,10 +324,18 @@ function replaceFlags(text) {
 	})
 }
 function share(data) {
+	const params = new URLSearchParams()
+	params.set("id", data.mod_id)
+	const url = new URL(window.location.href)
+	url.search = params.toString()
 	if (navigator.share) {
-		navigator.share(data)
+		navigator.share({
+			title: data.title,
+			text: data.title,
+			url: url.toString()
+		})
 	} else {
-		navigator.clipboard.writeText(data.url)
+		navigator.clipboard.writeText(url.toString())
 	}
 }
 function loadStatsPage(SHEET_ID, callback){
