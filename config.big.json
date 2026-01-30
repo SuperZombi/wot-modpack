@@ -1968,6 +1968,29 @@
 			"category": "hangar"
 		},
 		{
+			"id": "panikaxa.extra_style_filters",
+			"files": [
+				{
+					"url": "https://github.com/SuperZombi/wot-modpack/raw/refs/heads/mods/mods/hangar/panikaxa.wot.extra_style_filters.wotmod",
+					"dest": "mods"
+				}
+			],
+			"image": "https://raw.githubusercontent.com/SuperZombi/wot-modpack/refs/heads/mods/images/hangar/panikaxa.extra_style_filters.jpg",
+			"title": {
+				"en": "Extra Style Filters",
+				"ru": "Дополнительные фильтры стилей",
+				"uk": "Додаткові фільтри стилів",
+			},
+			"description": {
+				"en": "<ul><li>Adding styles to «Favorites».</li><li>Additional style filters.</li><li>Search by style name.</li><li>Quick demount a style from other tanks.</li></ul>",
+				"ru": "<ul><li>Добавление стилей в «Избранное».</li><li>Дополнительные фильтры для стилей.</li><li>Поиск по названию стиля.</li><li>Быстрое снятие стиля з других танков.</li></ul>",
+				"uk": "<ul><li>Додавання стилів до «Обраного».</li><li>Додаткові фільтри для стилів.</li><li>Пошук за назвою стилю.</li><li>Швидке зняття стилю з інших танків.</li></ul>",
+			},
+			"author": "Panikaxa",
+			"ver": "1.0.2",
+			"category": "hangar"
+		},
+		{
 			"id": "kurzdor.autoequipmentreturn",
 			"files": [{
 				"url": "https://github.com/SuperZombi/wot-modpack/raw/refs/heads/mods/mods/hangar/me.kurzdor.autoequipmentreturn.wotmod",
