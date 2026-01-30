@@ -26,11 +26,6 @@ body{
 	grid-auto-rows: 150px;
 	gap: 10px;
 }
-@media (max-width: 600px) {
-	#mods-list {
-		grid-template-columns: repeat(2, 1fr);
-	}
-}
 .mod{
 	display: grid;
 	grid-template-rows: 1fr auto;
@@ -79,6 +74,7 @@ body{
 	overflow: auto;
 	max-height: 95dvh;
 	max-width: 95dvw;
+	min-width: 40dvw;
 	gap: 1rem;
 }
 .image-container{
@@ -136,6 +132,18 @@ body{
 .button svg{
 	height: 18px;
 	fill: #fff;
+}
+@media (max-width: 600px) {
+	#mods-list {
+		grid-template-columns: repeat(2, 1fr);
+	}
+	.image-container{
+		height: auto;
+		min-height: fit-content;
+		max-height: 300px;
+		overflow: hidden;
+		border-radius: 10px;
+	}
 }
 </style>
 </head>
