@@ -120,23 +120,36 @@ const App = () => {
 						<div className="image-container">
 							<img src={previewData.image} draggable={false}/>
 						</div>
-						{previewData.audio && (
-							<p style={{width: "100%"}}>
-								<audio src={previewData.audio}
-									controls autoPlay controlsList="nodownload"
-									style={{width: "100%"}}
-								/>
-							</p>
-						)}
 						{previewData.author && (
-							<p>{LANG.author[lang]}: {previewData.author}</p>
+							<span>{LANG.author[lang]}: {previewData.author}</span>
 						)}
 						{previewData.version && (
 							<span>{LANG.version[lang]}: <code className="version">{previewData.version}</code></span>
 						)}
 						{previewData.description && (
-							<p dangerouslySetInnerHTML={{ __html: previewData.description}}/>
+							<div className="mod-description">
+								<hr/>
+								<div dangerouslySetInnerHTML={{ __html: previewData.description}}/>
+							</div>
 						)}
+						{previewData.audio && (
+							<div style={{width: "100%"}}>
+								<audio src={previewData.audio}
+									controls autoPlay controlsList="nodownload"
+									style={{width: "100%"}}
+								/>
+							</div>
+						)}
+						<button className="button" onClick={_=>share({
+							title: previewData.title,
+							text: previewData.title,
+							url: window.location.href
+						})}>
+							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+								<path d="M49.8 3.3C24 3.3 3.1 24.2 3.1 50S24 96.7 49.8 96.7 96.5 75.8 96.5 50 75.6 3.3 49.8 3.3m5.8 64.2V55.8s-23.4-5.8-35 11.7c0-19.3 15.7-35 35-35V20.8L79 44.2z"/>
+							</svg>
+							<span>{LANG.share[lang]}</span>
+						</button>
 					</div>
 				</div>
 			)}
@@ -195,6 +208,13 @@ function replaceFlags(text) {
 		return part
 	})
 }
+function share(data) {
+	if (navigator.share) {
+		navigator.share(data)
+	} else {
+		navigator.clipboard.writeText(data.url)
+	}
+}
 const LANG = {
 	"mods_list": {
 		"en": "Mods list",
@@ -215,5 +235,10 @@ const LANG = {
 		"en": "Version",
 		"ru": "Версия",
 		"uk": "Версія"
+	},
+	"share": {
+		"en": "Share",
+		"ru": "Поделиться",
+		"uk": "Поділитися"
 	}
 }

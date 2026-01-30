@@ -79,6 +79,7 @@ body{
 	overflow: auto;
 	max-height: 95dvh;
 	max-width: 95dvw;
+	gap: 1rem;
 }
 .image-container{
 	height: 300px;
@@ -91,6 +92,12 @@ body{
 	max-width: 100%;
 	border-radius: 10px;
 	user-select: none;
+}
+.mod-description ul{
+	margin: 0;
+}
+.mod-description hr{
+	width: 100%;
 }
 .close {
 	position: absolute;
@@ -105,6 +112,30 @@ body{
 	padding: 4px 10px;
 	border-radius: 8px;
 	color: white;
+}
+.button {
+	display: flex;
+	align-items: center;
+	gap: 5px;
+	padding: 10px 15px;
+	border-radius: 8px;
+	color: #fff;
+	background: #0276FF;
+	border-style: none;
+	cursor: pointer;
+	font-size: 100%;
+	transition: 0.12s ease-in-out;
+	user-select: none;
+}
+.button:hover {
+	background: #1C84FF;
+}
+.button:active {
+	background: #006AE8;
+}
+.button svg{
+	height: 18px;
+	fill: #fff;
 }
 </style>
 </head>
