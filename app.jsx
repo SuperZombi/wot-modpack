@@ -6,6 +6,8 @@ const App = () => {
 	const [previewData, setPreviewData] = React.useState({})
 	const [selected, setSelected] = React.useState(null)
 	const [error, setError] = React.useState(false)
+
+	const [tab, setTab] = React.useState("mods")
 	
 	const supportedLangs = ["en", "ru", "uk"]
 	const userLang = navigator.language?.slice(0, 2)
@@ -51,18 +53,25 @@ const App = () => {
 		const params = new URLSearchParams(window.location.search)
 		const id = params.get("id")
 		if (id){ setSelected(id) }
+		const tab = params.get("tab")
+		if (tab){ setTab(tab) }
 	}, [])
 	React.useEffect(() => {
 		const params = new URLSearchParams(window.location.search)
 		if (selected !== null) {
-			params.set("id", selected);
+			params.set("id", selected)
 		} else {
-			params.delete("id");
+			params.delete("id")
+		}
+		if (tab !== "mods"){
+			params.set("tab", tab)
+		} else {
+			params.delete("tab")
 		}
 		const q = params.toString()
 		const newUrl = q ? window.location.pathname + "?" + q : window.location.pathname;
 		history.replaceState(null, "", newUrl)
-	}, [selected])
+	}, [selected, tab])
 	React.useEffect(() => {
 		if (!selected || mods.length === 0) return;
 		const mod = mods.find(m => m.id == selected);
@@ -92,6 +101,7 @@ const App = () => {
 		setSelected(null)
 	}
 
+
 	return (
 		<React.Fragment>
 			<p align="center">
@@ -108,12 +118,28 @@ const App = () => {
 					<option value="uk">Ukranian</option>
 				</select>
 			</p>
+			<div className="tabs">
+				<span className={tab == "mods" ? "active" : null} onClick={_=>setTab("mods")}>
+					{LANG.modsTab[lang]}
+				</span>
+				<span className={tab == "stats" ? "active" : null} onClick={_=>setTab("stats")}>
+					{LANG.statsTab[lang]}
+				</span>
+			</div>
 			{mods.length > 0 ? (
 				<React.Fragment>
-					<p align="center">
-						{LANG.mods_count[lang].replace("{%}", mods.filter(mod => mod.title).length)}
-					</p>
-					<ModsList mods={mods} groups={groups} lang={lang} onPreview={onPreview}/>
+					{tab == "stats" ? (
+						<React.Fragment>
+							<ModStats mods={mods} stats={stats} lang={lang} onPreview={onPreview}/>
+						</React.Fragment>
+					) : (
+						<React.Fragment>
+							<p align="center">
+								{LANG.mods_count[lang].replace("{%}", mods.filter(mod => mod.title).length)}
+							</p>
+							<ModsList mods={mods} groups={groups} lang={lang} onPreview={onPreview}/>
+						</React.Fragment>
+					)}
 				</React.Fragment>
 			) : (
 				error ? <h3 align="center" style={{color: "red"}}>Failed to fetch!</h3> : (
@@ -212,6 +238,28 @@ const ModsList = ({ mods, groups, lang, onPreview }) => {
 	)
 }
 
+const ModStats = ({mods, stats, lang, onPreview}) => {
+	const sortedMods = mods
+		.filter(mod => mod.title)
+		.map(mod => ({
+			...mod,
+			popularity: stats[mod.id] || 0
+		}))
+		.sort((a, b) => b.popularity - a.popularity)
+
+	return (
+		<div id="stats-list">
+			{sortedMods.map(mod => (
+				<div className="item" key={mod.id} onClick={_=>onPreview(mod)}>
+					<img src={mod.image} draggable={false}/>
+					<span>{replaceFlags(mod.title[lang])}</span>
+					<span>{mod.popularity}</span>
+				</div>
+			))}
+		</div>
+	)
+}
+
 const Mod = ({ mod, lang, onPreview }) => {
 	return (
 		<div className="mod" onClick={_=>onPreview(mod)}>
@@ -268,5 +316,15 @@ const LANG = {
 		"en": "Downloads",
 		"ru": "Скачиваний",
 		"uk": "Завантажень"
-	}
+	},
+	"modsTab": {
+		"en": "Mods",
+		"ru": "Моды",
+		"uk": "Моди"
+	},
+	"statsTab": {
+		"en": "Stats",
+		"ru": "Статистика",
+		"uk": "Статистика"
+	},
 }

@@ -95,6 +95,30 @@ body{
 .mod-description hr{
 	width: 100%;
 }
+#stats-list {
+	display: flex;
+	flex-direction: column;
+	gap: 5px;
+}
+#stats-list .item{
+	display: grid;
+	grid-template-columns: 64px 1fr auto;
+	align-items: center;
+	gap: 12px;
+	cursor: pointer;
+	background: #eee;
+	padding-right: 8px;
+	transition: 0.15s;
+}
+#stats-list .item:hover{
+	background: lightgray;
+}
+#stats-list .item img{
+	height: 64px;
+	width: 64px;
+	object-fit: cover;
+	user-select: none;
+}
 .close {
 	position: absolute;
 	height: 25px;
@@ -132,6 +156,23 @@ body{
 .button svg{
 	height: 18px;
 	fill: #fff;
+}
+.tabs {
+	display: flex;
+	justify-content: center;
+	gap: 5px;
+	border-bottom: 1px solid;
+}
+.tabs span {
+	border: 1px solid;
+	border-bottom: 0;
+	border-radius: 6px 6px 0 0;
+	padding: 4px 8px;
+	cursor: pointer;
+	user-select: none;
+}
+.tabs .active{
+	background: lightgray;
 }
 @media (max-width: 600px) {
 	#mods-list {
