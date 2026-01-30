@@ -2,6 +2,9 @@ const App = () => {
 	const [mods, setMods] = React.useState([])
 	const [groups, setGroups] = React.useState([])
 	const [stats, setStats] = React.useState({})
+	const [langStats, setLangStats] = React.useState({})
+	const [clientStats, setClientStats] = React.useState({})
+
 	const [showPreview, setShowPreview] = React.useState(false)
 	const [previewData, setPreviewData] = React.useState({})
 	const [selected, setSelected] = React.useState(null)
@@ -32,6 +35,18 @@ const App = () => {
 	React.useEffect(() => {
 		loadStatsPage('2089462923', setStats)
 	}, [])
+	
+	React.useEffect(() => {
+		if (tab == "otherStats"){
+			if (Object.keys(langStats).length == 0){
+				loadStatsPage("1884858162", setLangStats)
+			}
+			if (Object.keys(clientStats).length == 0){
+				loadStatsPage("224300057", setClientStats)
+			}
+		}
+	}, [tab])
+
 	React.useEffect(() => {
 		const params = new URLSearchParams(window.location.search)
 		const id = params.get("id")
@@ -119,7 +134,7 @@ const App = () => {
 							<ModStats mods={mods} stats={stats} lang={lang} onPreview={onPreview}/>
 						</React.Fragment>
 					) : tab == "otherStats" ? (
-						<OtherStats/>
+						<OtherStats langStats={langStats} clientStats={clientStats}/>
 					) : (
 						<React.Fragment>
 							<p align="center">
@@ -248,41 +263,31 @@ const ModStats = ({mods, stats, lang, onPreview}) => {
 	)
 }
 
-const OtherStats = () => {
-	const [langStats, setLangStats] = React.useState({})
-	const [clientStats, setClientStats] = React.useState({})
-
-	React.useEffect(() => {
-		loadStatsPage("224300057", setClientStats)
-		loadStatsPage("1884858162", setLangStats)
-	}, [])
-
+const OtherStats = ({langStats, clientStats}) => {
 	return (
 		<div className="row">
-			<table border="1">
-			<caption>Languages</caption>
-			<tbody>
-				{Object.entries(langStats).map(([name, count], index)=>(
-					<tr key={index}>
-						<td>{name}</td>
-						<td style={{textAlign: "right"}}>{count}</td>
-					</tr>
-				))}
-			</tbody>
-			</table>
-
-			<table border="1">
-			<caption>Clients</caption>
-			<tbody>
-				{Object.entries(clientStats).map(([name, count], index)=>(
-					<tr key={index}>
-						<td>{name}</td>
-						<td style={{textAlign: "right"}}>{count}</td>
-					</tr>
-				))}
-			</tbody>
-			</table>
+			<OtherStatsTable caption="Languages" data={langStats}/>
+			<OtherStatsTable caption="Clients" data={clientStats}/>
 		</div>
+	)
+}
+const OtherStatsTable = ({caption, data}) => {
+	return (
+		<table border="1">
+			<caption>{caption}</caption>
+			<tbody>
+				{Object.keys(data).length > 0 ? (
+					<React.Fragment>
+					{Object.entries(data).map(([name, count], index)=>(
+						<tr key={index}>
+							<td>{name}</td>
+							<td style={{textAlign: "right"}}>{count}</td>
+						</tr>
+					))}
+					</React.Fragment>
+				) : <tr><td>Loading...</td></tr>}
+			</tbody>
+		</table>
 	)
 }
 
