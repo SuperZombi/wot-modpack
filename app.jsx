@@ -30,25 +30,8 @@ const App = () => {
 		})
 	}, [])
 	React.useEffect(() => {
-		fetch('https://docs.google.com/spreadsheets/d/1GEMJfZxjUYmQAg-cDcQ7DGNjsX6pASMp9hQ1T0tVRfo/export?format=csv&gid=2089462923')
-		.then(r=>{
-			if (!r.ok) {
-				throw new Error(`HTTP error!: ${r.status}`)
-			}
-			return r.text()
-		}).then(text=>{
-			setStats(Object.fromEntries(
-				text.split("\n").map(line => {
-					const [key, value] = line.split(",")
-					return [key, Number(value)]
-				})
-			))
-		})
-		.catch(err=>{
-			console.error(err)
-		})
+		loadStatsPage('2089462923', setStats)
 	}, [])
-
 	React.useEffect(() => {
 		const params = new URLSearchParams(window.location.search)
 		const id = params.get("id")
@@ -125,6 +108,9 @@ const App = () => {
 				<span className={tab == "stats" ? "active" : null} onClick={_=>setTab("stats")}>
 					{LANG.statsTab[lang]}
 				</span>
+				<span className={tab == "otherStats" ? "active" : null} onClick={_=>setTab("otherStats")}>
+					{LANG.statsTab[lang]} 2
+				</span>
 			</div>
 			{mods.length > 0 ? (
 				<React.Fragment>
@@ -132,6 +118,8 @@ const App = () => {
 						<React.Fragment>
 							<ModStats mods={mods} stats={stats} lang={lang} onPreview={onPreview}/>
 						</React.Fragment>
+					) : tab == "otherStats" ? (
+						<OtherStats/>
 					) : (
 						<React.Fragment>
 							<p align="center">
@@ -260,6 +248,44 @@ const ModStats = ({mods, stats, lang, onPreview}) => {
 	)
 }
 
+const OtherStats = () => {
+	const [langStats, setLangStats] = React.useState({})
+	const [clientStats, setClientStats] = React.useState({})
+
+	React.useEffect(() => {
+		loadStatsPage("224300057", setClientStats)
+		loadStatsPage("1884858162", setLangStats)
+	}, [])
+
+	return (
+		<div className="row">
+			<table border="1">
+			<caption>Languages</caption>
+			<tbody>
+				{Object.entries(langStats).map(([name, count], index)=>(
+					<tr key={index}>
+						<td>{name}</td>
+						<td style={{textAlign: "right"}}>{count}</td>
+					</tr>
+				))}
+			</tbody>
+			</table>
+
+			<table border="1">
+			<caption>Clients</caption>
+			<tbody>
+				{Object.entries(clientStats).map(([name, count], index)=>(
+					<tr key={index}>
+						<td>{name}</td>
+						<td style={{textAlign: "right"}}>{count}</td>
+					</tr>
+				))}
+			</tbody>
+			</table>
+		</div>
+	)
+}
+
 const Mod = ({ mod, lang, onPreview }) => {
 	return (
 		<div className="mod" onClick={_=>onPreview(mod)}>
@@ -285,6 +311,24 @@ function share(data) {
 	} else {
 		navigator.clipboard.writeText(data.url)
 	}
+}
+function loadStatsPage(SHEET_ID, callback){
+	const DOC_ID = "1GEMJfZxjUYmQAg-cDcQ7DGNjsX6pASMp9hQ1T0tVRfo"
+	fetch(`https://docs.google.com/spreadsheets/d/${DOC_ID}/export?format=csv&gid=${SHEET_ID}`)
+	.then(r=>{
+		if (!r.ok) {
+			throw new Error(`HTTP error!: ${r.status}`)
+		}
+		return r.text()
+	}).then(text=>{
+		callback(Object.fromEntries(
+			text.split("\n").map(line => {
+				const [key, value] = line.split(",")
+				return [key, Number(value)]
+			})
+		))
+	})
+	.catch(console.error)
 }
 const LANG = {
 	"mods_list": {
