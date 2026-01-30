@@ -1,6 +1,7 @@
 const App = () => {
 	const [mods, setMods] = React.useState([])
 	const [groups, setGroups] = React.useState([])
+	const [stats, setStats] = React.useState({})
 	const [showPreview, setShowPreview] = React.useState(false)
 	const [previewData, setPreviewData] = React.useState({})
 	const [selected, setSelected] = React.useState(null)
@@ -14,7 +15,7 @@ const App = () => {
 		fetch('https://raw.githubusercontent.com/SuperZombi/wot-modpack/refs/heads/mods/config.json')
 		.then(r=>{
 			if (!r.ok) {
-				throw new Error(`HTTP error!: ${r.status}`);
+				throw new Error(`HTTP error!: ${r.status}`)
 			}
 			return r.json()
 		}).then(data=>{
@@ -24,6 +25,25 @@ const App = () => {
 		.catch(err=>{
 			console.error(err)
 			setError(true)
+		})
+	}, [])
+	React.useEffect(() => {
+		fetch('https://docs.google.com/spreadsheets/d/1GEMJfZxjUYmQAg-cDcQ7DGNjsX6pASMp9hQ1T0tVRfo/export?format=csv&gid=2089462923')
+		.then(r=>{
+			if (!r.ok) {
+				throw new Error(`HTTP error!: ${r.status}`)
+			}
+			return r.text()
+		}).then(text=>{
+			setStats(Object.fromEntries(
+				text.split("\n").map(line => {
+					const [key, value] = line.split(",")
+					return [key, Number(value)]
+				})
+			))
+		})
+		.catch(err=>{
+			console.error(err)
 		})
 	}, [])
 
@@ -125,6 +145,9 @@ const App = () => {
 						)}
 						{previewData.version && (
 							<span>{LANG.version[lang]}: <code className="version">{previewData.version}</code></span>
+						)}
+						{Object.keys(stats).length > 0 && (
+							<span>⬇️{LANG.downloads[lang]}: {stats[previewData.id] || 0}</span>
 						)}
 						{previewData.description && (
 							<div className="mod-description">
@@ -240,5 +263,10 @@ const LANG = {
 		"en": "Share",
 		"ru": "Поделиться",
 		"uk": "Поділитися"
+	},
+	"downloads": {
+		"en": "Downloads",
+		"ru": "Скачиваний",
+		"uk": "Завантажень"
 	}
 }
