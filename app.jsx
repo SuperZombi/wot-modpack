@@ -114,7 +114,7 @@ const App = () => {
 				<img src="favicon.png" height="128" draggable={false} style={{userSelect: "none"}}/>
 			</p>
 			<h1 align="center">
-				<span>Web Modpack</span><br/>
+				<a href="https://github.com/SuperZombi/wot-modpack/" target="_blank">Web Modpack</a>
 			</h1>
 			<div className="float-right">
 				<select name="lang" value={lang} onChange={e=>setLang(e.target.value)} style={{fontSize: "12pt"}}>
