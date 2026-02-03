@@ -3,9 +3,9 @@
 # Web Modpack
 ### Lightweight and modern modpack for World of Tanks
 
-<p align="right">
-    <img align="left" src="https://shields.io/badge/version-2.3.0-blue">
-    <a href="https://wgmods.net/7156/"><img align="left" src="https://shields.io/badge/🡻-WGmods-f9b723"></a>
+<p>
+    <img src="https://shields.io/badge/version-2.3.0-blue">
+    <a href="https://wgmods.net/7156/"><img src="https://shields.io/badge/🡻-WGmods-f9b723"></a>
     <a href="#donate"><img src="https://shields.io/badge/💲-Support_the_Project-2ea043"></a>
 </p>
 
