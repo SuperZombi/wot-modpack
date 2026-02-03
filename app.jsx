@@ -35,6 +35,7 @@ const App = () => {
 	}, [])
 	React.useEffect(() => {
 		loadStatsPage('2089462923', data=>setStats(statsAsNumber(data)))
+		loadStatsPage("342255871", data=>setTotalInstalls(Math.max(0, data.length-1)))
 	}, [])
 	
 	React.useEffect(() => {
@@ -51,9 +52,6 @@ const App = () => {
 			}
 			if (Object.keys(clientStats).length == 0){
 				loadStatsPage("224300057", data=>setClientStats(statsAsNumber(data)))
-			}
-			if (totalInstalls == 0){
-				loadStatsPage("342255871", data=>setTotalInstalls(Math.max(0, data.length-1)))
 			}
 		}
 	}, [tab])
@@ -110,7 +108,6 @@ const App = () => {
 		setSelected(null)
 	}
 
-
 	return (
 		<React.Fragment>
 			<p align="center">
@@ -118,15 +115,20 @@ const App = () => {
 			</p>
 			<h1 align="center">
 				<span>Web Modpack</span><br/>
-				<span>{LANG.mods_list[lang]}</span>
 			</h1>
-			<p align="center">
+			<div className="float-right">
 				<select name="lang" value={lang} onChange={e=>setLang(e.target.value)} style={{fontSize: "12pt"}}>
 					<option value="en">English</option>
 					<option value="ru">Russian</option>
 					<option value="uk">Ukranian</option>
 				</select>
-			</p>
+			</div>
+			{tab == "mods" && (
+				<div className="row" style={{marginBottom: "1.5rem", fontSize: "14px"}}>
+					<StatCard value={mods.filter(mod => mod.title).length} duration={2000} label={LANG.mods_count[lang]}/>
+					<StatCard value={totalInstalls} duration={2000} label={LANG.installations[lang]}/>
+				</div>
+			)}
 			<div className="tabs">
 				<span className={tab == "mods" ? "active" : null} onClick={_=>setTab("mods")}>
 					{LANG.modsTab[lang]}
@@ -141,18 +143,16 @@ const App = () => {
 			{mods.length > 0 ? (
 				<React.Fragment>
 					{tab == "stats" ? (
-						<React.Fragment>
-							<ModStats mods={mods} stats={stats} lang={lang} onPreview={onPreview}/>
-						</React.Fragment>
+						<ModStats mods={mods} stats={stats} lang={lang} onPreview={onPreview}/>
 					) : tab == "otherStats" ? (
-						<OtherStats langStats={langStats} clientStats={clientStats} totalInstalls={totalInstalls} lang={lang}/>
-					) : (
 						<React.Fragment>
-							<p align="center">
-								{LANG.mods_count[lang].replace("{%}", mods.filter(mod => mod.title).length)}
-							</p>
-							<ModsList mods={mods} groups={groups} lang={lang} onPreview={onPreview}/>
+							<div className="row" style={{marginTop: "6px"}}>
+								<OtherStatsTable caption={LANG.languagesTable[lang]} data={langStats}/>
+								<OtherStatsTable caption={LANG.clientsTable[lang]} data={clientStats}/>
+							</div>
 						</React.Fragment>
+					) : (
+						<ModsList mods={mods} groups={groups} lang={lang} onPreview={onPreview}/>
 					)}
 				</React.Fragment>
 			) : (
@@ -272,18 +272,6 @@ const ModStats = ({mods, stats, lang, onPreview}) => {
 		</div>
 	)
 }
-
-const OtherStats = ({langStats, clientStats, totalInstalls, lang}) => {
-	return (
-		<React.Fragment>
-			<p align="center">{LANG.installations[lang]}: {totalInstalls}</p>
-			<div className="row">
-				<OtherStatsTable caption={LANG.languagesTable[lang]} data={langStats}/>
-				<OtherStatsTable caption={LANG.clientsTable[lang]} data={clientStats}/>
-			</div>
-		</React.Fragment>
-	)
-}
 const OtherStatsTable = ({caption, data}) => {
 	return (
 		<table border="1">
@@ -312,6 +300,32 @@ const Mod = ({ mod, lang, onPreview }) => {
 		</div>
 	)
 }
+
+function Counter({ to, duration }) {
+	const [value, setValue] = React.useState(0)
+	React.useEffect(() => {
+		const startTime = performance.now()
+		function animate(now) {
+			const progress = Math.min((now - startTime) / duration, 1)
+			const current = Math.floor(progress * to)
+			setValue(current)
+			if (progress < 1) { requestAnimationFrame(animate) }
+		}
+		requestAnimationFrame(animate)
+	}, [to, duration])
+	return (
+		<span>{value}</span>
+	)
+}
+function StatCard({ value, duration, label }) {
+	return (
+		<div className="stat-card">
+			<Counter to={value} duration={duration}/>
+			<span>{label}</span>
+		</div>
+	)
+}
+
 function replaceFlags(text) {
 	const parts = text.split(/(:flag_[a-z]{2}:)/gi)
 	return parts.map((part, i) => {
@@ -355,15 +369,10 @@ function statsAsNumber(array){
 	return Object.fromEntries(array.map(([key, value]) => [key, Number(value)]))
 }
 const LANG = {
-	"mods_list": {
-		"en": "Mods list",
-		"ru": "Список модов",
-		"uk": "Список модів"
-	},
 	"mods_count": {
-		"en": "{%} mods",
-		"ru": "{%} модов",
-		"uk": "{%} модів"
+		"en": "mods",
+		"ru": "модов",
+		"uk": "модів"
 	},
 	"author": {
 		"en": "Author",
