@@ -110,25 +110,22 @@ const App = () => {
 
 	return (
 		<React.Fragment>
-			<p align="center">
-				<img src="favicon.png" height="128" draggable={false} style={{userSelect: "none"}}/>
-			</p>
-			<h1 align="center">
-				<a href="https://github.com/SuperZombi/wot-modpack/" target="_blank">Web Modpack</a>
-			</h1>
-			<div className="float-right">
+			<div className="fake-header"></div>
+			<div className="header">
+				<a href="https://github.com/SuperZombi/wot-modpack/" target="_blank">
+					<img src="favicon.png" height="128" draggable={false} style={{userSelect: "none"}}/>
+					<span>Web Modpack</span>
+				</a>
 				<select name="lang" value={lang} onChange={e=>setLang(e.target.value)} style={{fontSize: "12pt"}}>
 					<option value="en">English</option>
 					<option value="ru">Russian</option>
 					<option value="uk">Ukranian</option>
 				</select>
 			</div>
-			{tab == "mods" && (
-				<div className="row" style={{marginBottom: "1.5rem", fontSize: "14px"}}>
-					<StatCard value={mods.filter(mod => mod.title).length} duration={2000} label={LANG.mods_count[lang]}/>
-					<StatCard value={totalInstalls} duration={2000} label={LANG.installations[lang]}/>
-				</div>
-			)}
+			<div className="row" style={{margin: "1.2rem", fontSize: "14px"}}>
+				<StatCard value={mods.filter(mod => mod.title).length} duration={2000} label={LANG.mods_count[lang]}/>
+				<StatCard value={totalInstalls} duration={2000} label={LANG.installations[lang]}/>
+			</div>
 			<div className="tabs">
 				<span className={tab == "mods" ? "active" : null} onClick={_=>setTab("mods")}>
 					{LANG.modsTab[lang]}
