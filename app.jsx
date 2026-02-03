@@ -410,7 +410,7 @@ const LANG = {
 		"uk": "Інше"
 	},
 	"installations": {
-		"en": "Installations",
+		"en": "Installs",
 		"ru": "Установок",
 		"uk": "Встановлень"
 	},
