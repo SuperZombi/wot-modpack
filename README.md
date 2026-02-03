@@ -10,7 +10,6 @@
 
 ### <a href="https://github.com/SuperZombi/wot-modpack/releases/latest/download/Web.Modpack.exe"><img src="https://github.com/user-attachments/assets/2a418b60-b0a1-462d-afc3-0270ba5c0e83" width="26" align="top"> Download</a>
 
-
 The problem of all modpacks is their large size.<br>
 This modpack downloads only those mods that the user selected at runtime.<br>
 Also it has a modern Web interface.<br>
@@ -21,6 +20,8 @@ Supports all client versions (including CT and SB)
 
 > [!NOTE]  
 > Modpack version does **NOT** necessarily have to match the client version!
+
+### [Mods List](https://superzombi.github.io/wot-modpack/)
 
 <br>
 <img src="github/images/home.png" width="700">
@@ -44,8 +45,6 @@ The collected data is used **only for ranking mods by popularity**!
 
 By using this modpack, you agree to this data collection.
 <hr>
-
-### [Mods List](https://superzombi.github.io/wot-modpack/)
 
 ### <a href="https://github.com/SuperZombi/wot-modpack/issues/new?template=1-mod-suggestion.yml"><img src="https://github.com/user-attachments/assets/998c0c5f-bae6-4d76-adba-fc94ea70350d" width="26" align="top"> Request a new Mod</a>
 
