@@ -116,7 +116,7 @@ const App = () => {
 					<img src="favicon.png" height="128" draggable={false} style={{userSelect: "none"}}/>
 					<span>Web Modpack</span>
 				</a>
-				<select name="lang" value={lang} onChange={e=>setLang(e.target.value)} style={{fontSize: "12pt"}}>
+				<select name="lang" value={lang} onChange={e=>setLang(e.target.value)}>
 					<option value="en">English</option>
 					<option value="ru">Russian</option>
 					<option value="uk">Ukranian</option>
