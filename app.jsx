@@ -97,7 +97,11 @@ const App = () => {
 			author: mod.author,
 			image: mod.image,
 			audio: mod.audio,
-			version: mod.ver
+			version: mod.ver,
+			on_download: _=>{
+				const files = collectFiles(mod.id)
+				buildZip(mod.id, files)
+			}
 		})
 		setSelected(mod.id)
 		setShowPreview(true)
@@ -106,6 +110,30 @@ const App = () => {
 		setPreviewData({})
 		setShowPreview(false)
 		setSelected(null)
+	}
+
+	function collectFiles(mod_id, collected = [], visited = []){
+		if (visited.includes(mod_id)) { return; }
+		visited.push(mod_id);
+		const mod = mods.find(m => m.id === mod_id);
+		if (!mod) { return; }
+		if (Array.isArray(mod.files)) {
+			for (const file of mod.files) {
+				collected.push({
+					...file,
+					url: file.url.replace(
+						"https://github.com/SuperZombi/wot-modpack/raw",
+						"https://raw.githubusercontent.com/SuperZombi/wot-modpack"
+					)
+				})
+			}
+		}
+		if (Array.isArray(mod.requires)) {
+			for (const dep of mod.requires) {
+				collectFiles(dep, collected, visited);
+			}
+		}
+		return collected;
 	}
 
 	return (
@@ -122,7 +150,7 @@ const App = () => {
 					<option value="uk">Ukranian</option>
 				</select>
 			</div>
-			<div className="row" style={{margin: "1.2rem", fontSize: "14px"}}>
+			<div className="row" style={{margin: "1.2rem", fontSize: "14px", gap: "2rem"}}>
 				<StatCard value={mods.filter(mod => mod.title).length} duration={2000} label={LANG.mods_count[lang]}/>
 				<StatCard value={totalInstalls} duration={2000} label={LANG.installations[lang]}/>
 			</div>
@@ -200,15 +228,23 @@ const App = () => {
 								/>
 							</div>
 						)}
-						<button className="button" onClick={_=>share({
-							title: previewData.title,
-							mod_id: previewData.id
-						})}>
-							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-								<path d="M49.8 3.3C24 3.3 3.1 24.2 3.1 50S24 96.7 49.8 96.7 96.5 75.8 96.5 50 75.6 3.3 49.8 3.3m5.8 64.2V55.8s-23.4-5.8-35 11.7c0-19.3 15.7-35 35-35V20.8L79 44.2z"/>
-							</svg>
-							<span>{LANG.share[lang]}</span>
-						</button>
+						<div className="row">
+							<button className="button" onClick={previewData.on_download}>
+								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+									<path d="M82.59 17.41a46.08 46.08 0 1 0-65.17 65.17 46.08 46.08 0 0 0 65.17-65.17M28.5 55.3c-2.68-2.68 1.39-6.75 4.07-4.07l14.54 14.54V27.29c0-3.8 5.76-3.8 5.76 0v38.47l14.54-14.54c2.68-2.68 6.75 1.4 4.07 4.07L52.04 74.75a2.9 2.9 0 0 1-4.11-.04z"/>
+								</svg>
+								<span>{LANG.download_button[lang]}</span>
+							</button>
+							<button className="button" onClick={_=>share({
+								title: previewData.title,
+								mod_id: previewData.id
+							})}>
+								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+									<path d="M49.8 3.3C24 3.3 3.1 24.2 3.1 50S24 96.7 49.8 96.7 96.5 75.8 96.5 50 75.6 3.3 49.8 3.3m5.8 64.2V55.8s-23.4-5.8-35 11.7c0-19.3 15.7-35 35-35V20.8L79 44.2z"/>
+								</svg>
+								<span>{LANG.share[lang]}</span>
+							</button>
+						</div>
 					</div>
 				</div>
 			)}
@@ -323,6 +359,55 @@ function StatCard({ value, duration, label }) {
 	)
 }
 
+async function buildZip(filename, files) {
+	const zip = new JSZip();
+	const PATHS = {
+		mods: ["mods", "1.0.0"],
+		res_mods: ["res_mods", "1.0.0"],
+		configs: ["mods", "configs"]
+	}
+	for (const file of files) {
+		const response = await fetch(file.url);
+		if (!response.ok) continue;
+
+		const blob = await response.blob();
+		const filename = file.url.split("/").pop();
+		const isZip = filename.endsWith(".zip");
+
+		const basePath = PATHS[file.dest];
+		if (!basePath) continue;
+
+		const baseParts = [
+			...basePath,
+			file.folder
+		].filter(Boolean);
+
+		if (isZip) {
+			const innerZip = await JSZip.loadAsync(blob);
+			for (const [innerPath, innerFile] of Object.entries(innerZip.files)) {
+				if (innerFile.dir) continue;
+				const innerContent = await innerFile.async("blob");
+				const finalPath = [
+					...baseParts,
+					innerPath
+				].join("/");
+				zip.file(finalPath, innerContent);
+			}
+		} else {
+			const finalPath = [
+				...baseParts,
+				filename
+			].join("/");
+			zip.file(finalPath, blob);
+		}
+	}
+	const content = await zip.generateAsync({ type: "blob" });
+	const link = document.createElement("a");
+	link.href = URL.createObjectURL(content);
+	link.download = `${filename}.zip`;
+	link.click();
+}
+
 function replaceFlags(text) {
 	const parts = text.split(/(:flag_[a-z]{2}:)/gi)
 	return parts.map((part, i) => {
@@ -385,6 +470,11 @@ const LANG = {
 		"en": "Share",
 		"ru": "Поделиться",
 		"uk": "Поділитися"
+	},
+	"download_button": {
+		"en": "Download",
+		"ru": "Скачать",
+		"uk": "Завантажити"
 	},
 	"downloads": {
 		"en": "Downloads",
