@@ -16,13 +16,13 @@ This modpack downloads only those mods that the user selected at runtime.<br>
 Also it has a modern Web interface.<br>
 Supports all client versions (including CT and SB)
 
+### [Mods List](https://superzombi.github.io/wot-modpack/)
+
 > [!WARNING]  
 > For the first installation, it is recommended to check the «Delete mod configs» option to avoid conflicts with previous modpacks.
 
 > [!NOTE]  
 > Modpack version does **NOT** necessarily have to match the client version!
-
-### [Mods List](https://superzombi.github.io/wot-modpack/)
 
 <br>
 <img src="github/images/home.png" width="700">
