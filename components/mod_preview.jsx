@@ -15,7 +15,10 @@ const ModPreview = ({lang, onClosePreview, previewData, stats}) => {
 					<span>{LANG.author[lang]}: {previewData.author}</span>
 				)}
 				{previewData.version && (
-					<span>{LANG.version[lang]}: <code className="version">{previewData.version}</code></span>
+					<div>
+						<span style={{marginRight: "5px"}}>{LANG.version[lang]}:</span>
+						<code className="container version">{previewData.version}</code>
+					</div>
 				)}
 				<div>
 					<i className="fa-solid fa-circle-down" style={{marginRight: "5px"}}></i>

@@ -195,6 +195,7 @@ nav{
 	max-width: 100%;
 	border-radius: 10px;
 	user-select: none;
+	box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
 }
 .mod-description ul{
 	margin: 0;
@@ -213,10 +214,8 @@ nav{
 	border-radius: 50%;
 }
 .version{
-	background: grey;
 	padding: 4px 10px;
 	border-radius: 8px;
-	color: white;
 }
 
 select{
