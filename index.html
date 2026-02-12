@@ -1,20 +1,26 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Web Modpack • Mods list</title>
-	<link rel='icon' type='image/x-icon' href='favicon.png'>
+	<title>Web Modpack</title>
+	<link rel='icon' type='image/x-icon' href='images/favicon.png'>
 	<meta name='viewport' content='width=device-width, initial-scale=1'>
 	<meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>
 	<meta property="og:title" content="Web Modpack">
-	<meta property="og:description" content="Mods list">
-	<meta property="og:image" content="favicon.png">
+	<meta property="og:description" content="Lightweight and modern modpack for World of Tanks">
+	<meta property="og:image" content="images/favicon.png">
 	<link rel="stylesheet" href="main.css">
+	<link rel='stylesheet' href='https://use.fontawesome.com/releases/v6.7.2/css/all.css'>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/css/flag-icons.min.css"/>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 	<script src='https://unpkg.com/react@18/umd/react.development.js'></script>
 	<script src='https://unpkg.com/react-dom@18/umd/react-dom.development.js'></script>
 	<script src='https://unpkg.com/@babel/standalone/babel.min.js'></script>
-	<script type='text/babel' data-presets='react' src='app.jsx'></script>
+	<script type='text/javascript' src='components/common.js'></script>
+	<script type='text/babel' data-presets='react' src='components/header.jsx'></script>
+	<script type='text/babel' data-presets='react' src='components/home.jsx'></script>
+	<script type='text/babel' data-presets='react' src='components/mods_list.jsx'></script>
+	<script type='text/babel' data-presets='react' src='components/mod_preview.jsx'></script>
+	<script type='text/babel' data-presets='react' src='components/app.jsx'></script>
 </head>
 <body>
 	<div id="root"></div>
