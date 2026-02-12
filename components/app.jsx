@@ -241,7 +241,7 @@ async function buildZip(filename, files) {
 }
 
 function replaceFlags(text) {
-	if (!text){return null}
+	if (!text){return}
 	const parts = text.split(/(:flag_[a-z]{2}:)/gi)
 	return parts.map((part, i) => {
 		const match = part.match(/^:flag_([a-z]{2}):$/i)
