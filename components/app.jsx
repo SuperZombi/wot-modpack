@@ -13,8 +13,18 @@ const App = () => {
 	const [tab, setTab] = React.useState("home")
 	
 	const supportedLangs = ["en", "ru", "uk"]
-	const userLang = navigator.language?.slice(0, 2)
-	const [lang, setLang] = React.useState(supportedLangs.includes(userLang) ? userLang : 'en')
+	const getInitialLang = () => {
+		const savedLang = localStorage.getItem("lang")
+		if (savedLang && supportedLangs.includes(savedLang)) {
+			return savedLang
+		}
+		const userLang = navigator.language?.slice(0, 2)
+		return supportedLangs.includes(userLang) ? userLang : "en"
+	}
+	const [lang, setLang] = React.useState(getInitialLang)
+	React.useEffect(() => {
+		localStorage.setItem("lang", lang)
+	}, [lang])
 
 	React.useEffect(() => {
 		fetch('https://raw.githubusercontent.com/SuperZombi/wot-modpack/refs/heads/mods/config.json')
