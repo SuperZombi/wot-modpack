@@ -7,10 +7,12 @@ const ModPreview = ({lang, onClosePreview, previewData, stats}) => {
 		<div className="popup" onClick={e=>e.target.classList.contains("popup") && onClosePreview()}>
 			<div className="container popup-content">
 				<i className="close fa-solid fa-circle-xmark" onClick={_=>onClosePreview()}></i>
-				<h3 align="center">{previewData.title}</h3>
-				<div className="image-container">
-					<img src={previewData.image} draggable={false}/>
-				</div>
+				<h3 align="center">{previewData.title || previewData.id}</h3>
+				{previewData.image && (
+					<div className="image-container">
+						<img src={previewData.image} draggable={false}/>
+					</div>
+				)}
 				{previewData.author && (
 					<span>{LANG.author[lang]}: {previewData.author}</span>
 				)}

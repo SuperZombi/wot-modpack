@@ -90,7 +90,7 @@ const App = () => {
 	const onPreview = mod=>{
 		setPreviewData({
 			id: mod.id,
-			title: replaceFlags(mod.title[lang]),
+			title: replaceFlags(mod.title?.[lang]),
 			description: mod.description?.[lang],
 			author: mod.author,
 			image: mod.image,
@@ -241,6 +241,7 @@ async function buildZip(filename, files) {
 }
 
 function replaceFlags(text) {
+	if (!text){return null}
 	const parts = text.split(/(:flag_[a-z]{2}:)/gi)
 	return parts.map((part, i) => {
 		const match = part.match(/^:flag_([a-z]{2}):$/i)
