@@ -7,7 +7,7 @@ const Header = ({tab, setTab, lang, setLang}) => {
 			"other": LANG.otherStatsTab[lang],
 		}
 		document.title = `Web Modpack • ${tabName[tab]}`
-	}, [tab])
+	}, [tab, lang])
 
 	return (
 		<header className="container">
