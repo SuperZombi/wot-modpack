@@ -11,7 +11,10 @@ const Header = ({tab, setTab, lang, setLang}) => {
 
 	return (
 		<header className="container">
-			<button className="button tab-btn left-button" onClick={_=>setTab("home")}>
+			<button className="button tab-btn left-button"
+				onClick={_=>setTab("home")}
+				disabled={tab === "home"}
+			>
 				<img src="images/favicon.png" draggable={false}/>
 				<span>Web Modpack</span>
 			</button>
