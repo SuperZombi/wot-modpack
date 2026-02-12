@@ -239,6 +239,7 @@ nav{
 
 select{
 	border-right: 10px solid transparent !important;
+	font-size: 14px !important;
 }
 select option{
 	background: #2e2f40;

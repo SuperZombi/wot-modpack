@@ -15,6 +15,14 @@ const Header = ({tab, setTab, lang, setLang}) => {
 				<img src="images/favicon.png" draggable={false}/>
 				<span>Web Modpack</span>
 			</button>
+				<select className="button tab-btn" name="lang" value={lang}
+					onChange={e=>setLang(e.target.value)}
+					style={{marginLeft: "auto"}}
+				>
+					<option value="en">EN</option>
+					<option value="ru">RU</option>
+					<option value="uk">UA</option>
+				</select>
 			<nav>
 				<button className={`button tab-btn ${tab == "mods" ? "active" : ""}`}
 					onClick={_=>setTab("mods")}
@@ -31,14 +39,6 @@ const Header = ({tab, setTab, lang, setLang}) => {
 				>
 					{LANG.otherStatsTab[lang]}
 				</button>
-
-				<select className="button tab-btn" name="lang" value={lang}
-					onChange={e=>setLang(e.target.value)}
-				>
-					<option value="en">EN</option>
-					<option value="ru">RU</option>
-					<option value="uk">UA</option>
-				</select>
 			</nav>
 		</header>
 	)
