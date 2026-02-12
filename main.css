@@ -224,8 +224,12 @@ nav{
 	right: 6px;
 	color: red;
 	cursor: pointer;
-	background: #ddd;
+	background: rgba(255, 255, 255, 0.86);
 	border-radius: 50%;
+	transition: 0.12s;
+}
+.close:hover{
+	transform: rotate(90deg);
 }
 .version{
 	padding: 4px 10px;
