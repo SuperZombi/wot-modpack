@@ -11,12 +11,12 @@
 
 ### <a href="https://github.com/SuperZombi/wot-modpack/releases/latest/download/Web.Modpack.exe"><img src="https://github.com/user-attachments/assets/2a418b60-b0a1-462d-afc3-0270ba5c0e83" width="26" align="top"> Download</a>
 
+### [Modpack Website](https://superzombi.github.io/wot-modpack/)
+
 The problem of all modpacks is their large size.<br>
 This modpack downloads only those mods that the user selected at runtime.<br>
 Also it has a modern Web interface.<br>
 Supports all client versions (including CT and SB)
-
-### [Mods List](https://superzombi.github.io/wot-modpack/)
 
 > [!WARNING]  
 > For the first installation, it is recommended to check the «Delete mod configs» option to avoid conflicts with previous modpacks.
