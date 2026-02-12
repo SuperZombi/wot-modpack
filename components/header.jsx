@@ -17,7 +17,6 @@ const Header = ({tab, setTab, lang, setLang}) => {
 			</button>
 				<select className="button tab-btn" name="lang" value={lang}
 					onChange={e=>setLang(e.target.value)}
-					style={{marginLeft: "auto"}}
 				>
 					<option value="en">EN</option>
 					<option value="ru">RU</option>

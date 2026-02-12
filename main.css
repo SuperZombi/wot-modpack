@@ -31,7 +31,7 @@ header{
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	gap: 1rem;
+	gap: 10px;
 	flex-wrap: wrap;
 }
 header .left-button{
@@ -57,6 +57,7 @@ nav{
 	scrollbar-width: thin;
 	padding: 1px 0;
 	font-size: 14px;
+	margin-left: auto;
 }
 .button{
 	background: rgba(255, 255, 255, 0.04);
@@ -238,8 +239,10 @@ nav{
 }
 
 select{
-	border-right: 10px solid transparent !important;
+	border-right: 8px solid transparent !important;
 	font-size: 14px !important;
+	padding: 8px 10px !important;
+	order: 1;
 }
 select option{
 	background: #2e2f40;
@@ -287,6 +290,12 @@ table td, table caption{
 	#mods-list {
 		grid-template-columns: repeat(2, 1fr);
 		grid-auto-rows: 140px;
+	}
+	select{
+		order: 0;
+	}
+	nav{
+		margin-left: 0;
 	}
 	.image-container{
 		height: auto;
