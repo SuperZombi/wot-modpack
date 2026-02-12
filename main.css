@@ -36,6 +36,8 @@ header{
 }
 header .left-button{
 	color: inherit;
+	background: transparent;
+	backdrop-filter: none;
 	text-decoration: inherit;
 	display: flex;
 	align-items: center;

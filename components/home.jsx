@@ -4,10 +4,20 @@ const Home = ({mods_count, totalInstalls, lang}) => {
 			<div className="container" align="center">
 				<img src="images/home_img.jpg" className="home_image" draggable={false}/>
 				<h2>{LANG.downloadModpackButton[lang]}</h2>
-				<a className="download-btn" href="https://github.com/SuperZombi/wot-modpack/releases/latest/download/Web.Modpack.exe">
-					<i className="fa-solid fa-circle-down"></i>
-					<span>{LANG.download_button[lang]}</span>
-				</a>
+				<div className="row" style={{fontSize: "1.1em"}}>
+					<a className="button" href="https://github.com/SuperZombi/wot-modpack/releases/latest/download/Web.Modpack.exe">
+						<i className="fa-solid fa-circle-down"></i>
+						<span>{LANG.download_button[lang]}</span>
+					</a>
+					<a className="button" href="https://github.com/SuperZombi/wot-modpack">
+						<i className="fa-brands fa-github"></i>
+						<span>GitHub</span>
+					</a>
+					<a className="button" href="https://wgmods.net/7156/">
+						<i className="fa-solid fa-globe"></i>
+						<span>WGmods</span>
+					</a>
+				</div>
 			</div>
 			
 			<div className="container row" style={{fontSize: "14px", gap: "2rem"}}>
