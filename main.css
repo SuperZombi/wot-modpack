@@ -95,28 +95,6 @@ nav{
 	border-radius: 100px;
 }
 
-.download-btn {
-	padding: 0.8rem 2rem;
-	font-size: 1.1rem;
-	border-radius: 12px;
-	border: none;
-	background: rgb(0, 255, 0, 0.5);
-	backdrop-filter: blur(5px);
-	color: #eee;
-	font-weight: bold;
-	cursor: pointer;
-	transition: 0.3s;
-	text-decoration: none;
-	display: inline-flex;
-	align-items: center;
-	gap: 5px;
-	user-select: none;
-}
-.download-btn:hover {
-	transform: scale(1.05);
-	box-shadow: 0 0 20px rgba(0,255,0,0.5);
-}
-
 .mod{
 	background: rgba(255,255,255,0.05);
 	border-radius: 0.5rem;
