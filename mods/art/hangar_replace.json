@@ -1,0 +1,12 @@
+{
+	"target": "spaces/hmhm",
+	"replace": [
+		"spaces/hangar_v4",
+		"spaces/hangar_v3_advent_calendar_2024",
+		"spaces/h33_hangar_v3_wt_2021",
+		"spaces/hangar_v3",
+		"spaces/h34_halloween",
+		"spaces/h38_newyear_2025",
+		"spaces/h34_lunar_ny_2025"
+	]
+}

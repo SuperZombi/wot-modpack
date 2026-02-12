@@ -1,0 +1,61 @@
+{
+	"winPattern": {
+		"message": ["{{UM:win}}{{UM:map}}{{UM:vehicle}}{{UM:xp}}{{UM:creditsEX}}{{UM:wn8}}{{UM:eff}}"],
+		"bgImage": "../maps/icons/library/BgBattleResultIconVictory-1.png",
+		"icon": "../maps/icons/library/BattleResultIcon-1.png",
+		"noBattleData": {
+			"message": ["{{UM:win}}{{UM:map}}{{UM:vehicle}}{{UM:xp}}{{UM:credits}}<br>"],
+			"bgImage": "../maps/icons/library/BgBattleResultIconVictory-1.png",
+			"icon": "../maps/icons/library/BattleResultIcon-1.png"
+		}
+	},
+	"defeatPattern": {
+		"message": ["{{UM:defeat}}{{UM:map}}{{UM:vehicle}}{{UM:xp}}{{UM:creditsEX}}{{UM:wn8}}{{UM:eff}}"],
+		"bgImage": "../maps/icons/library/BgBattleResultIconDefeat-1.png",
+		"icon": "../maps/icons/library/BattleResultIcon-1.png",
+		"noBattleData": {
+			"message": ["{{UM:defeat}}{{UM:map}}{{UM:vehicle}}{{UM:xp}}{{UM:credits}}<br>"],
+			"bgImage": "../maps/icons/library/BgBattleResultIconDefeat-1.png",
+			"icon": "../maps/icons/library/BattleResultIcon-1.png"
+		}
+	},
+	"drawPattern": {
+		"message": ["{{UM:draw}}{{UM:map}}{{UM:vehicle}}{{UM:xp}}{{UM:creditsEX}}{{UM:wn8}}{{UM:eff}}"],
+		"bgImage": "../maps/icons/library/BgBattleResultIconDraw-1.png",
+		"icon": "../maps/icons/library/BattleResultIcon-1.png",
+		"noBattleData": {
+			"message": ["{{UM:draw}}{{UM:map}}{{UM:vehicle}}{{UM:xp}}{{UM:credits}}<br>"],
+			"bgImage": "../maps/icons/library/BgBattleResultIconDraw-1.png",
+			"icon": "../maps/icons/library/BattleResultIcon-1.png"
+		}
+	},
+	"macrosFormatter": {
+		"dailyXPFactor": "<font color='#D3D3D3'>(x{{val}})</font>"
+	},
+	"buttons" : [ 
+		{
+			"enable": true,
+			"label": "Подробнее",
+			"type": "standart",
+			"action": "showBattleResults",
+			"width": 122
+		}
+	],
+	"userMacros": {
+		"UM:win": "<font color='#46B700' size='16'>Победа!</font><br>",
+		"UM:defeat": "<font color='#C40900' size='16'>Поражение</font><br>",
+		"UM:draw": "<font color='#D86704' size='16'>Ничья</font><br>",
+		"UM:map": "<font size='14'>Бой: <font color='#D3D3D3'>{{Map}}</font></font><br>",
+		"UM:vehicle": "<font size='14'>Техника: <font color='#D3D3D3'>{{VehicleLocalName}}</font></font><br>",
+		"UM:xp": "<font size='14'>Опыт: <font color='#D3D3D3'>{{XP}}</font> {{DailyXPFactor}} <img src='img://gui/maps/icons/library/XpIcon-1.png' width='14' height='14' align='baseline' vspace='-3'></font><br>",
+		"UM:credits": "<font size='14'>Кредиты: <font color='#99CC33'>{{Credits}}</font> <img src='img://gui/maps/icons/library/CreditsIconBig-1.png' width='8' height='8' align='baseline' vspace='0'></font><br>",
+		"UM:creditsEX": "<font size='14'>Кредиты: <font color='{{c:PureCredits}}'>{{PureCredits}}</font> <img src='img://gui/maps/icons/library/CreditsIconBig-1.png' width='8' height='8' align='baseline' vspace='0'></font><br>",
+		"UM:wn8": "<font size='14'>WN8: <font color='{{c:WN8}}'><b>{{WN8}}</b></font>   ",
+		"UM:eff": "<font size='14'>EFF: <font color='{{c:EFF}}'><b>{{EFF}}</b></font>"
+	},
+	"colors": {
+		"WN8": [{"value": 355, "color": "#FE0E00"}, {"value": 820, "color": "#FE7903"}, {"value": 1370, "color": "#F8F400"}, {"value": 2020, "color": "#60FF00"}, {"value": 2620, "color": "#02C9B3"}, {"value": 99999, "color": "#D042F3"}],
+		"EFF": [{"value": 610, "color": "#FE0E00"}, {"value": 850, "color": "#FE7903"}, {"value": 1145, "color": "#F8F400"}, {"value": 1475, "color": "#60FF00"}, {"value": 1775, "color": "#02C9B3"}, {"value": 99999, "color": "#D042F3"}],
+		"PureCredits": [{"value": 0, "color": "#E63628"}, {"value": 9999999, "color": "#99CC33"}]
+	}
+}

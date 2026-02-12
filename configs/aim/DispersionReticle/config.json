@@ -1,0 +1,72 @@
+{
+    "enabled": true,
+    "reticle-size-multiplier": 0.6,
+    "focused-reticle": {
+        "enabled": false,
+        "type": "default"
+    },
+    "focused-reticle-extended": {
+        "enabled": false,
+        "shape": "circle",
+        "color": [255, 255, 0],
+        "center-dot-size": 0.0,
+        "draw-outline": false,
+        "layer": "bottom",
+        "blend": 0.5,
+        "alpha": 1.0,
+        "shapes": {
+            "pentagon": {
+                "width": 1.0, "height": 1.0
+            },
+            "t-shape": {
+                "thickness": 1.0, "length": 1.0
+            }
+        }
+    },
+    "server-reticle": {
+        "enabled": false,
+        "type": "purple"
+    },
+    "server-reticle-extended": {
+        "enabled": false,
+        "shape": "pentagon",
+        "color": [255, 0, 255],
+        "center-dot-size": 0.0,
+        "draw-outline": false,
+        "layer": "bottom",
+        "blend": 0.5,
+        "alpha": 1.0,
+        "shapes": {
+            "pentagon": {
+                "width": 1.0, "height": 1.0
+            },
+            "t-shape": {
+                "thickness": 1.0, "length": 1.0
+            }
+        }
+    },
+    "hybrid-reticle": {
+        "enabled": false,
+        "type": "default",
+        "hide-standard-reticle": false
+    },
+    "hybrid-reticle-extended": {
+        "enabled": false,
+        "shape": "circle",
+        "color": [0, 255, 255],
+        "center-dot-size": 0.0,
+        "draw-outline": false,
+        "layer": "bottom",
+        "blend": 0.5,
+        "alpha": 1.0,
+        "shapes": {
+            "pentagon": {
+                "width": 1.0, "height": 1.0
+            },
+            "t-shape": {
+                "thickness": 1.0, "length": 1.0
+            }
+        }
+    },
+    "__version__": 6
+}
