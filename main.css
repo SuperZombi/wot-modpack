@@ -27,7 +27,7 @@ body{
 header{
 	position: sticky;
 	z-index: 1;
-	top: 1rem;
+	top: 0.5rem;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
@@ -72,13 +72,17 @@ nav{
 	font-size: 100%;
 	line-height: 100%;
 	backdrop-filter: blur(5px);
+	user-select: none;
 }
 .button:hover{
 	background: rgba(255,255,255,0.06);
 	border-color: rgba(255,255,255,0.12);
 	transform: translateY(-1px);
 }
-.button:active{
+.button:active,
+.button:focus,
+.button.active{
+	outline: none;
 	background: rgba(255,255,255,0.1);
 	border-color: rgba(255,255,255,0.16);
 }
@@ -86,10 +90,6 @@ nav{
 .tab-btn{
 	border: 1px solid transparent;
 	border-radius: 100px;
-}
-.tab-btn.active{
-	border-color: rgba(255,255,255,0.14);
-	background: rgba(255,255,255,0.06);
 }
 
 .download-btn {
@@ -107,6 +107,7 @@ nav{
 	display: inline-flex;
 	align-items: center;
 	gap: 5px;
+	user-select: none;
 }
 .download-btn:hover {
 	transform: scale(1.05);
@@ -234,6 +235,9 @@ nav{
 	color: white;
 }
 
+select{
+	border-right: 10px solid transparent !important;
+}
 select option{
 	background: #2e2f40;
 }
