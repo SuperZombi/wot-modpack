@@ -1,4 +1,11 @@
 const Home = ({mods_count, totalInstalls, lang}) => {
+	const features = [
+		{ icon: "fa-feather", titleKey: "featureSmallSizeTitle", descKey: "featureSmallSizeDesc" },
+		{ icon: "fa-compass-drafting", titleKey: "featureModernDesignTitle", descKey: "featureModernDesignDesc" },
+		{ icon: "fa-cloud-arrow-down", titleKey: "featureCloudModsTitle", descKey: "featureCloudModsDesc" },
+		{ icon: "fa-layer-group", titleKey: "featureAllClientsTitle", descKey: "featureAllClientsDesc" },
+		{ icon: "fa-shield-halved", titleKey: "featureOpenSourceTitle", descKey: "featureOpenSourceDesc" },
+	]
 	return (
 		<React.Fragment>
 			<div className="container" align="center">
@@ -23,6 +30,18 @@ const Home = ({mods_count, totalInstalls, lang}) => {
 			<div className="container row" style={{fontSize: "14px", gap: "2rem"}}>
 				<StatCard value={mods_count} duration={2000} label={LANG.mods_count[lang]}/>
 				<StatCard value={totalInstalls} duration={2000} label={LANG.installations[lang]}/>
+			</div>
+
+			<div className="container features-grid">
+				{features.map((feature, idx) => (
+					<div className="container feature" key={idx}>
+						<i className={`fa-solid ${feature.icon}`}></i>
+						<div className="feature-block">
+							<span className="feature-header">{LANG[feature.titleKey][lang]}</span>
+							<span>{LANG[feature.descKey][lang]}</span>
+						</div>
+					</div>
+				))}
 			</div>
 		</React.Fragment>
 	)
