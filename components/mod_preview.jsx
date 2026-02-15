@@ -1,10 +1,12 @@
 const ModPreview = ({lang, onClosePreview, previewData, stats}) => {
+	const [visible, setVisible] = React.useState(false);
 	React.useEffect(() => {
+		setVisible(true);
 		document.body.style.overflow = 'hidden';
 		return ()=> document.body.style.overflow = 'unset';
 	}, []);
 	return (
-		<div className="popup" onClick={e=>e.target.classList.contains("popup") && onClosePreview()}>
+		<div className={`popup ${visible ? "visible" : ""}`} onClick={e=>e.target.classList.contains("popup") && onClosePreview()}>
 			<div className="container popup-content">
 				<i className="close fa-solid fa-circle-xmark" onClick={_=>onClosePreview()}></i>
 				<h3 align="center">{previewData.title || previewData.id}</h3>
@@ -41,11 +43,11 @@ const ModPreview = ({lang, onClosePreview, previewData, stats}) => {
 					</div>
 				)}
 				<div className="row">
-					<button className="button" onClick={previewData.on_download}>
+					<button className="button shine" onClick={previewData.on_download}>
 						<i className="fa-solid fa-circle-down"></i>
 						<span>{LANG.download_button[lang]}</span>
 					</button>
-					<button className="button" onClick={_=>share({
+					<button className="button shine" onClick={_=>share({
 						title: previewData.title,
 						mod_id: previewData.id
 					})}>
