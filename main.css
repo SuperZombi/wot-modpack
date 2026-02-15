@@ -17,12 +17,11 @@ body{
 	gap: 1rem;
 }
 .container{
-	background: linear-gradient(180deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.04));
+	background: rgba(255, 255, 255, 0.06);
 	border: 1px solid rgba(255,255,255,0.10);
 	border-radius: 1rem;
 	padding: 1rem;
 	box-shadow: 0 10px 30px rgba(0,0,0,0.35);
-	backdrop-filter: blur(10px);
 }
 header{
 	position: sticky;
@@ -33,6 +32,7 @@ header{
 	align-items: center;
 	gap: 10px;
 	flex-wrap: wrap;
+	backdrop-filter: blur(5px);
 }
 header .left-button{
 	color: inherit;
@@ -60,7 +60,7 @@ nav{
 	margin-left: auto;
 }
 .button{
-	background: rgba(255, 255, 255, 0.04);
+	background: rgba(255, 255, 255, 0.06);
 	border: 1px solid rgba(255, 255, 255, 0.1);
 	color: rgba(255, 255, 255, 0.86);
 	padding: 10px 14px;
@@ -74,7 +74,6 @@ nav{
 	gap: 5px;
 	font-size: 100%;
 	line-height: 100%;
-	backdrop-filter: blur(5px);
 	user-select: none;
 	position: relative;
 	overflow: hidden;
@@ -90,7 +89,7 @@ nav{
 	transition: all 0.6s ease;
 }
 .button:hover:not(:disabled){
-	background: rgba(255,255,255,0.06);
+	background: rgba(255,255,255,0.08);
 	border-color: rgba(255,255,255,0.12);
 	transform: translateY(-1px);
 }
@@ -197,6 +196,7 @@ nav{
 	max-width: 95dvw;
 	min-width: 40dvw;
 	gap: 1rem;
+	backdrop-filter: blur(10px);
 }
 .image-container{
 	height: 300px;
@@ -264,6 +264,7 @@ table td, table caption{
 	flex-direction: column;
 	align-items: center;
 	gap: 0.5em;
+	background: linear-gradient(180deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.04));
 }
 .stat-card >*:first-child{
 	font-size: 1.5em;
@@ -296,6 +297,7 @@ table td, table caption{
 	align-items: center;
 	animation: feature-enter 0.55s ease backwards;
 	transition: all 0.25s ease;
+	background: linear-gradient(180deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.04));
 }
 .feature i{
 	width: 2.5em;
