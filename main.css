@@ -2,9 +2,9 @@
 html, body { margin: 0; }
 body{
 	font-family: sans-serif;
-	background: radial-gradient(900px 500px at 15% 10%, rgba(45,212,191,0.10), transparent 55%),
-		radial-gradient(800px 520px at 85% 20%, rgba(139,92,246,0.10), transparent 60%),
-		radial-gradient(900px 600px at 40% 90%, rgba(59,130,246,0.08), transparent 55%),
+	background: radial-gradient(900px 500px at 10% 10%, rgba(45,212,191,0.16), transparent 80%),
+		radial-gradient(800px 600px at 90% 20%, rgba(139,92,246,0.16), transparent 80%),
+		radial-gradient(900px 600px at 40% 90%, rgba(59,130,246,0.12), transparent 75%),
 		#0b0f19;
 	color: rgba(255, 255, 255, 0.86);
 	padding: 1rem;
