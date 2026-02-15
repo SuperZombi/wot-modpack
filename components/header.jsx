@@ -15,7 +15,7 @@ const Header = ({tab, setTab, lang, setLang}) => {
 				onClick={_=>setTab("home")}
 				disabled={tab === "home"}
 			>
-				<img src="web/images/favicon.png" draggable={false}/>
+				<img src="web/images/favicon.png" alt="Web Modpack logo" draggable={false}/>
 				<span>Web Modpack</span>
 			</button>
 				<select className="button tab-btn" name="lang" value={lang}
