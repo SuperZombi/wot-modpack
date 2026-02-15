@@ -22,3 +22,9 @@ esbuild.build({
 	console.error('❌ React Build Error:', err.message)
 	process.exit(1)
 })
+
+const srcDir = 'web'
+const destDir = 'dest/web'
+fs.ensureDirSync(destDir)
+fs.copySync(srcDir, destDir)
+console.log('✅ Files copied')
