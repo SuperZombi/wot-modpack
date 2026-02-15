@@ -30,10 +30,10 @@ const ModsList = ({ mods, groups, lang, onPreview }) => {
 }
 const Mod = ({ mod, lang, onPreview }) => {
 	return (
-		<div className="mod" onClick={_=>onPreview(mod)}>
+		<Reveal className="mod" onClick={_=>onPreview(mod)}>
 			<img src={mod.image} draggable={false}/>
 			<span>{replaceFlags(mod.title[lang])}</span>
-		</div>
+		</Reveal>
 	)
 }
 const ModStats = ({mods, stats, lang, onPreview}) => {

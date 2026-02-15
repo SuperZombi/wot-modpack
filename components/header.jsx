@@ -11,7 +11,7 @@ const Header = ({tab, setTab, lang, setLang}) => {
 
 	return (
 		<header className="container">
-			<button className="button tab-btn left-button"
+			<button className="button shine tab-btn left-button"
 				onClick={_=>setTab("home")}
 				disabled={tab === "home"}
 			>
@@ -26,17 +26,20 @@ const Header = ({tab, setTab, lang, setLang}) => {
 					<option value="uk">UA</option>
 				</select>
 			<nav>
-				<button className={`button tab-btn ${tab == "mods" ? "active" : ""}`}
+				<button className={`button shine tab-btn ${tab == "mods" ? "active" : ""}`}
+					disabled={tab === "mods"}
 					onClick={_=>setTab("mods")}
 				>
 					{LANG.modsTab[lang]}
 				</button>
-				<button className={`button tab-btn ${tab == "stats" ? "active" : ""}`}
+				<button className={`button shine tab-btn ${tab == "stats" ? "active" : ""}`}
+					disabled={tab === "stats"}
 					onClick={_=>setTab("stats")}
 				>
 					{LANG.statsTab[lang]}
 				</button>
-				<button className={`button tab-btn ${tab == "other" ? "active" : ""}`}
+				<button className={`button shine tab-btn ${tab == "other" ? "active" : ""}`}
+					disabled={tab === "other"}
 					onClick={_=>setTab("other")}
 				>
 					{LANG.otherStatsTab[lang]}

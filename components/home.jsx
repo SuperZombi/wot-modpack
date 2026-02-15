@@ -15,19 +15,19 @@ const Home = ({mods_count, totalInstalls, lang}) => {
 				</Reveal>
 				<div className="row" style={{fontSize: "1.1em"}}>
 					<Reveal delay={1}>
-						<a className="button" href="https://github.com/SuperZombi/wot-modpack/releases/latest/download/Web.Modpack.exe">
+						<a className="button shine" href="https://github.com/SuperZombi/wot-modpack/releases/latest/download/Web.Modpack.exe">
 							<i className="fa-solid fa-circle-down"></i>
 							<span>{LANG.download_button[lang]}</span>
 						</a>
 					</Reveal>
 					<Reveal delay={2}>
-						<a className="button" href="https://github.com/SuperZombi/wot-modpack">
+						<a className="button shine" href="https://github.com/SuperZombi/wot-modpack">
 							<i className="fa-brands fa-github"></i>
 							<span>GitHub</span>
 						</a>
 					</Reveal>
 					<Reveal delay={3}>
-						<a className="button" href="https://wgmods.net/7156/">
+						<a className="button shine" href="https://wgmods.net/7156/">
 							<i className="fa-solid fa-globe"></i>
 							<span>WGmods</span>
 						</a>
@@ -56,7 +56,7 @@ const Home = ({mods_count, totalInstalls, lang}) => {
 }
 const StatCard = ({ value, label, duration=2000, delay=0 }) => {
 	return (
-		<Reveal className="container stat-card" delay={delay}>
+		<Reveal className="container stat-card shine" delay={delay}>
 			<Counter to={value} duration={duration}/>
 			<span>{label}</span>
 		</Reveal>
