@@ -10,7 +10,7 @@ const Home = ({mods_count, totalInstalls, lang}) => {
 		<React.Fragment>
 			<div className="container" align="center">
 				<Reveal>
-					<img src="images/home_img.jpg" className="home_image" draggable={false}/>
+					<img src="web/images/home_img.jpg" className="home_image" draggable={false}/>
 					<h2>{LANG.downloadModpackButton[lang]}</h2>
 				</Reveal>
 				<div className="row" style={{fontSize: "1.1em"}}>
