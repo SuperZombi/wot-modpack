@@ -9,49 +9,57 @@ const Home = ({mods_count, totalInstalls, lang}) => {
 	return (
 		<React.Fragment>
 			<div className="container" align="center">
-				<img src="images/home_img.jpg" className="home_image" draggable={false}/>
-				<h2>{LANG.downloadModpackButton[lang]}</h2>
+				<Reveal>
+					<img src="images/home_img.jpg" className="home_image" draggable={false}/>
+					<h2>{LANG.downloadModpackButton[lang]}</h2>
+				</Reveal>
 				<div className="row" style={{fontSize: "1.1em"}}>
-					<a className="button" href="https://github.com/SuperZombi/wot-modpack/releases/latest/download/Web.Modpack.exe">
-						<i className="fa-solid fa-circle-down"></i>
-						<span>{LANG.download_button[lang]}</span>
-					</a>
-					<a className="button" href="https://github.com/SuperZombi/wot-modpack">
-						<i className="fa-brands fa-github"></i>
-						<span>GitHub</span>
-					</a>
-					<a className="button" href="https://wgmods.net/7156/">
-						<i className="fa-solid fa-globe"></i>
-						<span>WGmods</span>
-					</a>
+					<Reveal delay={1}>
+						<a className="button" href="https://github.com/SuperZombi/wot-modpack/releases/latest/download/Web.Modpack.exe">
+							<i className="fa-solid fa-circle-down"></i>
+							<span>{LANG.download_button[lang]}</span>
+						</a>
+					</Reveal>
+					<Reveal delay={2}>
+						<a className="button" href="https://github.com/SuperZombi/wot-modpack">
+							<i className="fa-brands fa-github"></i>
+							<span>GitHub</span>
+						</a>
+					</Reveal>
+					<Reveal delay={3}>
+						<a className="button" href="https://wgmods.net/7156/">
+							<i className="fa-solid fa-globe"></i>
+							<span>WGmods</span>
+						</a>
+					</Reveal>
 				</div>
 			</div>
 			
 			<div className="container row" style={{fontSize: "14px", gap: "2rem"}}>
-				<StatCard value={mods_count} duration={2000} label={LANG.mods_count[lang]}/>
-				<StatCard value={totalInstalls} duration={2000} label={LANG.installations[lang]}/>
+				<StatCard value={mods_count} label={LANG.mods_count[lang]}/>
+				<StatCard value={totalInstalls} label={LANG.installations[lang]} delay={2}/>
 			</div>
 
 			<div className="container features-grid">
 				{features.map((feature, idx) => (
-					<div className="container feature" key={idx}>
+					<Reveal className="container feature" key={idx} delay={idx}>
 						<i className={`fa-solid ${feature.icon}`}></i>
 						<div className="feature-block">
 							<span className="feature-header">{LANG[feature.titleKey][lang]}</span>
 							<span>{LANG[feature.descKey][lang]}</span>
 						</div>
-					</div>
+					</Reveal>
 				))}
 			</div>
 		</React.Fragment>
 	)
 }
-const StatCard = ({ value, duration, label }) => {
+const StatCard = ({ value, label, duration=2000, delay=0 }) => {
 	return (
-		<div className="container stat-card">
+		<Reveal className="container stat-card" delay={delay}>
 			<Counter to={value} duration={duration}/>
 			<span>{label}</span>
-		</div>
+		</Reveal>
 	)
 }
 const Counter = ({ to, duration }) => {
@@ -68,5 +76,35 @@ const Counter = ({ to, duration }) => {
 	}, [to, duration])
 	return (
 		<span>{value}</span>
+	)
+}
+const Reveal = ({ children, className="", delay=0, ...props }) => {
+	const [visible, setVisible] = React.useState(false)
+	const blockRef = React.useRef(null)
+
+	React.useEffect(() => {
+		const node = blockRef.current
+		if (!node) return
+		const observer = new IntersectionObserver(
+			([entry]) => {
+				if (entry.isIntersecting) {
+					setVisible(true)
+					observer.unobserve(entry.target)
+				}
+			},
+			{ threshold: 0.2 }
+		)
+		observer.observe(node)
+		return () => observer.disconnect()
+	}, [])
+	return (
+		<div
+			ref={blockRef}
+			className={`${className} reveal ${visible ? "visible" : ""}`}
+			style={{ ...props.style, "--reveal-delay": `${delay * 80}ms` }}
+			{...props}
+		>
+			{children}
+		</div>
 	)
 }
