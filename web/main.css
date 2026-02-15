@@ -23,6 +23,7 @@ body{
 	padding: 1rem;
 	box-shadow: 0 10px 30px rgba(0,0,0,0.35);
 }
+
 header{
 	position: sticky;
 	z-index: 1;
@@ -288,6 +289,7 @@ table td, table caption{
 
 .home_image{
 	width: 480px;
+	height: auto;
 	max-width: 100%;
 	border-radius: 0.5rem;
 	user-select: none;

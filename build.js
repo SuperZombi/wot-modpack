@@ -9,7 +9,7 @@ fs.writeFileSync(tempEntry, combinedCode)
 esbuild.build({
 	entryPoints: [tempEntry],
 	bundle: true,
-	outfile: 'dest/app.js',
+	outfile: 'dist/app.js',
 	loader: { '.jsx': 'jsx' },
 	platform: 'browser',
 	format: 'iife',
@@ -24,7 +24,7 @@ esbuild.build({
 })
 
 const srcDir = 'web'
-const destDir = 'dest/web'
-fs.ensureDirSync(destDir)
-fs.copySync(srcDir, destDir)
+const distDir = 'dist/web'
+fs.ensureDirSync(distDir)
+fs.copySync(srcDir, distDir)
 console.log('✅ Files copied')
