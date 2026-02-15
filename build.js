@@ -9,7 +9,7 @@ fs.writeFileSync(tempEntry, combinedCode)
 esbuild.build({
 	entryPoints: [tempEntry],
 	bundle: true,
-	outfile: 'web/app.js',
+	outfile: 'dest/app.js',
 	loader: { '.jsx': 'jsx' },
 	platform: 'browser',
 	format: 'iife',
