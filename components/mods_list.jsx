@@ -19,6 +19,7 @@ const ModsList = ({ mods, groups, lang, onPreview }) => {
 				value={search}
 				onChange={e => setSearch(e.target.value)}
 				placeholder={LANG.searchMods[lang]}
+				autoComplete="off"
 			/>
 			{filteredMods.length > 0 ? (
 				<div className="container" id="mods-list">
