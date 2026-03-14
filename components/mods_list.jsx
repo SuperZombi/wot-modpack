@@ -1,31 +1,62 @@
 const ModsList = ({ mods, groups, lang, onPreview }) => {
+	const [search, setSearch] = React.useState("")
+	const normalizedSearch = search.trim().toLowerCase()
+	const filteredMods = mods.filter(mod => {
+		if (!mod.title) { return false }
+		if (!normalizedSearch) { return true }
+		if (mod.id.toLowerCase().includes(normalizedSearch)) return true;
+		if (mod.author && mod.author.toLowerCase().includes(normalizedSearch)) return true;
+		if (mod.title && Object.values(mod.title).some(v => v.toLowerCase().includes(normalizedSearch))) return true;
+		if (mod.description && Object.values(mod.description).some(v => v.toLowerCase().includes(normalizedSearch))) return true;
+		return false;
+	})
 	return mods.length > 0 ? (
-		<div className="container" id="mods-list">
-			{mods.map(mod => {
-				if (!mod.title){return null}
-				if (mod.group) {
-					const group = groups.find(g => g.id === mod.group);
-					if (!group) return null;
+		<React.Fragment>
+			<input
+				type="search"
+				id="mods-search"
+				className="container"
+				value={search}
+				onChange={e => setSearch(e.target.value)}
+				placeholder={LANG.searchMods[lang]}
+			/>
+			{filteredMods.length > 0 ? (
+				<div className="container" id="mods-list">
+					{filteredMods.map(mod => {
+						if (mod.group) {
+							const group = groups.find(g => g.id === mod.group);
+							if (!group) return null;
 
-					const alreadyRendered = mods.findIndex(m => m.group === group.id) < mods.indexOf(mod);
-					if (alreadyRendered) return null;
+							const alreadyRendered = filteredMods.findIndex(m => m.group === group.id) < filteredMods.indexOf(mod);
+							if (alreadyRendered) return null;
 
-					const modsInGroup = mods.filter(m => m.group === group.id)
-					return (
-						<React.Fragment key={group.id}>
-							{modsInGroup.map(gmod=>{
-								return (
-									<Mod key={gmod.id} mod={gmod} lang={lang} onPreview={onPreview}/>
-								)
-							})}
-						</React.Fragment>
-					)
-				}
-				return (
-					<Mod key={mod.id} mod={mod} lang={lang} onPreview={onPreview}/>
-				)
-			})}
-		</div>
+							const modsInGroup = filteredMods.filter(m => m.group === group.id)
+							return (
+								<React.Fragment key={group.id}>
+									{modsInGroup.map(gmod=>{
+										return (
+											<Mod key={gmod.id} mod={gmod} lang={lang} onPreview={onPreview}/>
+										)
+									})}
+								</React.Fragment>
+							)
+						}
+						return (
+							<Mod key={mod.id} mod={mod} lang={lang} onPreview={onPreview}/>
+						)
+					})}
+				</div>
+			) : (
+				<div className="container" style={{paddingBottom: 0}}>
+					<Reveal className="line" style={{gap: 0}}>
+						<img src="web/images/empty-box.png" alt="No mods found"
+							height="128" draggable={false} style={{userSelect: "none"}}
+						/>
+						<h3>{LANG.nothingFounded[lang]}</h3>
+					</Reveal>
+				</div>
+			)}
+		</React.Fragment>
 	) : <Loader/>
 }
 const Mod = ({ mod, lang, onPreview }) => {

@@ -118,5 +118,15 @@ var LANG = {
 		"en": "No cheats, no viruses",
 		"ru": "Никаких читов, никаких вирусов",
 		"uk": "Без читів та без вірусів",
+	},
+	"searchMods": {
+		"en": "Search",
+		"ru": "Поиск",
+		"uk": "Пошук"
+	},
+	"nothingFounded": {
+		"en": "Nothing founded",
+		"ru": "Ничего не найдено",
+		"uk": "Нічого не знайдено"
 	}
 }

@@ -128,6 +128,17 @@ nav{
 	border-color: rgba(255,255,255,0.10);
 }
 
+#mods-search{
+	font-size: 14px;
+	transition: 0.3s;
+	color: inherit;
+}
+#mods-search:focus{
+	outline: none;
+	border-color: rgba(255,255,255,0.2);
+	background: rgba(255,255,255,0.1);
+}
+
 #mods-list{
 	display: grid;
 	grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -271,6 +282,12 @@ table td, table caption{
 	justify-content: center;
 	flex-wrap: wrap;
 	align-items: flex-start;
+}
+.line {
+	display: flex;
+    flex-direction: column;
+    align-items: center;
+	gap: 1rem;
 }
 .stat-card {
 	padding: 1em 1.5em;
