@@ -128,5 +128,10 @@ var LANG = {
 		"en": "Nothing founded",
 		"ru": "Ничего не найдено",
 		"uk": "Нічого не знайдено"
+	},
+	"showHiddenMods": {
+		"en": "Show hidden mods",
+		"ru": "Показать скрытые моды",
+		"uk": "Показати приховані моди"
 	}
 }

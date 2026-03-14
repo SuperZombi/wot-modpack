@@ -11,6 +11,7 @@ const App = () => {
 	const [selected, setSelected] = React.useState(null)
 
 	const [tab, setTab] = React.useState("home")
+	const [showHiddenMods, setShowHiddenMods] = React.useState(false)
 	
 	const supportedLangs = ["en", "ru", "uk"]
 	const getInitialLang = () => {
@@ -148,14 +149,17 @@ const App = () => {
 					lang={lang}
 				/>
 			) : tab == "mods" ? (
-				<ModsList mods={mods} groups={groups} lang={lang} onPreview={onPreview}/>
+				<ModsList mods={mods} groups={groups}
+					lang={lang} onPreview={onPreview}
+					showHidden={showHiddenMods}
+				/>
 			) : tab == "stats" ? (
 				<ModStats mods={mods} stats={stats} lang={lang} onPreview={onPreview}/>
 			) : tab == "other" ? (
-				<div className="container row" style={{marginTop: "6px"}}>
-					<OtherStatsTable caption={LANG.languagesTable[lang]} data={langStats}/>
-					<OtherStatsTable caption={LANG.clientsTable[lang]} data={clientStats}/>
-				</div>
+				<OtherPage lang={lang}
+					langStats={langStats} clientStats={clientStats}
+					showHiddenMods={showHiddenMods} setShowHiddenMods={setShowHiddenMods}
+				/>
 			) : null}
 
 			{showPreview && (
@@ -170,6 +174,26 @@ const App = () => {
 }
 ReactDOM.createRoot(document.getElementById('root')).render(<App/>)
 
+
+const OtherPage = ({ lang, langStats, clientStats, showHiddenMods, setShowHiddenMods }) => {
+	return (
+		<React.Fragment>
+			<div className="container" align="center">
+				<label>
+					<input type="checkbox" checked={showHiddenMods}
+						onChange={e=>setShowHiddenMods(e.target.checked)}
+						style={{marginRight: "0.5em"}}
+					/>
+					<span>{LANG.showHiddenMods[lang]}</span>
+				</label>
+			</div>
+			<div className="container row">
+				<OtherStatsTable caption={LANG.languagesTable[lang]} data={langStats}/>
+				<OtherStatsTable caption={LANG.clientsTable[lang]} data={clientStats}/>
+			</div>
+		</React.Fragment>
+	)
+}
 
 const OtherStatsTable = ({caption, data}) => {
 	return (

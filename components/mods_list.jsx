@@ -1,8 +1,8 @@
-const ModsList = ({ mods, groups, lang, onPreview }) => {
+const ModsList = ({ mods, groups, lang, onPreview, showHidden }) => {
 	const [search, setSearch] = React.useState("")
 	const normalizedSearch = search.trim().toLowerCase()
 	const filteredMods = mods.filter(mod => {
-		if (!mod.title) { return false }
+		if (!mod.title && !showHidden) { return false }
 		if (!normalizedSearch) { return true }
 		if (mod.id.toLowerCase().includes(normalizedSearch)) return true;
 		if (mod.author && mod.author.toLowerCase().includes(normalizedSearch)) return true;
@@ -61,10 +61,11 @@ const ModsList = ({ mods, groups, lang, onPreview }) => {
 	) : <Loader/>
 }
 const Mod = ({ mod, lang, onPreview }) => {
+	const hidden = mod.title ? false : true;
 	return (
 		<Reveal className="mod" onClick={_=>onPreview(mod)}>
-			<img src={mod.image} draggable={false}/>
-			<span>{replaceFlags(mod.title[lang])}</span>
+			<img src={hidden ? "web/images/picture.png" : mod.image} draggable={false}/>
+			<span>{hidden ? mod.id : replaceFlags(mod.title[lang])}</span>
 		</Reveal>
 	)
 }
@@ -79,13 +80,16 @@ const ModStats = ({mods, stats, lang, onPreview}) => {
 
 	return mods.length > 0 ? (
 		<div className="container" id="stats-list">
-			{sortedMods.map(mod => (
-				<div className="mod" key={mod.id} onClick={_=>onPreview(mod)}>
-					<img src={mod.image} draggable={false}/>
-					<span>{replaceFlags(mod.title[lang])}</span>
-					<span>{mod.popularity}</span>
-				</div>
-			))}
+			{sortedMods.map(mod => {
+				const hidden = mod.title ? false : true;
+				return (
+					<div className="mod" key={mod.id} onClick={_=>onPreview(mod)}>
+						<img src={hidden ? "web/images/picture.png" : mod.image} draggable={false}/>
+						<span>{hidden ? mod.id : replaceFlags(mod.title[lang])}</span>
+						<span>{mod.popularity}</span>
+					</div>
+				)
+			})}
 		</div>
 	) : <Loader/>
 }
