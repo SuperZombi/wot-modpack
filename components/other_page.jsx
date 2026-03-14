@@ -8,17 +8,13 @@ const OtherPage = ({ lang, langStats, clientStats, showHiddenMods, setShowHidden
 
 	const formatLanguageName = code => {
 		const sourceCode = String(code || "").trim()
-		if (!sourceCode) {
-			return code
-		}
-
+		if (!sourceCode) { return code }
 		const normalizedCode = sourceCode.toLowerCase().replace(/_/g, "-")
 		const languageCode = normalizedCode.split("-")[0]
 		const localizedLabel = languageDisplayNames?.of(languageCode)
 		if (!localizedLabel || localizedLabel === languageCode) {
 			return sourceCode
 		}
-
 		return `${sourceCode} (${localizedLabel})`
 	}
 
@@ -33,7 +29,7 @@ const OtherPage = ({ lang, langStats, clientStats, showHiddenMods, setShowHidden
 					<span>{LANG.showHiddenMods[lang]}</span>
 				</label>
 			</div>
-			<div className="container row">
+			<div className="container row" style={{gap: "2rem"}}>
 				<OtherStatsTable
 					caption={LANG.languagesTable[lang]}
 					data={langStats}
@@ -45,7 +41,7 @@ const OtherPage = ({ lang, langStats, clientStats, showHiddenMods, setShowHidden
 	)
 }
 
-const OtherStatsTable = ({caption, data, nameFormatter = name => name}) => {
+const OtherStatsTable = ({caption, data, nameFormatter=null}) => {
 	const values = Object.values(data)
 	const total = values.reduce((sum, value) => sum + Number(value), 0)
 
@@ -59,7 +55,7 @@ const OtherStatsTable = ({caption, data, nameFormatter = name => name}) => {
 						const percent = total > 0 ? ((Number(count) / total) * 100).toFixed(1) : "0.0"
 						return (
 							<tr key={index}>
-								<td>{nameFormatter(name)}</td>
+								<td>{nameFormatter ? nameFormatter(name) : name}</td>
 								<td style={{textAlign: "right"}}>{count}</td>
 								<td style={{textAlign: "right"}}>{percent}%</td>
 							</tr>
