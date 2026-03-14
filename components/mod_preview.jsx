@@ -5,10 +5,18 @@ const ModPreview = ({lang, onClosePreview, previewData, stats}) => {
 		document.body.style.overflow = 'hidden';
 		return ()=> document.body.style.overflow = 'unset';
 	}, []);
+	const BeforeClose = _=>{
+		if (visible){
+			setVisible(false)
+			setTimeout(_=>{ onClosePreview() }, 300)
+		}
+	}
 	return (
-		<div className={`popup ${visible ? "visible" : ""}`} onClick={e=>e.target.classList.contains("popup") && onClosePreview()}>
+		<div className={`popup ${visible ? "visible" : "hidden"}`}
+			onClick={e=>e.target.classList.contains("popup") && BeforeClose()}
+		>
 			<div className="container popup-content">
-				<i className="close fa-solid fa-circle-xmark" onClick={_=>onClosePreview()}></i>
+				<i className="close fa-solid fa-circle-xmark" onClick={_=>BeforeClose()}></i>
 				<h3 align="center">{previewData.title || previewData.id}</h3>
 				{previewData.image && (
 					<div className="image-container">

@@ -205,7 +205,12 @@ nav{
 	min-width: 40dvw;
 	gap: 1rem;
 	backdrop-filter: blur(10px);
+}
+.popup.visible .popup-content{
 	animation: reveal-enter 0.35s ease backwards;
+}
+.popup.hidden .popup-content{
+	animation: reveal-exit 0.35s ease backwards;
 }
 .image-container{
 	height: 300px;
@@ -360,6 +365,16 @@ table td, table caption{
 	to {
 		opacity: 1;
 		transform: translateY(0) scale(1);
+	}
+}
+@keyframes reveal-exit {
+	from {
+		opacity: 1;
+		transform: translateY(0) scale(1);
+	}
+	to {
+		opacity: 0;
+		transform: translateY(16px) scale(0.985);
 	}
 }
 
