@@ -1,4 +1,23 @@
 const OtherPage = ({ lang, langStats, clientStats, showHiddenMods, setShowHiddenMods }) => {
+	const languageDisplayNames = React.useMemo(() => {
+		if (typeof Intl === "undefined" || typeof Intl.DisplayNames !== "function") {
+			return null
+		}
+		return new Intl.DisplayNames([lang], { type: "language" })
+	}, [lang])
+
+	const formatLanguageName = code => {
+		const sourceCode = String(code || "").trim()
+		if (!sourceCode) { return code }
+		const normalizedCode = sourceCode.toLowerCase().replace(/_/g, "-")
+		const languageCode = normalizedCode.split("-")[0]
+		const localizedLabel = languageDisplayNames?.of(languageCode)
+		if (!localizedLabel || localizedLabel === languageCode) {
+			return sourceCode
+		}
+		return `${sourceCode} (${localizedLabel})`
+	}
+
 	return (
 		<React.Fragment>
 			<div className="container" align="center">
@@ -11,14 +30,18 @@ const OtherPage = ({ lang, langStats, clientStats, showHiddenMods, setShowHidden
 				</label>
 			</div>
 			<div className="container row" style={{gap: "2rem"}}>
-				<OtherStatsTable caption={LANG.languagesTable[lang]} data={langStats}/>
+				<OtherStatsTable
+					caption={LANG.languagesTable[lang]}
+					data={langStats}
+					nameFormatter={formatLanguageName}
+				/>
 				<OtherStatsTable caption={LANG.clientsTable[lang]} data={clientStats}/>
 			</div>
 		</React.Fragment>
 	)
 }
 
-const OtherStatsTable = ({caption, data}) => {
+const OtherStatsTable = ({caption, data, nameFormatter=null}) => {
 	const values = Object.values(data)
 	const total = values.reduce((sum, value) => sum + Number(value), 0)
 
@@ -32,7 +55,7 @@ const OtherStatsTable = ({caption, data}) => {
 						const percent = total > 0 ? ((Number(count) / total) * 100).toFixed(1) : "0.0"
 						return (
 							<tr key={index}>
-								<td>{name}</td>
+								<td>{nameFormatter ? nameFormatter(name) : name}</td>
 								<td style={{textAlign: "right"}}>{count}</td>
 								<td style={{textAlign: "right"}}>{percent}%</td>
 							</tr>
