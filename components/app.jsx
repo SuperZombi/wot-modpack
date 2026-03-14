@@ -175,45 +175,6 @@ const App = () => {
 ReactDOM.createRoot(document.getElementById('root')).render(<App/>)
 
 
-const OtherPage = ({ lang, langStats, clientStats, showHiddenMods, setShowHiddenMods }) => {
-	return (
-		<React.Fragment>
-			<div className="container" align="center">
-				<label>
-					<input type="checkbox" checked={showHiddenMods}
-						onChange={e=>setShowHiddenMods(e.target.checked)}
-						style={{marginRight: "0.5em"}}
-					/>
-					<span>{LANG.showHiddenMods[lang]}</span>
-				</label>
-			</div>
-			<div className="container row">
-				<OtherStatsTable caption={LANG.languagesTable[lang]} data={langStats}/>
-				<OtherStatsTable caption={LANG.clientsTable[lang]} data={clientStats}/>
-			</div>
-		</React.Fragment>
-	)
-}
-
-const OtherStatsTable = ({caption, data}) => {
-	return (
-		<table border="1">
-			<caption>{caption}</caption>
-			<tbody>
-				{Object.keys(data).length > 0 ? (
-					<React.Fragment>
-					{Object.entries(data).map(([name, count], index)=>(
-						<tr key={index}>
-							<td>{name}</td>
-							<td style={{textAlign: "right"}}>{count}</td>
-						</tr>
-					))}
-					</React.Fragment>
-				) : <tr><td>Loading...</td></tr>}
-			</tbody>
-		</table>
-	)
-}
 
 async function buildZip(filename, files) {
 	const zip = new JSZip();
