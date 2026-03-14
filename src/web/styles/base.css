@@ -295,12 +295,12 @@ label{
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	visability: hidden;
+	visibility: hidden;
 	opacity: 0;
 	transition: 0.3s;
 }
 .popup.show{
-	visability: visible;
+	visibility: visible;
 	opacity: 1;
 }
 .popup .popup_wraper{
