@@ -6,9 +6,7 @@ const Popup = ({onClose, children}) => {
 	const BeforeClose = _=>{
 		if (show){
 			setShow(false)
-			setTimeout(_=>{
-				onClose()
-			}, 300)
+			setTimeout(_=>{ onClose() }, 300)
 		}
 	}
 	return (
