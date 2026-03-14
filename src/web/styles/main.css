@@ -45,10 +45,6 @@ header a:hover{
 	scrollbar-width: thin;
 	color-scheme: dark;
 }
-#mods-list-area.grid {
-
-}
-
 .mods-grid {
 	display: grid !important;
 	grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
