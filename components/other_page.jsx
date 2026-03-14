@@ -10,7 +10,7 @@ const OtherPage = ({ lang, langStats, clientStats, showHiddenMods, setShowHidden
 					<span>{LANG.showHiddenMods[lang]}</span>
 				</label>
 			</div>
-			<div className="container row">
+			<div className="container row" style={{gap: "2rem"}}>
 				<OtherStatsTable caption={LANG.languagesTable[lang]} data={langStats}/>
 				<OtherStatsTable caption={LANG.clientsTable[lang]} data={clientStats}/>
 			</div>
