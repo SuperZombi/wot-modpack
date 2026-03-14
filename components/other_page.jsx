@@ -15,7 +15,7 @@ const OtherPage = ({ lang, langStats, clientStats, showHiddenMods, setShowHidden
 		if (!localizedLabel || localizedLabel === languageCode) {
 			return sourceCode
 		}
-		return `${sourceCode} (${localizedLabel})`
+		return localizedLabel.charAt(0).toLocaleUpperCase(lang) + localizedLabel.slice(1)
 	}
 
 	return (
