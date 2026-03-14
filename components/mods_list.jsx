@@ -64,7 +64,7 @@ const Mod = ({ mod, lang, onPreview }) => {
 	const hidden = mod.title ? false : true;
 	return (
 		<Reveal className="mod" onClick={_=>onPreview(mod)}>
-			<img src={hidden ? "web/images/picture.png" : mod.image} draggable={false}/>
+			<img src={mod.image || "web/images/picture.png"} draggable={false}/>
 			<span>{hidden ? mod.id : replaceFlags(mod.title[lang])}</span>
 		</Reveal>
 	)
@@ -84,7 +84,7 @@ const ModStats = ({mods, stats, lang, onPreview}) => {
 				const hidden = mod.title ? false : true;
 				return (
 					<div className="mod" key={mod.id} onClick={_=>onPreview(mod)}>
-						<img src={hidden ? "web/images/picture.png" : mod.image} draggable={false}/>
+						<img src={mod.image || "web/images/picture.png"} draggable={false}/>
 						<span>{hidden ? mod.id : replaceFlags(mod.title[lang])}</span>
 						<span>{mod.popularity}</span>
 					</div>
