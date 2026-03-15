@@ -212,7 +212,7 @@ nav{
 	position: relative;
 	overflow: auto;
 	max-height: 95dvh;
-	max-width: 95dvw;
+	max-width: 65dvw;
 	min-width: 40dvw;
 	gap: 1rem;
 	backdrop-filter: blur(10px);
@@ -236,8 +236,13 @@ nav{
 	user-select: none;
 	box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
 }
+.mod-description{
+	text-wrap: balance;
+	text-align: center;
+}
 .mod-description ul{
 	margin: 0;
+	text-align: left;
 }
 .mod-description hr{
 	width: 100%;
@@ -412,5 +417,8 @@ table td, table caption{
 		max-height: 300px;
 		overflow: hidden;
 		border-radius: 10px;
+	}
+	.popup-content{
+		max-width: 95dvw;
 	}
 }
