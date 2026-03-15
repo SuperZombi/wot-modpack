@@ -212,7 +212,7 @@ nav{
 	position: relative;
 	overflow: auto;
 	max-height: 95dvh;
-	max-width: 65dvw;
+	max-width: 60dvw;
 	min-width: 40dvw;
 	gap: 1rem;
 	backdrop-filter: blur(10px);
