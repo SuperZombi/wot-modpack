@@ -5,13 +5,12 @@
 
 <p>
     <img src="https://shields.io/badge/version-2.3.1-blue">&ensp;
+    <a href="https://superzombi.github.io/wot-modpack/"><img src="https://shields.io/badge/🌐-Website-598dbf"></a>&ensp;
     <a href="https://wgmods.net/7156/"><img src="https://shields.io/badge/⇩-WGmods-f9b723"></a>&ensp;
     <a href="#donate"><img src="https://shields.io/badge/💲-Support_the_Project-2ea043"></a>
 </p>
 
 ### <a href="https://github.com/SuperZombi/wot-modpack/releases/latest/download/Web.Modpack.exe"><img src="https://github.com/user-attachments/assets/2a418b60-b0a1-462d-afc3-0270ba5c0e83" width="26" align="top"> Download</a>
-
-### [Modpack Website](https://superzombi.github.io/wot-modpack/)
 
 The problem of all modpacks is their large size.<br>
 This modpack downloads only those mods that the user selected at runtime.<br>
