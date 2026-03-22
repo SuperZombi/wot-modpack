@@ -144,9 +144,13 @@ def _main_install_worker(client_path, args, mods):
 				fails.append({"error": str(e)})
 				return fails
 
-		telemetry.send_telemetry(mods,
-			__version__, client.version,
-			client.type.upper(), client.lang.upper()
+		telemetry.send_telemetry(
+			mod_ids=mods,
+			modpack_ver=__version__,
+			wot_ver=client.version,
+			wot_type=client.type.upper(),
+			wot_lang=client.lang.upper(),
+			layout=SETTINGS.get("layout")
 		)
 
 	if args.get("save_selected_mods", True):

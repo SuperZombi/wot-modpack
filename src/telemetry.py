@@ -6,6 +6,7 @@ def send_telemetry(
     wot_ver: str,
     wot_type: str,
     wot_lang: str,
+    layout: str,
 ):
     FORM_ID = "1FAIpQLSfC97X60xa_K9GkqmNKu3bKfq0cMWNZeDRDYGTSN6w5EuWS2w"
     FORM_ENDPOINT = f"https://docs.google.com/forms/d/e/{FORM_ID}/formResponse"
@@ -16,13 +17,15 @@ def send_telemetry(
     WOT_VER_ENTRY = "entry.1583337109"
     WOT_TYPE = "entry.1269265634"
     WOT_LANG = "entry.1724540185"
+    LAYOUT = "entry.951084848"
 
     data = {
         MOD_IDS_ENTRY: str(",".join(mod_ids)),
         MODPACK_VER_ENTRY: str(modpack_ver),
         WOT_VER_ENTRY: str(wot_ver),
         WOT_TYPE: str(wot_type),
-        WOT_LANG: str(wot_lang)
+        WOT_LANG: str(wot_lang),
+        LAYOUT: str(layout) if layout in ["list", "grid"] else "",
     }
     headers = {
         "User-Agent": "Mozilla/5.0",
