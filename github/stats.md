@@ -50,3 +50,15 @@
   0
 )
 ```
+
+### Game version
+```
+=QUERY(
+  FILTER(Form_Responses[WoT version]; Form_Responses[WoT version] <> "");
+  "select Col1, count(Col1)
+   group by Col1
+   order by Col1 desc
+   label Col1 '', count(Col1) ''";
+  0
+)
+```
