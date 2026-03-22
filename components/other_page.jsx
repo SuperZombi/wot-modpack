@@ -33,6 +33,11 @@ const OtherPage = ({showHiddenMods, setShowHiddenMods}) => {
 
 	const capitalize = text => text.charAt(0).toUpperCase() + text.slice(1).toLowerCase()
 
+	const layout_type = {
+		"grid": <LANG id="layout_grid" />,
+		"list": <LANG id="layout_list" />
+	}
+
 	return (
 		<React.Fragment>
 			<div className="container" align="center">
@@ -62,7 +67,7 @@ const OtherPage = ({showHiddenMods, setShowHiddenMods}) => {
 				<OtherStatsTable
 					caption={<LANG id="layout"/>}
 					data={layoutStats}
-					nameFormatter={capitalize}
+					nameFormatter={val=>layout_type[val] || val}
 				/>
 			</div>
 		</React.Fragment>
