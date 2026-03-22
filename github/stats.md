@@ -15,6 +15,7 @@
 )
 ```
 
+### Client type
 ```
 =QUERY(
   FILTER(Form_Responses[WoT type]; Form_Responses[WoT type] <> "");
@@ -26,9 +27,22 @@
 )
 ```
 
+### Language
 ```
 =QUERY(
   FILTER(Form_Responses[WoT lang]; Form_Responses[WoT lang] <> "");
+  "select Col1, count(Col1)
+   group by Col1
+   order by count(Col1) desc
+   label Col1 '', count(Col1) ''";
+  0
+)
+```
+
+### Layout
+```
+=QUERY(
+  FILTER(Form_Responses[Layout]; Form_Responses[Layout] <> "");
   "select Col1, count(Col1)
    group by Col1
    order by count(Col1) desc
