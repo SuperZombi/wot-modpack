@@ -1,11 +1,12 @@
 import os, sys
-import xmltodict
 import shutil
 import requests
 import zipfile
 import psutil
 import json
 from io import BytesIO
+import xml.etree.ElementTree as ET
+from functools import cached_property
 
 
 class Version:
@@ -71,19 +72,30 @@ class Launchers:
 class Client:
 	def __init__(self, path, use_cache=True):
 		self.path = path
-		self.type = "steam" if "steam" in path.lower() else "wg"
-		self.parse_info()
-		self.title = f"WoT {self.realm} {self.version}"
-		if self.type == "steam":
-			self.title = f"WoT {self.realm} {self.version} (Steam)"
-		self.exe = "WorldOfTanks.exe"
-		self.installed = []
 		self.use_cache = use_cache
+		self.exe = "WorldOfTanks.exe"
 		appdata = os.path.join(os.getenv('APPDATA'), 'Wargaming.net', 'WorldOfTanks')
 		self.appdata = appdata if os.path.exists(appdata) else None
+		self.installed = []
+
+	@property
+	def is_running(self):
+		for process in psutil.process_iter():
+			if process and process.name() == self.exe:
+				return self.path in process.cwd()
+		return False
+
+	@property
+	def type(self):
+		return "steam" if "steam" in self.path.lower() else "wg"
+
+	@property
+	def title(self):
+		return f'WoT {self.realm.upper()} {self.version}{" (Steam)" if self.type == "steam" else ""}'
 
 	def __str__(self): return self.title
 	def __repr__(self): return f"<{str(self)}>"
+
 	def to_json(self):
 		return {
 			"path": self.path,
@@ -96,40 +108,63 @@ class Client:
 			"mods_folder": self.mods_folder,
 			"configs_path": self.configs_path,
 		}
+
 	@property
-	def is_running(self):
-		for process in psutil.process_iter():
-			if process and process.name() == self.exe:
-				return self.path in process.cwd()
-		return False
+	def realm(self):
+		return self._find_xml_text(self._version_xml, 'meta/realm').lower()
 
-	def parse_info(self):
-		with open(os.path.join(self.path, "version.xml"), 'r', encoding="utf-8") as f:
-			xpars = xmltodict.parse(f.read())
-			meta = xpars.get('version.xml').get('meta')
+	@property
+	def version(self):
+		ver = self._find_xml_text(self._version_xml, 'version')
+		if ver:
+			ver = ver.replace('v.', '').strip()
+			ver = ver.split()[:-1]
+			ver = ''.join(ver)
+			return ver
 
-			self.realm = meta.get('realm')
-			self.version = meta.get('branch').strip('v')
+	@property
+	def lang(self):
+		return self._find_xml_text(self._game_info_xml, 'game/localization').lower()[:2]
 
-		with open(os.path.join(self.path, "game_info.xml"), 'r', encoding="utf-8") as f:
-			xpars = xmltodict.parse(f.read())
-			data = xpars.get('protocol').get('game')
+	@property
+	def mods_folder(self):
+		return next(
+			(os.path.join(self.path, folder) for folder in self._paths_xml if folder.startswith('mods')),
+			None
+		)
 
-			self.lang = data.get('localization')
+	@property
+	def res_mods(self):
+		return next(
+			(os.path.join(self.path, folder) for folder in self._paths_xml if folder.startswith('res_mods')),
+			None
+		)
 
-		with open(os.path.join(self.path, "paths.xml"), 'r', encoding="utf-8") as f:
-			xpars = xmltodict.parse(f.read())
-			paths = xpars.get('root').get('Paths').get('Path')
-			for folder in paths:
-				if isinstance(folder, dict):
-					folder = os.path.normpath(folder.get("#text"))
-					path = os.path.join(self.path, folder)
-					if 'res_mods' in folder:
-						self.res_mods = path
-					elif 'mods' in folder:
-						self.mods_folder = path
-						self.configs_path = os.path.abspath(os.path.join(self.mods_folder, "..", "configs"))
-	
+	@property
+	def configs_path(self):
+		return os.path.abspath(os.path.join(self.mods_folder, "..", "configs"))
+
+	@cached_property
+	def _version_xml(self):
+		return self._parse_xml("version.xml")
+
+	@cached_property
+	def _game_info_xml(self):
+		return self._parse_xml("game_info.xml")
+
+	@cached_property
+	def _paths_xml(self):
+		root = self._parse_xml("paths.xml")
+		elements = root.findall('Paths/Path')
+		return list(map(lambda el: os.path.normpath(el.text.strip()), elements))
+
+	def _parse_xml(self, path):
+		return ET.parse(os.path.join(self.path, path)).getroot()
+
+	def _find_xml_text(self, root, path):
+		el = root.find(path)
+		return el.text.strip() if el is not None else None
+
 	def delete_mods(self, delete_configs=False, delete_logs=True):
 		self.installed = []
 		mods_f = os.path.join(self.path, "mods")
