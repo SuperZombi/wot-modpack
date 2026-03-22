@@ -12,12 +12,13 @@ const OtherPage = ({showHiddenMods, setShowHiddenMods}) => {
 		loadStatsPage("871377866", data=>setLayoutStats(statsAsNumber(data)))
 	}, [])
 
-	const languageDisplayNames = React.useMemo(() => {
-		if (typeof Intl === "undefined" || typeof Intl.DisplayNames !== "function") {
-			return null
-		}
-		return new Intl.DisplayNames([lang], { type: "language" })
-	}, [lang])
+	const capitalize = text => text.charAt(0).toUpperCase() + text.slice(1).toLowerCase()
+
+	const languageDisplayNames = (
+		typeof Intl === "undefined" || typeof Intl.DisplayNames !== "function"
+	) ? (
+		new Intl.DisplayNames([lang], { type: "language" })
+	) : null;
 
 	const formatLanguageName = code => {
 		const sourceCode = String(code || "").trim()
@@ -28,10 +29,8 @@ const OtherPage = ({showHiddenMods, setShowHiddenMods}) => {
 		if (!localizedLabel || localizedLabel === languageCode) {
 			return sourceCode
 		}
-		return localizedLabel.charAt(0).toLocaleUpperCase(lang) + localizedLabel.slice(1)
+		return capitalize(localizedLabel) 
 	}
-
-	const capitalize = text => text.charAt(0).toUpperCase() + text.slice(1).toLowerCase()
 
 	const layout_type = {
 		"grid": <LANG id="layout_grid" />,
