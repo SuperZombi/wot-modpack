@@ -15,16 +15,15 @@ const OtherPage = ({showHiddenMods, setShowHiddenMods}) => {
 	const capitalize = text => text.charAt(0).toUpperCase() + text.slice(1).toLowerCase()
 
 	const languageDisplayNames = (
-		typeof Intl === "undefined" || typeof Intl.DisplayNames !== "function"
+		typeof Intl !== "undefined" && typeof Intl.DisplayNames === "function"
 	) ? (
 		new Intl.DisplayNames([lang], { type: "language" })
-	) : null;
+	) : null
 
 	const formatLanguageName = code => {
 		const sourceCode = String(code || "").trim()
 		if (!sourceCode) { return code }
-		const normalizedCode = sourceCode.toLowerCase().replace(/_/g, "-")
-		const languageCode = normalizedCode.split("-")[0]
+		const languageCode = sourceCode.toLowerCase().replace(/_/g, "-").split("-")[0]
 		const localizedLabel = languageDisplayNames?.of(languageCode)
 		if (!localizedLabel || localizedLabel === languageCode) {
 			return sourceCode
@@ -86,7 +85,7 @@ const OtherStatsTable = ({caption, data, nameFormatter=null}) => {
 				{validEntries.length > 0 ? (
 					<React.Fragment>
 					{validEntries.map(([name, count], index) => {
-						const percent = total > 0 ? ((Number(count) / total) * 100).toFixed(1) : "0.0"
+						const percent = total > 0 ? ((Number(count) / total) * 100).toFixed(0) : "0"
 						return (
 							<tr key={index}>
 								<td>{nameFormatter ? nameFormatter(name) : name}</td>
