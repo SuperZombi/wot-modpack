@@ -1,4 +1,16 @@
-const OtherPage = ({ lang, langStats, clientStats, showHiddenMods, setShowHiddenMods }) => {
+const OtherPage = ({lang, showHiddenMods, setShowHiddenMods}) => {
+	const [langStats, setLangStats] = React.useState({})
+	const [clientStats, setClientStats] = React.useState({})
+	const [gameVersionStats, setGameVersionStats] = React.useState({})
+	const [layoutStats, setLayoutStats] = React.useState({})
+
+	React.useEffect(_=>{
+		loadStatsPage("1884858162", data=>setLangStats(statsAsNumber(data)))
+		loadStatsPage("224300057", data=>setClientStats(statsAsNumber(data)))
+		loadStatsPage("379781718", data=>setGameVersionStats(statsAsNumber(data)))
+		loadStatsPage("871377866", data=>setLayoutStats(statsAsNumber(data)))
+	}, [])
+
 	const languageDisplayNames = React.useMemo(() => {
 		if (typeof Intl === "undefined" || typeof Intl.DisplayNames !== "function") {
 			return null
@@ -18,6 +30,8 @@ const OtherPage = ({ lang, langStats, clientStats, showHiddenMods, setShowHidden
 		return localizedLabel.charAt(0).toLocaleUpperCase(lang) + localizedLabel.slice(1)
 	}
 
+	const capitalize = text => text.charAt(0).toUpperCase() + text.slice(1).toLowerCase()
+
 	return (
 		<React.Fragment>
 			<div className="container" align="center">
@@ -35,7 +49,20 @@ const OtherPage = ({ lang, langStats, clientStats, showHiddenMods, setShowHidden
 					data={langStats}
 					nameFormatter={formatLanguageName}
 				/>
-				<OtherStatsTable caption={LANG.clientsTable[lang]} data={clientStats}/>
+				<OtherStatsTable
+					caption={LANG.gameVersion[lang]}
+					data={gameVersionStats}
+				/>
+				<OtherStatsTable
+					caption={LANG.clientsTable[lang]}
+					data={clientStats}
+					nameFormatter={capitalize}
+				/>
+				<OtherStatsTable
+					caption={LANG.layout[lang]}
+					data={layoutStats}
+					nameFormatter={capitalize}
+				/>
 			</div>
 		</React.Fragment>
 	)
@@ -62,7 +89,9 @@ const OtherStatsTable = ({caption, data, nameFormatter=null}) => {
 						)
 					})}
 					</React.Fragment>
-				) : <tr><td>Loading...</td></tr>}
+				) : <tr><td>
+						{LANG.loading[lang]}
+					</td></tr>}
 			</tbody>
 		</table>
 	)

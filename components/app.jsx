@@ -2,8 +2,6 @@ const App = () => {
 	const [mods, setMods] = React.useState([])
 	const [groups, setGroups] = React.useState([])
 	const [stats, setStats] = React.useState({})
-	const [langStats, setLangStats] = React.useState({})
-	const [clientStats, setClientStats] = React.useState({})
 	const [totalInstalls, setTotalInstalls] = React.useState(0)
 
 	const [showPreview, setShowPreview] = React.useState(false)
@@ -41,19 +39,9 @@ const App = () => {
 		.catch(console.error)
 	}, [])
 	React.useEffect(() => {
-		loadStatsPage('2089462923', data=>setStats(statsAsNumber(data)))
+		loadStatsPage("2089462923", data=>setStats(statsAsNumber(data)))
 		loadStatsPage("342255871", data=>setTotalInstalls(Math.max(0, data.length-1)))
 	}, [])
-	React.useEffect(() => {
-		if (tab == "other"){
-			if (Object.keys(langStats).length == 0){
-				loadStatsPage("1884858162", data=>setLangStats(statsAsNumber(data)))
-			}
-			if (Object.keys(clientStats).length == 0){
-				loadStatsPage("224300057", data=>setClientStats(statsAsNumber(data)))
-			}
-		}
-	}, [tab])
 
 	React.useEffect(() => {
 		const params = new URLSearchParams(window.location.search)
@@ -157,7 +145,6 @@ const App = () => {
 				<ModStats mods={mods} stats={stats} lang={lang} onPreview={onPreview}/>
 			) : tab == "other" ? (
 				<OtherPage lang={lang}
-					langStats={langStats} clientStats={clientStats}
 					showHiddenMods={showHiddenMods} setShowHiddenMods={setShowHiddenMods}
 				/>
 			) : null}
@@ -237,8 +224,12 @@ function replaceFlags(text) {
 		return part
 	})
 }
+const statsPageCache = new Map();
 function loadStatsPage(SHEET_ID, callback){
 	const DOC_ID = "1GEMJfZxjUYmQAg-cDcQ7DGNjsX6pASMp9hQ1T0tVRfo"
+	if (statsPageCache.has(SHEET_ID)) {
+		return callback(statsPageCache.get(SHEET_ID))
+	}
 	fetch(`https://docs.google.com/spreadsheets/d/${DOC_ID}/export?format=csv&gid=${SHEET_ID}`)
 	.then(r=>{
 		if (!r.ok) {
@@ -246,7 +237,9 @@ function loadStatsPage(SHEET_ID, callback){
 		}
 		return r.text()
 	}).then(text=>{
-		callback(text.split("\n").map(line => line.trim().split(",")))
+		const data = text.split("\n").map(line => line.trim().split(","))
+		statsPageCache.set(SHEET_ID, data);
+		callback(data)
 	})
 	.catch(console.error)
 }

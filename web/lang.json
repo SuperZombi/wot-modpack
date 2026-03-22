@@ -1,4 +1,4 @@
-var LANG = {
+{
 	"mods_count": {
 		"en": "mods",
 		"ru": "модов",
@@ -133,5 +133,20 @@ var LANG = {
 		"en": "Show hidden mods",
 		"ru": "Показать скрытые моды",
 		"uk": "Показати приховані моди"
+	},
+	"gameVersion": {
+		"en": "Game version",
+		"ru": "Версия игры",
+		"uk": "Версія гри"
+	},
+	"layout": {
+		"en": "Layout",
+		"ru": "Макет",
+		"uk": "Макет"
+	},
+	"loading": {
+		"en": "Loading...",
+		"ru": "Загрузка...",
+		"uk": "Завантаження..."
 	}
 }
