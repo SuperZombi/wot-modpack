@@ -70,16 +70,18 @@ const OtherPage = ({showHiddenMods, setShowHiddenMods}) => {
 }
 
 const OtherStatsTable = ({caption, data, nameFormatter=null}) => {
-	const values = Object.values(data)
-	const total = values.reduce((sum, value) => sum + Number(value), 0)
+	const validEntries = Object.entries(data || {}).filter(([key, value]) => {
+		return !isNaN(Number(value)) && value !== null;
+	})
+	const total = validEntries.reduce((sum, [_, value]) => sum + Number(value), 0)
 
 	return (
 		<table border="1">
 			<caption>{caption}</caption>
 			<tbody>
-				{Object.keys(data).length > 0 ? (
+				{validEntries.length > 0 ? (
 					<React.Fragment>
-					{Object.entries(data).map(([name, count], index)=>{
+					{validEntries.map(([name, count], index) => {
 						const percent = total > 0 ? ((Number(count) / total) * 100).toFixed(1) : "0.0"
 						return (
 							<tr key={index}>
@@ -90,9 +92,11 @@ const OtherStatsTable = ({caption, data, nameFormatter=null}) => {
 						)
 					})}
 					</React.Fragment>
-				) : <tr><td>
-						<LANG id="loading"/>
-					</td></tr>}
+				) : (
+					<tr><td colSpan="3" style={{textAlign: "center"}}>
+						{Object.keys(data || {}).length > 0 ? <LANG id="error" /> : <LANG id="loading" />}
+					</td></tr>
+				)}
 			</tbody>
 		</table>
 	)

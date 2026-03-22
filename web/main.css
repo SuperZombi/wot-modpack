@@ -280,6 +280,7 @@ table {
 }
 table td, table caption{
 	padding: 5px 10px;
+	white-space: nowrap;
 }
 .row {
 	display: flex;
