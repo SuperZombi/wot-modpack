@@ -1,13 +1,14 @@
-const Header = ({tab, setTab, lang, setLang}) => {
+const Header = ({tab, setTab}) => {
+	const {lang, langData, setLang} = useApp()
 	React.useEffect(() => {
 		const tabName = {
-			"home": LANG.homeTab[lang],
-			"mods": LANG.modsTab[lang],
-			"stats": LANG.statsTab[lang],
-			"other": LANG.otherStatsTab[lang],
+			"home": langData?.["homeTab"]?.[lang],
+			"mods": langData?.["modsTab"]?.[lang],
+			"stats": langData?.["statsTab"]?.[lang],
+			"other": langData?.["otherStatsTab"]?.[lang]
 		}
-		document.title = `Web Modpack • ${tabName[tab]}`
-	}, [tab, lang])
+		document.title = `Web Modpack${tabName[tab] ? ` • ${tabName[tab]}` : ''}`
+	}, [tab, lang, langData])
 
 	return (
 		<header className="container">
@@ -30,19 +31,19 @@ const Header = ({tab, setTab, lang, setLang}) => {
 					disabled={tab === "mods"}
 					onClick={_=>setTab("mods")}
 				>
-					{LANG.modsTab[lang]}
+					<LANG id="modsTab"/>
 				</button>
 				<button className={`button shine tab-btn ${tab == "stats" ? "active" : ""}`}
 					disabled={tab === "stats"}
 					onClick={_=>setTab("stats")}
 				>
-					{LANG.statsTab[lang]}
+					<LANG id="statsTab"/>
 				</button>
 				<button className={`button shine tab-btn ${tab == "other" ? "active" : ""}`}
 					disabled={tab === "other"}
 					onClick={_=>setTab("other")}
 				>
-					{LANG.otherStatsTab[lang]}
+					<LANG id="otherStatsTab"/>
 				</button>
 			</nav>
 		</header>

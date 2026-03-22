@@ -1,4 +1,4 @@
-const Home = ({mods_count, totalInstalls, lang}) => {
+const Home = ({mods_count, totalInstalls}) => {
 	const features = [
 		{ icon: "fa-feather", titleKey: "featureSmallSizeTitle", descKey: "featureSmallSizeDesc" },
 		{ icon: "fa-compass-drafting", titleKey: "featureModernDesignTitle", descKey: "featureModernDesignDesc" },
@@ -11,13 +11,13 @@ const Home = ({mods_count, totalInstalls, lang}) => {
 			<div className="container" align="center">
 				<Reveal>
 					<img src="web/images/home_img.jpg" className="home_image" width="480" height="240" alt="Modpack preview" draggable={false}/>
-					<h2>{LANG.downloadModpackButton[lang]}</h2>
+					<h2><LANG id="downloadModpackButton"/></h2>
 				</Reveal>
 				<div className="row" style={{fontSize: "1.1em"}}>
 					<Reveal delay={1}>
 						<a className="button shine" href="https://github.com/SuperZombi/wot-modpack/releases/latest/download/Web.Modpack.exe">
 							<i className="fa-solid fa-circle-down"></i>
-							<span>{LANG.download_button[lang]}</span>
+							<span><LANG id="download_button"/></span>
 						</a>
 					</Reveal>
 					<Reveal delay={2}>
@@ -36,8 +36,8 @@ const Home = ({mods_count, totalInstalls, lang}) => {
 			</div>
 			
 			<div className="container row" style={{fontSize: "14px", gap: "2rem"}}>
-				<StatCard value={mods_count} label={LANG.mods_count[lang]}/>
-				<StatCard value={totalInstalls} label={LANG.installations[lang]} delay={2}/>
+				<StatCard value={mods_count} label={<LANG id="mods_count"/>}/>
+				<StatCard value={totalInstalls} label={<LANG id="installations"/>} delay={2}/>
 			</div>
 
 			<div className="container features-grid">
@@ -45,8 +45,8 @@ const Home = ({mods_count, totalInstalls, lang}) => {
 					<Reveal className="container feature" key={idx} delay={idx}>
 						<i className={`fa-solid ${feature.icon}`}></i>
 						<div className="feature-block">
-							<span className="feature-header">{LANG[feature.titleKey][lang]}</span>
-							<span>{LANG[feature.descKey][lang]}</span>
+							<span className="feature-header"><LANG id={feature.titleKey}/></span>
+							<span><LANG id={feature.descKey}/></span>
 						</div>
 					</Reveal>
 				))}

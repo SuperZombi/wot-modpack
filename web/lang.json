@@ -77,7 +77,7 @@
 	"featureSmallSizeDesc": {
 		"en": "The modpack weighs only 20MB",
 		"ru": "Модпак весит всего 20 МБ.",
-		"uk": "Модпак важить лише 20 МБ",
+		"uk": "Модпак важить лише 20 МБ"
 	},
 	"featureModernDesignTitle": {
 		"en": "Modern design",
@@ -87,7 +87,7 @@
 	"featureModernDesignDesc": {
 		"en": "Convenient and pretty web-interface",
 		"ru": "Удобный и красивый веб-интерфейс",
-		"uk": "Зручний та гарний веб-інтерфейс",
+		"uk": "Зручний та гарний веб-інтерфейс"
 	},
 	"featureCloudModsTitle": {
 		"en": "Cloud mods",
@@ -97,7 +97,7 @@
 	"featureCloudModsDesc": {
 		"en": "Downloads only mods selected by user",
 		"ru": "Загружаются только моды, выбранные пользователем",
-		"uk": "Завантажуються лише моди, вибрані користувачем",
+		"uk": "Завантажуються лише моди, вибрані користувачем"
 	},
 	"featureAllClientsTitle": {
 		"en": "All game versions",
@@ -107,7 +107,7 @@
 	"featureAllClientsDesc": {
 		"en": "Supports all client versions",
 		"ru": "Поддерживает все версии клиента",
-		"uk": "Підтримує всі версії клієнтів",
+		"uk": "Підтримує всі версії клієнтів"
 	},
 	"featureOpenSourceTitle": {
 		"en": "Open source",
@@ -117,7 +117,7 @@
 	"featureOpenSourceDesc": {
 		"en": "No cheats, no viruses",
 		"ru": "Никаких читов, никаких вирусов",
-		"uk": "Без читів та без вірусів",
+		"uk": "Без читів та без вірусів"
 	},
 	"searchMods": {
 		"en": "Search",

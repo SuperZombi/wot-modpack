@@ -1,4 +1,4 @@
-const ModPreview = ({lang, onClosePreview, previewData, stats}) => {
+const ModPreview = ({onClosePreview, previewData, stats}) => {
 	const [visible, setVisible] = React.useState(false);
 	React.useEffect(() => {
 		setVisible(true);
@@ -11,35 +11,38 @@ const ModPreview = ({lang, onClosePreview, previewData, stats}) => {
 			setTimeout(_=>{ onClosePreview() }, 300)
 		}
 	}
+	const {lang} = useApp()
 	return (
 		<div className={`popup ${visible ? "visible" : "hidden"}`}
 			onClick={e=>e.target.classList.contains("popup") && BeforeClose()}
 		>
 			<div className="container popup-content">
 				<i className="close fa-solid fa-circle-xmark" onClick={_=>BeforeClose()}></i>
-				<h3 align="center">{previewData.title || previewData.id}</h3>
+				<h3 align="center">
+					{replaceFlags(previewData.title?.[lang]) || previewData.id}
+				</h3>
 				{previewData.image && (
 					<div className="image-container">
 						<img src={previewData.image} draggable={false}/>
 					</div>
 				)}
 				{previewData.author && (
-					<span>{LANG.author[lang]}: {previewData.author}</span>
+					<span>{<LANG id="author"/>}: {previewData.author}</span>
 				)}
 				{previewData.version && (
 					<div>
-						<span style={{marginRight: "5px"}}>{LANG.version[lang]}:</span>
+						<span style={{marginRight: "5px"}}>{<LANG id="version"/>}:</span>
 						<code className="container version">{previewData.version}</code>
 					</div>
 				)}
 				<div>
 					<i className="fa-solid fa-circle-down" style={{marginRight: "5px"}}></i>
-					<span>{LANG.downloads[lang]}: {stats[previewData.id] || 0}</span>
+					<span>{<LANG id="downloads"/>}: {stats[previewData.id] || 0}</span>
 				</div>
 				{previewData.description && (
 					<div className="mod-description">
 						<hr/>
-						<div dangerouslySetInnerHTML={{ __html: previewData.description}}/>
+						<div dangerouslySetInnerHTML={{ __html: previewData.description?.[lang] }}/>
 					</div>
 				)}
 				{previewData.audio && (
@@ -53,14 +56,14 @@ const ModPreview = ({lang, onClosePreview, previewData, stats}) => {
 				<div className="row">
 					<button className="button shine" onClick={previewData.on_download}>
 						<i className="fa-solid fa-circle-down"></i>
-						<span>{LANG.download_button[lang]}</span>
+						<span>{<LANG id="download_button"/>}</span>
 					</button>
 					<button className="button shine" onClick={_=>share({
-						title: previewData.title,
+						title: previewData.title?.[lang] || previewData.id,
 						mod_id: previewData.id
 					})}>
 						<i className="fa-solid fa-share"></i>
-						<span>{LANG.share[lang]}</span>
+						<span>{<LANG id="share"/>}</span>
 					</button>
 				</div>
 			</div>
@@ -81,4 +84,64 @@ function share(data) {
 	} else {
 		navigator.clipboard.writeText(url.toString())
 	}
+}
+function replaceFlags(text) {
+	if (!text){return}
+	const parts = text.split(/(:flag_[a-z]{2}:)/gi)
+	return parts.map((part, i) => {
+		const match = part.match(/^:flag_([a-z]{2}):$/i)
+		if (match) {
+			const code = match[1].toLowerCase()
+			return <span key={i} className={`fi fi-${code}`} style={{verticalAlign: "middle"}}></span>
+		}
+		return part
+	})
+}
+async function buildZip(filename, files) {
+	const zip = new JSZip();
+	const PATHS = {
+		mods: ["mods", "1.0.0"],
+		res_mods: ["res_mods", "1.0.0"],
+		configs: ["mods", "configs"]
+	}
+	for (const file of files) {
+		const response = await fetch(file.url);
+		if (!response.ok) continue;
+
+		const blob = await response.blob();
+		const filename = file.url.split("/").pop();
+		const isZip = filename.endsWith(".zip");
+
+		const basePath = PATHS[file.dest];
+		if (!basePath) continue;
+
+		const baseParts = [
+			...basePath,
+			file.folder
+		].filter(Boolean);
+
+		if (isZip) {
+			const innerZip = await JSZip.loadAsync(blob);
+			for (const [innerPath, innerFile] of Object.entries(innerZip.files)) {
+				if (innerFile.dir) continue;
+				const innerContent = await innerFile.async("blob");
+				const finalPath = [
+					...baseParts,
+					innerPath
+				].join("/");
+				zip.file(finalPath, innerContent);
+			}
+		} else {
+			const finalPath = [
+				...baseParts,
+				filename
+			].join("/");
+			zip.file(finalPath, blob);
+		}
+	}
+	const content = await zip.generateAsync({ type: "blob" });
+	const link = document.createElement("a");
+	link.href = URL.createObjectURL(content);
+	link.download = `${filename}.zip`;
+	link.click();
 }

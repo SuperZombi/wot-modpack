@@ -1,8 +1,9 @@
-const OtherPage = ({lang, showHiddenMods, setShowHiddenMods}) => {
+const OtherPage = ({showHiddenMods, setShowHiddenMods}) => {
 	const [langStats, setLangStats] = React.useState({})
 	const [clientStats, setClientStats] = React.useState({})
 	const [gameVersionStats, setGameVersionStats] = React.useState({})
 	const [layoutStats, setLayoutStats] = React.useState({})
+	const {lang} = useApp()
 
 	React.useEffect(_=>{
 		loadStatsPage("1884858162", data=>setLangStats(statsAsNumber(data)))
@@ -40,26 +41,26 @@ const OtherPage = ({lang, showHiddenMods, setShowHiddenMods}) => {
 						onChange={e=>setShowHiddenMods(e.target.checked)}
 						style={{marginRight: "0.5em"}}
 					/>
-					<span>{LANG.showHiddenMods[lang]}</span>
+					<span>{<LANG id="showHiddenMods"/>}</span>
 				</label>
 			</div>
 			<div className="container row" style={{gap: "2rem"}}>
 				<OtherStatsTable
-					caption={LANG.languagesTable[lang]}
+					caption={<LANG id="languagesTable"/>}
 					data={langStats}
 					nameFormatter={formatLanguageName}
 				/>
 				<OtherStatsTable
-					caption={LANG.gameVersion[lang]}
+					caption={<LANG id="gameVersion"/>}
 					data={gameVersionStats}
 				/>
 				<OtherStatsTable
-					caption={LANG.clientsTable[lang]}
+					caption={<LANG id="clientsTable"/>}
 					data={clientStats}
 					nameFormatter={capitalize}
 				/>
 				<OtherStatsTable
-					caption={LANG.layout[lang]}
+					caption={<LANG id="layout"/>}
 					data={layoutStats}
 					nameFormatter={capitalize}
 				/>
@@ -90,7 +91,7 @@ const OtherStatsTable = ({caption, data, nameFormatter=null}) => {
 					})}
 					</React.Fragment>
 				) : <tr><td>
-						{LANG.loading[lang]}
+						<LANG id="loading"/>
 					</td></tr>}
 			</tbody>
 		</table>

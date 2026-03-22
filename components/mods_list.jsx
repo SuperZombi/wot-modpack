@@ -1,4 +1,4 @@
-const ModsList = ({ mods, groups, lang, onPreview, showHidden }) => {
+const ModsList = ({ mods, groups, onPreview, showHidden }) => {
 	const [search, setSearch] = React.useState("")
 	const normalizedSearch = search.trim().toLowerCase()
 	const filteredMods = mods.filter(mod => {
@@ -10,6 +10,8 @@ const ModsList = ({ mods, groups, lang, onPreview, showHidden }) => {
 		if (mod.description && Object.values(mod.description).some(v => v.toLowerCase().includes(normalizedSearch))) return true;
 		return false;
 	})
+	const {lang, langData} = useApp()
+
 	return mods.length > 0 ? (
 		<React.Fragment>
 			<input
@@ -18,7 +20,7 @@ const ModsList = ({ mods, groups, lang, onPreview, showHidden }) => {
 				className="container"
 				value={search}
 				onChange={e => setSearch(e.target.value)}
-				placeholder={LANG.searchMods[lang]}
+				placeholder={langData?.["searchMods"]?.[lang]}
 				autoComplete="off"
 			/>
 			{filteredMods.length > 0 ? (
@@ -36,14 +38,14 @@ const ModsList = ({ mods, groups, lang, onPreview, showHidden }) => {
 								<React.Fragment key={group.id}>
 									{modsInGroup.map(gmod=>{
 										return (
-											<Mod key={gmod.id} mod={gmod} lang={lang} onPreview={onPreview}/>
+											<Mod key={gmod.id} mod={gmod} onPreview={onPreview}/>
 										)
 									})}
 								</React.Fragment>
 							)
 						}
 						return (
-							<Mod key={mod.id} mod={mod} lang={lang} onPreview={onPreview}/>
+							<Mod key={mod.id} mod={mod} onPreview={onPreview}/>
 						)
 					})}
 				</div>
@@ -60,7 +62,8 @@ const ModsList = ({ mods, groups, lang, onPreview, showHidden }) => {
 		</React.Fragment>
 	) : <Loader/>
 }
-const Mod = ({ mod, lang, onPreview }) => {
+const Mod = ({ mod, onPreview }) => {
+	const {lang} = useApp()
 	const hidden = mod.title ? false : true;
 	return (
 		<Reveal className="mod" onClick={_=>onPreview(mod)}>
@@ -69,7 +72,8 @@ const Mod = ({ mod, lang, onPreview }) => {
 		</Reveal>
 	)
 }
-const ModStats = ({mods, stats, lang, onPreview}) => {
+const ModStats = ({mods, stats, onPreview}) => {
+	const {lang} = useApp()
 	const sortedMods = mods
 		.filter(mod => mod.title)
 		.map(mod => ({
@@ -85,7 +89,7 @@ const ModStats = ({mods, stats, lang, onPreview}) => {
 				return (
 					<div className="mod" key={mod.id} onClick={_=>onPreview(mod)}>
 						<img src={mod.image || "web/images/picture.png"} draggable={false}/>
-						<span>{hidden ? mod.id : replaceFlags(mod.title[lang])}</span>
+						<span>{hidden ? mod.id : replaceFlags(mod.title?.[lang])}</span>
 						<span>{mod.popularity}</span>
 					</div>
 				)

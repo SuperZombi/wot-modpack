@@ -10,20 +10,6 @@ const App = () => {
 
 	const [tab, setTab] = React.useState("home")
 	const [showHiddenMods, setShowHiddenMods] = React.useState(false)
-	
-	const supportedLangs = ["en", "ru", "uk"]
-	const getInitialLang = () => {
-		const savedLang = localStorage.getItem("lang")
-		if (savedLang && supportedLangs.includes(savedLang)) {
-			return savedLang
-		}
-		const userLang = navigator.language?.slice(0, 2)
-		return supportedLangs.includes(userLang) ? userLang : "en"
-	}
-	const [lang, setLang] = React.useState(getInitialLang)
-	React.useEffect(() => {
-		localStorage.setItem("lang", lang)
-	}, [lang])
 
 	React.useEffect(() => {
 		fetch('https://raw.githubusercontent.com/SuperZombi/wot-modpack/refs/heads/mods/config.json')
@@ -74,13 +60,13 @@ const App = () => {
 			return
 		}
 		onPreview(mod)
-	}, [selected, mods, lang])
-
+	}, [selected, mods])
+	
 	const onPreview = mod=>{
 		setPreviewData({
 			id: mod.id,
-			title: replaceFlags(mod.title?.[lang]),
-			description: mod.description?.[lang],
+			title: mod.title,
+			description: mod.description,
 			author: mod.author,
 			image: mod.image,
 			audio: mod.audio,
@@ -127,30 +113,28 @@ const App = () => {
 		<React.Fragment>
 			<Header
 				tab={tab} setTab={setTab}
-				lang={lang} setLang={setLang}
 			/>
 
 			{tab == "home" ? (
 				<Home
 					mods_count={mods.filter(mod => mod.title).length}
 					totalInstalls={totalInstalls}
-					lang={lang}
 				/>
 			) : tab == "mods" ? (
 				<ModsList mods={mods} groups={groups}
-					lang={lang} onPreview={onPreview}
+					onPreview={onPreview}
 					showHidden={showHiddenMods}
 				/>
 			) : tab == "stats" ? (
-				<ModStats mods={mods} stats={stats} lang={lang} onPreview={onPreview}/>
+				<ModStats mods={mods} stats={stats} onPreview={onPreview}/>
 			) : tab == "other" ? (
-				<OtherPage lang={lang}
+				<OtherPage
 					showHiddenMods={showHiddenMods} setShowHiddenMods={setShowHiddenMods}
 				/>
 			) : null}
 
 			{showPreview && (
-				<ModPreview lang={lang}
+				<ModPreview
 					onClosePreview={onClosePreview}
 					previewData={previewData}
 					stats={stats}
@@ -159,71 +143,12 @@ const App = () => {
 		</React.Fragment>
 	)
 }
-ReactDOM.createRoot(document.getElementById('root')).render(<App/>)
+ReactDOM.createRoot(document.getElementById("root")).render(
+	<AppProvider>
+		<App/>
+	</AppProvider>
+)
 
-
-
-async function buildZip(filename, files) {
-	const zip = new JSZip();
-	const PATHS = {
-		mods: ["mods", "1.0.0"],
-		res_mods: ["res_mods", "1.0.0"],
-		configs: ["mods", "configs"]
-	}
-	for (const file of files) {
-		const response = await fetch(file.url);
-		if (!response.ok) continue;
-
-		const blob = await response.blob();
-		const filename = file.url.split("/").pop();
-		const isZip = filename.endsWith(".zip");
-
-		const basePath = PATHS[file.dest];
-		if (!basePath) continue;
-
-		const baseParts = [
-			...basePath,
-			file.folder
-		].filter(Boolean);
-
-		if (isZip) {
-			const innerZip = await JSZip.loadAsync(blob);
-			for (const [innerPath, innerFile] of Object.entries(innerZip.files)) {
-				if (innerFile.dir) continue;
-				const innerContent = await innerFile.async("blob");
-				const finalPath = [
-					...baseParts,
-					innerPath
-				].join("/");
-				zip.file(finalPath, innerContent);
-			}
-		} else {
-			const finalPath = [
-				...baseParts,
-				filename
-			].join("/");
-			zip.file(finalPath, blob);
-		}
-	}
-	const content = await zip.generateAsync({ type: "blob" });
-	const link = document.createElement("a");
-	link.href = URL.createObjectURL(content);
-	link.download = `${filename}.zip`;
-	link.click();
-}
-
-function replaceFlags(text) {
-	if (!text){return}
-	const parts = text.split(/(:flag_[a-z]{2}:)/gi)
-	return parts.map((part, i) => {
-		const match = part.match(/^:flag_([a-z]{2}):$/i)
-		if (match) {
-			const code = match[1].toLowerCase()
-			return <span key={i} className={`fi fi-${code}`} style={{verticalAlign: "middle"}}></span>
-		}
-		return part
-	})
-}
 const statsPageCache = new Map();
 function loadStatsPage(SHEET_ID, callback){
 	const DOC_ID = "1GEMJfZxjUYmQAg-cDcQ7DGNjsX6pASMp9hQ1T0tVRfo"
