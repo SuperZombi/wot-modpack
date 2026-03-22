@@ -2,4 +2,3 @@ Eel
 psutil
 requests
 pyinstaller
-xmltodict
