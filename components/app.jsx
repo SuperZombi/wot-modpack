@@ -3,6 +3,7 @@ const App = () => {
 	const [groups, setGroups] = React.useState([])
 	const [stats, setStats] = React.useState({})
 	const [totalInstalls, setTotalInstalls] = React.useState(0)
+	const [currentGameVersion, setCurrentGameVersion] = React.useState("1.0.0")
 
 	const [showPreview, setShowPreview] = React.useState(false)
 	const [previewData, setPreviewData] = React.useState({})
@@ -27,6 +28,7 @@ const App = () => {
 	React.useEffect(() => {
 		loadStatsPage("2089462923", data=>setStats(statsAsNumber(data)))
 		loadStatsPage("342255871", data=>setTotalInstalls(Math.max(0, data.length-1)))
+		loadStatsPage("379781718", data=>setCurrentGameVersion(getLatestGameVersion(statsAsNumber(data))))
 	}, [])
 
 	React.useEffect(() => {
@@ -70,11 +72,7 @@ const App = () => {
 			author: mod.author,
 			image: mod.image,
 			audio: mod.audio,
-			version: mod.ver,
-			on_download: _=>{
-				const files = collectFiles(mod.id)
-				buildZip(mod.id, files)
-			}
+			version: mod.ver
 		})
 		setSelected(mod.id)
 		setShowPreview(true)
@@ -138,6 +136,10 @@ const App = () => {
 					onClosePreview={onClosePreview}
 					previewData={previewData}
 					stats={stats}
+					onDownload={modId=>{
+						const files = collectFiles(modId)
+						buildZip(modId, files, currentGameVersion)
+					}}
 				/>
 			)}
 		</React.Fragment>
@@ -170,4 +172,14 @@ function loadStatsPage(SHEET_ID, callback){
 }
 function statsAsNumber(array){
 	return Object.fromEntries(array.map(([key, value]) => [key, Number(value)]))
+}
+function compareVersions(left, right){
+	return String(left).localeCompare(String(right), undefined, {numeric: true})
+}
+function getLatestGameVersion(gameVersionStats){
+	const versions = Object.keys(gameVersionStats || {}).filter(version => /^\d+(\.\d+)+$/.test(version))
+	if (versions.length === 0) {
+		return "1.0.0"
+	}
+	return versions.sort(compareVersions).at(-1)
 }
