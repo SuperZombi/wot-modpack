@@ -72,7 +72,7 @@ const App = () => {
 			author: mod.author,
 			image: mod.image,
 			audio: mod.audio,
-			version: mod.ver
+			version: mod.ver,
 		})
 		setSelected(mod.id)
 		setShowPreview(true)
