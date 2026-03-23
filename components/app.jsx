@@ -1,4 +1,5 @@
 const App = () => {
+	const {lang, langData} = useApp()
 	const [mods, setMods] = React.useState([])
 	const [groups, setGroups] = React.useState([])
 	const [stats, setStats] = React.useState({})
@@ -138,7 +139,12 @@ const App = () => {
 					stats={stats}
 					onDownload={modId=>{
 						const files = collectFiles(modId)
-						buildZip(modId, files, currentGameVersion)
+						buildZip({
+							filename: modId,
+							files: files,
+							gameVersion: currentGameVersion,
+							downloadErrorText: langData["download_file_error"]?.[lang]
+						})
 					}}
 				/>
 			)}

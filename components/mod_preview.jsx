@@ -97,7 +97,10 @@ function replaceFlags(text) {
 		return part
 	})
 }
-async function buildZip(filename, files, gameVersion = "1.0.0") {
+async function buildZip({
+	filename, files, gameVersion = "1.0.0",
+	downloadErrorText = "Failed to download file"
+}){
 	const zip = new JSZip();
 	const PATHS = {
 		mods: ["mods", gameVersion],
@@ -105,38 +108,46 @@ async function buildZip(filename, files, gameVersion = "1.0.0") {
 		configs: ["mods", "configs"]
 	}
 	for (const file of files) {
-		const response = await fetch(file.url);
-		if (!response.ok) continue;
+		const sourceFilename = file.url.split("/").pop() || file.url;
+		try {
+			const response = await fetch(file.url);
+			if (!response.ok) {
+				throw new Error(`HTTP ${response.status}`);
+			}
 
-		const blob = await response.blob();
-		const filename = file.url.split("/").pop();
-		const isZip = filename.endsWith(".zip");
+			const blob = await response.blob();
+			const isZip = sourceFilename.endsWith(".zip");
 
-		const basePath = PATHS[file.dest];
-		if (!basePath) continue;
+			const basePath = PATHS[file.dest];
+			if (!basePath) continue;
 
-		const baseParts = [
-			...basePath,
-			file.folder
-		].filter(Boolean);
+			const baseParts = [
+				...basePath,
+				file.folder
+			].filter(Boolean);
 
-		if (isZip) {
-			const innerZip = await JSZip.loadAsync(blob);
-			for (const [innerPath, innerFile] of Object.entries(innerZip.files)) {
-				if (innerFile.dir) continue;
-				const innerContent = await innerFile.async("blob");
+			if (isZip) {
+				const innerZip = await JSZip.loadAsync(blob);
+				for (const [innerPath, innerFile] of Object.entries(innerZip.files)) {
+					if (innerFile.dir) continue;
+					const innerContent = await innerFile.async("blob");
+					const finalPath = [
+						...baseParts,
+						innerPath
+					].join("/");
+					zip.file(finalPath, innerContent);
+				}
+			} else {
 				const finalPath = [
 					...baseParts,
-					innerPath
+					sourceFilename
 				].join("/");
-				zip.file(finalPath, innerContent);
+				zip.file(finalPath, blob);
 			}
-		} else {
-			const finalPath = [
-				...baseParts,
-				filename
-			].join("/");
-			zip.file(finalPath, blob);
+		} catch (error) {
+			alert(`${downloadErrorText}: ${sourceFilename}`);
+			console.error("Failed to download file:", file.url, error);
+			return;
 		}
 	}
 	const content = await zip.generateAsync({ type: "blob" });
