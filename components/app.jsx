@@ -3,6 +3,7 @@ const App = () => {
 	const [groups, setGroups] = React.useState([])
 	const [stats, setStats] = React.useState({})
 	const [totalInstalls, setTotalInstalls] = React.useState(0)
+	const [currentGameVersion, setCurrentGameVersion] = React.useState("1.0.0")
 
 	const [showPreview, setShowPreview] = React.useState(false)
 	const [previewData, setPreviewData] = React.useState({})
@@ -27,6 +28,7 @@ const App = () => {
 	React.useEffect(() => {
 		loadStatsPage("2089462923", data=>setStats(statsAsNumber(data)))
 		loadStatsPage("342255871", data=>setTotalInstalls(Math.max(0, data.length-1)))
+		loadStatsPage("379781718", data=>setCurrentGameVersion(getLatestGameVersion(statsAsNumber(data))))
 	}, [])
 
 	React.useEffect(() => {
@@ -73,7 +75,7 @@ const App = () => {
 			version: mod.ver,
 			on_download: _=>{
 				const files = collectFiles(mod.id)
-				buildZip(mod.id, files)
+				buildZip(mod.id, files, currentGameVersion)
 			}
 		})
 		setSelected(mod.id)
@@ -170,4 +172,24 @@ function loadStatsPage(SHEET_ID, callback){
 }
 function statsAsNumber(array){
 	return Object.fromEntries(array.map(([key, value]) => [key, Number(value)]))
+}
+function compareVersions(left, right){
+	const leftParts = String(left).split(".").map(Number)
+	const rightParts = String(right).split(".").map(Number)
+	const maxLength = Math.max(leftParts.length, rightParts.length)
+	for (let i = 0; i < maxLength; i += 1) {
+		const leftPart = leftParts[i] || 0
+		const rightPart = rightParts[i] || 0
+		if (leftPart !== rightPart) {
+			return leftPart - rightPart
+		}
+	}
+	return 0
+}
+function getLatestGameVersion(gameVersionStats){
+	const versions = Object.keys(gameVersionStats || {}).filter(version => /^\d+(\.\d+)+$/.test(version))
+	if (versions.length === 0) {
+		return "1.0.0"
+	}
+	return versions.sort(compareVersions).at(-1)
 }

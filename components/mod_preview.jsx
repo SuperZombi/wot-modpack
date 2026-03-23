@@ -97,11 +97,11 @@ function replaceFlags(text) {
 		return part
 	})
 }
-async function buildZip(filename, files) {
+async function buildZip(filename, files, gameVersion = "1.0.0") {
 	const zip = new JSZip();
 	const PATHS = {
-		mods: ["mods", "1.0.0"],
-		res_mods: ["res_mods", "1.0.0"],
+		mods: ["mods", gameVersion],
+		res_mods: ["res_mods", gameVersion],
 		configs: ["mods", "configs"]
 	}
 	for (const file of files) {
