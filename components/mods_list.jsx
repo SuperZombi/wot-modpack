@@ -62,18 +62,45 @@ const ModsList = ({ mods, groups, onPreview, showHidden }) => {
 		</React.Fragment>
 	) : <Loader/>
 }
-const Mod = ({ mod, onPreview }) => {
+const ModImage = ({ src = "web/images/picture.png" }) => {
+	const [loaded, setLoaded] = React.useState(false)
+	return (
+		<img
+			className={loaded ? "" : "img-loading"}
+			src={src}
+			draggable={false}
+			loading="lazy"
+			onLoad={() => setLoaded(true)}
+		/>
+	)
+}
+const ModLabel = ({mod}) => {
 	const {lang} = useApp()
 	const hidden = mod.title ? false : true;
+	return <span>{hidden ? mod.id : replaceFlags(mod.title[lang])}</span>
+}
+const Mod = ({ mod, onPreview }) => {
 	return (
 		<Reveal className="mod" onClick={_=>onPreview(mod)}>
-			<img src={mod.image || "web/images/picture.png"} draggable={false}/>
-			<span>{hidden ? mod.id : replaceFlags(mod.title[lang])}</span>
+			<ModImage src={mod.image}/>
+			<ModLabel mod={mod}/>
 		</Reveal>
 	)
 }
-const ModStats = ({mods, stats, onPreview}) => {
-	const {lang} = useApp()
+const ModStats = ({mods, onPreview}) => {
+	const [stats, setStats] = React.useState({})
+	const [statsLoaded, setStatsLoaded] = React.useState(false)
+	React.useEffect(() => {
+		loadStatsPage("2089462923", data=>{
+			setStats(statsAsNumber(data))
+			setStatsLoaded(true)
+		})
+	}, [])
+
+	if (!statsLoaded){
+		return <Loader/>
+	}
+
 	const sortedMods = mods
 		.filter(mod => mod.title)
 		.map(mod => ({
@@ -85,11 +112,10 @@ const ModStats = ({mods, stats, onPreview}) => {
 	return mods.length > 0 ? (
 		<div className="container" id="stats-list">
 			{sortedMods.map(mod => {
-				const hidden = mod.title ? false : true;
 				return (
 					<div className="mod" key={mod.id} onClick={_=>onPreview(mod)}>
-						<img src={mod.image || "web/images/picture.png"} draggable={false}/>
-						<span>{hidden ? mod.id : replaceFlags(mod.title?.[lang])}</span>
+						<ModImage src={mod.image}/>
+						<ModLabel mod={mod}/>
 						<span>{mod.popularity}</span>
 					</div>
 				)

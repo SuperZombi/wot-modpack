@@ -1,16 +1,12 @@
 const App = () => {
-	const {lang, langData} = useApp()
 	const [mods, setMods] = React.useState([])
 	const [groups, setGroups] = React.useState([])
-	const [stats, setStats] = React.useState({})
-	const [totalInstalls, setTotalInstalls] = React.useState(0)
-	const [currentGameVersion, setCurrentGameVersion] = React.useState("1.0.0")
 
 	const [showPreview, setShowPreview] = React.useState(false)
 	const [previewData, setPreviewData] = React.useState({})
 	const [selected, setSelected] = React.useState(null)
 
-	const [tab, setTab] = React.useState("home")
+	const [tab, setTab] = React.useState("")
 	const [showHiddenMods, setShowHiddenMods] = React.useState(false)
 
 	React.useEffect(() => {
@@ -26,18 +22,13 @@ const App = () => {
 		})
 		.catch(console.error)
 	}, [])
-	React.useEffect(() => {
-		loadStatsPage("2089462923", data=>setStats(statsAsNumber(data)))
-		loadStatsPage("342255871", data=>setTotalInstalls(Math.max(0, data.length-1)))
-		loadStatsPage("379781718", data=>setCurrentGameVersion(getLatestGameVersion(statsAsNumber(data))))
-	}, [])
 
 	React.useEffect(() => {
 		const params = new URLSearchParams(window.location.search)
 		const id = params.get("id")
 		if (id){ setSelected(id) }
 		const tab = params.get("tab")
-		if (tab){ setTab(tab) }
+		if (tab){ setTab(tab) } else { setTab("home") }
 	}, [])
 	React.useEffect(() => {
 		const params = new URLSearchParams(window.location.search)
@@ -117,7 +108,6 @@ const App = () => {
 			{tab == "home" ? (
 				<Home
 					mods_count={mods.filter(mod => mod.title).length}
-					totalInstalls={totalInstalls}
 				/>
 			) : tab == "mods" ? (
 				<ModsList mods={mods} groups={groups}
@@ -125,7 +115,7 @@ const App = () => {
 					showHidden={showHiddenMods}
 				/>
 			) : tab == "stats" ? (
-				<ModStats mods={mods} stats={stats} onPreview={onPreview}/>
+				<ModStats mods={mods} onPreview={onPreview}/>
 			) : tab == "other" ? (
 				<OtherPage
 					showHiddenMods={showHiddenMods} setShowHiddenMods={setShowHiddenMods}
@@ -136,16 +126,7 @@ const App = () => {
 				<ModPreview
 					onClosePreview={onClosePreview}
 					previewData={previewData}
-					stats={stats}
-					onDownload={modId=>{
-						const files = collectFiles(modId)
-						buildZip({
-							filename: modId,
-							files: files,
-							gameVersion: currentGameVersion,
-							downloadErrorText: langData["download_file_error"]?.[lang]
-						})
-					}}
+					collectFiles={collectFiles}
 				/>
 			)}
 		</React.Fragment>
@@ -178,14 +159,4 @@ function loadStatsPage(SHEET_ID, callback){
 }
 function statsAsNumber(array){
 	return Object.fromEntries(array.map(([key, value]) => [key, Number(value)]))
-}
-function compareVersions(left, right){
-	return String(left).localeCompare(String(right), undefined, {numeric: true})
-}
-function getLatestGameVersion(gameVersionStats){
-	const versions = Object.keys(gameVersionStats || {}).filter(version => /^\d+(\.\d+)+$/.test(version))
-	if (versions.length === 0) {
-		return "1.0.0"
-	}
-	return versions.sort(compareVersions).at(-1)
 }

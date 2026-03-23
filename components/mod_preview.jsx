@@ -1,5 +1,14 @@
-const ModPreview = ({onClosePreview, previewData, stats, onDownload}) => {
-	const [visible, setVisible] = React.useState(false);
+const ModPreview = ({onClosePreview, previewData, collectFiles}) => {
+	const {lang, langData} = useApp()
+	const [visible, setVisible] = React.useState(false)
+	const [stats, setStats] = React.useState({})
+	const [currentGameVersion, setCurrentGameVersion] = React.useState("1.0.0")
+
+	React.useEffect(() => {
+		loadStatsPage("2089462923", data=>setStats(statsAsNumber(data)))
+		loadStatsPage("379781718", data=>setCurrentGameVersion(getLatestGameVersion(statsAsNumber(data))))
+	}, [])
+	
 	React.useEffect(() => {
 		setVisible(true);
 		document.body.style.overflow = 'hidden';
@@ -11,7 +20,16 @@ const ModPreview = ({onClosePreview, previewData, stats, onDownload}) => {
 			setTimeout(_=>{ onClosePreview() }, 300)
 		}
 	}
-	const {lang} = useApp()
+	const onDownload = _=>{
+		const files = collectFiles(previewData.id)
+		buildZip({
+			filename: previewData.id,
+			files: files,
+			gameVersion: currentGameVersion,
+			downloadErrorText: langData["download_file_error"]?.[lang]
+		})
+	}
+	
 	return (
 		<div className={`popup ${visible ? "visible" : "hidden"}`}
 			onClick={e=>e.target.classList.contains("popup") && BeforeClose()}
@@ -54,7 +72,7 @@ const ModPreview = ({onClosePreview, previewData, stats, onDownload}) => {
 					</div>
 				)}
 				<div className="row">
-					<button className="button shine" onClick={_=>onDownload(previewData.id)}>
+					<button className="button shine" onClick={onDownload}>
 						<i className="fa-solid fa-circle-down"></i>
 						<span>{<LANG id="download_button"/>}</span>
 					</button>
@@ -96,6 +114,16 @@ function replaceFlags(text) {
 		}
 		return part
 	})
+}
+function compareVersions(left, right){
+	return String(left).localeCompare(String(right), undefined, {numeric: true})
+}
+function getLatestGameVersion(gameVersionStats){
+	const versions = Object.keys(gameVersionStats || {}).filter(version => /^\d+(\.\d+)+$/.test(version))
+	if (versions.length === 0) {
+		return "1.0.0"
+	}
+	return versions.sort(compareVersions).at(-1)
 }
 async function buildZip({
 	filename, files, gameVersion = "1.0.0",
