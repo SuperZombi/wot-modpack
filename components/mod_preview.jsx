@@ -1,4 +1,4 @@
-const ModPreview = ({onClosePreview, previewData, stats}) => {
+const ModPreview = ({onClosePreview, previewData, stats, onDownload}) => {
 	const [visible, setVisible] = React.useState(false);
 	React.useEffect(() => {
 		setVisible(true);
@@ -54,7 +54,7 @@ const ModPreview = ({onClosePreview, previewData, stats}) => {
 					</div>
 				)}
 				<div className="row">
-					<button className="button shine" onClick={previewData.on_download}>
+					<button className="button shine" onClick={_=>onDownload(previewData.id)}>
 						<i className="fa-solid fa-circle-down"></i>
 						<span>{<LANG id="download_button"/>}</span>
 					</button>

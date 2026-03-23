@@ -73,10 +73,6 @@ const App = () => {
 			image: mod.image,
 			audio: mod.audio,
 			version: mod.ver,
-			on_download: _=>{
-				const files = collectFiles(mod.id)
-				buildZip(mod.id, files, currentGameVersion)
-			}
 		})
 		setSelected(mod.id)
 		setShowPreview(true)
@@ -140,6 +136,10 @@ const App = () => {
 					onClosePreview={onClosePreview}
 					previewData={previewData}
 					stats={stats}
+					onDownload={modId=>{
+						const files = collectFiles(modId)
+						buildZip(modId, files, currentGameVersion)
+					}}
 				/>
 			)}
 		</React.Fragment>
@@ -174,17 +174,7 @@ function statsAsNumber(array){
 	return Object.fromEntries(array.map(([key, value]) => [key, Number(value)]))
 }
 function compareVersions(left, right){
-	const leftParts = String(left).split(".").map(Number)
-	const rightParts = String(right).split(".").map(Number)
-	const maxLength = Math.max(leftParts.length, rightParts.length)
-	for (let i = 0; i < maxLength; i += 1) {
-		const leftPart = leftParts[i] || 0
-		const rightPart = rightParts[i] || 0
-		if (leftPart !== rightPart) {
-			return leftPart - rightPart
-		}
-	}
-	return 0
+	return String(left).localeCompare(String(right), undefined, {numeric: true})
 }
 function getLatestGameVersion(gameVersionStats){
 	const versions = Object.keys(gameVersionStats || {}).filter(version => /^\d+(\.\d+)+$/.test(version))
