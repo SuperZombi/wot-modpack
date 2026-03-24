@@ -85,10 +85,12 @@ const StatsChart = ({
 	nameFormatter=null
 }) => {
 	const canvasRef = React.useRef(null)
-
+	const validEntries = Object.fromEntries(
+		Object.entries(data).filter(([k,v]) => !isNaN(Number(v)) && v !== null)
+	)
 	React.useEffect(()=>{
-		const labels = nameFormatter ? Object.keys(data).map(nameFormatter) : Object.keys(data)
-		const values = Object.values(data)
+		const labels = nameFormatter ? Object.keys(validEntries).map(nameFormatter) : Object.keys(validEntries)
+		const values = Object.values(validEntries)
 		const total = values.reduce((a,b)=>a+b,0)
 
 		const chart = new Chart(canvasRef.current,{
@@ -129,37 +131,4 @@ const StatsChart = ({
 		return ()=>{chart.destroy()}
 	},[data, caption])
 	return <canvas ref={canvasRef}/>
-}
-
-const OtherStatsTable = ({caption, data, nameFormatter=null}) => {
-	const validEntries = Object.entries(data || {}).filter(([key, value]) => {
-		return !isNaN(Number(value)) && value !== null;
-	})
-	const total = validEntries.reduce((sum, [_, value]) => sum + Number(value), 0)
-
-	return (
-		<table border="1">
-			<caption>{caption}</caption>
-			<tbody>
-				{validEntries.length > 0 ? (
-					<React.Fragment>
-					{validEntries.map(([name, count], index) => {
-						const percent = total > 0 ? ((Number(count) / total) * 100).toFixed(0) : "0"
-						return (
-							<tr key={index}>
-								<td>{nameFormatter ? nameFormatter(name) : name}</td>
-								<td style={{textAlign: "right"}}>{count}</td>
-								<td style={{textAlign: "right"}}>{percent}%</td>
-							</tr>
-						)
-					})}
-					</React.Fragment>
-				) : (
-					<tr><td colSpan="3" style={{textAlign: "center"}}>
-						{Object.keys(data || {}).length > 0 ? <LANG id="error" /> : <LANG id="loading" />}
-					</td></tr>
-				)}
-			</tbody>
-		</table>
-	)
 }
