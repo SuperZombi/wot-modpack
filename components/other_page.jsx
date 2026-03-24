@@ -3,7 +3,7 @@ const OtherPage = ({showHiddenMods, setShowHiddenMods}) => {
 	const [clientStats, setClientStats] = React.useState({})
 	const [gameVersionStats, setGameVersionStats] = React.useState({})
 	const [layoutStats, setLayoutStats] = React.useState({})
-	const {lang} = useApp()
+	const {lang, langData} = useApp()
 
 	React.useEffect(_=>{
 		loadStatsPage("1884858162", data=>setLangStats(statsAsNumber(data)))
@@ -32,8 +32,8 @@ const OtherPage = ({showHiddenMods, setShowHiddenMods}) => {
 	}
 
 	const layout_type = {
-		"grid": <LANG id="layout_grid" />,
-		"list": <LANG id="layout_list" />
+		"grid": langData?.["layout_grid"]?.[lang],
+		"list": langData?.["layout_list"]?.[lang]
 	}
 
 	return (
@@ -47,29 +47,88 @@ const OtherPage = ({showHiddenMods, setShowHiddenMods}) => {
 					<span>{<LANG id="showHiddenMods"/>}</span>
 				</label>
 			</div>
-			<div className="container row" style={{gap: "2rem"}}>
-				<OtherStatsTable
-					caption={<LANG id="languagesTable"/>}
-					data={langStats}
-					nameFormatter={formatLanguageName}
-				/>
-				<OtherStatsTable
-					caption={<LANG id="gameVersion"/>}
-					data={gameVersionStats}
-				/>
-				<OtherStatsTable
-					caption={<LANG id="clientsTable"/>}
-					data={clientStats}
-					nameFormatter={capitalize}
-				/>
-				<OtherStatsTable
-					caption={<LANG id="layout"/>}
-					data={layoutStats}
-					nameFormatter={val=>layout_type[val] || val}
-				/>
+			<div className="container line" style={{gap: "2rem"}}>
+				<div className="row">
+					<StatsChart
+						data={langStats}
+						caption={langData?.["languagesTable"]?.[lang]}
+						nameFormatter={formatLanguageName}
+					/>
+					<StatsChart
+						data={gameVersionStats}
+						caption={langData?.["gameVersion"]?.[lang]}
+					/>
+				</div>
+				<div className="row">
+					<StatsChart
+						type="doughnut"
+						data={clientStats}
+						caption={langData?.["clientsTable"]?.[lang]}
+						nameFormatter={capitalize}
+					/>
+					<StatsChart
+						type="doughnut"
+						data={layoutStats}
+						caption={langData?.["layout"]?.[lang]}
+						nameFormatter={val=>layout_type[val] || val}
+					/>
+				</div>
 			</div>
 		</React.Fragment>
 	)
+}
+
+const StatsChart = ({
+	data,
+	type="bar",
+	caption=null,
+	nameFormatter=null
+}) => {
+	const canvasRef = React.useRef(null)
+
+	React.useEffect(()=>{
+		const labels = nameFormatter ? Object.keys(data).map(nameFormatter) : Object.keys(data)
+		const values = Object.values(data)
+		const total = values.reduce((a,b)=>a+b,0)
+
+		const chart = new Chart(canvasRef.current,{
+			type:type,
+			data:{
+				labels,
+				datasets: [{
+					data: values,
+					borderRadius: type === "bar" ? 6 : 0,
+					borderWidth: type === "bar" ? 1 : 0,
+				}]
+			},
+			options:{
+				responsive:false,
+				indexAxis:"y",
+				plugins:{
+					legend: {
+						display: type === "bar" ? false : true,
+						position: 'top',
+						onClick: function(e, legendItem, legend) {}
+					},
+					title: {
+						display: caption ? true : false,
+						text: caption
+					},
+					tooltip:{
+						callbacks:{
+							label:function(context){
+								const value = context.raw
+								const percent = ((value/total)*100).toFixed(0)
+								return `${value} (${percent}%)`
+							}
+						}
+					}
+				}
+			}
+		})
+		return ()=>{chart.destroy()}
+	},[data, caption])
+	return <canvas ref={canvasRef}/>
 }
 
 const OtherStatsTable = ({caption, data, nameFormatter=null}) => {
