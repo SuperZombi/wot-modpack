@@ -585,5 +585,7 @@ table td, table caption{
 	}
 	.feature:hover i{
 		transform: scale(1.08) rotate(-4deg);
+		background: #00bdff;
+		color: #fff;
 	}
 }
