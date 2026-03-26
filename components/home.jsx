@@ -19,8 +19,12 @@ const Home = ({mods_count, setTab}) => {
 						<h2>Web Modpack</h2>
 						<h3><LANG id="modpack_description"/></h3>
 						<div className="row" style={{fontSize: "14px", gap: "2rem"}}>
-							<StatCard value={mods_count} label={<LANG id="mods_count"/>} delay={2} onClick={_=>setTab("mods")}/>
-							<StatCard value={totalInstalls} label={<LANG id="installations"/>} delay={4}/>
+							<StatCard value={mods_count} label={<LANG id="mods_count"/>}
+								delay={2} onClick={_=>setTab("mods")}
+							/>
+							<StatCard value={totalInstalls} label={<LANG id="installations"/>}
+								delay={4} onClick={_=>setTab("other")}
+							/>
 						</div>
 						<div className="row" style={{marginTop: "1.5rem", fontSize: "1.2em"}}>
 							<Reveal delay={6}>
@@ -53,7 +57,7 @@ const Home = ({mods_count, setTab}) => {
 			</div>
 
 			<div className="container card-page" align="center">
-				<h1><LANG id="featureModernDesignTitle"/></h1>
+				<h2><LANG id="featureModernDesignTitle"/></h2>
 				<BeforeAfterSlider
 					before="web/images/before.jpg"
 					after="web/images/after.jpg"
