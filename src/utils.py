@@ -116,11 +116,7 @@ class Client:
 	@property
 	def version(self):
 		ver = self._find_xml_text(self._version_xml, 'version')
-		if ver:
-			ver = ver.replace('v.', '').strip()
-			ver = ver.split()[:-1]
-			ver = ''.join(ver)
-			return ver
+		if ver: return ver.replace('v.', '').strip().split()[0]
 
 	@property
 	def lang(self):
