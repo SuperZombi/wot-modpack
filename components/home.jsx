@@ -57,6 +57,16 @@ const Home = ({mods_count, setTab}) => {
 			</div>
 
 			<div className="container card-page" align="center">
+				<ScrollParallaxCard
+					bg="web/images/bg1.png"
+					fg="web/images/bg2.png"
+				>
+					<h1><LANG id="mods_card_title"/></h1>
+					<h3><LANG id="mods_card_description"/></h3>
+				</ScrollParallaxCard>
+			</div>
+
+			<div className="container card-page" align="center">
 				<h2><LANG id="featureModernDesignTitle"/></h2>
 				<BeforeAfterSlider
 					before="web/images/before.jpg"
@@ -204,6 +214,50 @@ const BeforeAfterSlider = ({ before, after }) => {
 				style={{ left: `${dividerPos}%` }}
 				onPointerDown={startDrag}
 			></div>
+		</div>
+	)
+}
+function ScrollParallaxCard(props){
+	const ref = React.useRef(null)
+	const bgRef = React.useRef(null)
+	const fgRef = React.useRef(null)
+	React.useEffect(()=>{
+		const isMobile = 'ontouchstart' in window || navigator.maxTouchPoints > 0
+		function onScroll(){
+			if(!ref.current) return
+			const rect = ref.current.getBoundingClientRect()
+			const windowHeight = window.innerHeight
+			const progress = rect.top / windowHeight
+			const bgMove = isMobile ? progress * -40 : progress * -100
+			const fgMove = isMobile ? progress * -80 : progress * -200
+			if(bgRef.current){
+				bgRef.current.style.transform = `translateY(${bgMove}px) scale(1.1)`
+			}
+			if(fgRef.current){
+				fgRef.current.style.transform = `translateY(${fgMove}px)`
+			}
+		}
+		window.addEventListener("scroll", onScroll, { passive:true })
+		onScroll()
+		return ()=>window.removeEventListener("scroll", onScroll)
+	},[])
+	return (
+		<div ref={ref} className="scroll-parallax-card">
+			<img
+				ref={bgRef}
+				className="parallax-img parallax-bg"
+				src={props.bg}
+				draggable={false}
+			/>
+			<img
+				ref={fgRef}
+				className="parallax-img parallax-fg"
+				src={props.fg}
+				draggable={false}
+			/>
+			<div className="parallax-content">
+				{props.children}
+			</div>
 		</div>
 	)
 }

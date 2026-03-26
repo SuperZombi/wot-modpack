@@ -26,7 +26,7 @@ body{
 
 header{
 	position: sticky;
-	z-index: 1;
+	z-index: 4;
 	top: 0.5rem;
 	display: flex;
 	justify-content: space-between;
@@ -198,7 +198,7 @@ nav{
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	z-index: 2;
+	z-index: 5;
 	transition: 0.35s;
 }
 .popup.visible{
@@ -443,6 +443,43 @@ table td, table caption{
 	display: block;
 }
 
+
+.scroll-parallax-card{
+	position: relative;
+	height: 100dvh;
+	width: 100%;
+	overflow: hidden;
+}
+.parallax-img{
+	position: absolute;
+	object-fit: cover;
+	pointer-events: none;
+	will-change: transform;
+}
+.parallax-bg{
+	width: 130%;
+	height: 130%;
+	top: -15%;
+	left: -15%;
+	z-index: 2;
+}
+.parallax-fg{
+	width: 116%;
+	height: 116%;
+	top: -8%;
+	left: -8%;
+	z-index: 1;
+}
+.parallax-content{
+	position: relative;
+	z-index: 3;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+}
+
 .reveal {
 	opacity: 0;
 	visibility: hidden;
@@ -502,7 +539,11 @@ table td, table caption{
 		order: -1;
 	}
 }
-
+@media (max-width:768px){
+	.scroll-parallax-card{
+		height: 80dvh;
+	}
+}
 @media (max-width: 600px) {
 	#mods-list {
 		grid-template-columns: repeat(2, 1fr);
