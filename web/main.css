@@ -434,6 +434,7 @@ table td, table caption{
 	justify-content: center;
 	pointer-events: all;
 	touch-action: none;
+	user-select: none;
 }
 .ba-divider::after {
 	content: '';
