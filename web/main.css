@@ -431,6 +431,7 @@ table td, table caption{
 	width: 40px;
 	cursor: ew-resize;
 	display: flex;
+	align-items: center;
 	justify-content: center;
 	pointer-events: all;
 	touch-action: none;
@@ -439,9 +440,19 @@ table td, table caption{
 .ba-divider::after {
 	content: '';
 	width: 2px;
-	background: #fff;
+	background: rgba(255, 255, 255, 0.8);
 	height: 100%;
 	display: block;
+}
+.ba-divider i{
+	position: absolute;
+	z-index: 1;
+	color: #fff;
+	padding: 10px;
+	background: rgba(22, 26, 33, 0.7);
+	border-radius: 100%;
+	border: 1px solid rgba(255, 255, 255, 0.35);
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
 

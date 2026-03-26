@@ -213,7 +213,9 @@ const BeforeAfterSlider = ({ before, after }) => {
 				className="ba-divider"
 				style={{ left: `${dividerPos}%` }}
 				onPointerDown={startDrag}
-			></div>
+			>
+				<i className="fa-solid fa-arrows-left-right"></i>
+			</div>
 		</div>
 	)
 }
