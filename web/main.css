@@ -405,7 +405,6 @@ table td, table caption{
 	height: 75dvh;
 	border-radius: 1rem;
 	overflow: hidden;
-	touch-action: none;
 }
 .ba-image{
 	width: 100%;
