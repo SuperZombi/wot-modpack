@@ -144,46 +144,55 @@ const BeforeAfterSlider = ({ before, after }) => {
 	const [dividerPos, setDividerPos] = React.useState(50)
 	const sliderRef = React.useRef(null)
 	const isDragging = React.useRef(false)
+	const frameRef = React.useRef(null)
+	const nextClientXRef = React.useRef(null)
 	
-	const startDrag = () => {
-		isDragging.current = true;
-	}
-	const onDrag = (e) => {
-		if (!isDragging.current) return;
-		const slider = sliderRef.current;
-		if (!slider) return;
+	const updateDividerPos = React.useCallback((clientX) => {
+		const slider = sliderRef.current
+		if (!slider) return
 
 		const rect = slider.getBoundingClientRect()
-		let clientX;
+		let offsetX = clientX - rect.left
+		if (offsetX < 0) offsetX = 0
+		if (offsetX > rect.width) offsetX = rect.width
 
-		if (e.type.startsWith("touch")) {
-			clientX = e.touches[0].clientX;
-		} else {
-			clientX = e.clientX;
-		}
-
-		let offsetX = clientX - rect.left;
-		if (offsetX < 0) offsetX = 0;
-		if (offsetX > rect.width) offsetX = rect.width;
-
-		const percent = (offsetX / rect.width) * 100;
+		const percent = (offsetX / rect.width) * 100
 		setDividerPos(percent)
-	}
-	const stopDrag = () => {
-		isDragging.current = false;
-	}
-	React.useEffect(() => {
-		window.addEventListener("mousemove", onDrag)
-		window.addEventListener("mouseup", stopDrag)
-		window.addEventListener("touchmove", onDrag)
-		window.addEventListener("touchend", stopDrag)
-		return () => {
-			window.removeEventListener("mousemove", onDrag)
-			window.removeEventListener("mouseup", stopDrag)
-			window.removeEventListener("touchmove", onDrag)
-			window.removeEventListener("touchend", stopDrag)
-		}
 	}, [])
+	const flushDragPosition = React.useCallback(() => {
+		frameRef.current = null
+		if (nextClientXRef.current == null) return
+		updateDividerPos(nextClientXRef.current)
+	}, [updateDividerPos])
+	const queueDragPosition = React.useCallback((clientX) => {
+		nextClientXRef.current = clientX
+		if (frameRef.current != null) return
+		frameRef.current = requestAnimationFrame(flushDragPosition)
+	}, [flushDragPosition])
+	const startDrag = React.useCallback((e) => {
+		isDragging.current = true;
+		queueDragPosition(e.clientX)
+	}, [queueDragPosition])
+	const onDrag = React.useCallback((e) => {
+		if (!isDragging.current) return;
+		queueDragPosition(e.clientX)
+	}, [queueDragPosition])
+	const stopDrag = React.useCallback(() => {
+		isDragging.current = false;
+	}, [])
+	React.useEffect(() => {
+		window.addEventListener("pointermove", onDrag)
+		window.addEventListener("pointerup", stopDrag)
+		window.addEventListener("pointercancel", stopDrag)
+		return () => {
+			window.removeEventListener("pointermove", onDrag)
+			window.removeEventListener("pointerup", stopDrag)
+			window.removeEventListener("pointercancel", stopDrag)
+			if (frameRef.current != null) {
+				cancelAnimationFrame(frameRef.current)
+			}
+		}
+	}, [onDrag, stopDrag])
 	return (
 		<div className="ba-slider" ref={sliderRef}>
 			<img src={after} className="ba-image" draggable={false} />
@@ -193,8 +202,7 @@ const BeforeAfterSlider = ({ before, after }) => {
 			<div
 				className="ba-divider"
 				style={{ left: `${dividerPos}%` }}
-				onMouseDown={startDrag}
-				onTouchStart={startDrag}
+				onPointerDown={startDrag}
 			></div>
 		</div>
 	)
