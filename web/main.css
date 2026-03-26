@@ -560,8 +560,8 @@ table td, table caption{
 		width: 2.5em;
 		height: 2.5em;
 		border-radius: 0.6em;
-		background: #06BFFF;
-		color: inherit;
+		color: #7cc4ff;
+		background: rgba(59, 130, 246, 0.18);
 	}
 	.feature .feature-block:before{
 		background: none;
