@@ -404,6 +404,7 @@ table td, table caption{
 	height: 75dvh;
 	border-radius: 1rem;
 	overflow: hidden;
+	touch-action: none;
 }
 .ba-image{
 	width: 100%;
@@ -432,6 +433,7 @@ table td, table caption{
 	display: flex;
 	justify-content: center;
 	pointer-events: all;
+	touch-action: none;
 }
 .ba-divider::after {
 	content: '';
