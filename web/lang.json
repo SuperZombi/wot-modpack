@@ -119,6 +119,16 @@
 		"ru": "Никаких читов, никаких вирусов",
 		"uk": "Без читів та без вірусів"
 	},
+	"featureSortingTitle": {
+		"en": "Sorting by popularity",
+		"ru": "Сортировка по популярности",
+		"uk": "Сортування за популярністю"
+	},
+	"featureSortingDesc": {
+		"en": "Mods liked by community",
+		"ru": "Моды любимые сообществом",
+		"uk": "Моди улюблені спільнотою"
+	},
 	"searchMods": {
 		"en": "Search",
 		"ru": "Поиск",
@@ -168,5 +178,10 @@
 		"en": "Error",
 		"ru": "Ошибка",
 		"uk": "Помилка"
+	},
+	"modpack_description": {
+		"en": "Lightweight and modern modpack for World of Tanks",
+		"ru": "Лёгкий и современный модпак для World of Tanks",
+		"uk": "Легкий та сучасний модпак для World of Tanks"
 	}
 }

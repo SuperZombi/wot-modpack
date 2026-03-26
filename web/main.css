@@ -316,7 +316,7 @@ table td, table caption{
 }
 
 .home_image{
-	width: 480px;
+	width: 560px;
 	height: auto;
 	max-width: 100%;
 	border-radius: 0.5rem;
@@ -325,29 +325,30 @@ table td, table caption{
 
 .features-grid {
 	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+	grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
 	gap: 1rem;
+	width: 100%;
 }
 .feature {
 	display: grid;
-	grid-template-columns: auto 1fr;
-	gap: 1em;
-	align-items: center;
+	grid-template-rows: auto 1fr;
 	transition: all 0.25s ease;
-	background: linear-gradient(180deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.04));
 }
 .feature i{
-	width: 2.5em;
-	height: 2.5em;
+	transform: translateY(50%);
+	margin: auto;
+	width: 4em;
+	height: 4em;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	border-radius: 0.6em;
-	background: rgba(59,130,246,0.18);
+	border-radius: 100%;
+	background: linear-gradient(to right, #06BFFF, #2B74FF);
 	border: 1px solid rgba(59,130,246,0.35);
-	color: #7cc4ff;
+	color: inherit;
 	font-size: 1em;
 	transition: all 0.25s ease;
+	z-index: 1;
 }
 .feature .feature-header{
 	font-size: 1.1em;
@@ -357,16 +358,72 @@ table td, table caption{
 	display: flex;
 	flex-direction: column;
 	gap: 0.25rem;
+	padding: 1rem;
+	padding-top: 3em;
+
+	background: linear-gradient(180deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.04));
+	border: 1px solid rgba(255, 255, 255, 0.10);
+	border-radius: 1rem;
+	box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+	position: relative;
+	overflow: hidden;
+}
+.feature .feature-block:before{
+	content: '';
+	position: absolute;
+	top: 0;
+	left: -100%;
+	width: 100%;
+	height: 100%;
+	background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+	transition: all 0.6s ease;
+}
+.feature .feature-block:hover:before{
+	left: 100%;
 }
 .feature:hover{
 	transform: translateY(-4px);
 	border-color: rgba(124,196,255,0.45);
 }
 .feature:hover i{
-	transform: scale(1.08) rotate(-4deg);
-	background: rgba(59,130,246,0.28);
 	border-color: rgba(124,196,255,0.55);
-	box-shadow: 0 0 10px;
+	box-shadow: 0 0 10px #7cc4ff;
+}
+
+.card-page{
+	min-height: 80dvh;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	position: relative;
+}
+.parallax-bg{
+	position: absolute;
+	inset: 0;
+	overflow: hidden;
+	z-index: -1;
+}
+.parallax-layer{
+	position: absolute;
+	inset: -20%;
+	animation: parallaxMove linear infinite;
+}
+.parallax-item{
+	position: absolute;
+	width: 160px;
+	pointer-events: none;
+	opacity: 0.25;
+	filter: blur(1px);
+}
+
+@keyframes parallaxMove{
+	from{
+		transform: translateY(0);
+	}
+	to{
+		transform: translateY(-300px);
+	}
 }
 
 .reveal {
@@ -416,6 +473,19 @@ table td, table caption{
 	to { background-position: -200% 0 }
 }
 
+.mobile-font-size{
+	font-size: 18px;
+}
+
+@media (max-width: 1024px) {
+	.home_image{
+		width: 480px;
+	}
+	.home_image_block{
+		order: -1;
+	}
+}
+
 @media (max-width: 600px) {
 	#mods-list {
 		grid-template-columns: repeat(2, 1fr);
@@ -434,7 +504,68 @@ table td, table caption{
 		overflow: hidden;
 		border-radius: 10px;
 	}
+	.mobile-font-size{
+		font-size: 14px;
+	}
 	.popup-content{
 		max-width: 95dvw;
+	}
+	.card-page{
+		min-height: 70dvh;
+	}
+	.parallax-item{
+		width: 120px;
+	}
+	.features-grid{
+		grid-template-columns: 1fr;
+	}
+	.feature {
+		grid-template-rows: 1fr;
+		grid-template-columns: auto 1fr;
+		gap: 1em;
+		align-items: center;
+		transition: all 0.25s ease;
+		background: linear-gradient(180deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.04));
+		border: 1px solid rgba(255, 255, 255, 0.10);
+		border-radius: 1rem;
+		box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+		padding: 1em;
+	}
+	.feature .feature-block{
+		background: transparent;
+		border: none;
+		box-shadow: none;
+		padding: 0;
+	}
+	.feature i{
+		transform: none;
+		width: 2.5em;
+		height: 2.5em;
+		border-radius: 0.6em;
+		color: #7cc4ff;
+		background: rgba(59, 130, 246, 0.18);
+	}
+	.feature .feature-block:before{
+		background: none;
+	}
+	.feature{
+		position: relative;
+		overflow: hidden;
+	}
+	.feature:before{
+		content: '';
+		position: absolute;
+		top: 0;
+		left: -100%;
+		width: 100%;
+		height: 100%;
+		background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+		transition: all 0.6s ease;
+	}
+	.feature:hover:before{
+		left: 100%;
+	}
+	.feature:hover i{
+		transform: scale(1.08) rotate(-4deg);
 	}
 }
