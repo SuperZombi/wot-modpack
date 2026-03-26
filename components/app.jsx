@@ -108,7 +108,6 @@ const App = () => {
 			{tab == "home" ? (
 				<Home
 					mods_count={mods.filter(mod => mod.title).length}
-					mods_images={mods.filter(mod => mod.image).map(mod => mod.image)}
 					setTab={setTab}
 				/>
 			) : tab == "mods" ? (

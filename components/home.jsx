@@ -1,4 +1,4 @@
-const Home = ({mods_count, mods_images, setTab}) => {
+const Home = ({mods_count, setTab}) => {
 	const [totalInstalls, setTotalInstalls] = React.useState(0)
 	React.useEffect(() => {
 		loadStatsPage("342255871", data=>setTotalInstalls(Math.max(0, data.length-1)))
@@ -53,11 +53,10 @@ const Home = ({mods_count, mods_images, setTab}) => {
 			</div>
 
 			<div className="container card-page" align="center">
-				<ParallaxBackground mods_images={mods_images} />
-				<StatCard value={mods_count} label={<LANG id="mods_count"/>} delay={1}
-					className="mobile-font-size"
-					style={{boxShadow: "0 0 200px rgba(100, 100, 255, 0.5)"}}
-					onClick={_=>setTab("mods")}
+				<h1><LANG id="featureModernDesignTitle"/></h1>
+				<BeforeAfterSlider
+					before="web/images/before.jpg"
+					after="web/images/after.jpg"
 				/>
 			</div>
 
@@ -137,51 +136,62 @@ const Reveal = ({ children, className="", style={}, delay=0, ...props }) => {
 		</div>
 	)
 }
-const ParallaxBackground = ({ mods_images }) => {
-	const LAYERS = 3
-	const ITEMS_PER_LAYER = 10
+const BeforeAfterSlider = ({ before, after }) => {
+	const [dividerPos, setDividerPos] = React.useState(50)
+	const sliderRef = React.useRef(null)
+	const isDragging = React.useRef(false)
+	
+	const startDrag = () => {
+		isDragging.current = true;
+	}
+	const onDrag = (e) => {
+		if (!isDragging.current) return;
+		const slider = sliderRef.current;
+		if (!slider) return;
 
-	const shuffled = [...mods_images].sort(() => Math.random() - 0.5)
-	const layers = Array.from({ length: LAYERS }, (_, i) =>
-		shuffled.slice(i * ITEMS_PER_LAYER, (i + 1) * ITEMS_PER_LAYER)
-	)
-	const MAX_ROTATE = 30
-	const MIN_SCALE = 0.8
-	const MAX_SCALE = 1.4
-	const POSITION_SPREAD = 140
-	const POSITION_OFFSET = 20
-	const TRANSLATE = 40
+		const rect = slider.getBoundingClientRect()
+		let clientX;
 
-	const randomStyle = () => ({
-		top: Math.random() * POSITION_SPREAD - POSITION_OFFSET + "%",
-		left: Math.random() * POSITION_SPREAD - POSITION_OFFSET + "%",
-		transform: `
-			rotate(${Math.random() * MAX_ROTATE * 2 - MAX_ROTATE}deg)
-			scale(${MIN_SCALE + Math.random() * (MAX_SCALE - MIN_SCALE)})
-			translate(${Math.random() * TRANSLATE * 2 - TRANSLATE}px, ${Math.random() * TRANSLATE * 2 - TRANSLATE}px)
-		`
-	})
+		if (e.type.startsWith("touch")) {
+			clientX = e.touches[0].clientX;
+		} else {
+			clientX = e.clientX;
+		}
+
+		let offsetX = clientX - rect.left;
+		if (offsetX < 0) offsetX = 0;
+		if (offsetX > rect.width) offsetX = rect.width;
+
+		const percent = (offsetX / rect.width) * 100;
+		setDividerPos(percent)
+	}
+	const stopDrag = () => {
+		isDragging.current = false;
+	}
+	React.useEffect(() => {
+		window.addEventListener("mousemove", onDrag)
+		window.addEventListener("mouseup", stopDrag)
+		window.addEventListener("touchmove", onDrag)
+		window.addEventListener("touchend", stopDrag)
+		return () => {
+			window.removeEventListener("mousemove", onDrag)
+			window.removeEventListener("mouseup", stopDrag)
+			window.removeEventListener("touchmove", onDrag)
+			window.removeEventListener("touchend", stopDrag)
+		}
+	}, [])
 	return (
-		<div className="parallax-bg">
-			{layers.map((layer, layerIndex) => (
-				<div
-					key={layerIndex}
-					className="parallax-layer"
-					style={{
-						animationDuration: `${60 + layerIndex * 20}s`
-					}}
-				>
-					{layer.map((img, i) => (
-						<img
-							key={i}
-							src={img}
-							className="parallax-item"
-							loading="lazy"
-							style={randomStyle()}
-						/>
-					))}
-				</div>
-			))}
+		<div className="ba-slider" ref={sliderRef}>
+			<img src={after} className="ba-image" draggable={false} />
+			<div className="ba-holder" style={{ width: `${dividerPos}%` }}>
+				<img src={before} className="ba-image" draggable={false} />
+			</div>
+			<div
+				className="ba-divider"
+				style={{ left: `${dividerPos}%` }}
+				onMouseDown={startDrag}
+				onTouchStart={startDrag}
+			></div>
 		</div>
 	)
 }

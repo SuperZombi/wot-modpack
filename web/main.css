@@ -398,32 +398,47 @@ table td, table caption{
 	justify-content: center;
 	position: relative;
 }
-.parallax-bg{
-	position: absolute;
-	inset: 0;
-	overflow: hidden;
-	z-index: -1;
-}
-.parallax-layer{
-	position: absolute;
-	inset: -20%;
-	animation: parallaxMove linear infinite;
-}
-.parallax-item{
-	position: absolute;
-	width: 160px;
-	pointer-events: none;
-	opacity: 0.25;
-	filter: blur(1px);
-}
 
-@keyframes parallaxMove{
-	from{
-		transform: translateY(0);
-	}
-	to{
-		transform: translateY(-300px);
-	}
+.ba-slider{
+	position: relative;
+	height: 75dvh;
+	border-radius: 1rem;
+	overflow: hidden;
+}
+.ba-image{
+	width: 100%;
+	height: 100%;
+	display: block;
+	object-fit: cover;
+	object-position: left;
+	user-select: none;
+}
+.ba-holder{
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 50%;
+	overflow: hidden;
+}
+.ba-divider{
+	position: absolute;
+	top: 0;
+	left: 50%;
+	transform: translateX(-50%);
+	height: 100%;
+	width: 40px;
+	cursor: ew-resize;
+	display: flex;
+	justify-content: center;
+	pointer-events: all;
+}
+.ba-divider::after {
+	content: '';
+	width: 2px;
+	background: #fff;
+	height: 100%;
+	display: block;
 }
 
 .reveal {
@@ -510,11 +525,11 @@ table td, table caption{
 	.popup-content{
 		max-width: 95dvw;
 	}
+	.ba-slider{
+		height: auto;
+	}
 	.card-page{
 		min-height: 70dvh;
-	}
-	.parallax-item{
-		width: 120px;
 	}
 	.features-grid{
 		grid-template-columns: 1fr;
