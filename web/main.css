@@ -192,17 +192,17 @@ nav{
 }
 
 .popup{
-	background: transparent;
 	position: fixed;
 	inset: 0;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	z-index: 10;
-	transition: 0.35s;
+	background: rgba(0, 0, 0, 0.5);
+	animation: popup-overlay-enter 0.35s ease both;
 }
-.popup.visible{
-	background: rgb(0, 0, 0, 0.5);
+.popup.hidden{
+	animation: popup-overlay-exit 0.35s ease both;
 }
 .popup-content{
 	background: rgba(100,100,100,0.25);
@@ -216,12 +216,11 @@ nav{
 	min-width: 40dvw;
 	gap: 1rem;
 	backdrop-filter: blur(10px);
-}
-.popup.visible .popup-content{
-	animation: reveal-enter 0.35s ease backwards;
+	will-change: transform, opacity;
+	animation: popup-content-enter 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 .popup.hidden .popup-content{
-	animation: reveal-exit 0.35s ease backwards;
+	animation: popup-content-exit 0.35s ease both;
 }
 .image-container{
 	height: 300px;
@@ -528,6 +527,43 @@ table td, table caption{
 	to {
 		opacity: 0;
 		transform: translateY(16px) scale(0.985);
+	}
+}
+
+@keyframes popup-overlay-enter {
+	from {
+		background: rgba(0, 0, 0, 0);
+	}
+	to {
+		background: rgba(0, 0, 0, 0.5);
+	}
+}
+@keyframes popup-overlay-exit {
+	from {
+		background: rgba(0, 0, 0, 0.5);
+	}
+	to {
+		background: rgba(0, 0, 0, 0);
+	}
+}
+@keyframes popup-content-enter {
+	from {
+		opacity: 0;
+		transform: translateY(18px) scale(0.985);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0) scale(1);
+	}
+}
+@keyframes popup-content-exit {
+	from {
+		opacity: 1;
+		transform: translateY(0) scale(1);
+	}
+	to {
+		opacity: 0;
+		transform: translateY(18px) scale(0.985);
 	}
 }
 
