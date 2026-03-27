@@ -13,6 +13,8 @@
 	"search": "Поиск",
 	"install": "Установить",
 	"share": "Поделиться",
+	"grid_view": "Сеткой",
+	"list_view": "Списком",
 	"reset_confirm": "Сбросить все выбранные моды?",
 	"custom_game_folder": "Выбрать",
 	"remove_all_mods": "Удалить все установленные моды",

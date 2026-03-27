@@ -375,3 +375,39 @@ label{
 	vertical-align: middle;
 	user-select: none;
 }
+
+[tooltip] {
+	position: relative;
+}
+[tooltip]::before {
+	content: attr(tooltip);
+	position: absolute;
+	bottom: 120%;
+	left: 50%;
+	transform: translateX(-50%);
+	background: #666;
+	color: #fff;
+	box-shadow: 0 2px 4px black;
+	padding: 4px 8px;
+	border-radius: 4px;
+	font-size: 13px;
+	white-space: nowrap;
+	z-index: 2;
+	opacity: 0;
+	pointer-events: none;
+	transition: opacity 0.2s;
+}
+[tooltip].tooltip-right::before{
+	left: 120%;
+	bottom: 50%;
+	transform: translateY(50%);
+}
+[tooltip].tooltip-left::before{
+	left: unset;
+	right: 120%;
+	bottom: 50%;
+	transform: translateY(50%);
+}
+[tooltip]:hover::before {
+	opacity: 1;
+}

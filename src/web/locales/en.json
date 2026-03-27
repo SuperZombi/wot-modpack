@@ -13,6 +13,8 @@
 	"search": "Search",
 	"install": "Install",
 	"share": "Share",
+	"grid_view": "Grid",
+	"list_view": "List",
 	"reset_confirm": "Reset all selected mods?",
 	"custom_game_folder": "Custom",
 	"remove_all_mods": "Remove all installed mods",

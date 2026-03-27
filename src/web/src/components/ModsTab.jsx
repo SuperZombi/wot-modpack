@@ -103,6 +103,8 @@ const ModsTab = ({
 								/>
 								<Button style={{display: "flex"}}
 									onClick={_=>setModsLayout(prev=>prev=="grid"?"list":"grid")}
+									tooltip={modsLayout=="grid"?langData["list_view"]:langData["grid_view"]}
+									className="tooltip-left"
 								>
 									{modsLayout == "grid" ? (
 										<img src="images/list.svg" draggable={false} height="20"/>

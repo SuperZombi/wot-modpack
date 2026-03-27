@@ -77,7 +77,7 @@ function Select({ options=[], value, onChange, placeholder="", display_hint=fals
 		<div ref={ref} className="select">
 			<Button className="select-header"
 				onClick={() => setOpen(!open)}
-				title={(display_hint && value) ? value.path : null}
+				tooltip={(display_hint && value && value.path != "custom") ? value.path : null}
 			>
 				{value ? value.title : placeholder}
 			</Button>
@@ -85,7 +85,7 @@ function Select({ options=[], value, onChange, placeholder="", display_hint=fals
 				<div className="select-options">
 					{options.map((option) => (
 						<Button key={option.path}
-							title={(display_hint && option.path != "custom") ? option.path : null}
+							tooltip={(display_hint && option.path != "custom") ? option.path : null}
 							className={(value?.path == option.path) ? "selected": ""}
 							onClick={() => handleSelect(option)}
 						>

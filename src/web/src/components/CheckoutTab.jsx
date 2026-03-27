@@ -85,15 +85,20 @@ const CheckoutTab = ({
 							return (
 								<div className={`mod-item ${(cached_ver && cached_ver == modObj.ver) ? "" : "prior"}`} key={modObj.id}>
 									{(cached_ver && cached_ver == modObj.ver) ? (
-										<img className="help" src="images/check.svg" title={langData["mod_in_cache"]} draggable={false}/>
+										<div tooltip={langData["mod_in_cache"]} className="tooltip-right help">
+											<img src="images/check.svg" draggable={false}/>
+										</div>
 									) : (
-										<img className="help" src="images/down-arrow.svg" title={langData["mod_will_be_downloaded"]} draggable={false}/>
+										<div tooltip={langData["mod_will_be_downloaded"]} className="tooltip-right help">
+											<img src="images/down-arrow.svg" draggable={false}/>
+										</div>
 									)}
 									<span>{replaceFlags(modObj.title[language])}</span>
-									<img src="images/close.svg" className="remove hover"
-										title={langData["remove"]} draggable={false}
+									<div tooltip={langData["remove"]} className="tooltip-left remove hover"
 										onClick={_=>setSelectedMods(prev => prev.filter(id => id !== modObj.id))}
-									/>
+									>
+										<img src="images/close.svg" draggable={false}/>
+									</div>
 								</div>
 							)
 						})}

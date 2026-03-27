@@ -254,6 +254,10 @@ ul{
 	border-radius: 25px;
 	transition: 0.2s;
 }
+.mods-install-list .mod-item [tooltip]{
+	display: flex;
+	align-items: center;
+}
 .mods-install-list .mod-item:hover{
 	background: rgb(255, 255, 255, 0.1);
 }
