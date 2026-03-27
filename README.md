@@ -39,6 +39,8 @@ This modpack automatically collects **anonymous statistics** that includes:
 - WoT version.
 - Client type (Steam or WGC).
 - Client language.
+- WoT realm (EU/NA/ASIA).
+- WoT branch (Release/CT/ST/SB).
 
 The collected data is used **only for ranking mods by popularity**!
 - **No personal data** (such as username, IP address, or system information).   
