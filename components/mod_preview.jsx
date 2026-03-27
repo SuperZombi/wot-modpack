@@ -1,6 +1,6 @@
 const ModPreview = ({onClosePreview, previewData, collectFiles}) => {
 	const {lang, langData} = useApp()
-	const [visible, setVisible] = React.useState(false)
+	const [isClosing, setIsClosing] = React.useState(false)
 	const [stats, setStats] = React.useState({})
 	const [currentGameVersion, setCurrentGameVersion] = React.useState("1.0.0")
 
@@ -10,15 +10,13 @@ const ModPreview = ({onClosePreview, previewData, collectFiles}) => {
 	}, [])
 	
 	React.useEffect(() => {
-		setVisible(true);
 		document.body.style.overflow = 'hidden';
 		return ()=> document.body.style.overflow = 'unset';
 	}, []);
 	const BeforeClose = _=>{
-		if (visible){
-			setVisible(false)
-			setTimeout(_=>{ onClosePreview() }, 300)
-		}
+		if (isClosing){return}
+		setIsClosing(true)
+		setTimeout(_=>{ onClosePreview() }, 350)
 	}
 	const onDownload = _=>{
 		const files = collectFiles(previewData.id)
@@ -31,7 +29,7 @@ const ModPreview = ({onClosePreview, previewData, collectFiles}) => {
 	}
 	
 	return (
-		<div className={`popup ${visible ? "visible" : "hidden"}`}
+		<div className={`popup ${isClosing ? "hidden" : "visible"}`}
 			onClick={e=>e.target.classList.contains("popup") && BeforeClose()}
 		>
 			<div className="container popup-content">
