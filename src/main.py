@@ -9,7 +9,7 @@ from tkinter.filedialog import askdirectory
 from utils import *
 
 MODS_DATA = {}
-__version__ = "2.3.1"
+__version__ = "2.3.2"
 @eel.expose
 def app_version(): return __version__
 SETTINGS = {}
@@ -148,8 +148,10 @@ def _main_install_worker(client_path, args, mods):
 			mod_ids=mods,
 			modpack_ver=__version__,
 			wot_ver=client.version,
-			wot_type=client.type.upper(),
+			wot_type=client.type.value.upper(),
 			wot_lang=client.lang.upper(),
+			wot_realm=client.realm.upper(),
+			wot_branch=client.branch.value.upper(),
 			layout=SETTINGS.get("layout")
 		)
 

@@ -4,6 +4,7 @@ import requests
 import zipfile
 import psutil
 import json
+from enum import Enum
 from io import BytesIO
 import xml.etree.ElementTree as ET
 from functools import cached_property
@@ -69,6 +70,17 @@ class Launchers:
 			if os.path.exists(exe): return p
 
 
+class ClientBranch(Enum):
+	RELEASE = "release"
+	COMMON_TEST = "ct"
+	SUPERTEST = "st"
+	SANDBOX = "sb"
+	CLOSED_TEST = "closed"
+
+class ClientType(Enum):
+	WG = "wg"
+	STEAM = "steam"
+
 class Client:
 	def __init__(self, path, use_cache=True):
 		self.path = path
@@ -87,11 +99,11 @@ class Client:
 
 	@property
 	def type(self):
-		return "steam" if "steam" in self.path.lower() else "wg"
+		return ClientType.STEAM if "steam" in self.path.lower() else ClientType.WG
 
 	@property
 	def title(self):
-		return f'WoT {self.realm.upper()} {self.version}{" (Steam)" if self.type == "steam" else ""}'
+		return f'WoT {self.realm.upper()} {self.version}{" (Steam)" if self.type == ClientType.STEAM else ""}'
 
 	def __str__(self): return self.title
 	def __repr__(self): return f"<{str(self)}>"
@@ -100,10 +112,11 @@ class Client:
 		return {
 			"path": self.path,
 			"title": self.title,
-			"type": self.type,
-			"realm": self.realm,
+			"type": self.type.value,
 			"version": self.version,
 			"lang": self.lang,
+			"realm": self.realm,
+			"branch": self.branch.value,
 			"res_mods": self.res_mods,
 			"mods_folder": self.mods_folder,
 			"configs_path": self.configs_path,
@@ -117,6 +130,21 @@ class Client:
 	def version(self):
 		ver = self._find_xml_text(self._version_xml, 'version')
 		if ver: return ver.replace('v.', '').strip().split()[0]
+
+	@property
+	def branch(self):
+		ver = self._find_xml_text(self._version_xml, 'version')
+		if ver:
+			version = ver.lower()
+			if 'common test' in version:
+				return ClientBranch.COMMON_TEST
+			if 'st' in version:
+				return ClientBranch.SUPERTEST
+			if 'sb' in version:
+				return ClientBranch.SANDBOX
+			if 'closed test' in version:
+				return ClientBranch.CLOSED_TEST
+			return ClientBranch.RELEASE
 
 	@property
 	def lang(self):
@@ -141,12 +169,10 @@ class Client:
 		return os.path.abspath(os.path.join(self.mods_folder, "..", "configs"))
 
 	@cached_property
-	def _version_xml(self):
-		return self._parse_xml("version.xml")
+	def _version_xml(self): return self._parse_xml("version.xml")
 
 	@cached_property
-	def _game_info_xml(self):
-		return self._parse_xml("game_info.xml")
+	def _game_info_xml(self): return self._parse_xml("game_info.xml")
 
 	@cached_property
 	def _paths_xml(self):
