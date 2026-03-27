@@ -26,7 +26,7 @@ body{
 
 header{
 	position: sticky;
-	z-index: 4;
+	z-index: 5;
 	top: 0.5rem;
 	display: flex;
 	justify-content: space-between;
@@ -198,7 +198,7 @@ nav{
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	z-index: 5;
+	z-index: 10;
 	transition: 0.35s;
 }
 .popup.visible{
@@ -455,12 +455,12 @@ table td, table caption{
 	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
-
 .scroll-parallax-card{
 	position: relative;
 	height: 100dvh;
 	width: 100%;
 	overflow: hidden;
+	background: radial-gradient(rgb(50, 150, 255, 0.4), transparent 50%);
 }
 .parallax-img{
 	position: absolute;
@@ -485,11 +485,18 @@ table td, table caption{
 .parallax-content{
 	position: relative;
 	z-index: 3;
-	height: 100%;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	flex-direction: column;
+}
+.scroll-parallax-card:after{
+	content: "";
+	position: absolute;
+	inset: 0;
+	background: radial-gradient(circle, transparent 60%, rgba(0,0,0,0.6) 100%);
+	pointer-events: none;
+	z-index: 3;
 }
 
 .reveal {

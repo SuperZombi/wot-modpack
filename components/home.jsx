@@ -15,9 +15,9 @@ const Home = ({mods_count, setTab}) => {
 		<React.Fragment>
 			<div className="container card-page" align="center">
 				<div className="row" style={{columnGap: "4rem", marginBottom: "auto", marginTop: "auto"}}>
-					<Reveal>
-						<h2>Web Modpack</h2>
-						<h3><LANG id="modpack_description"/></h3>
+					<div>
+						<Reveal><h2>Web Modpack</h2></Reveal>
+						<Reveal delay={1}><h3><LANG id="modpack_description"/></h3></Reveal>
 						<div className="row" style={{fontSize: "14px", gap: "2rem"}}>
 							<StatCard value={mods_count} label={<LANG id="mods_count"/>}
 								delay={2} onClick={_=>setTab("mods")}
@@ -46,32 +46,31 @@ const Home = ({mods_count, setTab}) => {
 								</a>
 							</Reveal>
 						</div>
-					</Reveal>
+					</div>
 					<Reveal className="home_image_block">
 						<img src="web/images/home_img.jpg" className="home_image" width="480" height="240" alt="Modpack preview" draggable={false}/>
 					</Reveal>
 				</div>
-				<i className="fa-solid fa-angles-down fa-bounce"
+				<Reveal delay={10}><i className="fa-solid fa-angles-down fa-bounce"
 					style={{fontSize: "2rem", marginBottom: "1rem", marginTop: "2rem"}}>
-				</i>
+				</i></Reveal>
 			</div>
 
-			<div className="container card-page" align="center">
-				<ScrollParallaxCard
-					bg="web/images/bg1.png"
-					fg="web/images/bg2.png"
-				>
-					<h1><LANG id="mods_card_title"/></h1>
-					<h3><LANG id="mods_card_description"/></h3>
-				</ScrollParallaxCard>
-			</div>
+			<ScrollParallaxCard
+				className="container card-page"
+				bg="web/images/bg1.png"
+				fg="web/images/bg2.png"
+			>
+				<Reveal delay={2}><h1><LANG id="mods_card_title"/></h1></Reveal>
+				<Reveal delay={4}><h3><LANG id="mods_card_description"/></h3></Reveal>
+			</ScrollParallaxCard>
 
 			<div className="container card-page" align="center">
-				<h2><LANG id="featureModernDesignTitle"/></h2>
-				<BeforeAfterSlider
+				<Reveal delay={1}><h2><LANG id="featureModernDesignTitle"/></h2></Reveal>
+				<Reveal delay={2}><BeforeAfterSlider
 					before="web/images/before.jpg"
 					after="web/images/after.jpg"
-				/>
+				/></Reveal>
 			</div>
 
 			<div className="container card-page" align="center">
@@ -219,7 +218,7 @@ const BeforeAfterSlider = ({ before, after }) => {
 		</div>
 	)
 }
-function ScrollParallaxCard(props){
+function ScrollParallaxCard({children, bg, fg, className=""}){
 	const ref = React.useRef(null)
 	const bgRef = React.useRef(null)
 	const fgRef = React.useRef(null)
@@ -244,21 +243,21 @@ function ScrollParallaxCard(props){
 		return ()=>window.removeEventListener("scroll", onScroll)
 	},[])
 	return (
-		<div ref={ref} className="scroll-parallax-card">
+		<div ref={ref} className={`${className} scroll-parallax-card`}>
 			<img
 				ref={bgRef}
 				className="parallax-img parallax-bg"
-				src={props.bg}
+				src={bg}
 				draggable={false}
 			/>
 			<img
 				ref={fgRef}
 				className="parallax-img parallax-fg"
-				src={props.fg}
+				src={fg}
 				draggable={false}
 			/>
 			<div className="parallax-content">
-				{props.children}
+				{children}
 			</div>
 		</div>
 	)
