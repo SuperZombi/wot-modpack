@@ -62,3 +62,27 @@
   0
 )
 ```
+
+### Realm
+```
+=QUERY(
+  FILTER(Form_Responses[WoT realm]; Form_Responses[WoT realm] <> "");
+  "select Col1, count(Col1)
+   group by Col1
+   order by Col1 desc
+   label Col1 '', count(Col1) ''";
+  0
+)
+```
+
+### Branch
+```
+=QUERY(
+  FILTER(Form_Responses[WoT branch]; Form_Responses[WoT branch] <> "");
+  "select Col1, count(Col1)
+   group by Col1
+   order by Col1 desc
+   label Col1 '', count(Col1) ''";
+  0
+)
+```
