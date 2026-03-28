@@ -28,18 +28,6 @@ const Home = ({mods_count, setTab}) => {
 						</div>
 						<div className="row" style={{marginTop: "1.5rem", fontSize: "1.2em"}}>
 							<Reveal delay={6}>
-								<a className="button shine" href="https://wgmods.net/7156/" target="_blank">
-									<i className="fa-solid fa-globe"></i>
-									<span>WGmods</span>
-								</a>
-							</Reveal>
-							<Reveal delay={8}>
-								<a className="button shine" href="https://github.com/SuperZombi/wot-modpack" target="_blank">
-									<i className="fa-brands fa-github"></i>
-									<span>GitHub</span>
-								</a>
-							</Reveal>
-							<Reveal delay={10}>
 								<a className="button shine" href="https://github.com/SuperZombi/wot-modpack/releases/latest/download/Web.Modpack.exe">
 									<i className="fa-solid fa-circle-down"></i>
 									<span><LANG id="download_button"/></span>

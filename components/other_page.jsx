@@ -39,13 +39,25 @@ const OtherPage = ({showHiddenMods, setShowHiddenMods}) => {
 	return (
 		<React.Fragment>
 			<div className="container" align="center">
-				<label>
-					<input type="checkbox" checked={showHiddenMods}
-						onChange={e=>setShowHiddenMods(e.target.checked)}
-						style={{marginRight: "0.5em"}}
-					/>
-					<span>{<LANG id="showHiddenMods"/>}</span>
-				</label>
+				<div className="row">
+					<a className="button shine" href="https://wgmods.net/7156/" target="_blank">
+						<i className="fa-solid fa-globe"></i>
+						<span>WGmods</span>
+					</a>
+					<a className="button shine" href="https://github.com/SuperZombi/wot-modpack" target="_blank">
+						<i className="fa-brands fa-github"></i>
+						<span>GitHub</span>
+					</a>
+				</div>
+				<div className="row" style={{marginTop: "1.5rem"}}>
+					<label>
+						<input type="checkbox" checked={showHiddenMods}
+							onChange={e=>setShowHiddenMods(e.target.checked)}
+							style={{marginRight: "0.5em"}}
+						/>
+						<span>{<LANG id="showHiddenMods"/>}</span>
+					</label>
+				</div>
 			</div>
 			<div className="container line" style={{gap: "2rem"}}>
 				<div className="row">
