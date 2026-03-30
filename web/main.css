@@ -11,10 +11,12 @@ body{
 	background-attachment: fixed;
 	color-scheme: dark;
 }
+html.home-snap,
 body.home-snap{
 	scroll-snap-type: y mandatory;
 	scroll-padding-top: 5rem;
 }
+html.home-snap .card-page,
 body.home-snap .card-page{
 	scroll-snap-align: start;
 	scroll-snap-stop: always;

@@ -3,6 +3,53 @@ const Home = ({mods_count, setTab}) => {
 	React.useEffect(() => {
 		loadStatsPage("342255871", data=>setTotalInstalls(Math.max(0, data.length-1)))
 	}, [])
+	React.useEffect(() => {
+		let snapTimeout = null
+		let isAutoSnapping = false
+		const getSnapSections = () => Array.from(document.querySelectorAll(".card-page"))
+		const getSnapOffset = () => {
+			const headerHeight = document.querySelector("header")?.getBoundingClientRect().height || 0
+			return headerHeight + 16
+		}
+		const getNearestTarget = () => {
+			const sections = getSnapSections()
+			if (!sections.length) return null
+			const scrollY = window.scrollY
+			const offset = getSnapOffset()
+			let nearest = sections[0]
+			let minDistance = Number.POSITIVE_INFINITY
+			for (const section of sections) {
+				const targetY = Math.max(0, section.offsetTop - offset)
+				const distance = Math.abs(targetY - scrollY)
+				if (distance < minDistance) {
+					minDistance = distance
+					nearest = section
+				}
+			}
+			return nearest
+		}
+		const snapToNearest = () => {
+			if (isAutoSnapping) return
+			const nearest = getNearestTarget()
+			if (!nearest) return
+			const targetY = Math.max(0, nearest.offsetTop - getSnapOffset())
+			if (Math.abs(targetY - window.scrollY) < 8) return
+			isAutoSnapping = true
+			window.scrollTo({ top: targetY, behavior: "smooth" })
+			window.setTimeout(() => { isAutoSnapping = false }, 380)
+		}
+		const scheduleSnap = () => {
+			if (snapTimeout) window.clearTimeout(snapTimeout)
+			snapTimeout = window.setTimeout(snapToNearest, 90)
+		}
+		window.addEventListener("scroll", scheduleSnap, { passive: true })
+		window.addEventListener("resize", scheduleSnap, { passive: true })
+		return () => {
+			window.removeEventListener("scroll", scheduleSnap)
+			window.removeEventListener("resize", scheduleSnap)
+			if (snapTimeout) window.clearTimeout(snapTimeout)
+		}
+	}, [])
 	const features = [
 		{ icon: "fa-feather", titleKey: "featureSmallSizeTitle", descKey: "featureSmallSizeDesc" },
 		{ icon: "fa-compass-drafting", titleKey: "featureModernDesignTitle", descKey: "featureModernDesignDesc" },

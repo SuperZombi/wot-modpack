@@ -47,8 +47,12 @@ const App = () => {
 		history.replaceState(null, "", newUrl)
 	}, [selected, tab])
 	React.useEffect(() => {
+		document.documentElement.classList.toggle("home-snap", tab === "home")
 		document.body.classList.toggle("home-snap", tab === "home")
-		return () => document.body.classList.remove("home-snap")
+		return () => {
+			document.documentElement.classList.remove("home-snap")
+			document.body.classList.remove("home-snap")
+		}
 	}, [tab])
 	React.useEffect(() => {
 		if (!selected || mods.length === 0) return;
