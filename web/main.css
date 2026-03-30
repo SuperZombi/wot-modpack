@@ -11,6 +11,14 @@ body{
 	background-attachment: fixed;
 	color-scheme: dark;
 }
+body.home-snap{
+	scroll-snap-type: y mandatory;
+	scroll-padding-top: 5rem;
+}
+body.home-snap .card-page{
+	scroll-snap-align: start;
+	scroll-snap-stop: always;
+}
 #root{
 	display: flex;
 	flex-direction: column;

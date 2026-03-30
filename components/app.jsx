@@ -47,6 +47,10 @@ const App = () => {
 		history.replaceState(null, "", newUrl)
 	}, [selected, tab])
 	React.useEffect(() => {
+		document.body.classList.toggle("home-snap", tab === "home")
+		return () => document.body.classList.remove("home-snap")
+	}, [tab])
+	React.useEffect(() => {
 		if (!selected || mods.length === 0) return;
 		const mod = mods.find(m => m.id == selected);
 		if (!mod){
