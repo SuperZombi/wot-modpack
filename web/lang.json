@@ -164,6 +164,11 @@
 		"ru": "Список",
 		"uk": "Список"
 	},
+	"installsTimeline": {
+		"en": "Installations",
+		"ru": "Установки",
+		"uk": "Встановлення"
+	},
 	"loading": {
 		"en": "Loading...",
 		"ru": "Загрузка...",
