@@ -1,18 +1,22 @@
-const ModPreview = ({onClosePreview, previewData, collectFiles}) => {
+const ModPreview = ({onClosePreview, previewData, collectFiles, stats, stats_csv}) => {
 	const {lang, langData} = useApp()
 	const [isClosing, setIsClosing] = React.useState(false)
-	const [stats, setStats] = React.useState({})
 	const [currentGameVersion, setCurrentGameVersion] = React.useState("1.0.0")
 
 	React.useEffect(() => {
-		loadStatsPage("2089462923", data=>setStats(statsAsNumber(data)))
-		loadStatsPage("379781718", data=>setCurrentGameVersion(getLatestGameVersion(statsAsNumber(data))))
-	}, [])
+		setCurrentGameVersion(
+			getLatestGameVersion(
+				countByField(stats_csv, "WoT version",
+					row => row["WoT branch"] === "RELEASE"
+				)
+			)
+		)
+	}, [stats_csv])
 	
 	React.useEffect(() => {
 		document.body.style.overflow = 'hidden';
 		return ()=> document.body.style.overflow = 'unset';
-	}, []);
+	}, [])
 	const BeforeClose = _=>{
 		if (isClosing){return}
 		setIsClosing(true)

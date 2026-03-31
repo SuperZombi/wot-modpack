@@ -2,6 +2,9 @@ const App = () => {
 	const [mods, setMods] = React.useState([])
 	const [groups, setGroups] = React.useState([])
 
+	const [stats, setStats] = React.useState([])
+	const [downloadsStats, setDownloadsStats] = React.useState({})
+
 	const [showPreview, setShowPreview] = React.useState(false)
 	const [previewData, setPreviewData] = React.useState({})
 	const [selected, setSelected] = React.useState(null)
@@ -22,6 +25,12 @@ const App = () => {
 		})
 		.catch(console.error)
 	}, [])
+	React.useEffect(() => {
+		loadStatsPage(setStats)
+	}, [])
+	React.useEffect(() => {
+		setDownloadsStats(countBySplitField(stats, "Selected mods"))
+	}, [stats])
 
 	React.useEffect(() => {
 		const params = new URLSearchParams(window.location.search)
@@ -108,6 +117,7 @@ const App = () => {
 			{tab == "home" ? (
 				<Home
 					mods_count={mods.filter(mod => mod.title).length}
+					total_installs={stats.length}
 					setTab={setTab}
 				/>
 			) : tab == "mods" ? (
@@ -116,10 +126,11 @@ const App = () => {
 					showHidden={showHiddenMods}
 				/>
 			) : tab == "stats" ? (
-				<ModStats mods={mods} onPreview={onPreview}/>
+				<ModStats mods={mods} stats={downloadsStats} onPreview={onPreview}/>
 			) : tab == "other" ? (
 				<OtherPage
 					showHiddenMods={showHiddenMods} setShowHiddenMods={setShowHiddenMods}
+					stats={stats}
 				/>
 			) : null}
 
@@ -128,6 +139,8 @@ const App = () => {
 					onClosePreview={onClosePreview}
 					previewData={previewData}
 					collectFiles={collectFiles}
+					stats={downloadsStats}
+					stats_csv={stats}
 				/>
 			)}
 		</React.Fragment>
@@ -139,25 +152,20 @@ ReactDOM.createRoot(document.getElementById("root")).render(
 	</AppProvider>
 )
 
-const statsPageCache = new Map();
-function loadStatsPage(SHEET_ID, callback){
+function loadStatsPage(callback){
 	const DOC_ID = "1GEMJfZxjUYmQAg-cDcQ7DGNjsX6pASMp9hQ1T0tVRfo"
-	if (statsPageCache.has(SHEET_ID)) {
-		return callback(statsPageCache.get(SHEET_ID))
-	}
+	const SHEET_ID = "342255871"
 	fetch(`https://docs.google.com/spreadsheets/d/${DOC_ID}/export?format=csv&gid=${SHEET_ID}`)
 	.then(r=>{
 		if (!r.ok) {
 			throw new Error(`HTTP error!: ${r.status}`)
 		}
 		return r.text()
-	}).then(text=>{
-		const data = text.split("\n").map(line => line.trim().split(","))
-		statsPageCache.set(SHEET_ID, data);
-		callback(data)
+	}).then(csv=>{
+		const result = Papa.parse(csv, {
+			header: true
+		})
+		callback(result.data)
 	})
 	.catch(console.error)
-}
-function statsAsNumber(array){
-	return Object.fromEntries(array.map(([key, value]) => [key, Number(value)]))
 }

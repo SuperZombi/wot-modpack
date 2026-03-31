@@ -87,15 +87,11 @@ const Mod = ({ mod, onPreview }) => {
 		</Reveal>
 	)
 }
-const ModStats = ({mods, onPreview}) => {
-	const [stats, setStats] = React.useState({})
-	const [statsLoaded, setStatsLoaded] = React.useState(false)
+const ModStats = ({mods, stats, onPreview}) => {
+	const [statsLoaded, setStatsLoaded] = React.useState(true)
 	React.useEffect(() => {
-		loadStatsPage("2089462923", data=>{
-			setStats(statsAsNumber(data))
-			setStatsLoaded(true)
-		})
-	}, [])
+		setStatsLoaded(Object.keys(stats).length > 0)
+	}, [stats])
 
 	if (!statsLoaded){
 		return <Loader/>

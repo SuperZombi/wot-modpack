@@ -1,4 +1,4 @@
-const OtherPage = ({showHiddenMods, setShowHiddenMods}) => {
+const OtherPage = ({showHiddenMods, setShowHiddenMods, stats}) => {
 	const [langStats, setLangStats] = React.useState({})
 	const [clientStats, setClientStats] = React.useState({})
 	const [gameVersionStats, setGameVersionStats] = React.useState({})
@@ -6,11 +6,11 @@ const OtherPage = ({showHiddenMods, setShowHiddenMods}) => {
 	const {lang, langData} = useApp()
 
 	React.useEffect(_=>{
-		loadStatsPage("1884858162", data=>setLangStats(statsAsNumber(data)))
-		loadStatsPage("224300057", data=>setClientStats(statsAsNumber(data)))
-		loadStatsPage("379781718", data=>setGameVersionStats(statsAsNumber(data)))
-		loadStatsPage("871377866", data=>setLayoutStats(statsAsNumber(data)))
-	}, [])
+		setLangStats(countByField(stats, "WoT lang"))
+		setClientStats(countByField(stats, "WoT type"))
+		setGameVersionStats(countByField(stats, "WoT version", null, (a, b)=>compareVersions(b[0],a[0])))
+		setLayoutStats(countByField(stats, "Layout"))
+	}, [stats])
 
 	const capitalize = text => text.charAt(0).toUpperCase() + text.slice(1).toLowerCase()
 
@@ -116,7 +116,8 @@ const StatsChart = ({
 				}]
 			},
 			options:{
-				responsive:false,
+				responsive:true,
+				maintainAspectRatio:false,
 				indexAxis:"y",
 				plugins:{
 					legend: {
@@ -142,5 +143,35 @@ const StatsChart = ({
 		})
 		return ()=>{chart.destroy()}
 	},[data, caption])
-	return <canvas ref={canvasRef}/>
+	const rowHeight = 25
+	const height = (type === "bar") ? (Object.keys(validEntries).length * rowHeight + 60) : 300
+	return <div style={{height: height + "px"}}><canvas ref={canvasRef}/></div>
+}
+
+function countByField(data, keyField, filterFn = null, sortFn = null) {
+	const counts = data.reduce((acc, row) => {
+		if (filterFn && !filterFn(row)) return acc;
+		const key = row[keyField];
+		if (!key) return acc;
+		acc[key] = (acc[key] || 0) + 1;
+		return acc;
+	}, {})
+	return Object.fromEntries(
+		Object.entries(counts).sort(sortFn || ((a, b) => b[1] - a[1]))
+	)
+}
+function countBySplitField(data, keyField, separator = ",", filterFn = null, sortFn = null) {
+	const allValues = data.flatMap(row => {
+		if (filterFn && !filterFn(row)) return [];
+		const value = row[keyField];
+		if (!value) return [];
+		return value.split(separator).map(v => v.trim()).filter(v => v !== "");
+	})
+	const counts = allValues.reduce((acc, val) => {
+		acc[val] = (acc[val] || 0) + 1;
+		return acc;
+	}, {})
+	return Object.fromEntries(
+		Object.entries(counts).sort(sortFn || ((a, b) => b[1] - a[1]))
+	)
 }

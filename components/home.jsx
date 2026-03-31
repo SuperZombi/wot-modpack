@@ -1,8 +1,4 @@
-const Home = ({mods_count, setTab}) => {
-	const [totalInstalls, setTotalInstalls] = React.useState(0)
-	React.useEffect(() => {
-		loadStatsPage("342255871", data=>setTotalInstalls(Math.max(0, data.length-1)))
-	}, [])
+const Home = ({mods_count, total_installs, setTab}) => {
 	const features = [
 		{ icon: "fa-feather", titleKey: "featureSmallSizeTitle", descKey: "featureSmallSizeDesc" },
 		{ icon: "fa-compass-drafting", titleKey: "featureModernDesignTitle", descKey: "featureModernDesignDesc" },
@@ -22,7 +18,7 @@ const Home = ({mods_count, setTab}) => {
 							<StatCard value={mods_count} label={<LANG id="mods_count"/>}
 								delay={2} onClick={_=>setTab("mods")}
 							/>
-							<StatCard value={totalInstalls} label={<LANG id="installations"/>}
+							<StatCard value={total_installs} label={<LANG id="installations"/>}
 								delay={4} onClick={_=>setTab("other")}
 							/>
 						</div>
