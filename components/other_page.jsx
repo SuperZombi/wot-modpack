@@ -3,6 +3,7 @@ const OtherPage = ({showHiddenMods, setShowHiddenMods, stats}) => {
 	const [clientStats, setClientStats] = React.useState({})
 	const [gameVersionStats, setGameVersionStats] = React.useState({})
 	const [layoutStats, setLayoutStats] = React.useState({})
+	const [timelineStats, setTimelineStats] = React.useState({})
 	const {lang, langData} = useApp()
 
 	React.useEffect(_=>{
@@ -10,6 +11,7 @@ const OtherPage = ({showHiddenMods, setShowHiddenMods, stats}) => {
 		setClientStats(countByField(stats, "WoT type"))
 		setGameVersionStats(countByField(stats, "WoT version", null, (a, b)=>compareVersions(b[0],a[0])))
 		setLayoutStats(countByField(stats, "Layout"))
+		setTimelineStats(countByTimestamp(stats, "Отметка времени"))
 	}, [stats])
 
 	const capitalize = text => text.charAt(0).toUpperCase() + text.slice(1).toLowerCase()
@@ -85,6 +87,12 @@ const OtherPage = ({showHiddenMods, setShowHiddenMods, stats}) => {
 						nameFormatter={val=>layout_type[val] || val}
 					/>
 				</div>
+				<div className="row">
+					<TimelineChart
+						data={timelineStats}
+						caption={langData?.["installsTimeline"]?.[lang]}
+					/>
+				</div>
 			</div>
 		</React.Fragment>
 	)
@@ -148,6 +156,60 @@ const StatsChart = ({
 	return <div style={{height: height + "px"}}><canvas ref={canvasRef}/></div>
 }
 
+const TimelineChart = ({data, caption = null}) => {
+	const canvasRef = React.useRef(null)
+	const validEntries = Object.entries(data).filter(([key, value]) => key && !isNaN(Number(value)))
+	React.useEffect(()=>{
+		if (!canvasRef.current || validEntries.length === 0) { return }
+		const labels = validEntries.map(([label])=>label)
+		const values = validEntries.map(([, value])=>value)
+
+		const chart = new Chart(canvasRef.current,{
+			type:"line",
+			data:{
+				labels,
+				datasets: [{
+					label: caption,
+					data: values,
+					fill: false,
+					tension: 0.2
+				}]
+			},
+			options:{
+				responsive:true,
+				maintainAspectRatio:false,
+				plugins:{
+					title: {
+						display: caption ? true : false,
+						text: caption
+					},
+					legend: {
+						display: false
+					}
+				},
+				scales: {
+					x: {
+						ticks: {
+							maxRotation: 0,
+							autoSkip: true,
+							maxTicksLimit: 10
+						}
+					},
+					y: {
+						beginAtZero: true,
+						title: {
+							display: true,
+							text: "Count"
+						}
+					}
+				}
+			}
+		})
+		return ()=>{chart.destroy()}
+	}, [data, caption])
+	return <div style={{height: "320px", width: "100%"}}><canvas ref={canvasRef}/></div>
+}
+
 function countByField(data, keyField, filterFn = null, sortFn = null) {
 	const counts = data.reduce((acc, row) => {
 		if (filterFn && !filterFn(row)) return acc;
@@ -159,6 +221,39 @@ function countByField(data, keyField, filterFn = null, sortFn = null) {
 	return Object.fromEntries(
 		Object.entries(counts).sort(sortFn || ((a, b) => b[1] - a[1]))
 	)
+}
+
+function countByTimestamp(data, keyField) {
+	const counts = data.reduce((acc, row) => {
+		const parsedDate = parseRuTimestamp(row[keyField])
+		if (!parsedDate) return acc
+		const year = parsedDate.getUTCFullYear()
+		const month = String(parsedDate.getUTCMonth() + 1).padStart(2, "0")
+		const day = String(parsedDate.getUTCDate()).padStart(2, "0")
+		const key = `${year}-${month}-${day}`
+		acc[key] = (acc[key] || 0) + 1
+		return acc
+	}, {})
+	return Object.fromEntries(
+		Object.entries(counts).sort((a, b) => new Date(a[0]) - new Date(b[0]))
+	)
+}
+
+function parseRuTimestamp(value) {
+	const text = String(value || "").trim()
+	const match = text.match(/^(\d{2})\.(\d{2})\.(\d{4})\s+(\d{1,2}):(\d{2})(?::(\d{2}))?$/)
+	if (!match) {
+		return null
+	}
+	const [, day, month, year, hour, minute, second = "0"] = match
+	return new Date(Date.UTC(
+		Number(year),
+		Number(month) - 1,
+		Number(day),
+		Number(hour),
+		Number(minute),
+		Number(second)
+	))
 }
 function countBySplitField(data, keyField, separator = ",", filterFn = null, sortFn = null) {
 	const allValues = data.flatMap(row => {
