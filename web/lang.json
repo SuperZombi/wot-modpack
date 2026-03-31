@@ -165,9 +165,9 @@
 		"uk": "Список"
 	},
 	"installsTimeline": {
-		"en": "Installs over time",
-		"ru": "Установки по времени",
-		"uk": "Встановлення за часом"
+		"en": "Installations",
+		"ru": "Установки",
+		"uk": "Встановлення"
 	},
 	"loading": {
 		"en": "Loading...",
