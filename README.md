@@ -36,11 +36,11 @@ Supports all client versions (including CT and SB)
 This modpack automatically collects **anonymous statistics** that includes:
 - List of selected mods.
 - Modpack version.
-- WoT version.
-- Client type (Steam or WGC).
-- Client language.
-- WoT realm (EU/NA/ASIA).
-- WoT branch (Release/CT/ST/SB).
+- Game version.
+- Game type (Steam or WGC).
+- Game language.
+- Game realm (EU/NA/ASIA).
+- Game branch (Release/CT/ST/SB).
 
 **No personal data is collected** (username, IP address, or system information).
 
