@@ -4,7 +4,7 @@
 ### Lightweight and modern modpack for World of Tanks
 
 <p>
-    <img src="https://shields.io/badge/version-2.3.2-blue">&ensp;
+    <img src="https://shields.io/badge/version-2.4.0-blue">&ensp;
     <a href="https://superzombi.github.io/wot-modpack/"><img src="https://shields.io/badge/🌐-Website-598dbf"></a>&ensp;
     <a href="https://wgmods.net/7156/"><img src="https://shields.io/badge/⇩-WGmods-f9b723"></a>&ensp;
     <a href="#donate"><img src="https://shields.io/badge/💲-Support_the_Project-2ea043"></a>
