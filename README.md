@@ -42,8 +42,7 @@ This modpack automatically collects **anonymous statistics** that includes:
 - WoT realm (EU/NA/ASIA).
 - WoT branch (Release/CT/ST/SB).
 
-The collected data is used **only for ranking mods by popularity**!
-- **No personal data** (such as username, IP address, or system information).   
+**No personal data is collected** (username, IP address, or system information).
 
 By using this modpack, you agree to this data collection.
 <hr>
