@@ -9,9 +9,19 @@ const ModsTab = ({
 	const [modPreview, setPreview] = React.useState(null)
 	const [displayPreview, setDisplayPreview] = React.useState(false)
 
-	const { language, langData, modsLayout, setModsLayout } = useApp()
+	const {
+		language, langData,
+		modsLayout, setModsLayout,
+		layoutTooltip, setLayoutTooltip
+	} = useApp()
 	const audioRef = React.useRef(null)
 	const [imageLoaded, setImageLoaded] = React.useState(false)
+
+	const [needToShowTooltip, setNeedToShowTooltip] = React.useState(layoutTooltip)
+	const tooltipOnClick = () => {
+		setNeedToShowTooltip(false)
+		setLayoutTooltip(false)
+	}
 
 	React.useEffect(() => {
 		const audio = audioRef.current
@@ -73,6 +83,11 @@ const ModsTab = ({
 		reader.readAsText(droppedFile)
 	}
 
+	const layoutButtonStyle = {
+		display: "flex",
+		boxShadow: (needToShowTooltip && modsLayout == "list") ? "0 0 10px orange" : null
+	}
+
 	return (
 		<React.Fragment>
 			{failedToLoadModsInfo ? (
@@ -101,17 +116,23 @@ const ModsTab = ({
 									value={search}
 									onChange={e => setSearch(e.target.value)}
 								/>
-								<Button style={{display: "flex"}}
-									onClick={_=>setModsLayout(prev=>prev=="grid"?"list":"grid")}
-									tooltip={modsLayout=="grid"?langData["list_view"]:langData["grid_view"]}
-									className="tooltip-left"
+								<div tooltip={
+									(needToShowTooltip && modsLayout == "list")?langData["layout_tooltip"]:null
+								} className="tooltip-bottom tooltip-show"
+									onClick={tooltipOnClick}
 								>
-									{modsLayout == "grid" ? (
-										<img src="images/list.svg" draggable={false} height="20"/>
-									) : (
-										<img src="images/grid.svg" draggable={false} height="20"/>
-									)}
-								</Button>
+									<Button style={layoutButtonStyle}
+										onClick={_=>setModsLayout(prev=>prev=="grid"?"list":"grid")}
+										tooltip={modsLayout=="grid"?langData["list_view"]:langData["grid_view"]}
+										className="tooltip-left"
+									>
+										{modsLayout == "grid" ? (
+											<img src="images/list.svg" draggable={false} height="20"/>
+										) : (
+											<img src="images/grid.svg" draggable={false} height="20"/>
+										)}
+									</Button>
+								</div>
 							</div>
 							<ModList
 								mods={mods}

@@ -44,5 +44,6 @@
 	"client_is_running_error": "The client is running!<br>Please close it and try again.",
 	"delete_mods_button": "Delete mods",
 	"clear_install_button": "Clean installation",
-	"update_install_button": "Update"
+	"update_install_button": "Update",
+	"layout_tooltip": "Try Grid layout!"
 }

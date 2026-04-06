@@ -44,5 +44,6 @@
 	"client_is_running_error": "Клиент запущен!<br>Пожалуйста, закройте его и попробуйте снова.",
 	"delete_mods_button": "Удалить моды",
 	"clear_install_button": "Чистая установка",
-	"update_install_button": "Обновление"
+	"update_install_button": "Обновление",
+	"layout_tooltip": "Попробуйте вид Сеткой!"
 }

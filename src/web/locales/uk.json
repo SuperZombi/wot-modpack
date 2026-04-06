@@ -44,5 +44,6 @@
 	"client_is_running_error": "Клієнт запущений!<br>Закрийте його і спробуйте знову.",
 	"delete_mods_button": "Видалити моди",
 	"clear_install_button": "Чисте встановлення",
-	"update_install_button": "Оновлення"
+	"update_install_button": "Оновлення",
+	"layout_tooltip": "Спробуйте вид Сіткою!"
 }
