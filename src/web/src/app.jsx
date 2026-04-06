@@ -171,9 +171,8 @@ const App = () => {
 					setCachedMods={setCachedMods}
 				/>
 			)}
-
 			{ updateAvailable && <UpdatePopup onClose={_=>setUpdateAvailable(false)}/>}
-
+			
 			<div className="flex-center">
 				{page == "home" ? (
 					<HomeTab

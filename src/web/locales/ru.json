@@ -45,5 +45,8 @@
 	"delete_mods_button": "Удалить моды",
 	"clear_install_button": "Чистая установка",
 	"update_install_button": "Обновление",
-	"layout_tooltip": "Попробуйте вид Сеткой!"
+	"layout_tooltip": "Попробуйте вид Сеткой!",
+	"data_collection_title": "Уведомление о сборе данных",
+	"data_collection_description": "Этот модпак автоматически собирает:",
+	"accept": "Принять"
 }

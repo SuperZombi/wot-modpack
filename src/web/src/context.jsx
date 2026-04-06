@@ -9,6 +9,7 @@ function AppProvider({children}) {
 	const [useCache, setUseCache] = React.useState(true)
 	const [modsLayout, setModsLayout] = React.useState("list")
 	const [layoutTooltip, setLayoutTooltip] = React.useState(true)
+	const [dataCollection, setDataCollection] = React.useState(false)
 
 	React.useEffect(() => {
 		(async _=>{
@@ -27,6 +28,9 @@ function AppProvider({children}) {
 			}
 			if ("layout_tooltip" in settings){
 				setLayoutTooltip(settings["layout_tooltip"])
+			}
+			if ("data_collection" in settings){
+				setDataCollection(settings["data_collection"])
 			}
 		})()
 	}, [])
@@ -57,13 +61,19 @@ function AppProvider({children}) {
 			await eel.update_settings({"layout_tooltip": layoutTooltip})()
 		})()
 	}, [layoutTooltip])
+	React.useEffect(() => {
+		(async _=>{
+			await eel.update_settings({"data_collection": dataCollection})()
+		})()
+	}, [dataCollection])
 
 	const value = {
 		language, setLanguage, langData,
 		matchClientLang, setMatchClientLang,
 		useCache, setUseCache,
 		modsLayout, setModsLayout,
-		layoutTooltip, setLayoutTooltip
+		layoutTooltip, setLayoutTooltip,
+		dataCollection, setDataCollection
 	}
 	return (
 		<AppContext.Provider value={value}>

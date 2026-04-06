@@ -45,5 +45,8 @@
 	"delete_mods_button": "Delete mods",
 	"clear_install_button": "Clean installation",
 	"update_install_button": "Update",
-	"layout_tooltip": "Try Grid layout!"
+	"layout_tooltip": "Try Grid layout!",
+	"data_collection_title": "Data Collection Notice",
+	"data_collection_description": "This modpack automatically collects:",
+	"accept": "Accept"
 }
