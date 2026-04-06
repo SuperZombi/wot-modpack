@@ -174,7 +174,7 @@ const App = () => {
 
 			{ updateAvailable && <UpdatePopup onClose={_=>setUpdateAvailable(false)}/>}
 
-			<div className="flex-center top-content">
+			<div className="flex-center">
 				{page == "home" ? (
 					<HomeTab
 						selectedClient={selectedClient}
@@ -232,7 +232,7 @@ const App = () => {
 					) :
 					page == "mods" ? (
 						<React.Fragment>
-							<div style={{display: "flex", gap: "0.5em"}}>
+							<div style={{display: "flex", gap: "0.75em"}}>
 								<BackButton onClick={_=>setPage("home")}/>
 								{mods.length > 0 && (
 									<Button onClick={resetAllSelected}>

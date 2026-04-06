@@ -74,12 +74,7 @@ const ModsTab = ({
 	}
 
 	return (
-		<div id="mods-area"
-			onDragEnter={onDragEnter}
-			onDragLeave={onDragLeave}
-			onDragOver={onDragOver}
-			onDrop={onDrop}
-		>
+		<React.Fragment>
 			{failedToLoadModsInfo ? (
 				<div id="retry_area">
 					<LANG id="mods_info_parse_fail"/>
@@ -90,7 +85,12 @@ const ModsTab = ({
 				</div>
 			) : (
 				mods.length > 0 ? (
-					<React.Fragment>
+					<div id="mods-area"
+						onDragEnter={onDragEnter}
+						onDragLeave={onDragLeave}
+						onDragOver={onDragOver}
+						onDrop={onDrop}
+					>
 						<div id="drag-area" className={drag ? "show":""}></div>
 						<div id="mods-list-area">
 							<div id="search-area">
@@ -162,11 +162,11 @@ const ModsTab = ({
 								></div>
 							</div>
 						</div>
-					</React.Fragment>
+					</div>
 				) : (
 					<Loader/>
 				)
 			)}
-		</div>
+		</React.Fragment>
 	)
 }

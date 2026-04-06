@@ -1,3 +1,7 @@
+#root{
+	padding-top: 50px;
+	padding-bottom: 60px;
+}
 header{
 	height: 50px;
 	background-image: url('/images/header.jpg');
@@ -8,6 +12,10 @@ header{
 	align-items: center;
 	padding: 0 12px;
 	user-select: none;
+	position: fixed;
+	top: 0;
+	width: 100%;
+	z-index: 2;
 }
 header img {
 	height: 30px;
@@ -22,6 +30,20 @@ header a {
 }
 header a:hover{
 	text-decoration: underline;
+}
+
+.bottom-buttons{
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 0 1em;
+	height: 60px;
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+	z-index: 2;
+	background: rgb(17, 17, 17, 0.5);
+	backdrop-filter: blur(10px);
 }
 
 #setting_button{
@@ -40,15 +62,18 @@ header a:hover{
 	width: 100%;
 	height: 100%;
 }
+#mods-list{
+	margin-top: -5px;
+}
 #mods-list-area{
-	overflow: auto;
-	scrollbar-width: thin;
-	color-scheme: dark;
+	position: relative;
 }
 .mods-grid {
 	display: grid !important;
 	grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
 	grid-auto-rows: 125px;
+	padding: 0.5rem !important;
+	gap: 0.5rem !important;
 }
 .mods-grid .mod{
 	display: grid;
@@ -114,6 +139,9 @@ header a:hover{
 	overflow: auto;
 	scrollbar-width: thin;
 	color-scheme: dark;
+	height: calc(100dvh - 50px - 60px);
+	position: sticky;
+	top: 50px;
 }
 #mod-preview.show{
 	opacity: 1;
@@ -203,8 +231,11 @@ ul{
 #search-area{
 	display: flex;
 	padding: 5px;
-	padding-bottom: 0;
 	gap: 5px;
+	position: sticky;
+	top: 50px;
+	z-index: 1;
+	background: #111;
 }
 
 #retry_area{
@@ -223,17 +254,6 @@ ul{
 	display: flex;
 	align-items: center;
 	gap: 5px;
-}
-
-.top-content{
-	height: calc(100vh - 115px);
-	margin-bottom: 15px;
-	justify-content: flex-start !important;
-}
-.bottom-buttons{
-	display: flex;
-	justify-content: space-between;
-	padding: 0 20px;
 }
 
 .mods-install-list{
@@ -297,17 +317,7 @@ ul{
 	opacity: 0.75;
 }
 .links img{
-	height: 60px;
-}
-
-#settings .popup_wraper{
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	gap: 1em;
-}
-#settings .popup_wraper hr{
-	width: 100%;
+	height: 55px;
 }
 
 .file_size{
@@ -341,7 +351,7 @@ ul{
 	position: absolute;
 	inset: 0;
 	backdrop-filter: blur(2px);
-	z-index: 1;
+	z-index: 2;
 	visibility: hidden;
 	opacity: 0;
 	transition: 0.15s;

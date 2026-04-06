@@ -51,6 +51,7 @@ svg{
 	position: fixed;
 	inset: 0;
 	background: rgb(0, 0, 0, 0.5);
+	z-index: 3;
 }
 .hide{
 	display: none !important;
@@ -228,11 +229,11 @@ label{
 .details > .collapse > .wrapper > .content {
 	display: flex;
 	flex-direction: column;
-	gap: 0.5rem;
-	padding: 0.5rem;
+	gap: 1rem;
+	padding: 0.75rem;
 }
 .details.category > .collapse > .wrapper > .content {
-	padding-top: 1px;
+	padding-top: 0.25rem;
 }
 .details .collapse .wrapper{
 	min-height: 0;
@@ -280,7 +281,9 @@ label{
 
 
 .group .content {
-	margin-left: 1em;
+	margin-left: 0.5rem;
+	padding-top: 1rem !important;
+	padding-bottom: 0.25rem !important;
 }
 .group .summary::after{
 	content: '⯆';
@@ -291,7 +294,8 @@ label{
 	position: fixed;
 	inset: 0;
 	background: rgb(0, 0, 0, 0.5);
-	z-index: 2;
+	backdrop-filter: blur(5px);
+	z-index: 3;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -304,10 +308,11 @@ label{
 	opacity: 1;
 }
 .popup .popup_wraper{
+	position: relative;
 	width: fit-content;
 	min-width: 400px;
-	background: #111;
-	filter: drop-shadow(0 0 6px #666);
+	background: rgb(12, 12, 12, 0.5);
+	box-shadow: 0 0 10px #666;
 	border-radius: 12px;
 	padding: 20px;
 }
@@ -320,6 +325,16 @@ label{
 	user-select: none;
 }
 
+hr{
+	border: 1px solid #666;
+}
+section{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 1rem;
+	padding: 0.5rem;
+}
 
 .loader {
 	position: relative;
