@@ -466,6 +466,7 @@ table td, table caption{
 	object-fit: cover;
 	pointer-events: none;
 	will-change: transform;
+	filter: drop-shadow(0 5px 10px rgb(0, 0, 0, 0.5));
 }
 .parallax-bg{
 	width: 130%;
