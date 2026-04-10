@@ -48,5 +48,11 @@
 	"layout_tooltip": "Спробуйте вид Сіткою!",
 	"data_collection_title": "Повідомлення про збір даних",
 	"data_collection_description": "Цей модпак автоматично збирає:",
-	"accept": "Прийняти"
+	"accept": "Прийняти",
+	"show_install_logs": "Показати логи встановлення",
+	"hide_install_logs": "Сховати логи встановлення",
+	"log_level": "Рівень",
+	"copy_logs": "Копировать",
+	"copied": "Скопійовано",
+	"no_logs_for_selected_level": "Немає логів для вибраного рівня."
 }

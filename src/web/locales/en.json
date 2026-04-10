@@ -48,5 +48,11 @@
 	"layout_tooltip": "Try Grid layout!",
 	"data_collection_title": "Data Collection Notice",
 	"data_collection_description": "This modpack automatically collects:",
-	"accept": "Accept"
+	"accept": "Accept",
+	"show_install_logs": "Show install logs",
+	"hide_install_logs": "Hide install logs",
+	"log_level": "Log level",
+	"copy_logs": "Копировать",
+	"copied": "Copied",
+	"no_logs_for_selected_level": "No logs for selected level."
 }

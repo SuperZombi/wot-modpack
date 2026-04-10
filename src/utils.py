@@ -82,13 +82,18 @@ class ClientType(Enum):
 	STEAM = "steam"
 
 class Client:
-	def __init__(self, path, use_cache=True):
+	def __init__(self, path, use_cache=True, logger=None):
 		self.path = path
 		self.use_cache = use_cache
+		self.logger = logger
 		self.exe = "WorldOfTanks.exe"
 		appdata = os.path.join(os.getenv('APPDATA'), 'Wargaming.net', 'WorldOfTanks')
 		self.appdata = appdata if os.path.exists(appdata) else None
 		self.installed = []
+
+	def _log(self, message, level="debug"):
+		if callable(self.logger):
+			self.logger(message, level=level)
 
 	@property
 	def is_running(self):
@@ -188,6 +193,7 @@ class Client:
 		return el.text.strip() if el is not None else None
 
 	def delete_mods(self, delete_configs=False, delete_logs=True):
+		self._log("Client.delete_mods started.")
 		self.installed = []
 		mods_f = os.path.join(self.path, "mods")
 		res_mods = os.path.join(self.path, "res_mods")
@@ -207,12 +213,24 @@ class Client:
 		if delete_logs:
 			logfile = os.path.join(self.path, "python.log")
 			if os.path.exists(logfile): os.remove(logfile)
+		self._log("Client.delete_mods finished.")
 
 	def install_mod(self, mod, on_progress=None):
 		if not mod.id in self.installed:
-			result = mod.install(self, on_progress=on_progress, use_cache=self.use_cache)
+			self._log(f"Client.install_mod started: {mod.id}")
+			result = mod.install(
+				self,
+				on_progress=on_progress,
+				use_cache=self.use_cache,
+				logger=self.logger
+			)
 			if result: self.installed.append(mod.id)
+			self._log(
+				f"Client.install_mod finished: {mod.id} ({'ok' if result else 'failed'})",
+				level="debug" if result else "warn"
+			)
 			return result
+		self._log(f"Client.install_mod skipped (already installed): {mod.id}", level="debug")
 		return True
 
 
@@ -225,18 +243,27 @@ class Mod:
 	def __str__(self): return f'<Mod "{self.id}">'
 	def __repr__(self): return str(self)
 
-	def install(self, client, on_progress=None, use_cache=True):
+	def install(self, client, on_progress=None, use_cache=True, logger=None):
+		def log(message, level="debug"):
+			if callable(logger):
+				logger(message, level=level)
+
+		log(f"Mod.install started: {self.id}", level="info")
 		if self.requires and len(self.requires) > 0:
 			for mod in self.requires:
+				log(f"Installing required mod for {self.id}: {mod.id}", level="debug")
 				client.install_mod(mod)
 
 		write_cache = True
 		if use_cache:
+			log(f"Cache enabled for mod: {self.id}", level="debug")
 			self.init_cache()
 			have_cache = self.load_cache_files()
 			if have_cache:
+				log(f"Using cache for mod: {self.id}", level="info")
 				write_cache = False
 			else:
+				log(f"Cache miss for mod: {self.id}", level="debug")
 				self.delete_from_cache()
 
 		cache_files = []
@@ -253,8 +280,11 @@ class Mod:
 			os.makedirs(target_map[file["dest"]], exist_ok=True)
 
 			if file["url"].startswith("http"):
+				log(f"Downloading file for {self.id}: {file['url']}", level="info")
 				file_io = self.download(file["url"], on_progress=on_progress)
-				if not file_io: return False
+				if not file_io:
+					log(f"Download failed for {self.id}: {file['url']}", level="error")
+					return False
 
 				if file["url"].endswith(".zip"):
 					with zipfile.ZipFile(file_io, 'r') as zip_ref:
@@ -274,7 +304,10 @@ class Mod:
 						"url": target_file
 					})
 			else:
-				if not os.path.exists(file["url"]): return False
+				log(f"Using local file for {self.id}: {file['url']}", level="debug")
+				if not os.path.exists(file["url"]):
+					log(f"Local file not found for {self.id}: {file['url']}", level="error")
+					return False
 				if file["url"].endswith(".zip"):
 					with zipfile.ZipFile(file["url"], 'r') as zip_ref:
 						zip_ref.extractall(target_map[file["dest"]])
@@ -287,7 +320,9 @@ class Mod:
 				"ver": self.version,
 				"files": cache_files
 			}])
+			log(f"Cache updated for mod: {self.id}", level="debug")
 
+		log(f"Mod.install finished: {self.id}", level="info")
 		return True
 
 	def download(self, url, on_progress=None):

@@ -2,6 +2,8 @@ const FinishTab = ({
 	fails, mods, selectedMods
 }) => {
 	const { language, langData } = useApp()
+	const [isLogsOpen, setIsLogsOpen] = React.useState(false)
+
 	function getKnownError(){
 		if (fails.filter(x=>x.error).length > 0){
 			let known_error = fails.find(x =>
@@ -37,11 +39,14 @@ const FinishTab = ({
 						</React.Fragment>
 					) : null}
 					<br/>
-					<Button href="https://github.com/SuperZombi/wot-modpack/issues" style={{fontSize: "12px"}}>
-						<LANG id="report_bug"/>
-					</Button>
-				</React.Fragment>
-			) : (
+						<Button href="https://github.com/SuperZombi/wot-modpack/issues" style={{fontSize: "12px"}}>
+							<LANG id="report_bug"/>
+						</Button>
+						<div style={{marginTop: "8px"}}>
+							<InstallLogsViewer onVisibilityChange={setIsLogsOpen}/>
+						</div>
+					</React.Fragment>
+				) : (
 				<React.Fragment>
 					<br/>
 					<h3>
@@ -63,9 +68,12 @@ const FinishTab = ({
 							<img src="/images/donatello_logo.png" draggable={false}/>
 						</a>
 					</div>
-					<Gallery/>
-				</React.Fragment>
-			)}
+						<div style={{marginTop: "16px"}}>
+							<InstallLogsViewer onVisibilityChange={setIsLogsOpen}/>
+						</div>
+						{!isLogsOpen && <Gallery/>}
+					</React.Fragment>
+				)}
 		</div>
 	)
 }
