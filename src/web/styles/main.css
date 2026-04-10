@@ -300,18 +300,26 @@ ul{
 	max-width: 800px;
 }
 
-.install-log-levels{
+.install-log-controls{
 	display: flex;
 	gap: 12px;
 	flex-wrap: wrap;
 	justify-content: flex-start;
+	align-items: center;
 }
-.install-log-levels label{
+.install-log-controls label{
 	display: inline-flex;
 	align-items: center;
 	gap: 6px;
 	font-size: 12px;
 	user-select: none;
+}
+.install-log-controls select{
+	background: #111;
+	color: #eee;
+	border: 1px solid #555;
+	border-radius: 4px;
+	padding: 3px 6px;
 }
 .mods-install-list .mod-item:hover{
 	background: rgb(255, 255, 255, 0.1);

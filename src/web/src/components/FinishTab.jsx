@@ -2,31 +2,6 @@ const FinishTab = ({
 	fails, mods, selectedMods
 }) => {
 	const { language, langData } = useApp()
-	const [showLogs, setShowLogs] = React.useState(false)
-	const [logs, setLogs] = React.useState([])
-	const [levels, setLevels] = React.useState({
-		info: true,
-		warn: true,
-		error: true,
-		debug: false
-	})
-
-	const toggleLogs = async _ => {
-		if (!showLogs && logs.length === 0){
-			const installLogs = await eel.get_install_logs()()
-			setLogs(installLogs || [])
-		}
-		setShowLogs(prev => !prev)
-	}
-	const toggleLevel = level => {
-		setLevels(prev => ({
-			...prev,
-			[level]: !prev[level]
-		}))
-	}
-
-	const visibleLogs = logs.filter(log => levels[log.level] ?? true)
-	const levelItems = ["info", "warn", "error", "debug"]
 
 	function getKnownError(){
 		if (fails.filter(x=>x.error).length > 0){
@@ -66,28 +41,9 @@ const FinishTab = ({
 					<Button href="https://github.com/SuperZombi/wot-modpack/issues" style={{fontSize: "12px"}}>
 						<LANG id="report_bug"/>
 					</Button>
-					<Button onClick={toggleLogs} style={{marginLeft: "10px", fontSize: "12px"}}>
-						{showLogs ? "Hide install logs" : "Show install logs"}
-					</Button>
-					{showLogs && (
-						<div className="install-logs-area">
-							<div className="install-log-levels">
-								{levelItems.map(level => (
-									<label key={level}>
-										<input
-											type="checkbox"
-											checked={levels[level]}
-											onChange={_=>toggleLevel(level)}
-										/>
-										<span>{level.toUpperCase()}</span>
-									</label>
-								))}
-							</div>
-							<pre className="install-logs">
-								{visibleLogs.map(log=>`[${log.level.toUpperCase()}] ${log.message}`).join("\n") || "No logs for selected levels."}
-							</pre>
-						</div>
-					)}
+					<div style={{marginTop: "8px"}}>
+						<InstallLogsViewer/>
+					</div>
 				</React.Fragment>
 			) : (
 				<React.Fragment>
@@ -111,28 +67,9 @@ const FinishTab = ({
 							<img src="/images/donatello_logo.png" draggable={false}/>
 						</a>
 					</div>
-					<Button onClick={toggleLogs} style={{fontSize: "12px", marginTop: "16px"}}>
-						{showLogs ? "Hide install logs" : "Show install logs"}
-					</Button>
-					{showLogs && (
-						<div className="install-logs-area">
-							<div className="install-log-levels">
-								{levelItems.map(level => (
-									<label key={level}>
-										<input
-											type="checkbox"
-											checked={levels[level]}
-											onChange={_=>toggleLevel(level)}
-										/>
-										<span>{level.toUpperCase()}</span>
-									</label>
-								))}
-							</div>
-							<pre className="install-logs">
-								{visibleLogs.map(log=>`[${log.level.toUpperCase()}] ${log.message}`).join("\n") || "No logs for selected levels."}
-							</pre>
-						</div>
-					)}
+					<div style={{marginTop: "16px"}}>
+						<InstallLogsViewer/>
+					</div>
 					<Gallery/>
 				</React.Fragment>
 			)}
