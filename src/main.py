@@ -138,7 +138,7 @@ def _main_install_worker(client_path, args, mods):
 	if client.is_running:
 		add_install_log("Installation stopped: client is currently running.", level="error")
 		fails.append({"error": "client_is_running_error"})
-		return fails
+		return eel.on_install_finish(fails)()
 	if args.get("delete_mods", False):
 		add_install_log(
 			f"Deleting existing mods (delete_configs={args.get('delete_configs', False)}).",
@@ -150,7 +150,7 @@ def _main_install_worker(client_path, args, mods):
 		except Exception as e:
 			add_install_log(f"Failed while deleting mods: {e}", level="error")
 			fails.append({"error": str(e)})
-			return fails
+			return eel.on_install_finish(fails)()
 	
 	if len(mods) > 0:
 		mods_arr = list(filter(bool, map(json_to_mod, mods)))
@@ -173,8 +173,7 @@ def _main_install_worker(client_path, args, mods):
 					add_install_log(f"Mod installation completed: {mod.id}", level="info")
 			except Exception as e:
 				add_install_log(f"Exception during mod installation ({mod.id}): {e}", level="error")
-				fails.append({"error": str(e)})
-				return fails
+				fails.append({"mod": mod.id})
 
 		add_install_log("Sending telemetry for completed installation.", level="debug")
 		telemetry.send_telemetry(
