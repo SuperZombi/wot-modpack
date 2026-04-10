@@ -1,14 +1,9 @@
-:root{
-	--header-height: 50px;
-	--footer-height: 60px;
-}
-
 #root{
-	padding-top: var(--header-height);
-	padding-bottom: var(--footer-height);
+	padding-top: 50px;
+	padding-bottom: 60px;
 }
 header{
-	height: var(--header-height);
+	height: 50px;
 	background-image: url('/images/header.jpg');
 	background-repeat: no-repeat;
 	background-size: cover;
@@ -42,7 +37,7 @@ header a:hover{
 	align-items: center;
 	justify-content: space-between;
 	padding: 0 1em;
-	height: var(--footer-height);
+	height: 60px;
 	position: fixed;
 	bottom: 0;
 	width: 100%;
@@ -144,9 +139,9 @@ header a:hover{
 	overflow: auto;
 	scrollbar-width: thin;
 	color-scheme: dark;
-	height: calc(100dvh - var(--header-height) - var(--footer-height));
+	height: calc(100dvh - 50px - 60px);
 	position: sticky;
-	top: var(--header-height);
+	top: 50px;
 }
 #mod-preview.show{
 	opacity: 1;
@@ -238,7 +233,7 @@ ul{
 	padding: 5px;
 	gap: 5px;
 	position: sticky;
-	top: var(--header-height);
+	top: 50px;
 	z-index: 1;
 	background: #111;
 }
@@ -284,18 +279,6 @@ ul{
 	align-items: center;
 }
 
-.finish-tab{
-	height: calc(100dvh - var(--header-height) - var(--footer-height));
-	width: 100%;
-	display: flex;
-	flex-direction: column;
-}
-.finish-tab-content{
-	flex: 1 1 auto;
-	min-height: 0;
-	overflow: auto;
-}
-
 .install-logs{
 	margin-top: 12px;
 	max-width: 640px;
@@ -303,7 +286,7 @@ ul{
 	color-scheme: dark;
 	flex: 1 1 auto;
 	min-height: 100px;
-	max-height: calc(100dvh - var(--header-height) - var(--footer-height) - 150px);
+	max-height: calc(100dvh - 260px);
 	padding: 10px;
 	text-align: left;
 	white-space: pre-wrap;
@@ -321,7 +304,7 @@ ul{
 	display: flex;
 	flex-direction: column;
 	min-height: 0;
-	max-height: calc(100dvh - var(--header-height) - var(--footer-height) - 150px);
+	max-height: calc(100dvh - 260px);
 }
 
 .install-log-controls{
