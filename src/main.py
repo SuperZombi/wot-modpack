@@ -9,6 +9,7 @@ from tkinter.filedialog import askdirectory
 from utils import *
 
 MODS_DATA = {}
+INSTALL_LOGS = []
 __version__ = "2.4.0"
 @eel.expose
 def app_version(): return __version__
@@ -86,6 +87,13 @@ def set_mods_data(data):
 	global MODS_DATA
 	MODS_DATA = data
 
+@eel.expose
+def get_install_logs():
+	return INSTALL_LOGS
+
+def add_install_log(message):
+	INSTALL_LOGS.append(message)
+
 
 def download_progress(current, total):
 	eel.installing_progress({"download_progress":round(current / total * 100)})
@@ -114,23 +122,38 @@ def main_install(path, args, mods):
 	).start()
 
 def _main_install_worker(client_path, args, mods):
+	global INSTALL_LOGS
+	INSTALL_LOGS = []
 	fails = []
-	client = Client(client_path, use_cache=SETTINGS.get("use_cache", True))
+	add_install_log(f"Install worker started for client: {client_path}")
+	client = Client(
+		client_path,
+		use_cache=SETTINGS.get("use_cache", True),
+		logger=add_install_log
+	)
 
 	if client.is_running:
+		add_install_log("Installation stopped: client is currently running.")
 		fails.append({"error": "client_is_running_error"})
 		return fails
 	if args.get("delete_mods", False):
+		add_install_log(
+			f"Deleting existing mods (delete_configs={args.get('delete_configs', False)})."
+		)
 		try:
 			client.delete_mods(args.get("delete_configs", False))
+			add_install_log("Existing mods deletion completed.")
 		except Exception as e:
+			add_install_log(f"Failed while deleting mods: {e}")
 			fails.append({"error": str(e)})
 			return fails
 	
 	if len(mods) > 0:
 		mods_arr = list(filter(bool, map(json_to_mod, mods)))
 		total_mods = len(mods_arr)
+		add_install_log(f"Preparing to install {total_mods} mod(s).")
 		for index, mod in enumerate(mods_arr):
+			add_install_log(f"Installing mod {index + 1}/{total_mods}: {mod.id}")
 			eel.installing_progress({
 				"id": mod.id,
 				"current": index,
@@ -139,11 +162,17 @@ def _main_install_worker(client_path, args, mods):
 			})
 			try:
 				result = client.install_mod(mod, on_progress=download_progress)
-				if not result: fails.append({"mod": mod.id})
+				if not result:
+					add_install_log(f"Mod installation returned failure: {mod.id}")
+					fails.append({"mod": mod.id})
+				else:
+					add_install_log(f"Mod installation completed: {mod.id}")
 			except Exception as e:
+				add_install_log(f"Exception during mod installation ({mod.id}): {e}")
 				fails.append({"error": str(e)})
 				return fails
 
+		add_install_log("Sending telemetry for completed installation.")
 		telemetry.send_telemetry(
 			mod_ids=mods,
 			modpack_ver=__version__,
@@ -156,11 +185,13 @@ def _main_install_worker(client_path, args, mods):
 		)
 
 	if args.get("save_selected_mods", True):
+		add_install_log("Saving selected mods and client path to settings.")
 		update_settings({
 			"client": client_path,
 			"mods": mods
 		})
 
+	add_install_log(f"Install worker finished with {len(fails)} failure(s).")
 	eel.on_install_finish(fails)()
 
 

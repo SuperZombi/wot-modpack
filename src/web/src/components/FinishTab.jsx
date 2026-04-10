@@ -2,6 +2,17 @@ const FinishTab = ({
 	fails, mods, selectedMods
 }) => {
 	const { language, langData } = useApp()
+	const [showLogs, setShowLogs] = React.useState(false)
+	const [logs, setLogs] = React.useState([])
+
+	const toggleLogs = async _ => {
+		if (!showLogs && logs.length === 0){
+			const installLogs = await eel.get_install_logs()()
+			setLogs(installLogs || [])
+		}
+		setShowLogs(prev => !prev)
+	}
+
 	function getKnownError(){
 		if (fails.filter(x=>x.error).length > 0){
 			let known_error = fails.find(x =>
@@ -40,6 +51,12 @@ const FinishTab = ({
 					<Button href="https://github.com/SuperZombi/wot-modpack/issues" style={{fontSize: "12px"}}>
 						<LANG id="report_bug"/>
 					</Button>
+					<Button onClick={toggleLogs} style={{marginLeft: "10px", fontSize: "12px"}}>
+						{showLogs ? "Hide install logs" : "Show install logs"}
+					</Button>
+					{showLogs && (
+						<pre className="install-logs">{logs.join("\n") || "No logs."}</pre>
+					)}
 				</React.Fragment>
 			) : (
 				<React.Fragment>
@@ -63,6 +80,12 @@ const FinishTab = ({
 							<img src="/images/donatello_logo.png" draggable={false}/>
 						</a>
 					</div>
+					<Button onClick={toggleLogs} style={{fontSize: "12px", marginTop: "16px"}}>
+						{showLogs ? "Hide install logs" : "Show install logs"}
+					</Button>
+					{showLogs && (
+						<pre className="install-logs">{logs.join("\n") || "No logs."}</pre>
+					)}
 					<Gallery/>
 				</React.Fragment>
 			)}
