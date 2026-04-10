@@ -16,10 +16,11 @@ const FinishTab = ({
 	const system_errors = fails.filter(x=>x.error)
 	const mods_errors = fails.filter(x=>x.mod)
 	return (
-		<div>
-			{ fails.length > 0 ? (
-				<React.Fragment>
-					<br/>
+		<div className="finish-tab">
+			<div className="finish-tab-content">
+				{ fails.length > 0 ? (
+					<React.Fragment>
+						<br/>
 					{known_error ? (
 						<h3 style={{color: "red"}} dangerouslySetInnerHTML={{ __html: known_error }}></h3>
 					) : system_errors.length > 0 ? (
@@ -47,7 +48,7 @@ const FinishTab = ({
 						</div>
 					</React.Fragment>
 				) : (
-				<React.Fragment>
+					<React.Fragment>
 					<br/>
 					<h3>
 						{selectedMods.length > 0 ? (
@@ -74,6 +75,7 @@ const FinishTab = ({
 						{!isLogsOpen && <Gallery/>}
 					</React.Fragment>
 				)}
+			</div>
 		</div>
 	)
 }
