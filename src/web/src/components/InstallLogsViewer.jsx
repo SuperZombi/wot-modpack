@@ -6,7 +6,7 @@ const InstallLogsViewer = () => {
 
 	const levelsOrder = ["debug", "info", "warn", "error"]
 	const selectedIndex = levelsOrder.indexOf(selectedLevel)
-	const visibleLevels = levelsOrder.slice(0, selectedIndex + 1)
+	const visibleLevels = levelsOrder.slice(selectedIndex)
 	const visibleLogs = logs.filter(log => visibleLevels.includes(log.level))
 	const logsText = visibleLogs.map(log => `[${log.level.toUpperCase()}] ${log.message}`).join("\n")
 
@@ -46,15 +46,15 @@ const InstallLogsViewer = () => {
 					<div className="install-log-controls">
 						<label>
 							<span>Log level:</span>
-							<select
-								value={selectedLevel}
-								onChange={e=>setSelectedLevel(e.target.value)}
-							>
-								<option value="debug">DEBUG (+ info, warn, error)</option>
-								<option value="info">INFO (+ warn, error)</option>
-								<option value="warn">WARN (+ error)</option>
-								<option value="error">ERROR</option>
-							</select>
+								<select
+									value={selectedLevel}
+									onChange={e=>setSelectedLevel(e.target.value)}
+								>
+									<option value="debug">DEBUG</option>
+									<option value="info">INFO</option>
+									<option value="warn">WARN</option>
+									<option value="error">ERROR</option>
+								</select>
 						</label>
 						<Button onClick={copyLogs} style={{fontSize: "12px"}}>
 							{copied ? "Copied" : "Copy logs"}
