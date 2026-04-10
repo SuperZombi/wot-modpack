@@ -1,6 +1,7 @@
 const InstallLogsViewer = ({
 	onVisibilityChange = null
 }) => {
+	const { langData } = useApp()
 	const [logs, setLogs] = React.useState([])
 	const [showLogs, setShowLogs] = React.useState(false)
 	const [selectedLevel, setSelectedLevel] = React.useState("info")
@@ -27,7 +28,7 @@ const InstallLogsViewer = ({
 	}, [showLogs])
 
 	const copyLogs = async _ => {
-		const textToCopy = logsText || "No logs for selected level."
+		const textToCopy = logsText || (langData?.no_logs_for_selected_level || "No logs for selected level.")
 		try {
 			await navigator.clipboard.writeText(textToCopy)
 			setCopied(true)
@@ -45,18 +46,18 @@ const InstallLogsViewer = ({
 	}
 
 	return (
-		<div className="install-logs-root">
-			<Button onClick={toggleLogs} style={{fontSize: "12px"}}>
-				{showLogs ? "Hide install logs" : "Show install logs"}
-			</Button>
-			{showLogs && (
-				<div className="install-logs-area">
-					<div className="install-log-controls">
-						<label>
-							<span>Log level:</span>
-								<select
-									value={selectedLevel}
-									onChange={e=>setSelectedLevel(e.target.value)}
+			<div className="install-logs-root">
+				<Button onClick={toggleLogs} style={{fontSize: "12px"}}>
+					{showLogs ? <LANG id="hide_install_logs"/> : <LANG id="show_install_logs"/>}
+				</Button>
+				{showLogs && (
+					<div className="install-logs-area">
+						<div className="install-log-controls">
+							<label>
+								<span><LANG id="log_level"/>:</span>
+									<select
+										value={selectedLevel}
+										onChange={e=>setSelectedLevel(e.target.value)}
 								>
 									<option value="debug">DEBUG</option>
 									<option value="info">INFO</option>
@@ -64,15 +65,15 @@ const InstallLogsViewer = ({
 									<option value="error">ERROR</option>
 								</select>
 						</label>
-						<Button onClick={copyLogs} style={{fontSize: "12px"}}>
-							{copied ? "Copied" : "Copy logs"}
-						</Button>
+							<Button onClick={copyLogs} style={{fontSize: "12px", marginLeft: "auto"}}>
+								{copied ? <LANG id="copied"/> : <LANG id="copy_logs"/>}
+							</Button>
+						</div>
+						<pre className="install-logs">
+							{logsText || <LANG id="no_logs_for_selected_level"/>}
+						</pre>
 					</div>
-					<pre className="install-logs">
-						{logsText || "No logs for selected level."}
-					</pre>
-				</div>
-			)}
+				)}
 		</div>
 	)
 }
