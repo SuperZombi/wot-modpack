@@ -2,10 +2,12 @@ const InstallLogsViewer = ({
 	onVisibilityChange = null
 }) => {
 	const { langData } = useApp()
+	const logsRef = React.useRef(null)
 	const [logs, setLogs] = React.useState([])
 	const [showLogs, setShowLogs] = React.useState(false)
 	const [selectedLevel, setSelectedLevel] = React.useState("info")
 	const [copied, setCopied] = React.useState(false)
+	const [logsMaxHeight, setLogsMaxHeight] = React.useState(null)
 
 	const levelsOrder = ["debug", "info", "warn", "error"]
 	const selectedIndex = levelsOrder.indexOf(selectedLevel)
@@ -26,6 +28,31 @@ const InstallLogsViewer = ({
 			onVisibilityChange(showLogs)
 		}
 	}, [showLogs])
+
+	React.useEffect(() => {
+		if (!showLogs || !logsRef.current) return
+
+		const updateLogsMaxHeight = () => {
+			if (!logsRef.current) return
+			const top = logsRef.current.getBoundingClientRect().top
+			const available = Math.floor(window.innerHeight - top - 16)
+			setLogsMaxHeight(Math.max(120, available))
+		}
+
+		updateLogsMaxHeight()
+		window.addEventListener("resize", updateLogsMaxHeight)
+
+		let observer = null
+		if (typeof ResizeObserver !== "undefined"){
+			observer = new ResizeObserver(updateLogsMaxHeight)
+			observer.observe(document.body)
+		}
+
+		return () => {
+			window.removeEventListener("resize", updateLogsMaxHeight)
+			if (observer) observer.disconnect()
+		}
+	}, [showLogs, logs.length, selectedLevel])
 
 	const copyLogs = async _ => {
 		const textToCopy = logsText || (langData?.no_logs_for_selected_level || "No logs for selected level.")
@@ -69,7 +96,11 @@ const InstallLogsViewer = ({
 								{copied ? <LANG id="copied"/> : <LANG id="copy_logs"/>}
 							</Button>
 						</div>
-						<pre className="install-logs">
+						<pre
+							ref={logsRef}
+							className="install-logs"
+							style={{maxHeight: logsMaxHeight ? `${logsMaxHeight}px` : undefined}}
+						>
 							{logsText || <LANG id="no_logs_for_selected_level"/>}
 						</pre>
 					</div>

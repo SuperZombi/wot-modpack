@@ -281,8 +281,7 @@ ul{
 
 .install-logs{
 	margin-top: 12px;
-	height: calc(100dvh - 260px);
-	max-height: calc(100dvh - 260px);
+	max-height: 240px;
 	max-width: 800px;
 	overflow: auto;
 	color-scheme: dark;

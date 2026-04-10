@@ -52,7 +52,7 @@
 	"show_install_logs": "Показати логи встановлення",
 	"hide_install_logs": "Сховати логи встановлення",
 	"log_level": "Рівень логів",
-	"copy_logs": "Копіювати логи",
+	"copy_logs": "Копировать",
 	"copied": "Скопійовано",
 	"no_logs_for_selected_level": "Немає логів для вибраного рівня."
 }

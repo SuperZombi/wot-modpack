@@ -52,7 +52,7 @@
 	"show_install_logs": "Show install logs",
 	"hide_install_logs": "Hide install logs",
 	"log_level": "Log level",
-	"copy_logs": "Copy logs",
+	"copy_logs": "Копировать",
 	"copied": "Copied",
 	"no_logs_for_selected_level": "No logs for selected level."
 }
