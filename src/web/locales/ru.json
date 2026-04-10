@@ -51,7 +51,7 @@
 	"accept": "Принять",
 	"show_install_logs": "Показать логи установки",
 	"hide_install_logs": "Скрыть логи установки",
-	"log_level": "Уровень логов",
+	"log_level": "Уровень",
 	"copy_logs": "Копировать",
 	"copied": "Скопировано",
 	"no_logs_for_selected_level": "Нет логов для выбранного уровня."

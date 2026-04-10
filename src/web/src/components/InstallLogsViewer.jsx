@@ -2,12 +2,10 @@ const InstallLogsViewer = ({
 	onVisibilityChange = null
 }) => {
 	const { langData } = useApp()
-	const logsRef = React.useRef(null)
 	const [logs, setLogs] = React.useState([])
 	const [showLogs, setShowLogs] = React.useState(false)
 	const [selectedLevel, setSelectedLevel] = React.useState("info")
 	const [copied, setCopied] = React.useState(false)
-	const [logsMaxHeight, setLogsMaxHeight] = React.useState(null)
 
 	const levelsOrder = ["debug", "info", "warn", "error"]
 	const selectedIndex = levelsOrder.indexOf(selectedLevel)
@@ -29,31 +27,6 @@ const InstallLogsViewer = ({
 		}
 	}, [showLogs])
 
-	React.useEffect(() => {
-		if (!showLogs || !logsRef.current) return
-
-		const updateLogsMaxHeight = () => {
-			if (!logsRef.current) return
-			const top = logsRef.current.getBoundingClientRect().top
-			const available = Math.floor(window.innerHeight - top - 16)
-			setLogsMaxHeight(Math.max(120, available))
-		}
-
-		updateLogsMaxHeight()
-		window.addEventListener("resize", updateLogsMaxHeight)
-
-		let observer = null
-		if (typeof ResizeObserver !== "undefined"){
-			observer = new ResizeObserver(updateLogsMaxHeight)
-			observer.observe(document.body)
-		}
-
-		return () => {
-			window.removeEventListener("resize", updateLogsMaxHeight)
-			if (observer) observer.disconnect()
-		}
-	}, [showLogs, logs.length, selectedLevel])
-
 	const copyLogs = async _ => {
 		const textToCopy = logsText || (langData?.no_logs_for_selected_level || "No logs for selected level.")
 		try {
@@ -72,11 +45,11 @@ const InstallLogsViewer = ({
 		}
 	}
 
-	return (
-			<div className="install-logs-root">
-				<Button onClick={toggleLogs} style={{fontSize: "12px"}}>
-					{showLogs ? <LANG id="hide_install_logs"/> : <LANG id="show_install_logs"/>}
-				</Button>
+		return (
+				<div className="install-logs-root">
+					<Button onClick={toggleLogs} style={{fontSize: "12px", marginTop: "10px"}}>
+						{showLogs ? <LANG id="hide_install_logs"/> : <LANG id="show_install_logs"/>}
+					</Button>
 				{showLogs && (
 					<div className="install-logs-area">
 						<div className="install-log-controls">
@@ -96,13 +69,9 @@ const InstallLogsViewer = ({
 								{copied ? <LANG id="copied"/> : <LANG id="copy_logs"/>}
 							</Button>
 						</div>
-						<pre
-							ref={logsRef}
-							className="install-logs"
-							style={{maxHeight: logsMaxHeight ? `${logsMaxHeight}px` : undefined}}
-						>
-							{logsText || <LANG id="no_logs_for_selected_level"/>}
-						</pre>
+							<pre className="install-logs">
+								{logsText || <LANG id="no_logs_for_selected_level"/>}
+							</pre>
 					</div>
 				)}
 		</div>
