@@ -1,4 +1,6 @@
-const InstallLogsViewer = () => {
+const InstallLogsViewer = ({
+	onVisibilityChange = null
+}) => {
 	const [logs, setLogs] = React.useState([])
 	const [showLogs, setShowLogs] = React.useState(false)
 	const [selectedLevel, setSelectedLevel] = React.useState("info")
@@ -17,6 +19,12 @@ const InstallLogsViewer = () => {
 		}
 		setShowLogs(prev => !prev)
 	}
+
+	React.useEffect(() => {
+		if (typeof onVisibilityChange === "function"){
+			onVisibilityChange(showLogs)
+		}
+	}, [showLogs])
 
 	const copyLogs = async _ => {
 		const textToCopy = logsText || "No logs for selected level."

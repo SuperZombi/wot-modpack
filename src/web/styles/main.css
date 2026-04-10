@@ -281,9 +281,11 @@ ul{
 
 .install-logs{
 	margin-top: 12px;
-	max-height: 240px;
+	height: calc(100dvh - 260px);
+	max-height: calc(100dvh - 260px);
 	max-width: 800px;
 	overflow: auto;
+	color-scheme: dark;
 	padding: 10px;
 	text-align: left;
 	white-space: pre-wrap;
@@ -298,6 +300,9 @@ ul{
 .install-logs-area{
 	margin-top: 12px;
 	max-width: 800px;
+	display: flex;
+	flex-direction: column;
+	min-height: 0;
 }
 
 .install-log-controls{
