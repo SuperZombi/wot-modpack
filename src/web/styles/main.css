@@ -294,6 +294,25 @@ ul{
 	color: #d9d9d9;
 	font-size: 12px;
 }
+
+.install-logs-area{
+	margin-top: 12px;
+	max-width: 800px;
+}
+
+.install-log-levels{
+	display: flex;
+	gap: 12px;
+	flex-wrap: wrap;
+	justify-content: flex-start;
+}
+.install-log-levels label{
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	font-size: 12px;
+	user-select: none;
+}
 .mods-install-list .mod-item:hover{
 	background: rgb(255, 255, 255, 0.1);
 }

@@ -91,9 +91,9 @@ class Client:
 		self.appdata = appdata if os.path.exists(appdata) else None
 		self.installed = []
 
-	def _log(self, message):
+	def _log(self, message, level="debug"):
 		if callable(self.logger):
-			self.logger(message)
+			self.logger(message, level=level)
 
 	@property
 	def is_running(self):
@@ -225,9 +225,12 @@ class Client:
 				logger=self.logger
 			)
 			if result: self.installed.append(mod.id)
-			self._log(f"Client.install_mod finished: {mod.id} ({'ok' if result else 'failed'})")
+			self._log(
+				f"Client.install_mod finished: {mod.id} ({'ok' if result else 'failed'})",
+				level="debug" if result else "warn"
+			)
 			return result
-		self._log(f"Client.install_mod skipped (already installed): {mod.id}")
+		self._log(f"Client.install_mod skipped (already installed): {mod.id}", level="debug")
 		return True
 
 
@@ -241,26 +244,26 @@ class Mod:
 	def __repr__(self): return str(self)
 
 	def install(self, client, on_progress=None, use_cache=True, logger=None):
-		def log(message):
+		def log(message, level="debug"):
 			if callable(logger):
-				logger(message)
+				logger(message, level=level)
 
-		log(f"Mod.install started: {self.id}")
+		log(f"Mod.install started: {self.id}", level="info")
 		if self.requires and len(self.requires) > 0:
 			for mod in self.requires:
-				log(f"Installing required mod for {self.id}: {mod.id}")
+				log(f"Installing required mod for {self.id}: {mod.id}", level="debug")
 				client.install_mod(mod)
 
 		write_cache = True
 		if use_cache:
-			log(f"Cache enabled for mod: {self.id}")
+			log(f"Cache enabled for mod: {self.id}", level="debug")
 			self.init_cache()
 			have_cache = self.load_cache_files()
 			if have_cache:
-				log(f"Using cache for mod: {self.id}")
+				log(f"Using cache for mod: {self.id}", level="info")
 				write_cache = False
 			else:
-				log(f"Cache miss for mod: {self.id}")
+				log(f"Cache miss for mod: {self.id}", level="debug")
 				self.delete_from_cache()
 
 		cache_files = []
@@ -277,10 +280,10 @@ class Mod:
 			os.makedirs(target_map[file["dest"]], exist_ok=True)
 
 			if file["url"].startswith("http"):
-				log(f"Downloading file for {self.id}: {file['url']}")
+				log(f"Downloading file for {self.id}: {file['url']}", level="info")
 				file_io = self.download(file["url"], on_progress=on_progress)
 				if not file_io:
-					log(f"Download failed for {self.id}: {file['url']}")
+					log(f"Download failed for {self.id}: {file['url']}", level="error")
 					return False
 
 				if file["url"].endswith(".zip"):
@@ -301,9 +304,9 @@ class Mod:
 						"url": target_file
 					})
 			else:
-				log(f"Using local file for {self.id}: {file['url']}")
+				log(f"Using local file for {self.id}: {file['url']}", level="debug")
 				if not os.path.exists(file["url"]):
-					log(f"Local file not found for {self.id}: {file['url']}")
+					log(f"Local file not found for {self.id}: {file['url']}", level="error")
 					return False
 				if file["url"].endswith(".zip"):
 					with zipfile.ZipFile(file["url"], 'r') as zip_ref:
@@ -317,9 +320,9 @@ class Mod:
 				"ver": self.version,
 				"files": cache_files
 			}])
-			log(f"Cache updated for mod: {self.id}")
+			log(f"Cache updated for mod: {self.id}", level="debug")
 
-		log(f"Mod.install finished: {self.id}")
+		log(f"Mod.install finished: {self.id}", level="info")
 		return True
 
 	def download(self, url, on_progress=None):

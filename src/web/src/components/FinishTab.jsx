@@ -4,6 +4,12 @@ const FinishTab = ({
 	const { language, langData } = useApp()
 	const [showLogs, setShowLogs] = React.useState(false)
 	const [logs, setLogs] = React.useState([])
+	const [levels, setLevels] = React.useState({
+		info: true,
+		warn: true,
+		error: true,
+		debug: false
+	})
 
 	const toggleLogs = async _ => {
 		if (!showLogs && logs.length === 0){
@@ -12,6 +18,15 @@ const FinishTab = ({
 		}
 		setShowLogs(prev => !prev)
 	}
+	const toggleLevel = level => {
+		setLevels(prev => ({
+			...prev,
+			[level]: !prev[level]
+		}))
+	}
+
+	const visibleLogs = logs.filter(log => levels[log.level] ?? true)
+	const levelItems = ["info", "warn", "error", "debug"]
 
 	function getKnownError(){
 		if (fails.filter(x=>x.error).length > 0){
@@ -55,7 +70,23 @@ const FinishTab = ({
 						{showLogs ? "Hide install logs" : "Show install logs"}
 					</Button>
 					{showLogs && (
-						<pre className="install-logs">{logs.join("\n") || "No logs."}</pre>
+						<div className="install-logs-area">
+							<div className="install-log-levels">
+								{levelItems.map(level => (
+									<label key={level}>
+										<input
+											type="checkbox"
+											checked={levels[level]}
+											onChange={_=>toggleLevel(level)}
+										/>
+										<span>{level.toUpperCase()}</span>
+									</label>
+								))}
+							</div>
+							<pre className="install-logs">
+								{visibleLogs.map(log=>`[${log.level.toUpperCase()}] ${log.message}`).join("\n") || "No logs for selected levels."}
+							</pre>
+						</div>
 					)}
 				</React.Fragment>
 			) : (
@@ -84,7 +115,23 @@ const FinishTab = ({
 						{showLogs ? "Hide install logs" : "Show install logs"}
 					</Button>
 					{showLogs && (
-						<pre className="install-logs">{logs.join("\n") || "No logs."}</pre>
+						<div className="install-logs-area">
+							<div className="install-log-levels">
+								{levelItems.map(level => (
+									<label key={level}>
+										<input
+											type="checkbox"
+											checked={levels[level]}
+											onChange={_=>toggleLevel(level)}
+										/>
+										<span>{level.toUpperCase()}</span>
+									</label>
+								))}
+							</div>
+							<pre className="install-logs">
+								{visibleLogs.map(log=>`[${log.level.toUpperCase()}] ${log.message}`).join("\n") || "No logs for selected levels."}
+							</pre>
+						</div>
 					)}
 					<Gallery/>
 				</React.Fragment>

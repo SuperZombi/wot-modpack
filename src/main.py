@@ -91,8 +91,11 @@ def set_mods_data(data):
 def get_install_logs():
 	return INSTALL_LOGS
 
-def add_install_log(message):
-	INSTALL_LOGS.append(message)
+def add_install_log(message, level="info"):
+	INSTALL_LOGS.append({
+		"level": level,
+		"message": message
+	})
 
 
 def download_progress(current, total):
@@ -125,7 +128,7 @@ def _main_install_worker(client_path, args, mods):
 	global INSTALL_LOGS
 	INSTALL_LOGS = []
 	fails = []
-	add_install_log(f"Install worker started for client: {client_path}")
+	add_install_log(f"Install worker started for client: {client_path}", level="info")
 	client = Client(
 		client_path,
 		use_cache=SETTINGS.get("use_cache", True),
@@ -133,27 +136,28 @@ def _main_install_worker(client_path, args, mods):
 	)
 
 	if client.is_running:
-		add_install_log("Installation stopped: client is currently running.")
+		add_install_log("Installation stopped: client is currently running.", level="error")
 		fails.append({"error": "client_is_running_error"})
 		return fails
 	if args.get("delete_mods", False):
 		add_install_log(
-			f"Deleting existing mods (delete_configs={args.get('delete_configs', False)})."
+			f"Deleting existing mods (delete_configs={args.get('delete_configs', False)}).",
+			level="info"
 		)
 		try:
 			client.delete_mods(args.get("delete_configs", False))
-			add_install_log("Existing mods deletion completed.")
+			add_install_log("Existing mods deletion completed.", level="info")
 		except Exception as e:
-			add_install_log(f"Failed while deleting mods: {e}")
+			add_install_log(f"Failed while deleting mods: {e}", level="error")
 			fails.append({"error": str(e)})
 			return fails
 	
 	if len(mods) > 0:
 		mods_arr = list(filter(bool, map(json_to_mod, mods)))
 		total_mods = len(mods_arr)
-		add_install_log(f"Preparing to install {total_mods} mod(s).")
+		add_install_log(f"Preparing to install {total_mods} mod(s).", level="info")
 		for index, mod in enumerate(mods_arr):
-			add_install_log(f"Installing mod {index + 1}/{total_mods}: {mod.id}")
+			add_install_log(f"Installing mod {index + 1}/{total_mods}: {mod.id}", level="info")
 			eel.installing_progress({
 				"id": mod.id,
 				"current": index,
@@ -163,16 +167,16 @@ def _main_install_worker(client_path, args, mods):
 			try:
 				result = client.install_mod(mod, on_progress=download_progress)
 				if not result:
-					add_install_log(f"Mod installation returned failure: {mod.id}")
+					add_install_log(f"Mod installation returned failure: {mod.id}", level="error")
 					fails.append({"mod": mod.id})
 				else:
-					add_install_log(f"Mod installation completed: {mod.id}")
+					add_install_log(f"Mod installation completed: {mod.id}", level="info")
 			except Exception as e:
-				add_install_log(f"Exception during mod installation ({mod.id}): {e}")
+				add_install_log(f"Exception during mod installation ({mod.id}): {e}", level="error")
 				fails.append({"error": str(e)})
 				return fails
 
-		add_install_log("Sending telemetry for completed installation.")
+		add_install_log("Sending telemetry for completed installation.", level="debug")
 		telemetry.send_telemetry(
 			mod_ids=mods,
 			modpack_ver=__version__,
@@ -185,13 +189,13 @@ def _main_install_worker(client_path, args, mods):
 		)
 
 	if args.get("save_selected_mods", True):
-		add_install_log("Saving selected mods and client path to settings.")
+		add_install_log("Saving selected mods and client path to settings.", level="debug")
 		update_settings({
 			"client": client_path,
 			"mods": mods
 		})
 
-	add_install_log(f"Install worker finished with {len(fails)} failure(s).")
+	add_install_log(f"Install worker finished with {len(fails)} failure(s).", level="info")
 	eel.on_install_finish(fails)()
 
 
