@@ -32,10 +32,11 @@ class Logger:
 class ModLogger:
 	def __init__(self, logger, name):
 		self.logger = logger
-		self.name = name
-
-	def __getattr__(self, attr):
-		return lambda msg, *a, **k: getattr(self.logger, attr)(f"[{self.name}] {msg}", *a, **k)
+		self.prefix = f"[{name}] "
+	def log(self, msg): self.logger.log(self.prefix + msg)
+	def debug(self, msg): self.logger.debug(self.prefix + msg)
+	def warn(self, msg): self.logger.warn(self.prefix + msg)
+	def error(self, msg): self.logger.error(self.prefix + msg)
 
 def resource_path(relative_path=""):
 	base_path = getattr(sys, '_MEIPASS', os.path.dirname(os.path.abspath(__file__)))
