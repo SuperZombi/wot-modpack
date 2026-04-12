@@ -331,7 +331,7 @@ label{
 	top: 12px;
 	right: 12px;
 	user-select: none;
-	transition: 0.15s;
+	transition: 0.2s;
 }
 .popup .close:hover{
 	rotate: 90deg;
