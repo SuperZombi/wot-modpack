@@ -293,19 +293,17 @@ label{
 .popup {
 	position: fixed;
 	inset: 0;
-	background: rgb(0, 0, 0, 0.5);
-	backdrop-filter: blur(5px);
 	z-index: 3;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	visibility: hidden;
-	opacity: 0;
-	transition: 0.3s;
+	transition: 0.35s cubic-bezier(0.22, 1, 0.36, 1);
 }
 .popup.show{
 	visibility: visible;
-	opacity: 1;
+	background: rgb(0, 0, 0, 0.5);
+	backdrop-filter: blur(5px);
 }
 .popup .popup_wraper{
 	position: relative;
@@ -315,6 +313,16 @@ label{
 	box-shadow: 0 0 10px #666;
 	border-radius: 12px;
 	padding: 20px;
+	transition: 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+	transform: translateY(1rem);
+	scale: 0.95;
+	opacity: 0;
+	will-change: scale;
+}
+.popup.show .popup_wraper{
+	transform: translateY(0);
+	opacity: 1;
+	scale: 1;
 }
 .popup .close{
 	width: 24px;
@@ -323,6 +331,10 @@ label{
 	top: 12px;
 	right: 12px;
 	user-select: none;
+	transition: 0.15s;
+}
+.popup .close:hover{
+	rotate: 90deg;
 }
 
 hr{
