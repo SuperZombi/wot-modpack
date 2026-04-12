@@ -13,10 +13,12 @@ const ModsTab = ({
 	const audioRef = React.useRef(null)
 	const [imageLoaded, setImageLoaded] = React.useState(false)
 
+	const [forceOpenCategories, setForceOpenCategories] = React.useState(false)
 	const [needToShowTooltip, setNeedToShowTooltip] = React.useState(settings.layout_tooltip)
 	const tooltipOnClick = () => {
 		setNeedToShowTooltip(false)
 		updateSetting("layout_tooltip", false)
+		setForceOpenCategories(true)
 	}
 
 	React.useEffect(() => {
@@ -142,6 +144,7 @@ const ModsTab = ({
 								setDisplayPreview={setDisplayPreview}
 								cachedMods={cachedMods}
 								selectedClient={selectedClient}
+								forceOpen={forceOpenCategories}
 							/>
 						</div>
 						<div id="mod-preview"

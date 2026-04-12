@@ -1,7 +1,7 @@
 function ModList({
 	mods, groups, categories, stats, search,
 	selectedMods, setSelectedMods, setPreview, setDisplayPreview,
-	cachedMods, selectedClient
+	cachedMods, selectedClient, forceOpen=false
 }) {
 	const toggleMod = (modId, value=null) => {
 		setSelectedMods(prev => {
@@ -43,7 +43,6 @@ function ModList({
 			</h3>
 		)
 	}
-
 	return (
 		<div id="mods-list">
 			{categories.map(cat => {
@@ -64,6 +63,7 @@ function ModList({
 						setPreview={setPreview}
 						setDisplayPreview={setDisplayPreview}
 						cachedMods={cachedMods}
+						forceOpen={forceOpen}
 					/>
 				)
 			})}
@@ -76,7 +76,7 @@ function Category({
 	search, matchesSearch,
 	selectedMods, toggleMod,
 	setPreview, setDisplayPreview,
-	cachedMods
+	cachedMods, forceOpen=false
 }) {
 	function sortByPopularityWithGroups(mods) {
 		const groupPopularity = {}
@@ -95,10 +95,10 @@ function Category({
 	const { settings } = useApp()
 	const filteredMods = mods.filter(mod => matchesSearch(mod, search))
 	const allModsSorted = sortByPopularityWithGroups(filteredMods)
-	const [opened, setOpened] = React.useState(false)
+	const [opened, setOpened] = React.useState(forceOpen)
 	React.useEffect(_=>{
-		setOpened(search.length > 0)
-	}, [search])
+		setOpened(forceOpen || search.length > 0)
+	}, [forceOpen, search])
 
 	if (!filteredMods.length) return null;
 
