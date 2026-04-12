@@ -18,10 +18,10 @@ function ModList({
 			return prev;
 		})
 	}
-	const { matchClientLang } = useApp()
+	const { settings } = useApp()
 
 	function matchesSearch(mod, search) {
-		if (matchClientLang && mod.lang && mod.lang !== selectedClient.lang.toLocaleLowerCase()) return false
+		if (settings.match_client_lang && mod.lang && mod.lang !== selectedClient.lang.toLocaleLowerCase()) return false
 
 		if (!search) return true;
 		const s = search.toLowerCase();
@@ -92,7 +92,7 @@ function Category({
 			return popB - popA;
 		})
 	}
-	const { language, modsLayout } = useApp()
+	const { settings } = useApp()
 	const filteredMods = mods.filter(mod => matchesSearch(mod, search))
 	const allModsSorted = sortByPopularityWithGroups(filteredMods)
 	const [opened, setOpened] = React.useState(false)
@@ -107,12 +107,12 @@ function Category({
 			<label className="summary hover">
 				<input type="checkbox" checked={opened} onChange={e=>setOpened(e.target.checked)}/>
 				{icon && <img src={icon} draggable={false}/>}
-				<span>{title[language]}</span>
+				<span>{title[settings.language]}</span>
 			</label>
 				
 			<div className="collapse">
 				<div className="wrapper">
-					<div className={`content ${modsLayout == "grid" ? "mods-grid" : ""}`}>
+					<div className={`content ${settings.layout=="grid"?"mods-grid":""}`}>
 						{allModsSorted.map(mod => {
 							if (mod.group) {
 								const group = groups.find(g => g.id === mod.group);
@@ -188,9 +188,9 @@ function Group({
 		setGroupChecked(mods.some(mod => selectedMods.includes(mod.id)))
 	}, [selectedMods])
 
-	const { language, modsLayout } = useApp()
+	const {settings} = useApp()
 
-	if (modsLayout == "grid"){
+	if (settings.layout == "grid"){
 		return (
 			<React.Fragment>
 				{sortByPopularity(mods).map(mod => (
@@ -217,7 +217,7 @@ function Group({
 					checked={groupChecked}
 					onChange={onGroupCheck}
 				/>
-				<span>{title[language]}</span>
+				<span>{title[settings.language]}</span>
 			</label>
 			<div className="collapse">
 				<div className="wrapper">
@@ -252,7 +252,7 @@ function Mod({
 	selectedMods,
 	cachedMods,
 }) {
-	const { language, langData, modsLayout } = useApp()
+	const {settings, langData} = useApp()
 	const [imageLoaded, setImageLoaded] = React.useState(false)
 
 	const onMouse = _=> {
@@ -279,7 +279,7 @@ function Mod({
 	}
 	const cached_ver = (cachedMods.find(el=>el.id==mod.id)||{}).ver || null
 
-	if (modsLayout == "grid"){
+	if (settings.layout == "grid"){
 		return (
 			<label className="mod hover" onClick={onGridClick} onMouseOver={onMouse} onMouseOut={_=>setDisplayPreview(false)}>
 				<input
@@ -299,7 +299,7 @@ function Mod({
 						onLoad={_=>setImageLoaded(true)}
 					/>
 				</div>
-				<span>{replaceFlags(mod.title[language])}</span>
+				<span>{replaceFlags(mod.title[settings.language])}</span>
 				{
 					(cached_ver && cached_ver != mod.ver) && (
 						<i className="new-badge" title={langData["mod_updated"]}/>
@@ -317,7 +317,7 @@ function Mod({
 				onChange={onChange}
 				{...(name && { name })}
 			/>
-			<span>{replaceFlags(mod.title[language])}</span>
+			<span>{replaceFlags(mod.title[settings.language])}</span>
 			{
 				(cached_ver && cached_ver != mod.ver) && (
 					<i className="new-badge" title={langData["mod_updated"]}/>

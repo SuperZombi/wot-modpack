@@ -9,18 +9,14 @@ const ModsTab = ({
 	const [modPreview, setPreview] = React.useState(null)
 	const [displayPreview, setDisplayPreview] = React.useState(false)
 
-	const {
-		language, langData,
-		modsLayout, setModsLayout,
-		layoutTooltip, setLayoutTooltip
-	} = useApp()
+	const {langData, settings, updateSetting} = useApp()
 	const audioRef = React.useRef(null)
 	const [imageLoaded, setImageLoaded] = React.useState(false)
 
-	const [needToShowTooltip, setNeedToShowTooltip] = React.useState(layoutTooltip)
+	const [needToShowTooltip, setNeedToShowTooltip] = React.useState(settings.layout_tooltip)
 	const tooltipOnClick = () => {
 		setNeedToShowTooltip(false)
-		setLayoutTooltip(false)
+		updateSetting("layout_tooltip", false)
 	}
 
 	React.useEffect(() => {
@@ -85,7 +81,7 @@ const ModsTab = ({
 
 	const layoutButtonStyle = {
 		display: "flex",
-		boxShadow: (needToShowTooltip && modsLayout == "list") ? "0 0 10px orange" : null
+		boxShadow: (needToShowTooltip && settings.layout == "list") ? "0 0 10px orange" : null
 	}
 
 	return (
@@ -117,16 +113,16 @@ const ModsTab = ({
 									onChange={e => setSearch(e.target.value)}
 								/>
 								<div tooltip={
-									(needToShowTooltip && modsLayout == "list")?langData["layout_tooltip"]:null
+									(needToShowTooltip && settings.layout == "list")?langData["layout_tooltip"]:null
 								} className="tooltip-bottom tooltip-show"
-									onClick={tooltipOnClick}
+									onClick={(needToShowTooltip && settings.layout == "list")?tooltipOnClick:null}
 								>
 									<Button style={layoutButtonStyle}
-										onClick={_=>setModsLayout(prev=>prev=="grid"?"list":"grid")}
-										tooltip={modsLayout=="grid"?langData["list_view"]:langData["grid_view"]}
+										onClick={_=>updateSetting("layout", settings.layout=="grid"?"list":"grid")}
+										tooltip={settings.layout=="grid"?langData["list_view"]:langData["grid_view"]}
 										className="tooltip-left"
 									>
-										{modsLayout == "grid" ? (
+										{settings.layout == "grid" ? (
 											<img src="images/list.svg" draggable={false} height="20"/>
 										) : (
 											<img src="images/grid.svg" draggable={false} height="20"/>
@@ -163,7 +159,7 @@ const ModsTab = ({
 								/>
 							</div>
 							<div id="mod-description-text">
-								<h3 align="center" id="mod-title">{modPreview ? replaceFlags(modPreview.title[language]) : ""}</h3>
+								<h3 align="center" id="mod-title">{modPreview ? replaceFlags(modPreview.title[settings.language]) : ""}</h3>
 								<h4 id="mod-subtitle">
 									<div id="mod-author">{modPreview?.author}</div>
 									<div id="mod-downloads">
@@ -179,7 +175,7 @@ const ModsTab = ({
 									/>
 								)}
 								<div id="mod-description"
-									dangerouslySetInnerHTML={{ __html: modPreview?.description?.[language]}}
+									dangerouslySetInnerHTML={{ __html: modPreview?.description?.[settings.language]}}
 								></div>
 							</div>
 						</div>

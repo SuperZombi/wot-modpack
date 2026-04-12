@@ -54,5 +54,6 @@
 	"log_level": "Уровень",
 	"copy_logs": "Копировать",
 	"copied": "Скопировано",
-	"no_logs_for_selected_level": "Нет логов для выбранного уровня."
+	"no_logs_for_selected_level": "Нет логов для выбранного уровня.",
+	"first_install_tooltip": "Выберите это, если это ваша первая установка"
 }

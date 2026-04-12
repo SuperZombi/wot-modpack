@@ -2,78 +2,36 @@ const AppContext = React.createContext();
 function AppProvider({children}) {
 	const supportedLangs = ["en", "ru", "uk"]
 	const userLang = navigator.language?.slice(0, 2)
-	
-	const [language, setLanguage] = React.useState(supportedLangs.includes(userLang) ? userLang : 'en')
-	const [langData, setLangData] = React.useState({})
-	const [matchClientLang, setMatchClientLang] = React.useState(true)
-	const [useCache, setUseCache] = React.useState(true)
-	const [modsLayout, setModsLayout] = React.useState("list")
-	const [layoutTooltip, setLayoutTooltip] = React.useState(true)
-	const [dataCollection, setDataCollection] = React.useState(false)
-
+	const defaultSettings = {
+		language: supportedLangs.includes(userLang) ? userLang : 'en',
+		match_client_lang: true,
+		use_cache: true,
+		layout: "list",
+		layout_tooltip: true,
+		data_collection: false,
+		first_install: true
+	}
+	const [settings, setSettings] = React.useState(defaultSettings)
 	React.useEffect(() => {
-		(async _=>{
-			const settings = await eel.get_settings()()
-			if ("lang" in settings){
-				setLanguage(settings["lang"])
-			}
-			if ("match_client_lang" in settings){
-				setMatchClientLang(settings["match_client_lang"])
-			}
-			if ("use_cache" in settings){
-				setUseCache(settings["use_cache"])
-			}
-			if ("layout" in settings){
-				setModsLayout(settings["layout"])
-			}
-			if ("layout_tooltip" in settings){
-				setLayoutTooltip(settings["layout_tooltip"])
-			}
-			if ("data_collection" in settings){
-				setDataCollection(settings["data_collection"])
-			}
+		(async () => {
+			const loaded = await eel.get_settings()()
+			setSettings(prev => ({ ...prev, ...loaded }))
 		})()
 	}, [])
-
-	React.useEffect(() => {
-		fetch(`locales/${language}.json`).then(res => res.json()).then(setLangData);
+	const updateSetting = (key, value) => {
+		setSettings(prev => ({ ...prev, [key]: value }));
 		(async _=>{
-			await eel.update_settings({"lang": language})()
+			await eel.update_settings({[key]: value})()
 		})()
-	}, [language])
+	}
+	
+	const [langData, setLangData] = React.useState({})
 	React.useEffect(() => {
-		(async _=>{
-			await eel.update_settings({"match_client_lang": matchClientLang})()
-		})()
-	}, [matchClientLang])
-	React.useEffect(() => {
-		(async _=>{
-			await eel.update_settings({"use_cache": useCache})()
-		})()
-	}, [useCache])
-	React.useEffect(() => {
-		(async _=>{
-			await eel.update_settings({"layout": modsLayout})()
-		})()
-	}, [modsLayout])
-	React.useEffect(() => {
-		(async _=>{
-			await eel.update_settings({"layout_tooltip": layoutTooltip})()
-		})()
-	}, [layoutTooltip])
-	React.useEffect(() => {
-		(async _=>{
-			await eel.update_settings({"data_collection": dataCollection})()
-		})()
-	}, [dataCollection])
+		fetch(`locales/${settings.language}.json`).then(res => res.json()).then(setLangData);
+	}, [settings.language])
 
 	const value = {
-		language, setLanguage, langData,
-		matchClientLang, setMatchClientLang,
-		useCache, setUseCache,
-		modsLayout, setModsLayout,
-		layoutTooltip, setLayoutTooltip,
-		dataCollection, setDataCollection
+		langData, settings, updateSetting
 	}
 	return (
 		<AppContext.Provider value={value}>

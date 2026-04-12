@@ -1,7 +1,7 @@
 const FinishTab = ({
 	fails, mods, selectedMods
 }) => {
-	const { language, langData } = useApp()
+	const { settings, langData } = useApp()
 	const [isLogsOpen, setIsLogsOpen] = React.useState(false)
 
 	function getKnownError(){
@@ -32,7 +32,7 @@ const FinishTab = ({
 								{mods_errors.map(err=>{
 									const title = mods.find(x=>x.id == err.mod).title
 									return (
-										<li key={err.mod}>{replaceFlags(title[language])}</li>
+										<li key={err.mod}>{replaceFlags(title[settings.language])}</li>
 									)
 								})}
 							</ul>

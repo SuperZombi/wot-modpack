@@ -22,8 +22,15 @@ const CheckoutTab = ({
 		onArgChange("delete_mods", true)
 		onArgChange("delete_configs", false)
 	}
-
-	const { language, langData } = useApp()
+	const { settings, updateSetting, langData } = useApp()
+	const [needToShowTooltip, setNeedToShowTooltip] = React.useState(settings.first_install)
+	const tooltipOnClick = () => {
+		setNeedToShowTooltip(false)
+		updateSetting("first_install", false)
+	}
+	const layoutButtonStyle = {
+		boxShadow: (needToShowTooltip && settings.first_install) ? "0 0 12px orange" : null
+	}
 	return (
 		<React.Fragment>
 			<div>
@@ -35,10 +42,16 @@ const CheckoutTab = ({
 					}}
 				/>
 				<br/><br/>
-				<div className="flex-center-row" style={{fontSize: "0.85rem"}}>
-					<Button onClick={onClearInstall}>
-						<LANG id="clear_install_button"/>
-					</Button>
+				<div className="flex-center-row" style={{fontSize: "0.85rem"}}
+					onClick={(needToShowTooltip && settings.first_install)?tooltipOnClick:null}
+				>
+					<div className="tooltip-show" tooltip={
+						(needToShowTooltip && settings.first_install)?langData["first_install_tooltip"]:null
+					}>
+						<Button onClick={onClearInstall} style={layoutButtonStyle}>
+							<LANG id="clear_install_button"/>
+						</Button>
+					</div>
 					<Button onClick={onUpdateInstall}>
 						<LANG id="update_install_button"/>
 					</Button>
@@ -93,7 +106,7 @@ const CheckoutTab = ({
 											<img src="images/down-arrow.svg" draggable={false}/>
 										</div>
 									)}
-									<span>{replaceFlags(modObj.title[language])}</span>
+									<span>{replaceFlags(modObj.title[settings.language])}</span>
 									<div tooltip={langData["remove"]} className="remove hover"
 										onClick={_=>setSelectedMods(prev => prev.filter(id => id !== modObj.id))}
 									>

@@ -6,11 +6,7 @@ const Settings = ({
 		{ path: "ru", title: "Русский" },
 		{ path: "uk", title: "Українська" }
 	]
-	const {
-		langData, language, setLanguage,
-		matchClientLang, setMatchClientLang,
-		useCache, setUseCache
-	} = useApp()
+	const {langData, settings, updateSetting} = useApp()
 	const [cacheSize, setCacheSize] = React.useState(0)
 	
 	React.useEffect(_=>{
@@ -40,14 +36,14 @@ const Settings = ({
 					<span><LANG id="language"/>:</span>
 					<Select
 						options={langOptions}
-						value={{path: language, title: langOptions.find(x=>x.path==language).title}}
-						onChange={val=>setLanguage(val.path)}
+						value={{path: settings.language, title: langOptions.find(x=>x.path==settings.language).title}}
+						onChange={val=>updateSetting("language", val.path)}
 						placeholder={langData["language"]}
 					/>
 				</div>
 				<label className="hover">
 					<input type="checkbox" className="setting_element hover"
-						checked={matchClientLang} onChange={e=>setMatchClientLang(e.target.checked)}
+						checked={settings.match_client_lang} onChange={e=>updateSetting("match_client_lang", e.target.checked)}
 					/>
 					<LANG id="match_client_lang"/>
 				</label>
@@ -56,7 +52,7 @@ const Settings = ({
 			<section>
 				<label className="hover">
 					<input type="checkbox" className="setting_element hover"
-						checked={useCache} onChange={e=>setUseCache(e.target.checked)}
+						checked={settings.use_cache} onChange={e=>updateSetting("use_cache", e.target.checked)}
 					/>
 					<LANG id="use_cache"/>
 				</label>

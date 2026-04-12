@@ -1,7 +1,7 @@
 const HomeTab = ({
 	selectedClient, setSelectedClient, clientsData, setClientsData, clientsLoaded
 }) => {
-	const { langData, dataCollection, setDataCollection } = useApp()
+	const { langData, settings, updateSetting } = useApp()
 
 	React.useEffect(_=>{
 		if (clientsData.length > 0 && (!selectedClient)){
@@ -36,7 +36,7 @@ const HomeTab = ({
 	]
 	return (
 		<React.Fragment>
-			{ !dataCollection && <DataCollectionPopup onClose={_=>{setDataCollection(true)}}/>}
+			{ !settings.data_collection && <DataCollectionPopup onClose={_=>{updateSetting("data_collection", true)}}/>}
 			<div>
 				<br/>
 				<h3><LANG id="select_game_folder"/></h3>
