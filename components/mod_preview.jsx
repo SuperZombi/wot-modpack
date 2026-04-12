@@ -1,8 +1,6 @@
 const ModPreview = ({onClosePreview, previewData, collectFiles, stats, stats_csv}) => {
 	const {lang, langData} = useApp()
-	const [isClosing, setIsClosing] = React.useState(false)
 	const [currentGameVersion, setCurrentGameVersion] = React.useState("1.0.0")
-
 	React.useEffect(() => {
 		setCurrentGameVersion(
 			getLatestGameVersion(
@@ -12,16 +10,7 @@ const ModPreview = ({onClosePreview, previewData, collectFiles, stats, stats_csv
 			)
 		)
 	}, [stats_csv])
-	
-	React.useEffect(() => {
-		document.body.style.overflow = 'hidden';
-		return ()=> document.body.style.overflow = 'unset';
-	}, [])
-	const BeforeClose = _=>{
-		if (isClosing){return}
-		setIsClosing(true)
-		setTimeout(_=>{ onClosePreview() }, 350)
-	}
+
 	const onDownload = _=>{
 		const files = collectFiles(previewData.id)
 		buildZip({
@@ -31,61 +20,88 @@ const ModPreview = ({onClosePreview, previewData, collectFiles, stats, stats_csv
 			downloadErrorText: langData["download_file_error"]?.[lang]
 		})
 	}
-	
 	return (
-		<div className={`popup ${isClosing ? "hidden" : "visible"}`}
+		<Popup onClose={onClosePreview}>
+			<h3 align="center">
+				{replaceFlags(previewData.title?.[lang]) || previewData.id}
+			</h3>
+			{previewData.image && (
+				<div className="image-container">
+					<img src={previewData.image} draggable={false}/>
+				</div>
+			)}
+			{previewData.author && (
+				<span>{<LANG id="author"/>}: {previewData.author}</span>
+			)}
+			{previewData.version && (
+				<div>
+					<span style={{marginRight: "5px"}}>{<LANG id="version"/>}:</span>
+					<code className="container version">{previewData.version}</code>
+				</div>
+			)}
+			<div>
+				<i className="fa-solid fa-circle-down" style={{marginRight: "5px"}}></i>
+				<span>{<LANG id="downloads"/>}: {stats[previewData.id] || 0}</span>
+			</div>
+			{previewData.description && (
+				<div className="mod-description">
+					<hr/>
+					<div dangerouslySetInnerHTML={{ __html: previewData.description?.[lang] }}/>
+				</div>
+			)}
+			{previewData.audio && (
+				<div style={{width: "100%"}}>
+					<audio src={previewData.audio}
+						controls autoPlay controlsList="nodownload"
+						style={{width: "100%"}}
+					/>
+				</div>
+			)}
+			<div className="row">
+				<button className="button shine" onClick={onDownload}>
+					<i className="fa-solid fa-circle-down"></i>
+					<span>{<LANG id="download_button"/>}</span>
+				</button>
+				<button className="button shine" onClick={_=>share({
+					title: previewData.title?.[lang] || previewData.id,
+					mod_id: previewData.id
+				})}>
+					<i className="fa-solid fa-share"></i>
+					<span>{<LANG id="share"/>}</span>
+				</button>
+			</div>
+		</Popup>
+	)
+}
+const Popup = ({onClose, children}) => {
+	const [show, setShow] = React.useState(false)
+	React.useEffect(_=>{
+		setTimeout(_=>setShow(true), 0)
+		const body = document.body
+		const scrollBarWidth = window.innerWidth - document.documentElement.clientWidth
+		const computedStyle = window.getComputedStyle(body)
+		const originalPaddingRight = computedStyle.paddingRight
+		const originalOverflow = body.style.overflow
+		body.style.overflow = "hidden"
+		body.style.paddingRight = `calc(${originalPaddingRight} + ${scrollBarWidth}px)`
+		return () => {
+			body.style.overflow = originalOverflow
+			body.style.paddingRight = ""
+		}
+	}, [])
+	const BeforeClose = _=>{
+		if (show){
+			setShow(false)
+			setTimeout(_=>{ onClose && onClose() }, 300)
+		}
+	}
+	return (
+		<div className={`popup ${show ? "show" : ""}`}
 			onClick={e=>e.target.classList.contains("popup") && BeforeClose()}
 		>
 			<div className="container popup-content">
 				<i className="close fa-solid fa-circle-xmark" onClick={_=>BeforeClose()}></i>
-				<h3 align="center">
-					{replaceFlags(previewData.title?.[lang]) || previewData.id}
-				</h3>
-				{previewData.image && (
-					<div className="image-container">
-						<img src={previewData.image} draggable={false}/>
-					</div>
-				)}
-				{previewData.author && (
-					<span>{<LANG id="author"/>}: {previewData.author}</span>
-				)}
-				{previewData.version && (
-					<div>
-						<span style={{marginRight: "5px"}}>{<LANG id="version"/>}:</span>
-						<code className="container version">{previewData.version}</code>
-					</div>
-				)}
-				<div>
-					<i className="fa-solid fa-circle-down" style={{marginRight: "5px"}}></i>
-					<span>{<LANG id="downloads"/>}: {stats[previewData.id] || 0}</span>
-				</div>
-				{previewData.description && (
-					<div className="mod-description">
-						<hr/>
-						<div dangerouslySetInnerHTML={{ __html: previewData.description?.[lang] }}/>
-					</div>
-				)}
-				{previewData.audio && (
-					<div style={{width: "100%"}}>
-						<audio src={previewData.audio}
-							controls autoPlay controlsList="nodownload"
-							style={{width: "100%"}}
-						/>
-					</div>
-				)}
-				<div className="row">
-					<button className="button shine" onClick={onDownload}>
-						<i className="fa-solid fa-circle-down"></i>
-						<span>{<LANG id="download_button"/>}</span>
-					</button>
-					<button className="button shine" onClick={_=>share({
-						title: previewData.title?.[lang] || previewData.id,
-						mod_id: previewData.id
-					})}>
-						<i className="fa-solid fa-share"></i>
-						<span>{<LANG id="share"/>}</span>
-					</button>
-				</div>
+				{children}
 			</div>
 		</div>
 	)

@@ -198,11 +198,12 @@ nav{
 	align-items: center;
 	justify-content: center;
 	z-index: 10;
-	background: rgba(0, 0, 0, 0.5);
-	animation: popup-overlay-enter 0.35s ease both;
+	visibility: hidden;
+	transition: 0.35s cubic-bezier(0.22, 1, 0.36, 1);
 }
-.popup.hidden{
-	animation: popup-overlay-exit 0.35s ease both;
+.popup.show{
+	visibility: visible;
+	background: rgba(0, 0, 0, 0.5);
 }
 .popup-content{
 	background: rgba(100,100,100,0.25);
@@ -215,18 +216,23 @@ nav{
 	max-width: 60dvw;
 	min-width: 40dvw;
 	gap: 1rem;
-	backdrop-filter: blur(10px);
-	will-change: transform, opacity;
-	animation: popup-content-enter 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
-}
-.popup.hidden .popup-content{
-	animation: popup-content-exit 0.35s ease both;
+	transition: 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+	transform: translateY(1rem);
+	scale: 0.95;
+	opacity: 0;
+	will-change: scale opacity transform;
+	backdrop-filter: blur(5px);
 }
 .image-container{
 	height: 300px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
+}
+.popup.show .popup-content{
+	transform: translateY(0);
+	opacity: 1;
+	scale: 1;
 }
 .popup-content img {
 	max-height: 100%;
@@ -255,7 +261,7 @@ nav{
 	cursor: pointer;
 	background: rgba(255, 255, 255, 0.86);
 	border-radius: 50%;
-	transition: 0.12s;
+	transition: 0.15s;
 }
 .close:hover{
 	transform: rotate(90deg);
@@ -528,43 +534,6 @@ table td, table caption{
 	to {
 		opacity: 0;
 		transform: translateY(16px) scale(0.985);
-	}
-}
-
-@keyframes popup-overlay-enter {
-	from {
-		background: rgba(0, 0, 0, 0);
-	}
-	to {
-		background: rgba(0, 0, 0, 0.5);
-	}
-}
-@keyframes popup-overlay-exit {
-	from {
-		background: rgba(0, 0, 0, 0.5);
-	}
-	to {
-		background: rgba(0, 0, 0, 0);
-	}
-}
-@keyframes popup-content-enter {
-	from {
-		opacity: 0;
-		transform: translateY(18px) scale(0.985);
-	}
-	to {
-		opacity: 1;
-		transform: translateY(0) scale(1);
-	}
-}
-@keyframes popup-content-exit {
-	from {
-		opacity: 1;
-		transform: translateY(0) scale(1);
-	}
-	to {
-		opacity: 0;
-		transform: translateY(18px) scale(0.985);
 	}
 }
 
