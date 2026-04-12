@@ -220,7 +220,7 @@ nav{
 	transform: translateY(1rem);
 	scale: 0.95;
 	opacity: 0;
-	will-change: scale opacity transform;
+	will-change: scale, opacity, transform;
 	backdrop-filter: blur(5px);
 }
 .image-container{
