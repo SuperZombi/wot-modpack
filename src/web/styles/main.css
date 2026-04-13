@@ -281,11 +281,10 @@ ul{
 
 .install-logs{
 	margin-top: 12px;
-	max-width: 640px;
 	overflow: auto;
 	color-scheme: dark;
 	min-height: 100px;
-	max-height: calc(100dvh - var(--header-height) - var(--footer-height) - 150px);
+	max-height: calc(100dvh - var(--header-height) - var(--footer-height) - 180px);
 	padding: 10px;
 	text-align: left;
 	white-space: pre-wrap;
@@ -297,7 +296,9 @@ ul{
 	font-size: 12px;
 }
 .install-logs-area{
-	margin-top: 12px;
+	max-width: 640px;
+	margin: auto;
+	margin-top: 1rem;
 }
 
 .install-log-controls{
@@ -411,4 +412,13 @@ ul{
 	text-align: center;
 	margin: 0;
 	padding: 0;
+}
+.advert-block{
+	background: rgb(150, 150, 150, 0.1);
+	padding: 1rem 2rem;
+	padding-top: 0.5rem;
+	border-radius: 1rem;
+	width: fit-content;
+	margin: auto;
+	margin-top: 1rem;
 }

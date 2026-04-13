@@ -56,5 +56,8 @@
 	"copy_logs": "Копировать",
 	"copied": "Copied",
 	"no_logs_for_selected_level": "No logs for selected level.",
-	"first_install_tooltip": "Choose this, if this is your first installation"
+	"first_install_tooltip": "Choose this, if this is your first installation",
+	"advert_title": "Did you like this modpack?",
+	"advert_description": "Support the development with a small donation!",
+	"advert_button": "Support"
 }

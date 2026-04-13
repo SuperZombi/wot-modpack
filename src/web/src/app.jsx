@@ -154,7 +154,7 @@ const App = () => {
 	return (
 		<React.Fragment>
 			<header>
-				<a href="https://github.com/SuperZombi/wot-modpack" target="_blank" className="hover" draggable={false}>
+				<a href="https://superzombi.github.io/wot-modpack/" target="_blank" className="hover" draggable={false}>
 					<img src="/images/favicon.png" draggable={false}/>
 					<span>Web Modpack</span>
 				</a>

@@ -47,7 +47,7 @@ const InstallLogsViewer = ({
 
 		return (
 				<div className="install-logs-root">
-					<Button onClick={toggleLogs} style={{fontSize: "12px", marginTop: "10px"}}>
+					<Button onClick={toggleLogs} style={{fontSize: "12px"}}>
 						{showLogs ? <LANG id="hide_install_logs"/> : <LANG id="show_install_logs"/>}
 					</Button>
 				{showLogs && (

@@ -56,22 +56,19 @@ const FinishTab = ({
 							<LANG id="deleted_success"/>
 						)}
 					</h3>
-					<br/>
-					<div className="links">
-						<a href="https://www.youtube.com/c/SuperZombi" className="hover" target="_blank">
-							<img src="/images/youtube_logo.png" draggable={false}/>
-						</a>
-						<a href="https://github.com/SuperZombi/wot-modpack" className="hover" target="_blank">
-							<img src="/images/github_logo.png" draggable={false}/>
-						</a>
-						<a href="https://donatello.to/super_zombi" className="hover" target="_blank">
-							<img src="/images/donatello_logo.png" draggable={false}/>
-						</a>
-					</div>
-						<div style={{marginTop: "16px"}}>
-							<InstallLogsViewer onVisibilityChange={setIsLogsOpen}/>
-						</div>
-						{!isLogsOpen && <Gallery/>}
+					<InstallLogsViewer onVisibilityChange={setIsLogsOpen}/>
+					{!isLogsOpen && (
+						<React.Fragment>
+							<div className="advert-block">
+								<h4><LANG id="advert_title"/></h4>
+								<p><LANG id="advert_description"/></p>
+								<Button href="https://donatello.to/super_zombi" style={{marginTop: "0.5rem"}}>
+									<LANG id="advert_button"/>
+								</Button>
+							</div>
+							<Gallery style={{height: "320px", marginTop: "2rem"}}/>
+						</React.Fragment>
+					)}
 					</React.Fragment>
 				)}
 		</div>

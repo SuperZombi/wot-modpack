@@ -56,5 +56,8 @@
 	"copy_logs": "Копировать",
 	"copied": "Скопійовано",
 	"no_logs_for_selected_level": "Немає логів для вибраного рівня.",
-	"first_install_tooltip": "Виберіть це, якщо це ваше перше встановлення"
+	"first_install_tooltip": "Виберіть це, якщо це ваше перше встановлення",
+	"advert_title": "Сподобався модпак?",
+	"advert_description": "Підтримайте розробника донатом!",
+	"advert_button": "Підтримати"
 }

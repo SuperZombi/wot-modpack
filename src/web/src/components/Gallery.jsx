@@ -1,4 +1,4 @@
-const Gallery = () => {
+const Gallery = ({ style }) => {
 	const [currentImage, setCurrentImage] = React.useState(null)
 	const [visible, setVisible] = React.useState(false)
 
@@ -58,7 +58,7 @@ const Gallery = () => {
 	}, [])
 
 	return (
-		<div className={`gallery ${visible ? "show" : ""}`}>
+		<div className={`gallery ${visible ? "show" : ""}`} style={style}>
 			<img src={currentImage} draggable={false} />
 		</div>
 	)
