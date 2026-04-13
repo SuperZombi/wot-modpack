@@ -45,20 +45,17 @@ const UpdatePopup = ({onClose}) => {
 	)
 }
 const DataCollectionPopup = ({onClose}) => {
+	const { langData } = useApp()
 	return (
 		<Popup onClose={onClose} closeButton={false} closeOnOutsideClick={false}>
 			{({ close }) => (
-				<div className="flex-center">
+				<div className="flex-center data-collection">
 					<h3><LANG id="data_collection_title"/></h3>
 					<p><LANG id="data_collection_description"/></p>
-					<ul style={{display: "flex", flexDirection: "column", gap: "0.5em", textAlign: "left", margin: 0}}>
-						<li>List of selected mods</li>
-						<li>Modpack version</li>
-						<li>Game version</li>
-						<li>Game type</li>
-						<li>Game language</li>
-						<li>Game realm</li>
-						<li>Game branch</li>
+					<ul>
+						{langData["data_collection_list"].split(",").map((item, index) => (
+							<li key={index}>{item.trim()}</li>
+						))}
 					</ul>
 					<div style={{marginTop: "1em"}}>
 						<Button onClick={close}><LANG id="accept"/></Button>

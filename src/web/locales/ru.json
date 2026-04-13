@@ -48,6 +48,7 @@
 	"layout_tooltip": "Попробуйте вид Сеткой!",
 	"data_collection_title": "Уведомление о сборе данных",
 	"data_collection_description": "Этот модпак автоматически собирает:",
+	"data_collection_list": "Список выбранных модов,Версия модпака,Версия игры,Язык игры,Регион игры",
 	"accept": "Принять",
 	"show_install_logs": "Показать логи установки",
 	"hide_install_logs": "Скрыть логи установки",

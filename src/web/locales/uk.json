@@ -48,6 +48,7 @@
 	"layout_tooltip": "Спробуйте вид Сіткою!",
 	"data_collection_title": "Повідомлення про збір даних",
 	"data_collection_description": "Цей модпак автоматично збирає:",
+	"data_collection_list": "Список вибраних модів,Версія модпаку,Версія гри,Мова гри,Регіон гри",
 	"accept": "Прийняти",
 	"show_install_logs": "Показати логи встановлення",
 	"hide_install_logs": "Сховати логи встановлення",

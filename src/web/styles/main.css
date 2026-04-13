@@ -403,3 +403,12 @@ ul{
 	opacity: 1;
 	visibility: visible;
 }
+
+.data-collection ul{
+	display: flex;
+	flex-direction: column;
+	gap: 0.5em;
+	text-align: center;
+	margin: 0;
+	padding: 0;
+}

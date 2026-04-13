@@ -48,6 +48,7 @@
 	"layout_tooltip": "Try Grid layout!",
 	"data_collection_title": "Data Collection Notice",
 	"data_collection_description": "This modpack automatically collects:",
+	"data_collection_list": "List of selected mods,Modpack version,Game version,Game language,Game realm",
 	"accept": "Accept",
 	"show_install_logs": "Show install logs",
 	"hide_install_logs": "Hide install logs",
