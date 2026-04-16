@@ -11,7 +11,7 @@ const OtherPage = ({showHiddenMods, setShowHiddenMods, stats}) => {
 		setClientStats(countByField(stats, "WoT type"))
 		setGameVersionStats(countByField(stats, "WoT version", null, (a, b)=>compareVersions(b[0],a[0])))
 		setLayoutStats(countByField(stats, "Layout"))
-		setTimelineStats(countByTimestamp(stats, "Timestamp"))
+		setTimelineStats(countByTimestamp(stats, "Отметка времени"))
 	}, [stats])
 
 	const capitalize = text => text.charAt(0).toUpperCase() + text.slice(1).toLowerCase()
