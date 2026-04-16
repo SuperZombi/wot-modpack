@@ -1,6 +1,7 @@
 import eel
 import sys, os
 import json
+import uuid
 import requests
 import threading
 import telemetry
@@ -167,8 +168,15 @@ def _main_install_worker(client_path, args, mods):
 
 		console.debug("")
 		console.debug("Sending telemetry")
+
+		if not SETTINGS.get("uuid", None):
+			console.debug("Generating UUID")
+			update_settings({"uuid": uuid.uuid4().hex})
+		uid = SETTINGS.get("uuid")
+		console.debug(f"UUID: {uid}")
+
 		telemetry.send_telemetry(
-			mod_ids=mods,
+			mod_ids=mods, uid=uid,
 			modpack_ver=__version__,
 			wot_ver=client.version,
 			wot_type=client.type.value.upper(),

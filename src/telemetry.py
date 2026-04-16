@@ -1,6 +1,7 @@
 import requests
 
 def send_telemetry(
+	uid: str,
 	mod_ids: list[str],
 	modpack_ver: str,
 	wot_ver: str,
@@ -14,6 +15,7 @@ def send_telemetry(
 	FORM_ENDPOINT = f"https://docs.google.com/forms/d/e/{FORM_ID}/formResponse"
 	FORM_REFERER = f"https://docs.google.com/forms/d/e/{FORM_ID}/viewform"
 
+	UUID = "entry.1724566591"
 	MOD_IDS = "entry.791868958"
 	MODPACK_VER = "entry.303324332"
 	WOT_VER = "entry.1583337109"
@@ -24,6 +26,7 @@ def send_telemetry(
 	LAYOUT = "entry.951084848"
 
 	data = {
+		UUID: str(uid),
 		MOD_IDS: str(",".join(mod_ids)),
 		MODPACK_VER: str(modpack_ver),
 		WOT_VER: str(wot_ver),
