@@ -30,22 +30,26 @@ const ModPreview = ({onClosePreview, previewData, collectFiles, stats, stats_csv
 					<img src={previewData.image} draggable={false}/>
 				</div>
 			)}
-			{previewData.author && (
-				<span>{<LANG id="author"/>}: {previewData.author}</span>
-			)}
-			{previewData.version && (
-				<div>
-					<span style={{marginRight: "5px"}}>{<LANG id="version"/>}:</span>
-					<code className="container version">{previewData.version}</code>
+			<div className="badge-area">
+				{previewData.author && (
+					<div className="badge shine" title={langData["author"][lang]}>
+						<i className="fa-solid fa-circle-user"></i>
+						<span>{previewData.author}</span>
+					</div>
+				)}
+				{previewData.version && (
+					<div className="badge shine" title={langData["version"][lang]}>
+						<i className="fa-solid fa-tag"></i>
+						<span>{previewData.version}</span>
+					</div>
+				)}
+				<div className="badge shine" title={langData["downloads"][lang]}>
+					<i className="fa-solid fa-circle-down"></i>
+					<span>{stats[previewData.id] || 0}</span>
 				</div>
-			)}
-			<div>
-				<i className="fa-solid fa-circle-down" style={{marginRight: "5px"}}></i>
-				<span>{<LANG id="downloads"/>}: {stats[previewData.id] || 0}</span>
 			</div>
 			{previewData.description && (
 				<div className="mod-description">
-					<hr/>
 					<div dangerouslySetInnerHTML={{ __html: previewData.description?.[lang] }}/>
 				</div>
 			)}

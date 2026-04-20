@@ -18,7 +18,7 @@ body{
 }
 .container{
 	background: rgba(255, 255, 255, 0.06);
-	border: 1px solid rgba(255,255,255,0.10);
+	border: 1px solid rgba(255,255,255,0.1);
 	border-radius: 1rem;
 	padding: 1rem;
 	box-shadow: 0 10px 30px rgba(0,0,0,0.35);
@@ -266,9 +266,21 @@ nav{
 .close:hover{
 	transform: rotate(90deg);
 }
-.version{
-	padding: 4px 10px;
+.badge-area{
+	display: flex;
+	gap: 0.5rem;
+}
+.badge{
+	padding: 6px 10px;
 	border-radius: 8px;
+	background: rgba(200, 200, 255, 0.1);
+	border: 1px solid rgba(255, 255, 255, 0.1);
+	display: flex;
+	gap: 6px;
+	align-items: center;
+	font-size: 14px;
+	line-height: 14px;
+	font-family: monospace;
 }
 
 select{
