@@ -77,13 +77,14 @@ const ModImage = ({ src = "web/images/picture.png" }) => {
 const ModLabel = ({mod}) => {
 	const {lang} = useApp()
 	const hidden = mod.title ? false : true;
-	return <span>{hidden ? mod.id : replaceFlags(mod.title[lang])}</span>
+	return <span className="title">{hidden ? mod.id : replaceFlags(mod.title[lang])}</span>
 }
 const Mod = ({ mod, onPreview }) => {
 	return (
 		<Reveal className="mod" onClick={_=>onPreview(mod)}>
 			<ModImage src={mod.image}/>
 			<ModLabel mod={mod}/>
+			<span className="version">{mod.ver}</span>
 		</Reveal>
 	)
 }

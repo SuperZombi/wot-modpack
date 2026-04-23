@@ -152,6 +152,7 @@ nav{
 	white-space: nowrap;
 	gap: 4px;
 	width: 100%;
+	position: relative;
 }
 #mods-list .mod:hover{
 	transform: translateY(-1px);
@@ -163,13 +164,23 @@ nav{
 	overflow: hidden;
 	user-select: none;
 }
-#mods-list .mod span{
+#mods-list .mod .title{
 	padding-bottom: 5px;
 	padding-left: 5px;
 	padding-right: 5px;
 	text-overflow: ellipsis;
 	overflow: hidden;
 	text-align: center;
+}
+#mods-list .mod .version{
+	position: absolute;
+	top: 4px;
+	right: 4px;
+	background: rgba(0, 0, 0, 0.5);
+	padding: 2px 4px;
+	border-radius: 4px;
+	font-size: 0.8em;
+	font-family: monospace;
 }
 #stats-list {
 	display: flex;
@@ -268,6 +279,7 @@ nav{
 }
 .badge-area{
 	display: flex;
+	flex-wrap: wrap;
 	gap: 0.5rem;
 }
 .badge{
@@ -281,6 +293,8 @@ nav{
 	font-size: 14px;
 	line-height: 14px;
 	font-family: monospace;
+	color: inherit;
+	text-decoration: none;
 }
 
 select{

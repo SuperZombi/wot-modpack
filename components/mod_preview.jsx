@@ -37,16 +37,21 @@ const ModPreview = ({onClosePreview, previewData, collectFiles, stats, stats_csv
 						<span>{previewData.author}</span>
 					</div>
 				)}
-				{previewData.version && (
+				{previewData.ver && (
 					<div className="badge shine" title={langData["version"][lang]}>
 						<i className="fa-solid fa-tag"></i>
-						<span>{previewData.version}</span>
+						<span>{previewData.ver}</span>
 					</div>
 				)}
 				<div className="badge shine" title={langData["downloads"][lang]}>
 					<i className="fa-solid fa-circle-down"></i>
 					<span>{stats[previewData.id] || 0}</span>
 				</div>
+				{previewData.src && (
+					<a href={previewData.src} className="badge shine" title={langData["source"][lang]} target="_blank">
+						<i className="fa-solid fa-code"></i>
+					</a>
+				)}
 			</div>
 			{previewData.description && (
 				<div className="mod-description">

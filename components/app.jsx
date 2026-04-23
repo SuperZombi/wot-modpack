@@ -66,15 +66,7 @@ const App = () => {
 	}, [selected, mods])
 	
 	const onPreview = mod=>{
-		setPreviewData({
-			id: mod.id,
-			title: mod.title,
-			description: mod.description,
-			author: mod.author,
-			image: mod.image,
-			audio: mod.audio,
-			version: mod.ver,
-		})
+		setPreviewData(mod)
 		setSelected(mod.id)
 		setShowPreview(true)
 	}
