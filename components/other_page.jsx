@@ -59,11 +59,13 @@ const OtherPage = ({showHiddenMods, setShowHiddenMods, stats}) => {
 					</a>
 				</div>
 				<div className="row" style={{marginTop: "1.5rem"}}>
-					<label>
-						<input type="checkbox" checked={showHiddenMods}
+					<label className="switch-control">
+						<input
+							type="checkbox"
+							checked={showHiddenMods}
 							onChange={e=>setShowHiddenMods(e.target.checked)}
-							style={{marginRight: "0.5em"}}
 						/>
+						<span className="switch-slider" aria-hidden="true"></span>
 						<span>{<LANG id="showHiddenMods"/>}</span>
 					</label>
 				</div>
