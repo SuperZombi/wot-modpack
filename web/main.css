@@ -320,6 +320,52 @@ table td, table caption{
 	flex-wrap: wrap;
 	align-items: flex-start;
 }
+.switch-control{
+	display: inline-flex;
+	align-items: center;
+	gap: 0.5em;
+	cursor: pointer;
+	user-select: none;
+}
+.switch-control input{
+	position: absolute;
+	opacity: 0;
+	width: 0;
+	height: 0;
+}
+.switch-slider{
+	width: 2em;
+	height: 1em;
+	flex: 0 0 auto;
+	border-radius: 100px;
+	background: rgba(255, 255, 255, 0.12);
+	border: 1px solid rgba(255, 255, 255, 0.2);
+	position: relative;
+}
+.switch-slider::before{
+	content: '';
+	position: absolute;
+	top: 50%;
+	left: 0.1em;
+	width: 0.7em;
+	height: 0.7em;
+	transform: translateY(-50%);
+	border-radius: 50%;
+	background: rgba(255, 255, 255, 0.95);
+	box-shadow: 0 2px 6px rgba(0,0,0,0.35);
+	transition: left 0.25s ease;
+}
+.switch-control input:checked + .switch-slider{
+	background: linear-gradient(to right, #06BFFF, #2B74FF);
+	border-color: rgba(124,196,255,0.55);
+}
+.switch-control input:checked + .switch-slider::before{
+	left: 1.1em;
+}
+.switch-control input:focus-visible + .switch-slider{
+	outline: 2px solid rgba(124,196,255,0.8);
+	outline-offset: 2px;
+}
 .line {
 	display: flex;
     flex-direction: column;
