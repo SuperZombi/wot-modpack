@@ -50,14 +50,9 @@ const ModsList = ({ mods, groups, onPreview, showHidden }) => {
 					})}
 				</div>
 			) : (
-				<div className="container" style={{paddingBottom: 0}}>
-					<Reveal className="line" style={{gap: 0}}>
-						<img src="web/images/empty-box.png" alt="No mods found"
-							height="128" draggable={false} style={{userSelect: "none"}}
-						/>
-						<h3>{langData.nothingFounded[lang]}</h3>
-					</Reveal>
-				</div>
+				<NotFound onClick={_=>setSearch("")}>
+					<LANG id="allModsButton"/>
+				</NotFound>
 			)}
 		</React.Fragment>
 	) : <Loader/>

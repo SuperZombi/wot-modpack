@@ -60,6 +60,7 @@ const App = () => {
 		const mod = mods.find(m => m.id == selected);
 		if (!mod){
 			setSelected(null)
+			setTab("404")
 			return
 		}
 		onPreview(mod)
@@ -124,6 +125,11 @@ const App = () => {
 					showHiddenMods={showHiddenMods} setShowHiddenMods={setShowHiddenMods}
 					stats={stats}
 				/>
+			) : tab == "404" ? (
+				<NotFound onClick={_=>setTab("home")}>
+					<i className="fa-solid fa-home"></i>
+					<LANG id="homeTab"/>
+				</NotFound>
 			) : null}
 
 			{showPreview && (
@@ -143,6 +149,26 @@ ReactDOM.createRoot(document.getElementById("root")).render(
 		<App/>
 	</AppProvider>
 )
+
+const NotFound = ({ children, onClick }) => {
+	return (
+		<div className="container" style={{paddingBottom: 0}}>
+			<Reveal className="line" style={{gap: 0}}>
+				<img src="web/images/empty-box.png" alt="No mods found"
+					height="128" draggable={false} style={{userSelect: "none"}}
+				/>
+				<h3><LANG id="nothingFounded"/></h3>
+			</Reveal>
+			{children && (
+				<Reveal delay={2} style={{textAlign: "center", marginBottom: "1rem"}}>
+					<button className="button shine" onClick={onClick}>
+						{children}
+					</button>
+				</Reveal>
+			)}
+		</div>
+	)
+}
 
 function loadStatsPage(callback){
 	const DOC_ID = "1GEMJfZxjUYmQAg-cDcQ7DGNjsX6pASMp9hQ1T0tVRfo"
