@@ -84,7 +84,7 @@ const Mod = ({ mod, onPreview }) => {
 	)
 }
 const ModStats = ({mods, stats, onPreview}) => {
-	const [statsLoaded, setStatsLoaded] = React.useState(true)
+	const [statsLoaded, setStatsLoaded] = React.useState(false)
 	React.useEffect(() => {
 		setStatsLoaded(Object.keys(stats).length > 0)
 	}, [stats])
