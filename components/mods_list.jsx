@@ -55,7 +55,7 @@ const ModsList = ({ mods, groups, onPreview, showHidden }) => {
 						<img src="web/images/empty-box.png" alt="No mods found"
 							height="128" draggable={false} style={{userSelect: "none"}}
 						/>
-						<h3>{LANG.nothingFounded[lang]}</h3>
+						<h3>{langData.nothingFounded[lang]}</h3>
 					</Reveal>
 				</div>
 			)}
