@@ -32,6 +32,13 @@ const OtherPage = ({showHiddenMods, setShowHiddenMods, stats}) => {
 		}
 		return capitalize(localizedLabel) 
 	}
+	const formatDate = date => {
+		const parsedDate = parseRuTimestamp(date)
+		return parsedDate.toLocaleString(lang, {
+			day: 'numeric',
+			month: 'short'
+		})
+	}
 
 	const layout_type = {
 		"grid": langData?.["layout_grid"]?.[lang],
@@ -92,6 +99,7 @@ const OtherPage = ({showHiddenMods, setShowHiddenMods, stats}) => {
 						type="line"
 						data={timelineStats}
 						caption={langData?.["installsTimeline"]?.[lang]}
+						nameFormatter={formatDate}
 					/>
 				</div>
 			</div>
@@ -129,6 +137,18 @@ const StatsChart = ({
 				responsive:true,
 				maintainAspectRatio:false,
 				indexAxis: type === "bar" ? "y" : "x",
+				...((type === "line" || type === "bar") && {
+					scales: {
+						x: {
+							min: 0,
+							ticks: { stepSize: 1 }
+						},
+						y: {
+							min: 0,
+							ticks: { stepSize: 1 }
+						}
+					}
+				}),
 				plugins:{
 					legend: {
 						display: type === "doughnut" ? true : false,
@@ -195,21 +215,30 @@ function countByTimestamp(data, keyField) {
 	return data.reduce((acc, row) => {
 		const parsedDate = parseRuTimestamp(row[keyField])
 		if (!parsedDate) return acc
-		const year = String(parsedDate.getUTCFullYear()).slice(-2)
+		const year = String(parsedDate.getUTCFullYear())
 		const month = String(parsedDate.getUTCMonth() + 1).padStart(2, "0")
 		const day = String(parsedDate.getUTCDate()).padStart(2, "0")
-		const key = `${day}-${month}-${year}`
+		const key = `${day}.${month}.${year}`
 		acc[key] = (acc[key] || 0) + 1
 		return acc
 	}, {})
 }
 function parseRuTimestamp(value) {
 	const text = String(value || "").trim()
-	const match = text.match(/^(\d{2})\.(\d{2})\.(\d{4})\s+(\d{1,2}):(\d{2})(?::(\d{2}))?$/)
-	if (!match) {
-		return null
-	}
-	const [, day, month, year, hour, minute, second = "0"] = match
+	const match = text.match(
+		/^(\d{2})\.(\d{2})\.(\d{4})(?:\s+(\d{1,2}):(\d{2})(?::(\d{2}))?)?$/
+	)
+	if (!match) { return null }
+	const [
+		_,
+		day,
+		month,
+		year,
+		hour = "0",
+		minute = "0",
+		second = "0"
+	] = match
+
 	return new Date(Date.UTC(
 		Number(year),
 		Number(month) - 1,
