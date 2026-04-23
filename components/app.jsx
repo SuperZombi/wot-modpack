@@ -10,7 +10,6 @@ const App = () => {
 	const [selected, setSelected] = React.useState(null)
 
 	const [tab, setTab] = React.useState("")
-	const [showHiddenMods, setShowHiddenMods] = React.useState(false)
 
 	React.useEffect(() => {
 		fetch('https://raw.githubusercontent.com/SuperZombi/wot-modpack/refs/heads/mods/config.json')
@@ -113,16 +112,14 @@ const App = () => {
 					total_installs={stats.length}
 					setTab={setTab}
 				/>
-			) : tab == "mods" ? (
-				<ModsList mods={mods} groups={groups}
+			) : (tab == "mods" || tab == "popular") ? (
+				<ModsPage mods={mods} groups={groups}
+					stats={downloadsStats}
 					onPreview={onPreview}
-					showHidden={showHiddenMods}
+					tab={tab} setTab={setTab}
 				/>
 			) : tab == "stats" ? (
-				<ModStats mods={mods} stats={downloadsStats} onPreview={onPreview}/>
-			) : tab == "other" ? (
-				<OtherPage
-					showHiddenMods={showHiddenMods} setShowHiddenMods={setShowHiddenMods}
+				<StatsPage
 					stats={stats}
 				/>
 			) : tab == "404" ? (

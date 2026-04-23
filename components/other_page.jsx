@@ -1,4 +1,4 @@
-const OtherPage = ({showHiddenMods, setShowHiddenMods, stats}) => {
+const StatsPage = ({stats}) => {
 	const [langStats, setLangStats] = React.useState({})
 	const [clientStats, setClientStats] = React.useState({})
 	const [gameVersionStats, setGameVersionStats] = React.useState({})
@@ -47,29 +47,6 @@ const OtherPage = ({showHiddenMods, setShowHiddenMods, stats}) => {
 
 	return (
 		<React.Fragment>
-			<div className="container" align="center">
-				<div className="row">
-					<a className="button shine" href="https://wgmods.net/7156/" target="_blank">
-						<i className="fa-solid fa-globe"></i>
-						<span>WGmods</span>
-					</a>
-					<a className="button shine" href="https://github.com/SuperZombi/wot-modpack" target="_blank">
-						<i className="fa-brands fa-github"></i>
-						<span>GitHub</span>
-					</a>
-				</div>
-				<div className="row" style={{marginTop: "1.5rem"}}>
-					<label className="switch-control">
-						<span>{<LANG id="showHiddenMods"/>}</span>
-						<input
-							type="checkbox"
-							checked={showHiddenMods}
-							onChange={e=>setShowHiddenMods(e.target.checked)}
-						/>
-						<span className="switch-slider" aria-hidden="true"></span>
-					</label>
-				</div>
-			</div>
 			<div className="container line" style={{gap: "2rem"}}>
 				<div className="row">
 					<StatsChart

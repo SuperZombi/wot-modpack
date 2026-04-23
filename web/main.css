@@ -58,7 +58,7 @@ nav{
 	scrollbar-width: thin;
 	padding: 1px 0;
 	font-size: 14px;
-	margin-left: auto;
+	margin-right: auto;
 }
 .button{
 	background: rgba(255, 255, 255, 0.06);
@@ -404,7 +404,7 @@ table td, table caption{
 .features-grid {
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
-	gap: 1rem;
+	gap: 0 1rem;
 	width: 100%;
 }
 .feature {
@@ -640,39 +640,9 @@ table td, table caption{
 	.scroll-parallax-card{
 		height: 80dvh;
 	}
-}
-@media (max-width: 600px) {
-	#mods-list {
-		grid-template-columns: repeat(2, 1fr);
-		grid-auto-rows: 140px;
-	}
-	select{
-		order: 0;
-	}
-	nav{
-		margin-left: 0;
-	}
-	.image-container{
-		height: auto;
-		min-height: fit-content;
-		max-height: 300px;
-		overflow: hidden;
-		border-radius: 10px;
-	}
-	.mobile-font-size{
-		font-size: 14px;
-	}
-	.popup-content{
-		max-width: 95dvw;
-	}
-	.ba-slider{
-		height: auto;
-	}
-	.card-page{
-		min-height: 70dvh;
-	}
 	.features-grid{
 		grid-template-columns: 1fr;
+		gap: 1rem;
 	}
 	.feature {
 		grid-template-rows: 1fr;
@@ -725,5 +695,36 @@ table td, table caption{
 		transform: scale(1.08) rotate(-4deg);
 		background: #00bdff;
 		color: #fff;
+	}
+}
+@media (max-width: 600px) {
+	#mods-list {
+		grid-template-columns: repeat(2, 1fr);
+		grid-auto-rows: 140px;
+	}
+	select{
+		order: 0;
+	}
+	nav{
+		margin-left: 0;
+	}
+	.image-container{
+		height: auto;
+		min-height: fit-content;
+		max-height: 300px;
+		overflow: hidden;
+		border-radius: 10px;
+	}
+	.mobile-font-size{
+		font-size: 14px;
+	}
+	.popup-content{
+		max-width: 95dvw;
+	}
+	.ba-slider{
+		height: auto;
+	}
+	.card-page{
+		min-height: 70dvh;
 	}
 }

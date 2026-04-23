@@ -1,3 +1,51 @@
+const ModsPage = ({mods, stats, groups, onPreview, tab, setTab}) => {
+	const [showHiddenMods, setShowHiddenMods] = React.useState(false)
+
+	return (
+		<React.Fragment>
+			<div className="container line" style={{gap: "1.5rem"}}>
+				<div className="row">
+					<button className={`button shine ${tab === "mods" ? "active" : ""}`}
+						disabled={tab === "mods"}
+						onClick={_=>setTab("mods")}
+					>
+						<i className="fa-solid fa-list-ul"></i>
+						<LANG id="allModsTab"/>
+					</button>
+					<button className={`button shine ${tab === "popular" ? "active" : ""}`}
+						disabled={tab === "popular"}
+						onClick={_=>setTab("popular")}
+					>
+						<i className="fa-solid fa-chart-simple"></i>
+						<LANG id="popularModsTab"/>
+					</button>
+				</div>
+				{tab === "mods" && (
+					<div className="row">
+						<label className="switch-control">
+							<span>{<LANG id="showHiddenMods"/>}</span>
+							<input
+								type="checkbox"
+								checked={showHiddenMods}
+								onChange={e=>setShowHiddenMods(e.target.checked)}
+							/>
+							<span className="switch-slider" aria-hidden="true"></span>
+						</label>
+					</div>
+				)}
+			</div>
+			{tab == "mods" ? (
+				<ModsList mods={mods} groups={groups}
+					onPreview={onPreview}
+					showHidden={showHiddenMods}
+				/>
+			) : tab == "popular" ? (
+				<ModStats mods={mods} stats={stats} onPreview={onPreview}/>
+			) : null}
+		</React.Fragment>
+	)
+}
+
 const ModsList = ({ mods, groups, onPreview, showHidden }) => {
 	const [search, setSearch] = React.useState("")
 	const normalizedSearch = search.trim().toLowerCase()
@@ -84,15 +132,9 @@ const Mod = ({ mod, onPreview }) => {
 	)
 }
 const ModStats = ({mods, stats, onPreview}) => {
-	const [statsLoaded, setStatsLoaded] = React.useState(false)
-	React.useEffect(() => {
-		setStatsLoaded(Object.keys(stats).length > 0)
-	}, [stats])
-
-	if (!statsLoaded){
+	if (Object.keys(stats).length === 0) {
 		return <Loader/>
 	}
-
 	const sortedMods = mods
 		.filter(mod => mod.title)
 		.map(mod => ({

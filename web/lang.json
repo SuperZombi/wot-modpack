@@ -208,5 +208,15 @@
 		"en": "All mods",
 		"ru": "Все моды",
 		"uk": "Всі моди"
+	},
+	"allModsTab": {
+		"en": "All mods",
+		"ru": "Все моды",
+		"uk": "Всі моди"
+	},
+	"popularModsTab": {
+		"en": "Popular",
+		"ru": "Популярные",
+		"uk": "Популярні"
 	}
 }

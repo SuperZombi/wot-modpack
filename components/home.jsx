@@ -57,7 +57,7 @@ const Home = ({mods_count, total_installs, setTab}) => {
 				/></Reveal>
 			</div>
 
-			<div className="container card-page" align="center">
+			<div className="container" align="center">
 				<div className="features-grid">
 					{features.map((feature, idx) => (
 						<Reveal className="feature" key={idx} delay={idx}>
@@ -68,6 +68,26 @@ const Home = ({mods_count, total_installs, setTab}) => {
 							</div>
 						</Reveal>
 					))}
+				</div>
+				<div className="row" style={{fontSize: "1.1em", marginTop: "2rem"}}>
+					<Reveal delay={2}>
+						<a className="button shine" href="https://wgmods.net/7156/" target="_blank">
+							<i className="fa-solid fa-globe"></i>
+							<span>WGmods</span>
+						</a>
+					</Reveal>
+					<Reveal delay={4}>
+						<a className="button shine" href="https://github.com/SuperZombi/wot-modpack" target="_blank">
+							<i className="fa-brands fa-github"></i>
+							<span>GitHub</span>
+						</a>
+					</Reveal>
+					<Reveal delay={6}>
+						<a className="button shine" href="https://donatello.to/super_zombi" target="_blank">
+							<i className="fa-solid fa-dollar-sign"></i>
+							<span>Donatello</span>
+						</a>
+					</Reveal>
 				</div>
 			</div>
 		</React.Fragment>
