@@ -183,7 +183,7 @@ def _main_install_worker(client_path, args, mods):
 			wot_lang=client.lang.upper(),
 			wot_realm=client.realm.upper(),
 			wot_branch=client.branch.value.upper(),
-			layout=SETTINGS.get("layout")
+			layout=SETTINGS.get("layout", "list")
 		)
 
 	if args.get("save_selected_mods", True):
