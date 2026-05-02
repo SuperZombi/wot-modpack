@@ -19,7 +19,7 @@ const Home = ({mods_count, total_installs, setTab}) => {
 								delay={2} onClick={_=>setTab("mods")}
 							/>
 							<StatCard value={total_installs} label={<LANG id="installations"/>}
-								delay={4} onClick={_=>setTab("other")}
+								delay={4} onClick={_=>setTab("stats")}
 							/>
 						</div>
 						<div className="row" style={{marginTop: "1.5rem", fontSize: "1.2em"}}>
