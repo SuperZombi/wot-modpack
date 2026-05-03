@@ -1,0 +1,45 @@
+{
+	"enable" : true,
+	"enable_flash": false,
+	"trackUI": false,
+	"enemysOnly": true,
+
+	// От центра экрана
+	"position" : {
+		"arcade": [-100, 200],
+		"sniper": [-100, 150]
+	},
+	// Размер индикатора
+	"size" : [200, 50],
+	
+	// armor - толщина брони
+	// calcedArmor - приведённая
+	// piercingPower - пробитие
+	// calcedPiercingPower - реальное пробитие
+	// enemyDistance - дистанция
+	// maxShotDistance - максимальная дистанция полёта снаряда
+	// dynamicColor - динамический цвет относительно шанса пробития
+	// piercingReserve - резерв пробития (calcedPiercingPower - calcedArmor)
+	"pattern" : "{{calcedArmor}} • {{calcedPiercingPower}}",
+
+	"textFormat" : {
+		"align" : "center",
+		"alpha" : 100,
+		"colors" : {
+			"not_pierced": "E90000",
+			"little_pierced": "FFAD00",
+			"great_pierced": "6BF40D"
+		},
+		"font" : "$FieldFont",
+		"size" : 20,
+		"html": false
+	},
+	"shadow" : {
+		"alpha" : 90,
+		"blur" : 2,
+		"color" : "000000",
+		"strength" : 2,
+		"distance" : 0,
+		"angle" : 0
+	}
+}
