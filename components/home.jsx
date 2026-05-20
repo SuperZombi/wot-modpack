@@ -44,7 +44,7 @@ const Home = ({mods_count, total_installs, setTab}) => {
 				<Reveal>
 					<StatCard value={mods_count} label={<LANG id="mods_count"/>}
 						delay={2} onClick={_=>setTab("mods")}
-						style={{fontSize: "1.1rem"}}
+						style={{fontSize: "1.1rem"}} label_style={{color: "#ccc"}}
 					/>
 				</Reveal>
 			</div>
@@ -102,7 +102,7 @@ const Home = ({mods_count, total_installs, setTab}) => {
 		</React.Fragment>
 	)
 }
-const StatCard = ({ value, label, duration=2000, delay=0, style={}, className="", onClick=null }) => {
+const StatCard = ({ value, label, duration=2000, delay=0, style={}, label_style={}, className="", onClick=null }) => {
 	const combinedStyle = {
 		...style,
 		...(onClick ? { cursor: "pointer" } : {})
@@ -112,7 +112,7 @@ const StatCard = ({ value, label, duration=2000, delay=0, style={}, className=""
 			delay={delay} style={combinedStyle} onClick={onClick}
 		>
 			<Counter to={value} duration={duration}/>
-			<span>{label}</span>
+			<span style={label_style}>{label}</span>
 		</Reveal>
 	)
 }
