@@ -598,9 +598,8 @@ table td, table caption{
 	animation: scrollBg 60s linear infinite;
 }
 .infinity-grid > div{
-	backdrop-filter: blur(1rem);
+	backdrop-filter: blur(10px);
 	border-radius: 1rem;
-	mix-blend-mode: plus-lighter;
 }
 @keyframes scrollBg {
 	from { background-position-x: 0; }
