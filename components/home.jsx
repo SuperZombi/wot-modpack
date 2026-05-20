@@ -40,8 +40,17 @@ const Home = ({mods_count, total_installs, setTab}) => {
 				</i></Reveal>
 			</div>
 
+			<div className="container card-page infinity-grid gradient-bg" align="center">
+				<Reveal>
+					<StatCard value={mods_count} label={<LANG id="mods_count"/>}
+						delay={2} onClick={_=>setTab("mods")}
+						style={{fontSize: "1.1rem"}}
+					/>
+				</Reveal>
+			</div>
+
 			<ScrollParallaxCard
-				className="container card-page"
+				className="container card-page gradient-bg"
 				bg="web/images/bg1.png"
 				fg="web/images/bg2.png"
 			>
