@@ -57,6 +57,10 @@ const ModsList = ({ mods, groups, onPreview, showHidden }) => {
 		if (mod.title && Object.values(mod.title).some(v => v.toLowerCase().includes(normalizedSearch))) return true;
 		if (mod.description && Object.values(mod.description).some(v => v.toLowerCase().includes(normalizedSearch))) return true;
 		return false;
+	}).sort((a, b) => {
+		const catA = a.category ?? '';
+		const catB = b.category ?? '';
+		return catA.localeCompare(catB)
 	})
 	const {lang, langData} = useApp()
 
