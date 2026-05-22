@@ -50,7 +50,7 @@ const ModsList = ({ mods, groups, onPreview, showHidden }) => {
 	const [search, setSearch] = React.useState("")
 	const normalizedSearch = search.trim().toLowerCase()
 	const filteredMods = mods.filter(mod => {
-		if (!mod.title && !showHidden) { return false }
+		if (mod.hidden && !showHidden) { return false }
 		if (!normalizedSearch) { return true }
 		if (mod.id.toLowerCase().includes(normalizedSearch)) return true;
 		if (mod.author && mod.author.toLowerCase().includes(normalizedSearch)) return true;
@@ -119,8 +119,7 @@ const ModImage = ({ src = "web/images/picture.png" }) => {
 }
 const ModLabel = ({mod}) => {
 	const {lang} = useApp()
-	const hidden = mod.title ? false : true;
-	return <span className="title">{hidden ? mod.id : replaceFlags(mod.title[lang])}</span>
+	return <span className="title">{mod.title ? replaceFlags(mod.title[lang]) : mod.id}</span>
 }
 const Mod = ({ mod, onPreview }) => {
 	return (
