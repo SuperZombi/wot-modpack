@@ -301,7 +301,7 @@ class Mod:
 			os.makedirs(target_map[file["dest"]], exist_ok=True)
 
 			if file["url"].startswith("http"):
-				console.debug(f'Downloading: {file["url"]}')
+				console.debug(f'⬇️ Downloading: {file["url"]}')
 				file_io = self.download(file["url"], on_progress=on_progress, logger=console)
 				if not file_io: return False
 
