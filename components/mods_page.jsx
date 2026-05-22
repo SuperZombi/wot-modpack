@@ -135,7 +135,7 @@ const ModStats = ({mods, stats, onPreview}) => {
 		return <Loader/>
 	}
 	const sortedMods = mods
-		.filter(mod => mod.title)
+		.filter(mod => !mod.hidden)
 		.map(mod => ({
 			...mod,
 			popularity: stats[mod.id] || 0
