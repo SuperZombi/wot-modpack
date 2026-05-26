@@ -5,7 +5,6 @@ const InstallLogsViewer = ({
 	const [logs, setLogs] = React.useState([])
 	const [showLogs, setShowLogs] = React.useState(false)
 	const [selectedLevel, setSelectedLevel] = React.useState("info")
-	const [copied, setCopied] = React.useState(false)
 
 	const levelsOrder = ["debug", "info", "warn", "error"]
 	const selectedIndex = levelsOrder.indexOf(selectedLevel)
@@ -31,8 +30,6 @@ const InstallLogsViewer = ({
 		const textToCopy = logsText || (langData?.no_logs_for_selected_level || "No logs for selected level.")
 		try {
 			await navigator.clipboard.writeText(textToCopy)
-			setCopied(true)
-			setTimeout(()=>setCopied(false), 1200)
 		} catch {
 			const area = document.createElement("textarea")
 			area.value = textToCopy
@@ -40,8 +37,6 @@ const InstallLogsViewer = ({
 			area.select()
 			document.execCommand("copy")
 			document.body.removeChild(area)
-			setCopied(true)
-			setTimeout(()=>setCopied(false), 1200)
 		}
 	}
 
@@ -65,8 +60,11 @@ const InstallLogsViewer = ({
 									<option value="error">ERROR</option>
 								</select>
 						</label>
-							<Button onClick={copyLogs} style={{fontSize: "12px", marginLeft: "auto"}}>
-								{copied ? <LANG id="copied"/> : <LANG id="copy_logs"/>}
+							<Button onClick={copyLogs}
+								style={{fontSize: "12px", marginLeft: "auto"}}
+								tooltip={langData["copy_logs"]}
+							>
+								<img src="/images/copy.svg" draggable={false} style={{height: "1em"}}/>
 							</Button>
 						</div>
 							<pre className="install-logs">
