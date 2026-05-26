@@ -396,6 +396,12 @@ ul{
 	align-items: center;
 	justify-items: start;
 }
+.download-progress-size {
+	display: flex;
+	gap: 4px;
+	justify-content: center;
+	margin-top: 1rem;
+}
 
 #drag-area{
 	background: rgb(255, 255, 255, 0.2);

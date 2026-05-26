@@ -4,20 +4,19 @@ const InstallTab = ({
 	const { settings } = useApp()
 
 	const modObj = mods.find(mod => mod.id === currentInstall.id)
-	const download_progress = Math.round(
-		(currentInstall?.download_total
-			? (currentInstall.download_current ?? 0) / currentInstall.download_total * 100
-			: 0
-		)
-	)
+	const download_current = currentInstall?.download_current ?? 0
+	const download_total = currentInstall?.download_total ?? 0
+	const download_progress = download_total ? (
+		Math.round(download_current / download_total * 100)
+	) : 0
 	
 	return (
 		<div>
 			<br/>
 			<h3 style={{marginBottom: "2rem"}}><LANG id="installing_mods"/></h3>
-			<p>
+			<div>
 				{modObj?.title?.[settings.language] ? replaceFlags(modObj.title[settings.language]) : ""}
-			</p>
+			</div>
 			<br/>
 			<div className="progress-area">
 				<progress
@@ -38,6 +37,15 @@ const InstallTab = ({
 				}}>
 					{download_progress + "%"}
 				</span>
+			</div>
+			<div className="download-progress-size"
+				style={{opacity: download_progress > 0 ? 1 : 0}}
+			>
+				<span>{bytesToMb(download_current)}</span>
+				<LANG id="megabytes"/>
+				<span>/</span>
+				<span>{bytesToMb(download_total)}</span>
+				<LANG id="megabytes"/>
 			</div>
 			<Gallery/>
 		</div>
