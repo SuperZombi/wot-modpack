@@ -88,7 +88,7 @@ const App = () => {
 						const exists = clientsInfo.some(c => c.path === client_info.path);
 						if (!exists) {
 							setClientsData(prev => [
-								...prev, ...client_info
+								...prev, client_info
 							])
 						}
 						setSelectedClient(client_info)
