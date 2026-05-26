@@ -23,7 +23,7 @@ const InstallTab = ({
 					value={currentInstall?.current ?? 0}
 					max={currentInstall?.total ?? 1}
 				/>
-				<span>{currentInstall ? `${currentInstall.current ?? 0}/${currentInstall.total ?? 0}` : "0/0"}</span>
+				<span>{currentInstall ? `${currentInstall.current ?? 0} / ${currentInstall.total ?? 0}` : "0 / 0"}</span>
 
 				<progress
 					value={download_progress}
