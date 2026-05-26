@@ -4,6 +4,12 @@ const InstallTab = ({
 	const { settings } = useApp()
 
 	const modObj = mods.find(mod => mod.id === currentInstall.id)
+	const download_progress = Math.round(
+		(currentInstall?.download_total
+			? (currentInstall.download_current ?? 0) / currentInstall.download_total * 100
+			: 0
+		)
+	)
 	
 	return (
 		<div>
@@ -21,16 +27,16 @@ const InstallTab = ({
 				<span>{currentInstall ? `${currentInstall.current ?? 0}/${currentInstall.total ?? 0}` : "0/0"}</span>
 
 				<progress
-					value={currentInstall?.download_progress ?? 0}
+					value={download_progress}
 					max="100"
 					style={{
-						opacity: (currentInstall?.download_progress ?? 0) > 0 ? 1 : 0
+						opacity: download_progress > 0 ? 1 : 0
 					}}
 				/>
 				<span style={{
-					opacity: (currentInstall?.download_progress ?? 0) > 0 ? 1 : 0
+					opacity: download_progress > 0 ? 1 : 0
 				}}>
-					{(currentInstall?.download_progress ?? 0) + "%"}
+					{download_progress + "%"}
 				</span>
 			</div>
 			<Gallery/>

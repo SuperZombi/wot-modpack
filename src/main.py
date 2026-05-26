@@ -94,7 +94,10 @@ def get_install_logs():
 
 
 def download_progress(current, total):
-	eel.installing_progress({"download_progress":round(current / total * 100)})
+	eel.installing_progress({
+		"download_current": current,
+		"download_total": total,
+	})
 
 def json_to_mod(mod_id):
 	mod_info = next((d for d in MODS_DATA if d["id"] == mod_id), None)
@@ -157,7 +160,8 @@ def _main_install_worker(client_path, args, mods):
 				"id": mod.id,
 				"current": index,
 				"total": total_mods,
-				"download_progress": 0
+				"download_current": 0,
+				"download_total": 0,
 			})
 			try:
 				result = client.install_mod(mod, on_progress=download_progress)
