@@ -1,7 +1,7 @@
 const InstallTab = ({
 	mods, currentInstall
 }) => {
-	const { language } = useApp()
+	const { settings } = useApp()
 
 	const modObj = mods.find(mod => mod.id === currentInstall.id)
 	
@@ -10,7 +10,7 @@ const InstallTab = ({
 			<br/>
 			<h3 style={{marginBottom: "2rem"}}><LANG id="installing_mods"/></h3>
 			<p>
-				{modObj?.title?.[language] ? replaceFlags(modObj.title[language]) : ""}
+				{modObj?.title?.[settings.language] ? replaceFlags(modObj.title[settings.language]) : ""}
 			</p>
 			<br/>
 			<div className="progress-area">
