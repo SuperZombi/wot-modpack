@@ -270,7 +270,7 @@ class Mod:
 		if self.requires and len(self.requires) > 0:
 			console.log(f"Requirements: [{', '.join(map(lambda x: x.id, self.requires))}]")
 			for mod in self.requires:
-				result = client.install_mod(mod)
+				result = client.install_mod(mod, on_progress=on_progress)
 				if not result: return False
 			console.debug("Requirements installed")
 
@@ -301,15 +301,12 @@ class Mod:
 			os.makedirs(target_map[file["dest"]], exist_ok=True)
 
 			if file["url"].startswith("http"):
-				console.debug(f'⬇️ Downloading: {file["url"]}')
 				file_io = self.download(file["url"], on_progress=on_progress, logger=console)
 				if not file_io: return False
 
 				if file["url"].endswith(".zip"):
 					target_dest = target_map[file["dest"]]
-					console.debug(f"Unziping to: {target_dest}")
-					with zipfile.ZipFile(file_io, 'r') as zip_ref:
-						zip_ref.extractall(target_dest)
+					self.extract_files(file_io, target_dest, on_progress=on_progress, logger=console)
 				else:
 					target_file = os.path.join(target_map[file["dest"]], os.path.basename(file["url"]))
 					console.debug(f'Moving to: {target_file}')
@@ -333,9 +330,7 @@ class Mod:
 					return False
 				if file["url"].endswith(".zip"):
 					target_dest = target_map[file["dest"]]
-					console.debug(f"Unziping to: {target_dest}")
-					with zipfile.ZipFile(file["url"], 'r') as zip_ref:
-						zip_ref.extractall(target_dest)
+					self.extract_files(file["url"], target_dest, on_progress=on_progress, logger=console)
 				else:
 					target_file = os.path.join(target_map[file["dest"]], os.path.basename(file["url"]))
 					console.debug(f'Moving to: {target_file}')
@@ -350,17 +345,45 @@ class Mod:
 			console.debug(f"Cache updated")
 		return True
 
-	def download(self, url, on_progress=None, logger=None):
+	def extract_files(self, file, dest, on_progress, logger):
+		CHUNK_SIZE = 1024 * 1024
+		logger.debug(f"Unziping to: {dest}")
+		with zipfile.ZipFile(file, 'r') as zip_ref:
+			files = zip_ref.infolist()
+			current_size = 0
+			total_size = sum(f.file_size for f in files)
+			on_progress(current_size, total_size)
+
+			for zip_info in files:
+				target_path = os.path.join(dest, zip_info.filename)
+
+				if zip_info.is_dir():
+					os.makedirs(target_path, exist_ok=True)
+					continue
+
+				os.makedirs(os.path.dirname(target_path), exist_ok=True)
+
+				with zip_ref.open(zip_info) as src, open(target_path, 'wb') as dst:
+					while True:
+						chunk = src.read(CHUNK_SIZE)
+						if not chunk: break
+						dst.write(chunk)
+						current_size += len(chunk)
+						on_progress(current_size, total_size)
+
+	def download(self, url, on_progress, logger):
+		CHUNK_SIZE = 1024 * 1024
+		logger.debug(f'⬇️ Downloading: {url}')
 		try:
 			r = requests.get(url, stream=True, timeout=10)
 			if r.ok:
 				total_size = int(r.headers.get("content-length", 0))
 				downloaded = 0
-				if on_progress: on_progress(downloaded, total_size)
+				on_progress(downloaded, total_size)
 				file = BytesIO()
-				for data in r.iter_content(1024):
+				for data in r.iter_content(CHUNK_SIZE):
 					downloaded+=len(data)
-					if on_progress: on_progress(min(downloaded,total_size), total_size)
+					on_progress(min(downloaded,total_size), total_size)
 					file.write(data)
 				file.seek(0)
 				return file
