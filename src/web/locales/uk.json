@@ -54,6 +54,7 @@
 	"hide_install_logs": "Сховати логи встановлення",
 	"log_level": "Рівень",
 	"copy_logs": "Копіювати",
+	"save_logs_to_file": "Зберегти у файл",
 	"no_logs_for_selected_level": "Немає логів для вибраного рівня",
 	"first_install_tooltip": "Виберіть це, якщо це ваше перше встановлення",
 	"advert_title": "Сподобався модпак?",

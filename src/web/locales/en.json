@@ -54,6 +54,7 @@
 	"hide_install_logs": "Hide install logs",
 	"log_level": "Log level",
 	"copy_logs": "Copy",
+	"save_logs_to_file": "Save to file",
 	"no_logs_for_selected_level": "No logs for selected level",
 	"first_install_tooltip": "Choose this, if this is your first installation",
 	"advert_title": "Did you like this modpack?",

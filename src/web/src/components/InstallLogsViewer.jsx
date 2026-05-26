@@ -27,12 +27,11 @@ const InstallLogsViewer = ({
 	}, [showLogs])
 
 	const copyLogs = async _ => {
-		const textToCopy = logsText || (langData?.no_logs_for_selected_level || "No logs for selected level.")
 		try {
-			await navigator.clipboard.writeText(textToCopy)
+			await navigator.clipboard.writeText(logsText)
 		} catch {
 			const area = document.createElement("textarea")
-			area.value = textToCopy
+			area.value = logsText
 			document.body.appendChild(area)
 			area.select()
 			document.execCommand("copy")
@@ -50,26 +49,34 @@ const InstallLogsViewer = ({
 						<div className="install-log-controls">
 							<label>
 								<span><LANG id="log_level"/>:</span>
-									<select
-										value={selectedLevel}
-										onChange={e=>setSelectedLevel(e.target.value)}
+								<select
+									value={selectedLevel}
+									onChange={e=>setSelectedLevel(e.target.value)}
 								>
 									<option value="debug">DEBUG</option>
 									<option value="info">INFO</option>
 									<option value="warn">WARN</option>
 									<option value="error">ERROR</option>
 								</select>
-						</label>
-							<Button onClick={copyLogs}
-								style={{fontSize: "12px", marginLeft: "auto"}}
-								tooltip={langData["copy_logs"]}
-							>
-								<img src="/images/copy.svg" draggable={false} style={{height: "1em"}}/>
-							</Button>
+							</label>
+							<div className="actions">
+								<Button
+									onClick={copyLogs}
+									tooltip={langData["copy_logs"]}
+								>
+									<img src="/images/copy.svg" draggable={false}/>
+								</Button>
+								<Button
+									tooltip={langData["save_logs_to_file"]}
+									onClick={_=>writeToFile(logsText, `logs_${selectedLevel}.txt`)}
+								>
+									<img src="/images/down.svg" draggable={false}/>
+								</Button>
+							</div>
 						</div>
-							<pre className="install-logs">
-								{logsText || <LANG id="no_logs_for_selected_level"/>}
-							</pre>
+						<pre className="install-logs">
+							{logsText || <LANG id="no_logs_for_selected_level"/>}
+						</pre>
 					</div>
 				)}
 		</div>

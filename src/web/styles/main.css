@@ -308,12 +308,19 @@ ul{
 	justify-content: flex-start;
 	align-items: center;
 }
-.install-log-controls label{
+.install-log-controls label,
+.install-log-controls .actions {
 	display: inline-flex;
 	align-items: center;
 	gap: 6px;
 	font-size: 12px;
 	user-select: none;
+}
+.install-log-controls .actions {
+	margin-left: auto;
+}
+.install-log-controls .actions img {
+	height: 1em;
 }
 .install-log-controls select{
 	background: #111;
