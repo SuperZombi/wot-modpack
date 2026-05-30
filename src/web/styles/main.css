@@ -52,14 +52,16 @@ header a:hover{
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	padding: 0 1em;
-	height: var(--footer-height);
+	padding: 0.5em 1em;
+	/* height: var(--footer-height);
 	position: fixed;
 	bottom: 0;
 	width: 100%;
 	z-index: 2;
+	 */
 	background: rgb(17, 17, 17, 0.5);
 	backdrop-filter: blur(10px);
+	margin-top: auto;
 }
 /* 
 #setting_button{
@@ -72,11 +74,14 @@ header a:hover{
 
 #mods-area{
 	display: grid;
-	grid-template-columns: auto 1fr;
+	grid-template-columns: auto 1fr auto;
 	gap: 5px;
 	position: relative;
 	width: 100%;
 	height: 100%;
+}
+#mods-area:has(#mod-preview) {
+	grid-template-columns: auto 1fr 1fr;
 }
 
 #mods-sidebar {
@@ -116,9 +121,9 @@ header a:hover{
 	color: #f5a623;
 }
 
-#mods-list{
+/* #mods-list{
 	margin-top: -5px;
-}
+} */
 #mods-list-area{
 	display: grid !important;
 	grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
@@ -202,18 +207,17 @@ header a:hover{
 #mod-preview{
 	padding: 5px;
 	padding-left: 0;
-	opacity: 0;
-	transition: 0.25s;
 	overflow: auto;
 	scrollbar-width: thin;
 	color-scheme: dark;
-	height: calc(100dvh - var(--header-height) - var(--footer-height));
+	/* height: calc(100dvh - var(--header-height) - var(--footer-height));
 	position: sticky;
-	top: var(--header-height);
+	top: var(--header-height); */
+	border-radius: 0;
 }
-#mod-preview.show{
+/* #mod-preview.show{
 	opacity: 1;
-}
+} */
 #mod-preview .image-container{
 	height: 300px;
 	display: flex;

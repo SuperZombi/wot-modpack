@@ -15,7 +15,7 @@ const ModsTab = ({
 
 	const [activeCat, setActiveCat] = React.useState()
 
-	const [forceOpenCategories, setForceOpenCategories] = React.useState(false)
+	// const [forceOpenCategories, setForceOpenCategories] = React.useState(false)
 	// const [needToShowTooltip, setNeedToShowTooltip] = React.useState(settings.layout_tooltip)
 	// const tooltipOnClick = () => {
 	// 	setNeedToShowTooltip(false)
@@ -113,6 +113,8 @@ const ModsTab = ({
 						<div id="drag-area" className={drag ? "show":""}></div>
 
 						<SideBar
+							mini={displayPreview}
+							setDisplayPreview={setDisplayPreview}
 							activeCat={activeCat}
 							setActiveCat={setActiveCat}
 							mods={mods}
@@ -135,44 +137,41 @@ const ModsTab = ({
 								setDisplayPreview={setDisplayPreview}
 								cachedMods={cachedMods}
 								selectedClient={selectedClient}
-								forceOpen={forceOpenCategories}
 							/>
 						</div>
-						{/* <div id="mod-preview"
-							className={`${displayPreview ? "show": ""}`}
-							onMouseOver={_=>setDisplayPreview(true)}
-							onMouseOut={_=>setDisplayPreview(false)}
-						>
-							<div className="image-container">
-								<img id="mod-image"
-									className={`${imageLoaded ? '' : 'loading'}`}
-									src={modPreview?.image || ""}
-									key={modPreview?.image || ""}
-									draggable={false}
-									onLoad={_=>setImageLoaded(true)}
-								/>
-							</div>
-							<div id="mod-description-text">
-								<h3 align="center" id="mod-title">{modPreview ? replaceFlags(modPreview.title[settings.language]) : ""}</h3>
-								<h4 id="mod-subtitle">
-									<div id="mod-author">{modPreview?.author}</div>
-									<div id="mod-downloads">
-										<span>{modPreview && (stats[modPreview.id] || 0)}</span>
-										<img src="images/download.svg" height="18" draggable={false}/>
-									</div>
-								</h4>
-								{modPreview?.audio && (
-									<audio id="mod-audio"
-										src={modPreview.audio || ""}
-										ref={audioRef} controls
-										controlsList="nodownload"
+						{displayPreview && (
+							<div id="mod-preview" className="container">
+								<div className="image-container">
+									<img id="mod-image"
+										className={`${imageLoaded ? '' : 'loading'}`}
+										src={modPreview?.image || ""}
+										key={modPreview?.image || ""}
+										draggable={false}
+										onLoad={_=>setImageLoaded(true)}
 									/>
-								)}
-								<div id="mod-description"
-									dangerouslySetInnerHTML={{ __html: modPreview?.description?.[settings.language]}}
-								></div>
+								</div>
+								<div id="mod-description-text">
+									<h3 align="center" id="mod-title">{modPreview ? replaceFlags(modPreview.title[settings.language]) : ""}</h3>
+									<h4 id="mod-subtitle">
+										<div id="mod-author">{modPreview?.author}</div>
+										<div id="mod-downloads">
+											<span>{modPreview && (stats[modPreview.id] || 0)}</span>
+											<img src="images/download.svg" height="18" draggable={false}/>
+										</div>
+									</h4>
+									{modPreview?.audio && (
+										<audio id="mod-audio"
+											src={modPreview.audio || ""}
+											ref={audioRef} controls
+											controlsList="nodownload"
+										/>
+									)}
+									<div id="mod-description"
+										dangerouslySetInnerHTML={{ __html: modPreview?.description?.[settings.language]}}
+									></div>
+								</div>
 							</div>
-						</div> */}
+						)}
 					</div>
 				) : (
 					<Loader/>
@@ -182,12 +181,14 @@ const ModsTab = ({
 	)
 }
 const SideBar = ({
+	mini,
 	activeCat,
 	setActiveCat,
 	mods,
 	categories,
 	search,
-	setSearch
+	setSearch,
+	setDisplayPreview
 }) => {
 	React.useEffect(() => {
 		lucide.createIcons()
@@ -195,25 +196,33 @@ const SideBar = ({
 	const {langData, settings} = useApp()
 	return (
 		<div id="mods-sidebar" className="container">
-			<div id="search-area">
-				<input
-					className="large"
-					type="text"
-					placeholder={langData["search"]}
-					value={search}
-					onChange={e => setSearch(e.target.value)}
-				/>
-			</div>
+			{!mini && (
+				<div id="search-area">
+					<input
+						className="large"
+						type="text"
+						placeholder={langData["search"]}
+						value={search}
+						onChange={e => setSearch(e.target.value)}
+					/>
+				</div>
+			)}
+
 			{categories.map(cat=>(
 				<div className={`cat-item hover ${activeCat == cat.name ? "active" : ""}`}
 					key={cat.name} onClick={_=>{
 						setActiveCat(cat.name)
 						setSearch("")
+						setDisplayPreview(false)
 					}}
 				>
 					<i data-lucide={cat.icon}></i>
-					<span>{cat.title[settings.language]}</span>
-					<span className="cnt">{mods.filter(m=>m.category == cat.name).length}</span>
+					{!mini && (
+						<React.Fragment>
+							<span>{cat.title[settings.language]}</span>
+							<span className="cnt">{mods.filter(m=>m.category == cat.name).length}</span>
+						</React.Fragment>
+					)}
 				</div>
 			))}
 		</div>
