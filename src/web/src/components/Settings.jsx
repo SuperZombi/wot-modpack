@@ -109,18 +109,24 @@ const Button = ({children, href=null, className="", ...props})=>{
 	)
 }
 const BackButton = ({className="", style, ...props})=>{
+	React.useEffect(() => {
+		lucide.createIcons()
+	}, [])
 	return (
 		<Button
 			className={`flex-center-row ${className}`}
 			style={{ display: "inline-flex", gap: "5px", ...style }}
 			{...props}
 		>
-			<img src="images/back.svg" height="18" draggable={false}/>
+			<i data-lucide="arrow-left"></i>
 			<LANG id="back"/>
 		</Button>
 	)
 }
 const NextButton = ({className="", style, ...props})=>{
+	React.useEffect(() => {
+		lucide.createIcons()
+	}, [])
 	return (
 		<Button
 			className={`flex-center-row ${className}`}
@@ -128,7 +134,7 @@ const NextButton = ({className="", style, ...props})=>{
 			{...props}
 		>
 			<LANG id="next"/>
-			<img src="images/next.svg" height="18" draggable={false}/>
+			<i data-lucide="arrow-right"></i>
 		</Button>
 	)
 }

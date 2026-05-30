@@ -66,7 +66,7 @@ function ModList({
 	const allModsSorted = sortByPopularityWithGroups(filteredMods)
 
 	return (
-		<React.Fragment>
+		<div id="mods-list-area">
 			{allModsSorted.map(mod => {
 				if (mod.group) {
 					const group = groups.find(g => g.id === mod.group);
@@ -101,7 +101,7 @@ function ModList({
 					setDisplayPreview={setDisplayPreview}
 				/>
 			})}
-		</React.Fragment>
+		</div>
 	)
 }
 

@@ -224,6 +224,13 @@ header a:hover{
 	align-items: center;
 	justify-content: center;
 }
+#mod-preview .close {
+	position: absolute;
+	top: 6px;
+	right: 6px;
+	font-size: 1.75em;
+	color: red;
+}
 .loading{
 	background: linear-gradient(90deg, #ddd 0%, #bbb 50%, #ddd 100%);
 	background-size: 200% 100%;
@@ -261,16 +268,10 @@ header a:hover{
 	justify-content: space-between;
 	gap: 5px;
 }
-#mod-downloads{
+.mod-header-item {
 	display: flex;
 	align-items: center;
 	gap: 0.25rem;
-}
-#mod-downloads img {
-	user-select: none;
-}
-#mod-downloads span:empty + img{
-	display: none;
 }
 ul{
 	padding-left: 1em;

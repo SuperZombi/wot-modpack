@@ -123,24 +123,25 @@ const ModsTab = ({
 							setSearch={setSearch}
 						/>
 						
-						<div id="mods-list-area">
-							<ModList
-								activeCat={activeCat}
-								mods={mods}
-								categories={categories}
-								groups={groups}
-								stats={stats}
-								search={search}
-								selectedMods={selectedMods}
-								setSelectedMods={setSelectedMods}
-								setPreview={setPreview}
-								setDisplayPreview={setDisplayPreview}
-								cachedMods={cachedMods}
-								selectedClient={selectedClient}
-							/>
-						</div>
+						<ModList
+							activeCat={activeCat}
+							mods={mods}
+							categories={categories}
+							groups={groups}
+							stats={stats}
+							search={search}
+							selectedMods={selectedMods}
+							setSelectedMods={setSelectedMods}
+							setPreview={setPreview}
+							setDisplayPreview={setDisplayPreview}
+							cachedMods={cachedMods}
+							selectedClient={selectedClient}
+						/>
 						{displayPreview && (
 							<div id="mod-preview" className="container">
+								<div className="close hover" onClick={_=>setDisplayPreview(false)}>
+									<i data-lucide="circle-x"></i>
+								</div>
 								<div className="image-container">
 									<img id="mod-image"
 										className={`${imageLoaded ? '' : 'loading'}`}
@@ -153,10 +154,15 @@ const ModsTab = ({
 								<div id="mod-description-text">
 									<h3 align="center" id="mod-title">{modPreview ? replaceFlags(modPreview.title[settings.language]) : ""}</h3>
 									<h4 id="mod-subtitle">
-										<div id="mod-author">{modPreview?.author}</div>
-										<div id="mod-downloads">
+										<div className="mod-header-item">
+											<div style={{display: !modPreview?.author ? "none" : ""}}>
+												<i data-lucide="user-round"></i>
+											</div>
+											<div id="mod-author">{modPreview?.author}</div>
+										</div>
+										<div className="mod-header-item">
 											<span>{modPreview && (stats[modPreview.id] || 0)}</span>
-											<img src="images/download.svg" height="18" draggable={false}/>
+											<div><i data-lucide="download"></i></div>
 										</div>
 									</h4>
 									{modPreview?.audio && (
@@ -200,7 +206,7 @@ const SideBar = ({
 				<div id="search-area">
 					<input
 						className="large"
-						type="text"
+						type="search"
 						placeholder={langData["search"]}
 						value={search}
 						onChange={e => setSearch(e.target.value)}

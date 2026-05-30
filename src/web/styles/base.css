@@ -208,28 +208,28 @@ input[type=radio]:checked::before {
 }
 
 
-input[type=text]{
+input[type=text],
+input[type=search]{
 	appearance: none;
 	outline: none;
-	color: #f1f1f1;
+	color: var(--text-color);
 	padding: 1px 4px;
 	font-size: inherit;
-	border: solid 2px transparent;
-	border-radius: 4px;
-	background:
-		radial-gradient(#2e2e28 25%, black) padding-box,
-		linear-gradient(0deg, #6e3f15, #f7d670) border-box;
+	border-radius: 6px;
+	background: rgba(255, 255, 255, 0.06);
+	border: 1px solid rgba(255, 255, 255, 0.1);
 }
-input[type=text].large{
+input[type=text].large,
+input[type=search].large{
 	padding: 4px 6px 4px 6px;
 	width: 100%;
 }
-input[type=text]::selection {
+/* input[type=text]::selection {
 	background: #ea850a;
 	color: black;
-}
+} */
 textarea{
-	color: #f1f1f1;
+	color: var(--text-color);
 	background: #222;
 	border-radius: 8px;
 	font-size: 16px;
