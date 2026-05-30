@@ -18,7 +18,6 @@ header{
 	top: 0;
 	width: 100%;
 	z-index: 2; */
-	border-radius: 0 !important;
 }
 header .header-container {
 	display: flex;
@@ -58,8 +57,9 @@ header a:hover{
 	bottom: 0;
 	width: 100%;
 	z-index: 2;
-	 */
+	
 	background: rgb(17, 17, 17, 0.5);
+	 */
 	backdrop-filter: blur(10px);
 	margin-top: auto;
 }
@@ -81,7 +81,7 @@ header a:hover{
 	height: 100%;
 }
 #mods-area:has(#mod-preview) {
-	grid-template-columns: auto 1fr 1fr;
+	grid-template-columns: auto 1.5fr 1fr;
 }
 
 #mods-sidebar {
@@ -89,7 +89,6 @@ header a:hover{
 	flex-direction: column;
 	gap: 2px;
 	padding: 0.5em;
-	border-radius: 0;
 }
 #mods-sidebar .cat-item {
 	padding: 8px 10px;
@@ -206,14 +205,12 @@ header a:hover{
 
 #mod-preview{
 	padding: 5px;
-	padding-left: 0;
 	overflow: auto;
 	scrollbar-width: thin;
 	color-scheme: dark;
 	/* height: calc(100dvh - var(--header-height) - var(--footer-height));
 	position: sticky;
 	top: var(--header-height); */
-	border-radius: 0;
 }
 /* #mod-preview.show{
 	opacity: 1;
@@ -303,8 +300,7 @@ ul{
 
 #search-area{
 	display: flex;
-	padding: 5px;
-	gap: 5px;
+	padding-bottom: 5px;
 }
 
 #retry_area{
@@ -435,12 +431,15 @@ ul{
 	opacity: 0.75;
 }
 .links img{
-	height: 55px;
+	height: 50px;
 }
 
 .file_size{
 	font-family: monospace;
 	font-size: 14px;
+	background: rgba(255, 255, 255, 0.1);
+	padding: 4px 8px;
+	border-radius: 6px;
 }
 #cache_size{
 	margin-right: 2px;

@@ -55,7 +55,7 @@ const HomeTab = ({
 	)
 }
 
-function Select({ options=[], value, onChange, placeholder="", display_hint=false }) {
+function Select({ options=[], value, onChange, placeholder="", display_hint=false, style={} }) {
 	const [open, setOpen] = React.useState(false)
 	const ref = React.useRef(null)
 
@@ -75,7 +75,7 @@ function Select({ options=[], value, onChange, placeholder="", display_hint=fals
 	}
 
 	return (
-		<div ref={ref} className="select">
+		<div ref={ref} className="select" style={style}>
 			<Button className="select-header"
 				onClick={() => setOpen(!open)}
 				tooltip={(display_hint && value && value.path != "custom") ? value.path : null}

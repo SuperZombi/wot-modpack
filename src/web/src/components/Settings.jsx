@@ -1,5 +1,5 @@
 const Settings = ({
-	appVersion, onClose, setCachedMods
+	onClose, setCachedMods
 }) => {
 	const langOptions = [
 		{ path: "en", title: "English" },
@@ -20,52 +20,64 @@ const Settings = ({
 		setCacheSize(0)
 		setCachedMods([])
 	}
+	React.useEffect(() => {
+		lucide.createIcons()
+	}, [])
 
 	return (
 		<Popup onClose={onClose}>
 			<section>
 				<h3 style={{margin: 0}}><LANG id="settings"/></h3>
-				<span>
-					<LANG id="version"/> <span id="app-version">{appVersion}</span>
-				</span>
 			</section>
 			<hr/>
 			<section>
-				<div className="flex-row">
-					<img src="/images/planet.svg" height="20" draggable={false}/>
-					<span><LANG id="language"/>:</span>
+				<div className="row">
+					<div className="row-label">
+						<div><i data-lucide="languages"></i></div>
+						<span><LANG id="language"/>:</span>
+					</div>
 					<Select
 						options={langOptions}
 						value={{path: settings.language, title: langOptions.find(x=>x.path==settings.language).title}}
 						onChange={val=>updateSetting("language", val.path)}
 						placeholder={langData["language"]}
+						style={{fontSize: "0.8em"}}
 					/>
 				</div>
-				<label className="hover">
+				<div className="row">
+					<div className="row-label">
+						<div><i data-lucide="funnel"></i></div>
+						<LANG id="match_client_lang"/>
+					</div>
 					<input type="checkbox" className="setting_element hover"
 						checked={settings.match_client_lang} onChange={e=>updateSetting("match_client_lang", e.target.checked)}
 					/>
-					<LANG id="match_client_lang"/>
-				</label>
+				</div>
 			</section>
 			<hr/>
 			<section>
-				<label className="hover">
+				<div className="row">
+					<div className="row-label">
+						<div><i data-lucide="database"></i></div>
+						<LANG id="use_cache"/>
+					</div>
 					<input type="checkbox" className="setting_element hover"
 						checked={settings.use_cache} onChange={e=>updateSetting("use_cache", e.target.checked)}
 					/>
-					<LANG id="use_cache"/>
-				</label>
-				<div>
-					<span><LANG id="cache_size"/>: </span>
-					<span className="file_size">
-						<span>{cacheSize}</span>
-						<LANG id="megabytes"/>
-					</span>
 				</div>
-				<Button onClick={clear_cache} style={{fontSize: "14px"}}>
-					<LANG id="clear_cache"/>
-				</Button>
+				<div className="row">
+					<div className="row-label">
+						<div><i data-lucide="trash"></i></div>
+						<span><LANG id="cache_size"/>:</span>
+						<span className="file_size">
+							<span>{cacheSize}</span>
+							<LANG id="megabytes"/>
+						</span>
+					</div>
+					<Button onClick={clear_cache} style={{fontSize: "14px"}}>
+						<LANG id="clear_cache"/>
+					</Button>
+				</div>
 			</section>
 			<hr/>
 			<section>
@@ -83,7 +95,8 @@ const Settings = ({
 			</section>
 			<hr/>
 			<section style={{paddingBottom: 0}}>
-				<Button href="https://github.com/SuperZombi/wot-modpack/issues" style={{fontSize: "12px"}}>
+				<Button href="https://github.com/SuperZombi/wot-modpack/issues" style={{fontSize: "12px", gap: "4px"}}>
+					<i data-lucide="bug"></i>
 					<LANG id="report_bug"/>
 				</Button>
 			</section>

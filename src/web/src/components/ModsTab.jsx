@@ -168,7 +168,7 @@ const ModsTab = ({
 									{modPreview?.audio && (
 										<audio id="mod-audio"
 											src={modPreview.audio || ""}
-											ref={audioRef} controls
+											ref={audioRef} controls autoPlay
 											controlsList="nodownload"
 										/>
 									)}

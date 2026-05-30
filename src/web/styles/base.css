@@ -35,7 +35,6 @@ svg{
 .container {
 	background: rgba(255, 255, 255, 0.06);
 	border: 1px solid rgba(255, 255, 255, 0.1);
-	border-radius: 1rem;
 	padding: 1rem;
 	box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
 }
@@ -141,9 +140,9 @@ svg{
 	flex-direction: column;
 	gap: 5px;
 }
-.select .select-options .button {
+/* .select .select-options .button {
 	backdrop-filter: blur(10px);
-}
+} */
 
 
 input[type=checkbox]{
@@ -364,20 +363,16 @@ label{
 	scale: 1;
 }
 .popup .close{
-	width: 24px;
-	height: 24px;
 	position: absolute;
-	top: 12px;
-	right: 12px;
+	top: 10px;
+	right: 10px;
 	user-select: none;
-	transition: 0.2s;
-}
-.popup .close:hover{
-	rotate: 90deg;
+	color: red;
+	font-size: 1.5rem;
 }
 
 hr{
-	border: 1px solid #666;
+	border: 1px solid #333;
 }
 section{
 	display: flex;
@@ -385,6 +380,18 @@ section{
 	align-items: center;
 	gap: 1rem;
 	padding: 0.5rem;
+}
+section .row{
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 12px;
+	width: 100%;
+}
+section .row .row-label{
+	display: flex;
+	align-items: center;
+	gap: 8px;
 }
 
 .loader {

@@ -155,17 +155,17 @@ const App = () => {
 		<React.Fragment>
 			<Header
 				version={appVersion}
+				updateAvailable={updateAvailable}
 				show_settings={_=>setShowSettings(true)}
 			/>
 
 			{showSettings && (
 				<Settings
-					appVersion={appVersion}
 					onClose={_=>setShowSettings(false)}
 					setCachedMods={setCachedMods}
 				/>
 			)}
-			{ updateAvailable && <UpdatePopup onClose={_=>setUpdateAvailable(false)}/>}
+			{/* { updateAvailable && <UpdatePopup onClose={_=>setUpdateAvailable(false)}/>} */}
 			
 			<div className="flex-center">
 				{page == "home" ? (
@@ -213,7 +213,7 @@ const App = () => {
 				) : null}
 			</div>
 
-			<div className="bottom-buttons">
+			<div className="bottom-buttons container">
 				{(selectedClient && selectedClient.path != "custom") && (
 					page == "home" ? (
 						<React.Fragment>
@@ -270,12 +270,13 @@ const App = () => {
 }
 const Header = ({
 	version,
+	updateAvailable,
 	show_settings
 }) => {
 	const { langData } = useApp()
 	React.useEffect(() => {
 		lucide.createIcons()
-	}, [])
+	}, [updateAvailable])
 	return (
 		<header className="container">
 			<div className="header-container">
@@ -288,9 +289,13 @@ const Header = ({
 				)}
 			</div>
 			<div className="header-container">
-				<Button tooltip={langData["update_available"]} className="tooltip-bottom">
-					<i data-lucide="arrow-up"></i>
-				</Button>
+				{updateAvailable && (
+					<Button tooltip={langData["update_available"]} className="tooltip-bottom"
+						href="https://github.com/SuperZombi/wot-modpack/releases"
+					>
+						<i data-lucide="arrow-up"></i>
+					</Button>
+				)}
 				<Button onClick={show_settings}>
 					<i data-lucide="settings"></i>
 				</Button>
