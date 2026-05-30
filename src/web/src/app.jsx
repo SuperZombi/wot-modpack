@@ -38,6 +38,9 @@ const App = () => {
 	const [appVersion, setAppVersion] = React.useState(0)
 
 	React.useEffect(() => {
+		lucide.createIcons()
+	}, [])
+	React.useEffect(() => {
 		(async _=>{
 			const version = await eel.app_version()()
 			setAppVersion(version)
@@ -153,16 +156,10 @@ const App = () => {
 
 	return (
 		<React.Fragment>
-			<header>
-				<a href="https://superzombi.github.io/wot-modpack/" target="_blank" className="hover" draggable={false}>
-					<img src="/images/favicon.png" draggable={false}/>
-					<span>Web Modpack</span>
-				</a>
-				<img id="setting_button" className="hover"
-					src="/images/settings.svg" draggable={false}
-					onClick={_=>setShowSettings(true)}
-				/>
-			</header>
+			<Header
+				version={appVersion}
+				show_settings={_=>setShowSettings(true)}
+			/>
 
 			{showSettings && (
 				<Settings
@@ -272,6 +269,33 @@ const App = () => {
 				)}
 			</div>
 		</React.Fragment>
+	)
+}
+const Header = ({
+	version,
+	show_settings
+}) => {
+	const { langData } = useApp()
+	return (
+		<header className="container">
+			<div className="header-container">
+				<a draggable={false}>
+					<img src="/images/favicon.png" draggable={false}/>
+					<span className="title">Web Modpack</span>
+				</a>
+				{version && (
+					<span className="version">{version}</span>
+				)}
+			</div>
+			<div className="header-container">
+				<Button tooltip={langData["update_available"]} className="tooltip-bottom">
+					<i data-lucide="arrow-up"></i>
+				</Button>
+				<Button onClick={show_settings}>
+					<i data-lucide="settings"></i>
+				</Button>
+			</div>
+		</header>
 	)
 }
 

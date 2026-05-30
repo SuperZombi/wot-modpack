@@ -5,34 +5,52 @@
 	padding-bottom: var(--footer-height);
 }
 header{
-	height: var(--header-height);
-	background-image: url('/images/header.jpg');
+	/* height: var(--header-height); */
+	/* background-image: url('/images/header.jpg');
 	background-repeat: no-repeat;
-	background-size: cover;
+	background-size: cover; */
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	padding: 0 12px;
+	padding: 0.6em 1rem !important;
 	user-select: none;
 	position: fixed;
 	top: 0;
 	width: 100%;
 	z-index: 2;
+	border-radius: 0 !important;
+}
+header .header-container {
+	display: flex;
+	align-items: center;
+	gap: 0.5em;
+}
+header .title {
+	font-family: "Bebas Neue", sans-serif;
+	letter-spacing: 1px;
+	color: var(--text-color);
+	font-size: 1.4rem;
 }
 header img {
 	height: 30px;
 }
 header a {
-	color: inherit;
-	text-decoration: none;
-	font-size: 20px;
 	display: flex;
 	align-items: center;
-	gap: 10px;
+	gap: 0.6rem;
+	text-decoration: none;
 }
+header .button {
+	padding: 0.5em;
+}
+header svg {
+	height: 1.25em;
+	width: 1.25em;
+}
+/* 
 header a:hover{
 	text-decoration: underline;
-}
+} */
 
 .bottom-buttons{
 	display: flex;
@@ -47,14 +65,14 @@ header a:hover{
 	background: rgb(17, 17, 17, 0.5);
 	backdrop-filter: blur(10px);
 }
-
+/* 
 #setting_button{
 	height: 30px;
 	transition: 0.2s;
 }
 #setting_button:hover{
 	transform: rotate(90deg);
-}
+} */
 
 #mods-area{
 	display: grid;

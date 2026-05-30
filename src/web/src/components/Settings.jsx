@@ -90,6 +90,45 @@ const Settings = ({
 		</Popup>
 	)
 }
-function bytesToMb(bytes) {
-	return Math.round(bytes / (1024 * 1024));
+const Button = ({children, href=null, className="", ...props})=>{
+	if (href){
+		return (
+			<a className={`button hover ${className}`.trim()}
+				href={href} target="_blank" {...props}
+			>
+				{children}
+			</a>
+		)
+	}
+	return (
+		<div className={`button hover ${className}`.trim()}
+			{...props}
+		>
+			{children}
+		</div>
+	)
+}
+const BackButton = ({className="", style, ...props})=>{
+	return (
+		<Button
+			className={`flex-center-row ${className}`}
+			style={{ display: "inline-flex", gap: "5px", ...style }}
+			{...props}
+		>
+			<img src="images/back.svg" height="18" draggable={false}/>
+			<LANG id="back"/>
+		</Button>
+	)
+}
+const NextButton = ({className="", style, ...props})=>{
+	return (
+		<Button
+			className={`flex-center-row ${className}`}
+			style={{ display: "inline-flex", gap: "5px", ...style }}
+			{...props}
+		>
+			<LANG id="next"/>
+			<img src="images/next.svg" height="18" draggable={false}/>
+		</Button>
+	)
 }

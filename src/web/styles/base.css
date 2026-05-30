@@ -1,20 +1,34 @@
 html, body{
 	padding: 0; margin: 0;
 }
+:root{
+	--text-color: #f1f1f1;
+}
 body{
 	cursor: url('/images/cursor-normal.png'), auto;
 	font-family: sans-serif;
-	color: #f1f1f1;
-	background-color: #111;
+	color: var(--text-color);
+	/* background-color: #111;
 	background-image: url('/images/sparks.png');
 	background-repeat: repeat-y;
-	background-position: top center;
+	background-position: top center; */
+
+	background: radial-gradient(900px 500px at 10% 10%, rgba(45, 212, 191, 0.16), transparent 80%), radial-gradient(800px 600px at 90% 20%, rgba(139, 92, 246, 0.16), transparent 80%), radial-gradient(900px 600px at 40% 90%, rgba(59, 130, 246, 0.12), transparent 75%), #0b0f19;
+	background-attachment: fixed;
 }
-svg{
-	fill: #f1f1f1;
-}
+/* svg{
+	fill: var(--text-color);
+} */
 * {
 	box-sizing: border-box;
+}
+
+.container {
+	background: rgba(255, 255, 255, 0.06);
+	border: 1px solid rgba(255, 255, 255, 0.1);
+	border-radius: 1rem;
+	padding: 1rem;
+	box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
 }
 
 #tabs-area .tab{
@@ -62,28 +76,38 @@ svg{
 }
 
 .button{
-	display: inline-block;
-	background: linear-gradient(0deg, #4b4a3b, #969775);
-	color: #cecebc;
-	padding: 5px 10px 5px 10px;
+	padding: 0.4em 0.8em;
 	font-weight: bold;
-	text-shadow: 0px 0px 2px #322A2A, 0px 0px 2px #3F3939;
 	user-select: none;
-	border-radius: 5px;
-	border: none;
-	outline: none;
 	text-decoration: none;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 0.5px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+    color: var(--text-color);
 }
 .button:hover{
-	background: linear-gradient(0deg, #403f32, #808063);
+	background: rgba(255, 255, 255, 0.12);
+	color: #fff;
 }
-.button:active{
+/* .button:active{
 	background: linear-gradient(0deg, #343429, #696a52);
 }
 .button.selected{
 	background: linear-gradient(0deg, #343429, #696a52);
-}
+} */
 
+.version {
+	font-size: 0.85em;
+	padding: 4px 6px;
+	font-family: monospace;
+	border-radius: 7px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 0.5px solid rgba(255, 255, 255, 0.1);
+}
 
 .select {
 	position: relative;
@@ -100,10 +124,12 @@ svg{
 	top: calc(100% + 5px);
 	left: 0;
 	right: 0;
-	background: #111;
 	display: flex;
 	flex-direction: column;
 	gap: 5px;
+}
+.select .select-options .button {
+	backdrop-filter: blur(10px);
 }
 
 
@@ -412,8 +438,9 @@ section{
 	bottom: 120%;
 	left: 50%;
 	transform: translateX(-50%);
-	background: #666;
-	color: #fff;
+	background: rgba(255, 255, 255, 0.06);
+	backdrop-filter: blur(10px);
+	border: 1px solid rgba(255, 255, 255, 0.1);
 	box-shadow: 0 2px 4px black;
 	padding: 4px 8px;
 	border-radius: 4px;

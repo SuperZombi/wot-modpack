@@ -61,3 +61,6 @@ function replaceFlags(text) {
 		return part
 	})
 }
+function bytesToMb(bytes) {
+	return Math.round(bytes / (1024 * 1024));
+}
