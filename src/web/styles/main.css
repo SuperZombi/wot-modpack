@@ -43,10 +43,6 @@ header a {
 header .button {
 	padding: 0.5em;
 }
-header svg {
-	height: 1.25em;
-	width: 1.25em;
-}
 /* 
 header a:hover{
 	text-decoration: underline;
@@ -107,10 +103,6 @@ header a:hover{
 	background: rgba(245, 166, 35, 0.12);
 	color: #f5a623;
 }
-#mods-sidebar .cat-item svg{
-	height: 1em;
-	width: 1em;
-}
 #mods-sidebar .cat-item .cnt {
 	margin-left: auto;
 	font-size: 0.7em;
@@ -128,68 +120,82 @@ header a:hover{
 	margin-top: -5px;
 }
 #mods-list-area{
-	position: relative;
-}
-.mods-grid {
 	display: grid !important;
-	grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+	grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
 	grid-auto-rows: 125px;
 	padding: 0.5rem !important;
 	gap: 0.5rem !important;
 }
-.mods-grid .mod{
+#mods-list-area .mod{
 	display: grid;
 	grid-template-rows: 1fr auto;
-	background: #111;
+	background: rgba(255, 255, 255, 0.06);
 	white-space: nowrap;
 	overflow: hidden;
 	border-radius: 8px;
-	border: 3px solid #666;
+	border: 2px solid rgba(255, 255, 255, 0.1);
 	gap: 4px;
 	width: 100%;
 	align-items: unset;
 	position: relative;
+	transition: 0.12s;
 }
-.mods-grid .mod:hover{
-	background: #333;
-	border: 3px solid #999;
+#mods-list-area .mod:hover{
+	background: rgba(255, 255, 255, 0.1);
+	border-color: rgba(255, 255, 255, 0.25);
+	transform: translateY(-2px);
 }
-.mods-grid .mod:has(input:checked){
-	background: radial-gradient(#2e2e28 25%, black) padding-box,
+#mods-list-area .mod:has(input:checked){
+	/* background: radial-gradient(#2e2e28 25%, black) padding-box,
 		linear-gradient(0deg, #6e3f15, #f7d670) border-box;
-	border: solid 3px transparent;
+	border: solid 3px transparent; */
+	border-color: rgba(245, 166, 35, 0.6);
+    background: rgba(245, 166, 35, 0.16);
 }
-.mods-grid .mod:has(input:checked):hover{
+/* #mods-list-area .mod:has(input:checked):hover{
 	background: radial-gradient(#2e2e28 25%, #333) padding-box,
 		linear-gradient(0deg, #6e3f15, #f7d670) border-box;
-}
-.mods-grid .mod .image-container{
+} */
+#mods-list-area .mod .image-container{
 	overflow: hidden;
 	display: flex;
 	align-items: center;
 }
-.mods-grid .mod img{
+#mods-list-area .mod img{
 	height: 100%;
 	width: 100%;
 	max-height: fit-content;
 	object-fit: cover;
 }
-.mods-grid .mod span{
+#mods-list-area .mod span{
 	padding-bottom: 5px;
 	padding-left: 5px;
 	padding-right: 5px;
 	text-overflow: ellipsis;
 	overflow: hidden;
 }
-.mods-grid .mod input{
+#mods-list-area .mod input{
 	display: none;
 }
-.mods-grid .mod .new-badge{
+#mods-list-area .mod .new-badge{
 	position: absolute;
 	top: 4px;
 	right: 4px;
 	width: 12px;
 	height: 12px;
+}
+#mods-list-area .mod .checkmark {
+	position: absolute;
+	border-radius: 50%;
+	background: #f5a623;
+	color: #fff;
+	width: 1.3em;
+	height: 1.3em;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	top: 3px;
+	right: 3px;
 }
 
 

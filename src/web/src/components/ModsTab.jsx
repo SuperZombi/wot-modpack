@@ -13,13 +13,19 @@ const ModsTab = ({
 	const audioRef = React.useRef(null)
 	const [imageLoaded, setImageLoaded] = React.useState(false)
 
+	const [activeCat, setActiveCat] = React.useState()
+
 	const [forceOpenCategories, setForceOpenCategories] = React.useState(false)
-	const [needToShowTooltip, setNeedToShowTooltip] = React.useState(settings.layout_tooltip)
-	const tooltipOnClick = () => {
-		setNeedToShowTooltip(false)
-		updateSetting("layout_tooltip", false)
-		setForceOpenCategories(true)
-	}
+	// const [needToShowTooltip, setNeedToShowTooltip] = React.useState(settings.layout_tooltip)
+	// const tooltipOnClick = () => {
+	// 	setNeedToShowTooltip(false)
+	// 	updateSetting("layout_tooltip", false)
+	// 	setForceOpenCategories(true)
+	// }
+
+	React.useEffect(() => {
+		setActiveCat(categories[0]?.name)
+	}, [categories])
 
 	React.useEffect(() => {
 		const audio = audioRef.current
@@ -81,10 +87,10 @@ const ModsTab = ({
 		reader.readAsText(droppedFile)
 	}
 
-	const layoutButtonStyle = {
-		display: "flex",
-		boxShadow: (needToShowTooltip && settings.layout == "list") ? "0 0 10px orange" : null
-	}
+	// const layoutButtonStyle = {
+	// 	display: "flex",
+	// 	boxShadow: (needToShowTooltip && settings.layout == "list") ? "0 0 10px orange" : null
+	// }
 
 	return (
 		<React.Fragment>
@@ -107,6 +113,8 @@ const ModsTab = ({
 						<div id="drag-area" className={drag ? "show":""}></div>
 
 						<SideBar
+							activeCat={activeCat}
+							setActiveCat={setActiveCat}
 							mods={mods}
 							categories={categories}
 							search={search}
@@ -114,8 +122,8 @@ const ModsTab = ({
 						/>
 						
 						<div id="mods-list-area">
-							
-							{/* <ModList
+							<ModList
+								activeCat={activeCat}
 								mods={mods}
 								categories={categories}
 								groups={groups}
@@ -128,7 +136,7 @@ const ModsTab = ({
 								cachedMods={cachedMods}
 								selectedClient={selectedClient}
 								forceOpen={forceOpenCategories}
-							/> */}
+							/>
 						</div>
 						{/* <div id="mod-preview"
 							className={`${displayPreview ? "show": ""}`}
@@ -174,6 +182,8 @@ const ModsTab = ({
 	)
 }
 const SideBar = ({
+	activeCat,
+	setActiveCat,
 	mods,
 	categories,
 	search,
@@ -193,26 +203,14 @@ const SideBar = ({
 					value={search}
 					onChange={e => setSearch(e.target.value)}
 				/>
-				{/* <div tooltip={
-					(needToShowTooltip && settings.layout == "list")?langData["layout_tooltip"]:null
-				} className="tooltip-bottom tooltip-show"
-					onClick={(needToShowTooltip && settings.layout == "list")?tooltipOnClick:null}
-				>
-					<Button style={layoutButtonStyle}
-						onClick={_=>updateSetting("layout", settings.layout=="grid"?"list":"grid")}
-						tooltip={settings.layout=="grid"?langData["list_view"]:langData["grid_view"]}
-						className="tooltip-left"
-					>
-						{settings.layout == "grid" ? (
-							<img src="images/list.svg" draggable={false} height="20"/>
-						) : (
-							<img src="images/grid.svg" draggable={false} height="20"/>
-						)}
-					</Button>
-				</div> */}
 			</div>
 			{categories.map(cat=>(
-				<div className={`cat-item hover`} key={cat.name}>
+				<div className={`cat-item hover ${activeCat == cat.name ? "active" : ""}`}
+					key={cat.name} onClick={_=>{
+						setActiveCat(cat.name)
+						setSearch("")
+					}}
+				>
 					<i data-lucide={cat.icon}></i>
 					<span>{cat.title[settings.language]}</span>
 					<span className="cnt">{mods.filter(m=>m.category == cat.name).length}</span>

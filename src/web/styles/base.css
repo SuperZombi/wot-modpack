@@ -16,9 +16,11 @@ body{
 	background: radial-gradient(900px 500px at 10% 10%, rgba(45, 212, 191, 0.16), transparent 80%), radial-gradient(800px 600px at 90% 20%, rgba(139, 92, 246, 0.16), transparent 80%), radial-gradient(900px 600px at 40% 90%, rgba(59, 130, 246, 0.12), transparent 75%), #0b0f19;
 	background-attachment: fixed;
 }
-/* svg{
-	fill: var(--text-color);
-} */
+svg{
+	height: 1em;
+	width: 1em;
+	/* fill: var(--text-color); */
+}
 * {
 	box-sizing: border-box;
 }

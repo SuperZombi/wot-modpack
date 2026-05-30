@@ -1,4 +1,5 @@
 function ModList({
+	activeCat,
 	mods, groups, categories, stats, search,
 	selectedMods, setSelectedMods, setPreview, setDisplayPreview,
 	cachedMods, selectedClient, forceOpen=false
@@ -31,48 +32,80 @@ function ModList({
 		if (mod.description && Object.values(mod.description).some(v => v.toLowerCase().includes(s))) return true;
 		return false;
 	}
-	const anyMatch = categories.some(cat => {
-		const catMods = mods.filter(m => m.category === cat.name)
-		return catMods.some(mod => matchesSearch(mod, search))
-	})
+	// const anyMatch = categories.some(cat => {
+	// 	const catMods = mods.filter(m => m.category === cat.name)
+	// 	return catMods.some(mod => matchesSearch(mod, search))
+	// })
+	function sortByPopularityWithGroups(mods) {
+		const groupPopularity = {}
+		for (const g of groups) {
+			const modsInGroup = mods.filter(m => m.group === g.id)
+			if (modsInGroup.length) {
+				groupPopularity[g.id] = Math.max(...modsInGroup.map(m => stats[m.id] || 0))
+			}
+		}
+		return [...mods].sort((a, b) => {
+			const popA = a.group ? groupPopularity[a.group] : (stats[a.id] || 0)
+			const popB = b.group ? groupPopularity[b.group] : (stats[b.id] || 0)
+			return popB - popA;
+		})
+	}
+	
+	if (!activeCat){ return }
 
-	if (search && !anyMatch){
+	const filteredMods = search ? mods.filter(mod => matchesSearch(mod, search) && !mod.hidden) : mods.filter(m => m.category === activeCat && !m.hidden)
+	if (search && !filteredMods.length){
 		return (
 			<h3 align="center">
 				<LANG id="nothing_found"/>
 			</h3>
 		)
 	}
-	return (
-		<div id="mods-list">
-			{categories.map(cat => {
-				const catMods = mods.filter(m => m.category === cat.name)
+	
+	const allModsSorted = sortByPopularityWithGroups(filteredMods)
 
-				return (
-					<Category
-						key={cat.name}
-						title={cat.title}
-						icon={cat.image}
-						mods={catMods}
-						groups={groups}
-						stats={stats}
-						search={search}
-						matchesSearch={matchesSearch}
-						selectedMods={selectedMods}
-						toggleMod={toggleMod}
-						setPreview={setPreview}
-						setDisplayPreview={setDisplayPreview}
-						cachedMods={cachedMods}
-						forceOpen={forceOpen}
-					/>
-				)
+	return (
+		<React.Fragment>
+			{allModsSorted.map(mod => {
+				if (mod.group) {
+					const group = groups.find(g => g.id === mod.group);
+					if (!group) return null;
+
+					const alreadyRendered = allModsSorted.findIndex(m => m.group === group.id) < allModsSorted.indexOf(mod);
+					if (alreadyRendered) return null;
+
+					const modsInGroup = allModsSorted.filter(m => m.group === group.id)
+					return (
+						<Group
+							key={group.id}
+							id={group.id}
+							title={group.title}
+							mods={modsInGroup}
+							stats={stats}
+							selectedMods={selectedMods}
+							toggleMod={toggleMod}
+							setPreview={setPreview}
+							setDisplayPreview={setDisplayPreview}
+							cachedMods={cachedMods}
+						/>
+					)
+				}
+				return <Mod
+					key={mod.id}
+					mod={mod}
+					selectedMods={selectedMods}
+					cachedMods={cachedMods}
+					onChange={() => toggleMod(mod.id)}
+					setPreview={setPreview}
+					setDisplayPreview={setDisplayPreview}
+				/>
 			})}
-		</div>
+		</React.Fragment>
 	)
 }
 
 function Category({
-	title, icon, mods, groups, stats,
+	mods, groups, stats,
 	search, matchesSearch,
 	selectedMods, toggleMod,
 	setPreview, setDisplayPreview,
@@ -106,8 +139,8 @@ function Category({
 		<div className="details category">
 			<label className="summary hover">
 				<input type="checkbox" checked={opened} onChange={e=>setOpened(e.target.checked)}/>
-				{icon && <img src={icon} draggable={false}/>}
-				<span>{title[settings.language]}</span>
+				{/* {icon && <img src={icon} draggable={false}/>}
+				<span>{title[settings.language]}</span> */}
 			</label>
 				
 			<div className="collapse">
@@ -265,6 +298,10 @@ function Mod({
 
 	const checked = selectedMods.includes(mod.id) || false
 
+	React.useEffect(_=>{
+		lucide.createIcons()
+	}, [checked])
+
 	const onGridClick = e=>{
 		if (type == "radio" && checked){
 			e.preventDefault()
@@ -303,6 +340,13 @@ function Mod({
 				{
 					(cached_ver && cached_ver != mod.ver) && (
 						<i className="new-badge" title={langData["mod_updated"]}/>
+					)
+				}
+				{
+					checked && (
+						<div className="checkmark">
+							<i data-lucide="check"></i>  
+						</div>
 					)
 				}
 			</label>
