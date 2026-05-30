@@ -205,7 +205,6 @@ const SideBar = ({
 			{!mini && (
 				<div id="search-area">
 					<input
-						className="large"
 						type="search"
 						placeholder={langData["search"]}
 						value={search}

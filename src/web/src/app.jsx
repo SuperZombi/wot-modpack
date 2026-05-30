@@ -217,7 +217,8 @@ const App = () => {
 				{(selectedClient && selectedClient.path != "custom") && (
 					page == "home" ? (
 						<React.Fragment>
-							<Button onClick={onModsDelete}>
+							<Button onClick={onModsDelete} hasIcon={true} style={{ gap: "5px" }}>
+								<i data-lucide="trash"></i>
 								<LANG id="delete_mods_button"/>
 							</Button>
 							<NextButton onClick={_=>setPage("mods")}/>

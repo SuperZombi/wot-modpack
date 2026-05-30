@@ -328,6 +328,7 @@ ul{
 	flex-direction: column;
 	gap: 4px;
 	text-align: left;
+	padding-bottom: 5px;
 }
 .mods-install-list .mod-item {
 	display: flex;

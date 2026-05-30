@@ -51,7 +51,6 @@ svg{
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	justify-content: center;
 	text-align: center;
 	height: 100%;
 	overflow: auto;
@@ -212,16 +211,11 @@ input[type=search]{
 	appearance: none;
 	outline: none;
 	color: var(--text-color);
-	padding: 1px 4px;
+	padding: 4px 6px;
 	font-size: inherit;
 	border-radius: 6px;
 	background: rgba(255, 255, 255, 0.06);
 	border: 1px solid rgba(255, 255, 255, 0.1);
-}
-input[type=text].large,
-input[type=search].large{
-	padding: 4px 6px 4px 6px;
-	width: 100%;
 }
 /* input[type=text]::selection {
 	background: #ea850a;

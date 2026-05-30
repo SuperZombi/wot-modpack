@@ -103,7 +103,10 @@ const Settings = ({
 		</Popup>
 	)
 }
-const Button = ({children, href=null, className="", ...props})=>{
+const Button = ({children, href=null, className="", hasIcon=false, ...props})=>{
+	React.useEffect(() => {
+		if (hasIcon){lucide.createIcons()}
+	}, [hasIcon])
 	if (href){
 		return (
 			<a className={`button hover ${className}`.trim()}
@@ -122,14 +125,11 @@ const Button = ({children, href=null, className="", ...props})=>{
 	)
 }
 const BackButton = ({className="", style, ...props})=>{
-	React.useEffect(() => {
-		lucide.createIcons()
-	}, [])
 	return (
 		<Button
 			className={`flex-center-row ${className}`}
 			style={{ display: "inline-flex", gap: "5px", ...style }}
-			{...props}
+			hasIcon={true} {...props}
 		>
 			<i data-lucide="arrow-left"></i>
 			<LANG id="back"/>
@@ -137,14 +137,11 @@ const BackButton = ({className="", style, ...props})=>{
 	)
 }
 const NextButton = ({className="", style, ...props})=>{
-	React.useEffect(() => {
-		lucide.createIcons()
-	}, [])
 	return (
 		<Button
 			className={`flex-center-row ${className}`}
 			style={{ display: "inline-flex", gap: "5px", ...style }}
-			{...props}
+			hasIcon={true} {...props}
 		>
 			<LANG id="next"/>
 			<i data-lucide="arrow-right"></i>
