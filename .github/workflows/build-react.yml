@@ -50,9 +50,15 @@ jobs:
       - name: Build
         run: pyinstaller --noconfirm --onefile --noconsole --name "Web Modpack" --icon="github/icon.ico" --version-file="github/ver" --add-data "web\\;.\\web" "src/main.py"
 
-      - name: Upload
-        uses: xresloader/upload-to-github-release@v1
+      # - name: Upload
+      #   uses: xresloader/upload-to-github-release@v1
+      #   with:
+      #     file: "dist/Web Modpack.exe"
+      #     overwrite: true
+      #     update_latest_release: true
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
         with:
-          file: "dist/Web Modpack.exe"
-          overwrite: true
-          update_latest_release: true
+          name: "Web Modpack"
+          path: "dist/Web Modpack.exe"
