@@ -38,9 +38,6 @@ const App = () => {
 	const [appVersion, setAppVersion] = React.useState(0)
 
 	React.useEffect(() => {
-		lucide.createIcons()
-	}, [])
-	React.useEffect(() => {
 		(async _=>{
 			const version = await eel.app_version()()
 			setAppVersion(version)
@@ -276,6 +273,9 @@ const Header = ({
 	show_settings
 }) => {
 	const { langData } = useApp()
+	React.useEffect(() => {
+		lucide.createIcons()
+	}, [])
 	return (
 		<header className="container">
 			<div className="header-container">

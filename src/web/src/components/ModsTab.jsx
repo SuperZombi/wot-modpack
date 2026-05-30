@@ -105,34 +105,17 @@ const ModsTab = ({
 						onDrop={onDrop}
 					>
 						<div id="drag-area" className={drag ? "show":""}></div>
+
+						<SideBar
+							mods={mods}
+							categories={categories}
+							search={search}
+							setSearch={setSearch}
+						/>
+						
 						<div id="mods-list-area">
-							<div id="search-area">
-								<input
-									className="large"
-									type="text"
-									placeholder={langData["search"] || "Search"}
-									value={search}
-									onChange={e => setSearch(e.target.value)}
-								/>
-								<div tooltip={
-									(needToShowTooltip && settings.layout == "list")?langData["layout_tooltip"]:null
-								} className="tooltip-bottom tooltip-show"
-									onClick={(needToShowTooltip && settings.layout == "list")?tooltipOnClick:null}
-								>
-									<Button style={layoutButtonStyle}
-										onClick={_=>updateSetting("layout", settings.layout=="grid"?"list":"grid")}
-										tooltip={settings.layout=="grid"?langData["list_view"]:langData["grid_view"]}
-										className="tooltip-left"
-									>
-										{settings.layout == "grid" ? (
-											<img src="images/list.svg" draggable={false} height="20"/>
-										) : (
-											<img src="images/grid.svg" draggable={false} height="20"/>
-										)}
-									</Button>
-								</div>
-							</div>
-							<ModList
+							
+							{/* <ModList
 								mods={mods}
 								categories={categories}
 								groups={groups}
@@ -145,9 +128,9 @@ const ModsTab = ({
 								cachedMods={cachedMods}
 								selectedClient={selectedClient}
 								forceOpen={forceOpenCategories}
-							/>
+							/> */}
 						</div>
-						<div id="mod-preview"
+						{/* <div id="mod-preview"
 							className={`${displayPreview ? "show": ""}`}
 							onMouseOver={_=>setDisplayPreview(true)}
 							onMouseOut={_=>setDisplayPreview(false)}
@@ -181,12 +164,60 @@ const ModsTab = ({
 									dangerouslySetInnerHTML={{ __html: modPreview?.description?.[settings.language]}}
 								></div>
 							</div>
-						</div>
+						</div> */}
 					</div>
 				) : (
 					<Loader/>
 				)
 			)}
 		</React.Fragment>
+	)
+}
+const SideBar = ({
+	mods,
+	categories,
+	search,
+	setSearch
+}) => {
+	React.useEffect(() => {
+		lucide.createIcons()
+	}, [])
+	const {langData, settings} = useApp()
+	return (
+		<div id="mods-sidebar" className="container">
+			<div id="search-area">
+				<input
+					className="large"
+					type="text"
+					placeholder={langData["search"]}
+					value={search}
+					onChange={e => setSearch(e.target.value)}
+				/>
+				{/* <div tooltip={
+					(needToShowTooltip && settings.layout == "list")?langData["layout_tooltip"]:null
+				} className="tooltip-bottom tooltip-show"
+					onClick={(needToShowTooltip && settings.layout == "list")?tooltipOnClick:null}
+				>
+					<Button style={layoutButtonStyle}
+						onClick={_=>updateSetting("layout", settings.layout=="grid"?"list":"grid")}
+						tooltip={settings.layout=="grid"?langData["list_view"]:langData["grid_view"]}
+						className="tooltip-left"
+					>
+						{settings.layout == "grid" ? (
+							<img src="images/list.svg" draggable={false} height="20"/>
+						) : (
+							<img src="images/grid.svg" draggable={false} height="20"/>
+						)}
+					</Button>
+				</div> */}
+			</div>
+			{categories.map(cat=>(
+				<div className={`cat-item hover`} key={cat.name}>
+					<i data-lucide={cat.icon}></i>
+					<span>{cat.title[settings.language]}</span>
+					<span className="cnt">{mods.filter(m=>m.category == cat.name).length}</span>
+				</div>
+			))}
+		</div>
 	)
 }
