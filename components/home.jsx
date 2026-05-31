@@ -10,7 +10,10 @@ const Home = ({mods_count, total_installs, setTab}) => {
 	return (
 		<React.Fragment>
 			<div className="container card-page" align="center">
-				<div className="row" style={{columnGap: "4rem", marginBottom: "auto", marginTop: "auto"}}>
+				<div className="row" style={{
+					columnGap: "4rem", marginBottom: "auto", marginTop: "auto",
+					alignItems: "center"
+				}}>
 					<div>
 						<Reveal><h2>Web Modpack</h2></Reveal>
 						<Reveal delay={1}><h3><LANG id="modpack_description"/></h3></Reveal>
@@ -32,7 +35,7 @@ const Home = ({mods_count, total_installs, setTab}) => {
 						</div>
 					</div>
 					<Reveal className="home_image_block">
-						<img src="web/images/home_img.jpg" className="home_image" width="480" height="240" alt="Modpack preview" draggable={false}/>
+						<img src="web/images/main-page.jpg" className="home_image" width="480" height="240" alt="Modpack preview" draggable={false}/>
 					</Reveal>
 				</div>
 				<Reveal delay={10}><i className="fa-solid fa-angles-down fa-bounce"
@@ -60,6 +63,12 @@ const Home = ({mods_count, total_installs, setTab}) => {
 
 			<div className="container card-page" align="center">
 				<Reveal delay={1}><h2><LANG id="featureModernDesignTitle"/></h2></Reveal>
+				<Reveal delay={2}>
+					<img src="web/images/mods-page.jpg" className="hero_image" width="640" height="400" alt="Modpack preview" draggable={false}/>
+				</Reveal>
+			</div>
+
+			<div className="container card-page" align="center">
 				<Reveal delay={2}><BeforeAfterSlider
 					before="web/images/before.jpg"
 					after="web/images/after.jpg"

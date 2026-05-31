@@ -400,6 +400,13 @@ table td, table caption{
 	border-radius: 0.5rem;
 	user-select: none;
 }
+.hero_image{
+	width: 640px;
+	height: auto;
+	max-width: 100%;
+	border-radius: 0.5rem;
+	user-select: none;
+}
 
 .features-grid {
 	display: grid;
