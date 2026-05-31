@@ -1,23 +1,10 @@
-/* #root{
-	--header-height: 50px;
-	--footer-height: 60px;
-	padding-top: var(--header-height);
-	padding-bottom: var(--footer-height);
-} */
+
 header{
-	/* height: var(--header-height); */
-	/* background-image: url('/images/header.jpg');
-	background-repeat: no-repeat;
-	background-size: cover; */
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 	padding: 0.6em 1rem !important;
 	user-select: none;
-	/* position: fixed;
-	top: 0;
-	width: 100%;
-	z-index: 2; */
 }
 header .header-container {
 	display: flex;
@@ -49,28 +36,13 @@ header .button {
 	align-items: center;
 	justify-content: space-between;
 	padding: 0.5em 1em;
-	/* height: var(--footer-height);
-	position: fixed;
-	bottom: 0;
-	width: 100%;
-	z-index: 2;
-	
-	background: rgb(17, 17, 17, 0.5);
-	 */
+
 	backdrop-filter: blur(10px);
 	margin-top: auto;
 }
 .bottom-buttons:empty{
 	padding: 0
 }
-/* 
-#setting_button{
-	height: 30px;
-	transition: 0.2s;
-}
-#setting_button:hover{
-	transform: rotate(90deg);
-} */
 
 #mods-area{
 	display: grid;
@@ -120,9 +92,6 @@ header .button {
 	color: #f5a623;
 }
 
-/* #mods-list{
-	margin-top: -5px;
-} */
 #mods-list-area{
 	display: grid !important;
 	grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
@@ -150,16 +119,10 @@ header .button {
 	transform: translateY(-2px);
 }
 #mods-list-area .mod:has(input:checked){
-	/* background: radial-gradient(#2e2e28 25%, black) padding-box,
-		linear-gradient(0deg, #6e3f15, #f7d670) border-box;
-	border: solid 3px transparent; */
 	border-color: rgba(245, 166, 35, 0.6);
     background: rgba(245, 166, 35, 0.16);
 }
-/* #mods-list-area .mod:has(input:checked):hover{
-	background: radial-gradient(#2e2e28 25%, #333) padding-box,
-		linear-gradient(0deg, #6e3f15, #f7d670) border-box;
-} */
+
 #mods-list-area .mod .image-container{
 	overflow: hidden;
 	display: flex;
@@ -181,13 +144,6 @@ header .button {
 #mods-list-area .mod input{
 	display: none;
 }
-#mods-list-area .mod .new-badge{
-	position: absolute;
-	top: 4px;
-	right: 4px;
-	width: 12px;
-	height: 12px;
-}
 #mods-list-area .mod .checkmark {
 	position: absolute;
 	border-radius: 50%;
@@ -203,19 +159,13 @@ header .button {
 	aspect-ratio: 1;
 }
 
-
 #mod-preview{
 	padding: 5px;
 	overflow: auto;
 	scrollbar-width: thin;
 	color-scheme: dark;
-	/* height: calc(100dvh - var(--header-height) - var(--footer-height));
-	position: sticky;
-	top: var(--header-height); */
 }
-/* #mod-preview.show{
-	opacity: 1;
-} */
+
 #mod-preview .image-container{
 	height: 300px;
 	display: flex;
@@ -416,14 +366,6 @@ ul{
 	margin-right: 5px;
 }
 
-#app-version{
-	font-family: monospace;
-	font-size: 14px;
-	background: #666;
-	padding: 2px 6px;
-	border-radius: 12px;
-}
-
 .links {
 	display: flex;
 	justify-content: center;
@@ -439,9 +381,6 @@ ul{
 	padding: 4px 8px;
 	border-radius: 6px;
 }
-#cache_size{
-	margin-right: 2px;
-}
 
 .finish-tab-header {
 	display: flex;
@@ -454,14 +393,6 @@ ul{
 	color: #5de08c;
 	font-size: 2rem;
 }
-
-/* .new-badge{
-	width: 10px;
-	height: 10px;
-	background: red;
-	border-radius: 50%;
-	cursor: help;
-} */
 
 .progress-area {
 	display: grid;

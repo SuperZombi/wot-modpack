@@ -13,10 +13,6 @@ body{
 	cursor: url('/images/cursor-normal.png'), auto;
 	font-family: sans-serif;
 	color: var(--text-color);
-	/* background-color: #111;
-	background-image: url('/images/sparks.png');
-	background-repeat: repeat-y;
-	background-position: top center; */
 
 	background: radial-gradient(900px 500px at 10% 10%, rgba(45, 212, 191, 0.16), transparent 80%), radial-gradient(800px 600px at 90% 20%, rgba(139, 92, 246, 0.16), transparent 80%), radial-gradient(900px 600px at 40% 90%, rgba(59, 130, 246, 0.12), transparent 75%), #0b0f19;
 	background-attachment: fixed;
@@ -32,14 +28,6 @@ body{
 	border: 1px solid rgba(255, 255, 255, 0.1);
 	padding: 1rem;
 	box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
-}
-
-#tabs-area .tab{
-	display: none;
-	height: calc(100vh - 50px);
-}
-#tabs-area .tab.active{
-	display: block;
 }
 
 .flex-center {
@@ -59,22 +47,11 @@ body{
 	justify-content: center;
 	align-items: center;
 }
-.flex-row {
-	display: grid;
-	grid-template-columns: auto auto 1fr;
-	align-items: center;
-	gap: 10px;
-	width: fit-content;
-	margin: auto;
-}
 .shade{
 	position: fixed;
 	inset: 0;
 	background: rgb(0, 0, 0, 0.5);
 	z-index: 3;
-}
-.hide{
-	display: none !important;
 }
 
 .hover:hover{
@@ -100,12 +77,6 @@ body{
 	background: rgba(255, 255, 255, 0.12);
 	color: #fff;
 }
-/* .button:active{
-	background: linear-gradient(0deg, #343429, #696a52);
-}
-.button.selected{
-	background: linear-gradient(0deg, #343429, #696a52);
-} */
 
 .version {
 	font-size: 0.85em;
@@ -227,7 +198,6 @@ input[type=checkbox]:checked::before {
 	opacity: 1;
 }
 
-
 input[type=radio]{
 	appearance: none;
 	font-size: inherit;
@@ -258,7 +228,6 @@ input[type=radio]:checked::before {
 	opacity: 1;
 }
 
-
 input[type=text],
 input[type=search]{
 	appearance: none;
@@ -270,10 +239,7 @@ input[type=search]{
 	background: rgba(255, 255, 255, 0.06);
 	border: 1px solid rgba(255, 255, 255, 0.1);
 }
-/* input[type=text]::selection {
-	background: #ea850a;
-	color: black;
-} */
+
 textarea{
 	color: var(--text-color);
 	background: #222;
@@ -287,16 +253,6 @@ progress{
 	border: 1px solid rgba(255, 255, 255, 0.2);
 	border-radius: 99px;
 	overflow: hidden;
-
-	/* height: 10px;
-	border: solid 2px transparent;
-	border-radius: 2px;
-	background: linear-gradient(0deg, #6e3f15, #f7d670) border-box; */
-/* 
-	height: 6px;
-	border-radius: 99px;
-	background: linear-gradient(90deg, #f5a623, #e8470a);
-	transition: width 0.4s ease; */
 }
 progress::-webkit-progress-bar {
 	background: rgba(255, 255, 255, 0.1);
@@ -313,77 +269,6 @@ label{
 	width: fit-content;
 	line-height: 1em;
 }
-
-
-.details .collapse {
-	display: grid;
-	grid-template-rows: 0fr;
-	transition: grid-template-rows 0.3s;
-	overflow: hidden;
-}
-.details > .collapse > .wrapper > .content {
-	display: flex;
-	flex-direction: column;
-	gap: 1rem;
-	padding: 0.75rem;
-}
-.details.category > .collapse > .wrapper > .content {
-	padding-top: 0.25rem;
-}
-.details .collapse .wrapper{
-	min-height: 0;
-}
-.details.category > .summary > input[type=checkbox]{
-	display: none;
-}
-.details > .summary:has(input[type=checkbox]:checked) + .collapse{
-	grid-template-rows: 1fr;
-}
-
-
-.category{
-	background: #272727;
-	border-radius: 6px;
-	margin: 5px;
-}
-.category img{
-	height: 30px;
-}
-.category > .summary{
-	width: 100%;
-	font-size: 20px;
-	padding: 10px 5px;
-	height: 50px;
-	gap: 0;
-}
-.category > .summary > span {
-	margin-left: 5px;
-	font-weight: bold;
-}
-.category > .summary::after{
-	content: '⯆';
-	transform: rotate(-90deg);
-	margin-left: auto;
-	margin-right: 5px;
-	transition: 0.25s;
-}
-.category > .summary:has(input[type=checkbox]:checked)::after{
-	transform: rotate(0deg);
-}
-.category > .content{
-	padding: 5px;
-}
-
-
-.group .content {
-	margin-left: 0.5rem;
-	padding-top: 1rem !important;
-	padding-bottom: 0.25rem !important;
-}
-.group .summary::after{
-	content: '⯆';
-}
-
 
 .popup {
 	position: fixed;
@@ -538,11 +423,6 @@ section .row .row-label{
 	opacity: 0;
 	pointer-events: none;
 	transition: opacity 0.2s;
-}
-[tooltip].tooltip-right::before{
-	left: 120%;
-	bottom: 50%;
-	transform: translateY(50%);
 }
 [tooltip].tooltip-left::before{
 	left: unset;
