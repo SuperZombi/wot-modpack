@@ -301,7 +301,6 @@ function Mod({
 	const checked = selectedMods.includes(mod.id) || false
 
 	const onGridClick = e=>{
-		onMouse()
 		if (type == "radio" && checked){
 			e.preventDefault()
 			onChange({
@@ -316,7 +315,11 @@ function Mod({
 	const cached_ver = (cachedMods.find(el=>el.id==mod.id)||{}).ver || null
 
 	return (
-		<label className="mod hover" onClick={onGridClick} onMouseOver={_=>setPreview(mod)}>
+		<label className="mod hover"
+			onClick={onGridClick}
+			onMouseOver={_=>setPreview(mod)}
+			onContextMenu={e=>{e.preventDefault();onMouse()}}
+		>
 			<input
 				className="hover"
 				type={type}

@@ -455,13 +455,13 @@ ul{
 	font-size: 2rem;
 }
 
-.new-badge{
+/* .new-badge{
 	width: 10px;
 	height: 10px;
 	background: red;
 	border-radius: 50%;
 	cursor: help;
-}
+} */
 
 .progress-area {
 	display: grid;
@@ -516,4 +516,15 @@ ul{
 	width: fit-content;
 	margin: auto;
 	margin-top: 1rem;
+}
+
+.mod-list-hint{
+	border-top: 1px solid rgba(255, 255, 255, 0.1);
+	padding: 8px 10px;
+	padding-top: 1rem;
+	display: grid;
+	grid-template-columns: auto 1fr;
+	justify-items: start;
+	gap: 10px;
+	margin-top: auto;
 }

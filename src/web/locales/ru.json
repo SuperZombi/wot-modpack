@@ -59,5 +59,7 @@
 	"first_install_tooltip": "Выберите это, если это ваша первая установка",
 	"advert_title": "Понравился модпак?",
 	"advert_description": "Поддержите разработчика донатом!",
-	"advert_button": "Поддержать"
+	"advert_button": "Поддержать",
+	"mod_list_hint_left_click": "Выбрать",
+	"mod_list_hint_right_click": "Предпросмотр"
 }

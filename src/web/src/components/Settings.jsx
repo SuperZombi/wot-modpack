@@ -46,9 +46,7 @@ const Settings = ({
 						<i className="fa-regular fa-filter"></i>
 						<LANG id="match_client_lang"/>
 					</div>
-					<input type="checkbox" className="setting_element hover"
-						checked={settings.match_client_lang} onChange={e=>updateSetting("match_client_lang", e.target.checked)}
-					/>
+					<Switcher value={settings.match_client_lang} onChange={val=>updateSetting("match_client_lang", val)}/>
 				</div>
 			</section>
 			<hr/>
@@ -58,9 +56,7 @@ const Settings = ({
 						<i className="fa-regular fa-database"></i>
 						<LANG id="use_cache"/>
 					</div>
-					<input type="checkbox" className="setting_element hover"
-						checked={settings.use_cache} onChange={e=>updateSetting("use_cache", e.target.checked)}
-					/>
+					<Switcher value={settings.use_cache} onChange={val=>updateSetting("use_cache", val)}/>
 				</div>
 				<div className="row">
 					<div className="row-label">
@@ -101,6 +97,20 @@ const Settings = ({
 				</Button>
 			</section>
 		</Popup>
+	)
+}
+const Switcher = ({value, onChange}) => {
+	return (
+		<label className="toggle-switch hover">
+			<input
+				type="checkbox"
+				checked={value}
+				onChange={e => onChange(e.target.checked)}
+			/>
+			<div className="toggle-track">
+				<div className="toggle-thumb"></div>
+			</div>
+		</label>
 	)
 }
 const Button = ({children, href=null, className="", ...props})=>{

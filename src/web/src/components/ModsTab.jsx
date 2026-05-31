@@ -227,6 +227,14 @@ const SideBar = ({
 					)}
 				</div>
 			))}
+			{!mini && (
+				<div className="mod-list-hint">
+					<i className="fa-regular fa-computer-mouse-button-left"></i>
+					<LANG id="mod_list_hint_left_click"/>
+					<i className="fa-regular fa-computer-mouse-button-right"></i>
+					<LANG id="mod_list_hint_right_click"/>
+				</div>
+			)}
 		</div>
 	)
 }
