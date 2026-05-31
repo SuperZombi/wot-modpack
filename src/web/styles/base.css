@@ -249,7 +249,7 @@ textarea{
 
 progress{
 	appearance: none;
-	height: 6px;
+	height: 7px;
 	border: 1px solid rgba(255, 255, 255, 0.2);
 	border-radius: 99px;
 	overflow: hidden;
