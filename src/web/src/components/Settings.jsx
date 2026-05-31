@@ -38,7 +38,7 @@ const Settings = ({
 						value={{path: settings.language, title: langOptions.find(x=>x.path==settings.language).title}}
 						onChange={val=>updateSetting("language", val.path)}
 						placeholder={langData["language"]}
-						style={{fontSize: "0.8em"}}
+						style={{fontSize: "0.85em"}}
 					/>
 				</div>
 				<div className="row">

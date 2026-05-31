@@ -23,7 +23,9 @@ const InstallTab = ({
 					value={currentInstall?.current ?? 0}
 					max={currentInstall?.total ?? 1}
 				/>
-				<span>{currentInstall ? `${currentInstall.current ?? 0} / ${currentInstall.total ?? 0}` : "0 / 0"}</span>
+				<span style={{
+					color: "#f5a623", fontFamily: "monospace"
+				}}>{currentInstall ? `${currentInstall.current ?? 0}/${currentInstall.total ?? 0}` : "0 / 0"}</span>
 
 				<progress
 					value={download_progress}
@@ -33,7 +35,8 @@ const InstallTab = ({
 					}}
 				/>
 				<span style={{
-					opacity: download_progress > 0 ? 1 : 0
+					opacity: download_progress > 0 ? 1 : 0,
+					color: "#f5a623", fontFamily: "monospace"
 				}}>
 					{download_progress + "%"}
 				</span>
@@ -41,11 +44,15 @@ const InstallTab = ({
 			<div className="download-progress-size"
 				style={{opacity: download_progress > 0 ? 1 : 0}}
 			>
-				<span>{bytesToMb(download_current)}</span>
-				<LANG id="megabytes"/>
+				<span>
+					<span>{bytesToMb(download_current)}</span>
+					<LANG id="megabytes"/>
+				</span>
 				<span>/</span>
-				<span>{bytesToMb(download_total)}</span>
-				<LANG id="megabytes"/>
+				<span>
+					<span>{bytesToMb(download_total)}</span>
+					<LANG id="megabytes"/>
+				</span>
 			</div>
 			<Gallery/>
 		</div>

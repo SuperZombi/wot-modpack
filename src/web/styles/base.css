@@ -88,7 +88,7 @@ body{
 	text-decoration: none;
     border-radius: 8px;
     background: rgba(255, 255, 255, 0.06);
-    border: 0.5px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -119,12 +119,21 @@ body{
 .select {
 	position: relative;
 }
-.select .select-header {
+.select .button {
 	width: 100%;
+	max-width: 300px;
+	justify-content: flex-start;
+	gap: 0.65em;
+	backdrop-filter: blur(10px);
 }
-.select .select-header::after {
-	content: '⯆';
-	margin-left: 5px;
+.select:has(.icon) .button {
+	padding: 0.4em;
+}
+.select .arrow {
+	margin-left: auto;
+}
+.select .arrow.open {
+	transform: rotate(180deg);
 }
 .select .select-options {
 	position: absolute;
@@ -135,10 +144,58 @@ body{
 	flex-direction: column;
 	gap: 5px;
 }
-/* .select .select-options .button {
-	backdrop-filter: blur(10px);
-} */
-
+.select .select-options .selected {
+	border: 1px solid rgba(255, 255, 255, 0.25);
+}
+.select .icon {
+	border: 1px solid rgba(255, 255, 255, 0.1);
+	padding: 0.4em;
+	border-radius: 6px;
+	background: rgb(38, 41, 47, 0.2);
+}
+.select .icon.blue {
+	background: rgb(34, 42, 55, 0.5);
+	color: #3575d8;
+}
+.select .icon.yellow {
+	background: #362d21;
+	color: #c17a0a;
+}
+.select .select-item-area{
+	display: flex;
+	gap: 2px;
+	flex-direction: column;
+	align-items: flex-start;
+	white-space: nowrap;
+	overflow: hidden;
+}
+.select .select-title{
+	font-size: 0.85em;
+	display: flex;
+	align-items: center;
+	gap: 0.25em;
+}
+.select .select-title.blue{
+	color: #3575d8;
+}
+.select .select-title.yellow{
+	color: #f5a620;
+}
+.select .selected-value{
+	color: gray;
+	font-size: 0.75em;
+	width: 100%;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+.select .tag {
+	border: 1px solid rgba(255, 255, 255, 0.1);
+	padding: 0.1em 0.25em;
+	border-radius: 5px;
+	background: #312424;
+	font-size: 0.7em;
+	color: #a64949;
+}
 
 input[type=checkbox]{
 	appearance: none;
@@ -226,16 +283,26 @@ textarea{
 
 progress{
 	appearance: none;
-	height: 15px;
+	height: 6px;
+	border: 1px solid rgba(255, 255, 255, 0.2);
+	border-radius: 99px;
+	overflow: hidden;
+
+	/* height: 10px;
 	border: solid 2px transparent;
 	border-radius: 2px;
-	background: linear-gradient(0deg, #6e3f15, #f7d670) border-box;
+	background: linear-gradient(0deg, #6e3f15, #f7d670) border-box; */
+/* 
+	height: 6px;
+	border-radius: 99px;
+	background: linear-gradient(90deg, #f5a623, #e8470a);
+	transition: width 0.4s ease; */
 }
 progress::-webkit-progress-bar {
-	background: radial-gradient(#2e2e28 25%, black);
+	background: rgba(255, 255, 255, 0.1);
 }
 progress::-webkit-progress-value {
-	background: linear-gradient(0deg, #6e3f15, gold);
+	background: linear-gradient(90deg, #f5a623, #e8470a);
 }
 
 label{

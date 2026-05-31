@@ -24,8 +24,8 @@ function ModList({
 
 	function matchesSearch(mod, search) {
 		if (settings.match_client_lang && mod.lang && mod.lang !== selectedClient.lang.toLocaleLowerCase()) return false
-
-		if (!search) return true;
+		if (mod.hidden) return false
+		if (!search) return true
 		const s = search.toLowerCase();
 		if (mod.id.toLowerCase().includes(s)) return true;
 		if (mod.author && mod.author.toLowerCase().includes(s)) return true;
@@ -54,7 +54,10 @@ function ModList({
 	
 	if (!activeCat){ return }
 
-	const filteredMods = search ? mods.filter(mod => matchesSearch(mod, search) && !mod.hidden) : mods.filter(m => m.category === activeCat && !m.hidden)
+	const filteredMods = search ?
+		mods.filter(mod => matchesSearch(mod, search)) :
+		mods.filter(mod => matchesSearch(mod, search) && mod.category === activeCat);
+
 	if (search && !filteredMods.length){
 		return (
 			<h3 align="center">
@@ -333,16 +336,15 @@ function Mod({
 			</div>
 			<span>{replaceFlags(mod.title[settings.language])}</span>
 			{
-				(cached_ver && cached_ver != mod.ver) && (
-					<i className="new-badge" title={langData["mod_updated"]}/>
-				)
-			}
-			{
-				checked && (
+				checked ? (
 					<div className="checkmark">
 						<i className="fa-regular fa-check"></i>
 					</div>
-				)
+				) : (cached_ver && cached_ver != mod.ver) ? (
+					<div className="checkmark tooltip-left" tooltip={langData["mod_updated"]}>
+						<i className="fa-solid fa-up"></i>
+					</div>
+				) : null
 			}
 		</label>
 	)

@@ -49,13 +49,14 @@ const FinishTab = ({
 				) : (
 				<React.Fragment>
 					<br/>
-					<h3>
+					<div className="finish-tab-header">
+						<i className="fa-solid fa-circle-check"></i>
 						{selectedMods.length > 0 ? (
 							<LANG id="installed_success"/>
 						) : (
 							<LANG id="deleted_success"/>
 						)}
-					</h3>
+					</div>
 					<InstallLogsViewer onVisibilityChange={setIsLogsOpen}/>
 					{!isLogsOpen && (
 						<React.Fragment>
@@ -63,10 +64,11 @@ const FinishTab = ({
 								<h4><LANG id="advert_title"/></h4>
 								<p><LANG id="advert_description"/></p>
 								<Button href="https://donatello.to/super_zombi" style={{marginTop: "0.5rem"}}>
+									<i className="fa-solid fa-heart"></i>
 									<LANG id="advert_button"/>
 								</Button>
 							</div>
-							<Gallery style={{height: "320px", marginTop: "2rem"}}/>
+							<Gallery style={{height: "300px", marginTop: "1rem"}}/>
 						</React.Fragment>
 					)}
 					</React.Fragment>

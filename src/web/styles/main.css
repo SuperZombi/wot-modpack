@@ -60,6 +60,9 @@ header .button {
 	backdrop-filter: blur(10px);
 	margin-top: auto;
 }
+.bottom-buttons:empty{
+	padding: 0
+}
 /* 
 #setting_button{
 	height: 30px;
@@ -353,7 +356,7 @@ ul{
 	word-break: break-word;
 	border: 1px solid #555;
 	border-radius: 8px;
-	background: #0b0b0b;
+	background: rgba(255, 255, 255, 0.04);
 	color: #d9d9d9;
 	font-size: 12px;
 }
@@ -381,8 +384,9 @@ ul{
 .install-log-controls .actions {
 	margin-left: auto;
 }
-.install-log-controls .actions img {
-	height: 1em;
+.install-log-controls .actions .button {
+	aspect-ratio: 1;
+	padding: 0.6em;
 }
 .install-log-controls select{
 	background: #111;
@@ -439,6 +443,18 @@ ul{
 	margin-right: 2px;
 }
 
+.finish-tab-header {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 1rem;
+	margin: 1rem;
+}
+.finish-tab-header i {
+	color: #5de08c;
+	font-size: 2rem;
+}
+
 .new-badge{
 	width: 10px;
 	height: 10px;
@@ -458,9 +474,15 @@ ul{
 }
 .download-progress-size {
 	display: flex;
-	gap: 4px;
+	gap: 2px;
 	justify-content: center;
 	margin-top: 1rem;
+	color: #f5a623;
+	font-family: monospace;
+}
+.download-progress-size > span{
+	display: flex;
+	gap: 2px;
 }
 
 #drag-area{

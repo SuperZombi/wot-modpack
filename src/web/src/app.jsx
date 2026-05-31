@@ -267,6 +267,7 @@ const App = () => {
 						<Button onClick={_=>setPage("home")}
 							style={{margin: "auto"}}
 						>
+							<i className="fa-regular fa-house"></i>
 							<LANG id="home"/>
 						</Button>
 					) : null
