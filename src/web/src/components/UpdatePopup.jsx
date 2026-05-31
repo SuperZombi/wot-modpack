@@ -21,7 +21,9 @@ const Popup = ({
 		>
 			<div className="popup_wraper">
 				{closeButton && (
-					<div onClick={BeforeClose} className="close hover"><i data-lucide="circle-x"></i></div>
+					<div onClick={BeforeClose} className="close hover">
+						<i className="fa-regular fa-circle-xmark"></i>
+					</div>
 				)}
 				{typeof children === "function" ? children({ close: BeforeClose }) : children}
 			</div>

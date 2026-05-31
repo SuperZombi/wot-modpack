@@ -297,10 +297,6 @@ function Mod({
 
 	const checked = selectedMods.includes(mod.id) || false
 
-	React.useEffect(_=>{
-		lucide.createIcons()
-	}, [checked])
-
 	const onGridClick = e=>{
 		onMouse()
 		if (type == "radio" && checked){
@@ -344,7 +340,7 @@ function Mod({
 			{
 				checked && (
 					<div className="checkmark">
-						<i data-lucide="check"></i>  
+						<i className="fa-regular fa-check"></i>
 					</div>
 				)
 			}

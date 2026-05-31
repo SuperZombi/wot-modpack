@@ -165,7 +165,6 @@ const App = () => {
 					setCachedMods={setCachedMods}
 				/>
 			)}
-			{/* { updateAvailable && <UpdatePopup onClose={_=>setUpdateAvailable(false)}/>} */}
 			
 			<div className="flex-center">
 				{page == "home" ? (
@@ -217,8 +216,8 @@ const App = () => {
 				{(selectedClient && selectedClient.path != "custom") && (
 					page == "home" ? (
 						<React.Fragment>
-							<Button onClick={onModsDelete} hasIcon={true} style={{ gap: "5px" }}>
-								<i data-lucide="trash"></i>
+							<Button onClick={onModsDelete} style={{ gap: "5px" }}>
+								<i className="fa-regular fa-trash"></i>
 								<LANG id="delete_mods_button"/>
 							</Button>
 							<NextButton onClick={_=>setPage("mods")}/>
@@ -230,6 +229,7 @@ const App = () => {
 								<BackButton onClick={_=>setPage("home")}/>
 								{mods.length > 0 && (
 									<Button onClick={resetAllSelected}>
+										<i className="fa-regular fa-arrow-rotate-left"></i>
 										<LANG id="reset"/>
 									</Button>
 								)}
@@ -244,15 +244,21 @@ const App = () => {
 								<Button className="flex-center-row" style={{display: "flex"}}
 									onClick={_=>writeToFile(JSON.stringify(selectedMods, null, 4), "my-mods.json")}
 								>
-									<img src="images/share.svg" height="18" draggable={false}/>
+									<i className="fa-solid fa-share"></i>
 									<LANG id="share"/>
 								</Button>
 							)}
 							<Button onClick={mainCall}>
 								{selectedMods.length > 0 ? (
-									<LANG id="install"/>
+									<React.Fragment>
+										<LANG id="install"/>
+										<i className="fa-regular fa-angle-right"></i>
+									</React.Fragment>
 								) : (
-									<LANG id="delete_mods_button"/>
+									<React.Fragment>
+										<i className="fa-regular fa-trash"></i>
+										<LANG id="delete_mods_button"/>
+									</React.Fragment>
 								)}
 							</Button>
 						</React.Fragment>
@@ -275,9 +281,6 @@ const Header = ({
 	show_settings
 }) => {
 	const { langData } = useApp()
-	React.useEffect(() => {
-		lucide.createIcons()
-	}, [updateAvailable])
 	return (
 		<header className="container">
 			<div className="header-container">
@@ -294,11 +297,11 @@ const Header = ({
 					<Button tooltip={langData["update_available"]} className="tooltip-bottom"
 						href="https://github.com/SuperZombi/wot-modpack/releases"
 					>
-						<i data-lucide="arrow-up"></i>
+						<i className="fa-regular fa-arrow-up"></i>
 					</Button>
 				)}
 				<Button onClick={show_settings}>
-					<i data-lucide="settings"></i>
+					<i className="fa-regular fa-gear"></i>
 				</Button>
 			</div>
 		</header>

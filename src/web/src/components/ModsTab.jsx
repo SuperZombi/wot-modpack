@@ -98,7 +98,7 @@ const ModsTab = ({
 				<div id="retry_area">
 					<LANG id="mods_info_parse_fail"/>
 					<Button onClick={_=>setFailedToLoadModsInfo(false)}>
-						<img src="images/retry.svg" height="18" draggable={false}/>
+						<i className="fa-regular fa-arrow-rotate-left"></i>
 						<LANG id="retry"/>
 					</Button>
 				</div>
@@ -140,7 +140,7 @@ const ModsTab = ({
 						{displayPreview && (
 							<div id="mod-preview" className="container">
 								<div className="close hover" onClick={_=>setDisplayPreview(false)}>
-									<i data-lucide="circle-x"></i>
+									<i className="fa-regular fa-circle-xmark"></i>
 								</div>
 								<div className="image-container">
 									<img id="mod-image"
@@ -156,13 +156,13 @@ const ModsTab = ({
 									<h4 id="mod-subtitle">
 										<div className="mod-header-item">
 											<div style={{display: !modPreview?.author ? "none" : ""}}>
-												<i data-lucide="user-round"></i>
+												<i className="fa-regular fa-user"></i>
 											</div>
 											<div id="mod-author">{modPreview?.author}</div>
 										</div>
 										<div className="mod-header-item">
 											<span>{modPreview && (stats[modPreview.id] || 0)}</span>
-											<div><i data-lucide="download"></i></div>
+											<i className="fa-regular fa-arrow-down-to-bracket"></i>
 										</div>
 									</h4>
 									{modPreview?.audio && (
@@ -196,9 +196,6 @@ const SideBar = ({
 	setSearch,
 	setDisplayPreview
 }) => {
-	React.useEffect(() => {
-		lucide.createIcons()
-	}, [])
 	const {langData, settings} = useApp()
 	return (
 		<div id="mods-sidebar" className="container">
@@ -221,7 +218,7 @@ const SideBar = ({
 						setDisplayPreview(false)
 					}}
 				>
-					<i data-lucide={cat.icon}></i>
+					<i className={`fa-regular fa-${cat.icon}`}></i>
 					{!mini && (
 						<React.Fragment>
 							<span>{cat.title[settings.language]}</span>

@@ -23,11 +23,6 @@ body{
 	overflow: hidden;
 	height: 100dvh;
 }
-svg{
-	height: 1em;
-	width: 1em;
-	/* fill: var(--text-color); */
-}
 * {
 	box-sizing: border-box;
 }
@@ -94,11 +89,12 @@ svg{
     border-radius: 8px;
     background: rgba(255, 255, 255, 0.06);
     border: 0.5px solid rgba(255, 255, 255, 0.1);
-    display: flex;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
     transition: background 0.2s;
     color: var(--text-color);
+	gap: 0.4em;
 }
 .button:hover{
 	background: rgba(255, 255, 255, 0.12);
@@ -364,6 +360,12 @@ label{
 	color: red;
 	font-size: 1.5rem;
 }
+.popup .close i{
+	transition: 0.2s;
+}
+.popup .close:hover i{
+	transform: rotate(90deg);
+}
 
 hr{
 	border: 1px solid #333;
@@ -388,6 +390,11 @@ section .row .row-label{
 	gap: 8px;
 }
 
+#loader{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
 .loader {
 	position: relative;
 }

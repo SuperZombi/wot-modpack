@@ -41,11 +41,8 @@ header a {
 }
 header .button {
 	padding: 0.5em;
+	aspect-ratio: 1;
 }
-/* 
-header a:hover{
-	text-decoration: underline;
-} */
 
 .bottom-buttons{
 	display: flex;
@@ -193,13 +190,14 @@ header a:hover{
 	border-radius: 50%;
 	background: #f5a623;
 	color: #fff;
-	width: 1.3em;
-	height: 1.3em;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	top: 3px;
 	right: 3px;
+	padding: 0.4em;
+	font-size: 0.6em;
+	aspect-ratio: 1;
 }
 
 
@@ -425,14 +423,9 @@ ul{
 .links {
 	display: flex;
 	justify-content: center;
-	gap: 1em;
+	gap: 0.6em;
 	user-select: none;
-}
-.links a:hover{
-	opacity: 0.75;
-}
-.links img{
-	height: 50px;
+	font-size: 14px;
 }
 
 .file_size{

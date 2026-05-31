@@ -20,9 +20,6 @@ const Settings = ({
 		setCacheSize(0)
 		setCachedMods([])
 	}
-	React.useEffect(() => {
-		lucide.createIcons()
-	}, [])
 
 	return (
 		<Popup onClose={onClose}>
@@ -33,7 +30,7 @@ const Settings = ({
 			<section>
 				<div className="row">
 					<div className="row-label">
-						<div><i data-lucide="languages"></i></div>
+						<i className="fa-regular fa-language"></i>
 						<span><LANG id="language"/>:</span>
 					</div>
 					<Select
@@ -46,7 +43,7 @@ const Settings = ({
 				</div>
 				<div className="row">
 					<div className="row-label">
-						<div><i data-lucide="funnel"></i></div>
+						<i className="fa-regular fa-filter"></i>
 						<LANG id="match_client_lang"/>
 					</div>
 					<input type="checkbox" className="setting_element hover"
@@ -58,7 +55,7 @@ const Settings = ({
 			<section>
 				<div className="row">
 					<div className="row-label">
-						<div><i data-lucide="database"></i></div>
+						<i className="fa-regular fa-database"></i>
 						<LANG id="use_cache"/>
 					</div>
 					<input type="checkbox" className="setting_element hover"
@@ -67,7 +64,7 @@ const Settings = ({
 				</div>
 				<div className="row">
 					<div className="row-label">
-						<div><i data-lucide="trash"></i></div>
+						<i className="fa-regular fa-trash"></i>
 						<span><LANG id="cache_size"/>:</span>
 						<span className="file_size">
 							<span>{cacheSize}</span>
@@ -82,31 +79,31 @@ const Settings = ({
 			<hr/>
 			<section>
 				<div className="links">
-					<a href="https://www.youtube.com/c/SuperZombi" className="hover" target="_blank">
-						<img src="/images/youtube_logo.png" draggable={false}/>
-					</a>
-					<a href="https://github.com/SuperZombi/wot-modpack" className="hover" target="_blank">
-						<img src="/images/github_logo.png" draggable={false}/>
-					</a>
-					<a href="https://donatello.to/super_zombi" className="hover" target="_blank">
-						<img src="/images/donatello_logo.png" draggable={false}/>
-					</a>
+					<Button href="https://www.youtube.com/c/SuperZombi">
+						<i className="fa-brands fa-youtube"></i>
+						<span>YouTube</span>
+					</Button>
+					<Button href="https://github.com/SuperZombi/wot-modpack">
+						<i className="fa-brands fa-github"></i>
+						<span>GitHub</span>
+					</Button>
+					<Button href="https://donatello.to/super_zombi">
+						<i className="fa-solid fa-heart"></i>
+						<span>Donate</span>
+					</Button>
 				</div>
 			</section>
 			<hr/>
 			<section style={{paddingBottom: 0}}>
-				<Button href="https://github.com/SuperZombi/wot-modpack/issues" style={{fontSize: "12px", gap: "4px"}}>
-					<i data-lucide="bug"></i>
+				<Button href="https://github.com/SuperZombi/wot-modpack/issues" style={{fontSize: "12px"}}>
+					<i className="fa-regular fa-bug"></i>
 					<LANG id="report_bug"/>
 				</Button>
 			</section>
 		</Popup>
 	)
 }
-const Button = ({children, href=null, className="", hasIcon=false, ...props})=>{
-	React.useEffect(() => {
-		if (hasIcon){lucide.createIcons()}
-	}, [hasIcon])
+const Button = ({children, href=null, className="", ...props})=>{
 	if (href){
 		return (
 			<a className={`button hover ${className}`.trim()}
@@ -129,9 +126,9 @@ const BackButton = ({className="", style, ...props})=>{
 		<Button
 			className={`flex-center-row ${className}`}
 			style={{ display: "inline-flex", gap: "5px", ...style }}
-			hasIcon={true} {...props}
+			{...props}
 		>
-			<i data-lucide="arrow-left"></i>
+			<i className="fa-regular fa-angle-left"></i>
 			<LANG id="back"/>
 		</Button>
 	)
@@ -141,10 +138,10 @@ const NextButton = ({className="", style, ...props})=>{
 		<Button
 			className={`flex-center-row ${className}`}
 			style={{ display: "inline-flex", gap: "5px", ...style }}
-			hasIcon={true} {...props}
+			{...props}
 		>
 			<LANG id="next"/>
-			<i data-lucide="arrow-right"></i>
+			<i className="fa-regular fa-angle-right"></i>
 		</Button>
 	)
 }
