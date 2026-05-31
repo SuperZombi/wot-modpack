@@ -9,19 +9,12 @@ const ModsTab = ({
 	const [modPreview, setPreview] = React.useState(null)
 	const [displayPreview, setDisplayPreview] = React.useState(false)
 
-	const {langData, settings, updateSetting} = useApp()
+	const {langData, settings} = useApp()
 	const audioRef = React.useRef(null)
 	const [imageLoaded, setImageLoaded] = React.useState(false)
 
 	const [activeCat, setActiveCat] = React.useState()
 
-	// const [forceOpenCategories, setForceOpenCategories] = React.useState(false)
-	// const [needToShowTooltip, setNeedToShowTooltip] = React.useState(settings.layout_tooltip)
-	// const tooltipOnClick = () => {
-	// 	setNeedToShowTooltip(false)
-	// 	updateSetting("layout_tooltip", false)
-	// 	setForceOpenCategories(true)
-	// }
 
 	React.useEffect(() => {
 		setActiveCat(categories[0]?.name)
@@ -87,10 +80,6 @@ const ModsTab = ({
 		reader.readAsText(droppedFile)
 	}
 
-	// const layoutButtonStyle = {
-	// 	display: "flex",
-	// 	boxShadow: (needToShowTooltip && settings.layout == "list") ? "0 0 10px orange" : null
-	// }
 
 	return (
 		<React.Fragment>
@@ -126,7 +115,6 @@ const ModsTab = ({
 						<ModList
 							activeCat={activeCat}
 							mods={mods}
-							categories={categories}
 							groups={groups}
 							stats={stats}
 							search={search}
