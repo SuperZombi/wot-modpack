@@ -43,7 +43,9 @@ header .left-button{
 	display: flex;
 	align-items: center;
 	gap: 10px;
-	font-size: 1.2rem;
+	font-family: "Bebas Neue", sans-serif;
+	font-size: 1.5rem;
+	letter-spacing: 1px;
 }
 header .left-button img {
 	height: 2rem;
