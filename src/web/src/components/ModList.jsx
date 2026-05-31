@@ -1,7 +1,8 @@
 function ModList({
-	mods, groups, categories, stats, search,
+	activeCat,
+	mods, groups, stats, search,
 	selectedMods, setSelectedMods, setPreview, setDisplayPreview,
-	cachedMods, selectedClient, forceOpen=false
+	cachedMods, selectedClient,
 }) {
 	const toggleMod = (modId, value=null) => {
 		setSelectedMods(prev => {
@@ -22,8 +23,8 @@ function ModList({
 
 	function matchesSearch(mod, search) {
 		if (settings.match_client_lang && mod.lang && mod.lang !== selectedClient.lang.toLocaleLowerCase()) return false
-
-		if (!search) return true;
+		if (mod.hidden) return false
+		if (!search) return true
 		const s = search.toLowerCase();
 		if (mod.id.toLowerCase().includes(s)) return true;
 		if (mod.author && mod.author.toLowerCase().includes(s)) return true;
@@ -31,53 +32,6 @@ function ModList({
 		if (mod.description && Object.values(mod.description).some(v => v.toLowerCase().includes(s))) return true;
 		return false;
 	}
-	const anyMatch = categories.some(cat => {
-		const catMods = mods.filter(m => m.category === cat.name)
-		return catMods.some(mod => matchesSearch(mod, search))
-	})
-
-	if (search && !anyMatch){
-		return (
-			<h3 align="center">
-				<LANG id="nothing_found"/>
-			</h3>
-		)
-	}
-	return (
-		<div id="mods-list">
-			{categories.map(cat => {
-				const catMods = mods.filter(m => m.category === cat.name)
-
-				return (
-					<Category
-						key={cat.name}
-						title={cat.title}
-						icon={cat.image}
-						mods={catMods}
-						groups={groups}
-						stats={stats}
-						search={search}
-						matchesSearch={matchesSearch}
-						selectedMods={selectedMods}
-						toggleMod={toggleMod}
-						setPreview={setPreview}
-						setDisplayPreview={setDisplayPreview}
-						cachedMods={cachedMods}
-						forceOpen={forceOpen}
-					/>
-				)
-			})}
-		</div>
-	)
-}
-
-function Category({
-	title, icon, mods, groups, stats,
-	search, matchesSearch,
-	selectedMods, toggleMod,
-	setPreview, setDisplayPreview,
-	cachedMods, forceOpen=false
-}) {
 	function sortByPopularityWithGroups(mods) {
 		const groupPopularity = {}
 		for (const g of groups) {
@@ -92,91 +46,70 @@ function Category({
 			return popB - popA;
 		})
 	}
-	const { settings } = useApp()
-	const filteredMods = mods.filter(mod => matchesSearch(mod, search))
-	const allModsSorted = sortByPopularityWithGroups(filteredMods)
-	const [opened, setOpened] = React.useState(forceOpen)
-	React.useEffect(_=>{
-		setOpened(forceOpen || search.length > 0)
-	}, [forceOpen, search])
+	
+	if (!activeCat){ return }
 
-	if (!filteredMods.length) return null;
+	const filteredMods = search ?
+		mods.filter(mod => matchesSearch(mod, search)) :
+		mods.filter(mod => matchesSearch(mod, search) && mod.category === activeCat);
+
+	if (search && !filteredMods.length){
+		return (
+			<h3 align="center">
+				<LANG id="nothing_found"/>
+			</h3>
+		)
+	}
+	
+	const allModsSorted = sortByPopularityWithGroups(filteredMods)
 
 	return (
-		<div className="details category">
-			<label className="summary hover">
-				<input type="checkbox" checked={opened} onChange={e=>setOpened(e.target.checked)}/>
-				{icon && <img src={icon} draggable={false}/>}
-				<span>{title[settings.language]}</span>
-			</label>
-				
-			<div className="collapse">
-				<div className="wrapper">
-					<div className={`content ${settings.layout=="grid"?"mods-grid":""}`}>
-						{allModsSorted.map(mod => {
-							if (mod.group) {
-								const group = groups.find(g => g.id === mod.group);
-								if (!group) return null;
+		<div id="mods-list-area">
+			{allModsSorted.map(mod => {
+				if (mod.group) {
+					const group = groups.find(g => g.id === mod.group);
+					if (!group) return null;
 
-								const alreadyRendered = allModsSorted.findIndex(m => m.group === group.id) < allModsSorted.indexOf(mod);
-								if (alreadyRendered) return null;
+					const alreadyRendered = allModsSorted.findIndex(m => m.group === group.id) < allModsSorted.indexOf(mod);
+					if (alreadyRendered) return null;
 
-								const modsInGroup = allModsSorted.filter(m => m.group === group.id)
-								return (
-									<Group
-										key={group.id}
-										id={group.id}
-										title={group.title}
-										mods={modsInGroup}
-										stats={stats}
-										selectedMods={selectedMods}
-										toggleMod={toggleMod}
-										setPreview={setPreview}
-										setDisplayPreview={setDisplayPreview}
-										cachedMods={cachedMods}
-									/>
-								)
-							}
-							return <Mod
-								key={mod.id}
-								mod={mod}
-								selectedMods={selectedMods}
-								cachedMods={cachedMods}
-								onChange={() => toggleMod(mod.id)}
-								setPreview={setPreview}
-								setDisplayPreview={setDisplayPreview}
-							/>
-						})}
-					</div>
-				</div>
-			</div>
-
-			
+					const modsInGroup = allModsSorted.filter(m => m.group === group.id)
+					return (
+						<Group
+							key={group.id}
+							id={group.id}
+							mods={modsInGroup}
+							stats={stats}
+							selectedMods={selectedMods}
+							toggleMod={toggleMod}
+							setPreview={setPreview}
+							setDisplayPreview={setDisplayPreview}
+							cachedMods={cachedMods}
+						/>
+					)
+				}
+				return <Mod
+					key={mod.id}
+					mod={mod}
+					selectedMods={selectedMods}
+					cachedMods={cachedMods}
+					onChange={() => toggleMod(mod.id)}
+					setPreview={setPreview}
+					setDisplayPreview={setDisplayPreview}
+				/>
+			})}
 		</div>
 	)
 }
 
 function Group({
-	id, title, mods, stats,
+	id, mods, stats,
 	selectedMods, toggleMod,
 	setPreview, setDisplayPreview,
 	cachedMods
 }) {
 	const sortByPopularity = (arr) => arr.sort((a, b) => (stats[b.id] || 0) - (stats[a.id] || 0))
-	const [groupChecked, setGroupChecked] = React.useState(false)
-	const onGroupCheck = e => {
-		const value = e.target.checked
-		setGroupChecked(value)
-		if (!value){
-			mods.forEach(mod=>{
-				toggleMod(mod.id, false)
-			})
-		} else {
-			toggleMod(mods[0].id, true)
-		}
-	}
 	const onModCheck = (mod_id, value) => {
-		setGroupChecked(value)
 		mods.forEach(mod=>{
 			toggleMod(mod.id, false)
 		})
@@ -184,61 +117,23 @@ function Group({
 			toggleMod(mod_id, value)
 		}
 	}
-	React.useEffect(_=>{
-		setGroupChecked(mods.some(mod => selectedMods.includes(mod.id)))
-	}, [selectedMods])
 
-	const {settings} = useApp()
-
-	if (settings.layout == "grid"){
-		return (
-			<React.Fragment>
-				{sortByPopularity(mods).map(mod => (
-					<Mod
-						key={mod.id}
-						type="radio"
-						name={id}
-						mod={mod}
-						selectedMods={selectedMods}
-						cachedMods={cachedMods}
-						onChange={e=>onModCheck(mod.id, e.target.checked)}
-						setPreview={setPreview}
-						setDisplayPreview={setDisplayPreview}
-					/>
-				))}
-			</React.Fragment>
-		)
-	}
 	return (
-		<div className="details group">
-			<label className="summary hover">
-				<input
-					type="checkbox"
-					checked={groupChecked}
-					onChange={onGroupCheck}
+		<React.Fragment>
+			{sortByPopularity(mods).map(mod => (
+				<Mod
+					key={mod.id}
+					type="radio"
+					name={id}
+					mod={mod}
+					selectedMods={selectedMods}
+					cachedMods={cachedMods}
+					onChange={e=>onModCheck(mod.id, e.target.checked)}
+					setPreview={setPreview}
+					setDisplayPreview={setDisplayPreview}
 				/>
-				<span>{title[settings.language]}</span>
-			</label>
-			<div className="collapse">
-				<div className="wrapper">
-					<div className="content">
-						{sortByPopularity(mods).map(mod => (
-							<Mod
-								key={mod.id}
-								type="radio"
-								name={id}
-								mod={mod}
-								selectedMods={selectedMods}
-								cachedMods={cachedMods}
-								onChange={e=>onModCheck(mod.id, e.target.checked)}
-								setPreview={setPreview}
-								setDisplayPreview={setDisplayPreview}
-							/>
-						))}
-					</div>
-				</div>
-			</div>
-		</div>
+			))}
+		</React.Fragment>
 	)
 }
 
@@ -279,37 +174,12 @@ function Mod({
 	}
 	const cached_ver = (cachedMods.find(el=>el.id==mod.id)||{}).ver || null
 
-	if (settings.layout == "grid"){
-		return (
-			<label className="mod hover" onClick={onGridClick} onMouseOver={onMouse} onMouseOut={_=>setDisplayPreview(false)}>
-				<input
-					className="hover"
-					type={type}
-					checked={checked}
-					onChange={onChange}
-					{...(name && { name })}
-				/>
-				<div className="image-container">
-					<img
-						src={mod.image}
-						key={mod.image}
-						className={`${imageLoaded ? '' : 'loading'}`}
-						draggable={false}
-						loading="lazy"
-						onLoad={_=>setImageLoaded(true)}
-					/>
-				</div>
-				<span>{replaceFlags(mod.title[settings.language])}</span>
-				{
-					(cached_ver && cached_ver != mod.ver) && (
-						<i className="new-badge" title={langData["mod_updated"]}/>
-					)
-				}
-			</label>
-		)
-	}
 	return (
-		<label className="mod hover" onMouseOver={onMouse} onMouseOut={_=>setDisplayPreview(false)}>
+		<label className="mod hover"
+			onClick={onGridClick}
+			onMouseOver={_=>setPreview(mod)}
+			onContextMenu={e=>{e.preventDefault();onMouse()}}
+		>
 			<input
 				className="hover"
 				type={type}
@@ -317,11 +187,27 @@ function Mod({
 				onChange={onChange}
 				{...(name && { name })}
 			/>
+			<div className="image-container">
+				<img
+					src={mod.image}
+					key={mod.image}
+					className={`${imageLoaded ? '' : 'loading'}`}
+					draggable={false}
+					loading="lazy"
+					onLoad={_=>setImageLoaded(true)}
+				/>
+			</div>
 			<span>{replaceFlags(mod.title[settings.language])}</span>
 			{
-				(cached_ver && cached_ver != mod.ver) && (
-					<i className="new-badge" title={langData["mod_updated"]}/>
-				)
+				checked ? (
+					<div className="checkmark">
+						<i className="fa-regular fa-check"></i>
+					</div>
+				) : (cached_ver && cached_ver != mod.ver) ? (
+					<div className="checkmark tooltip-left" tooltip={langData["mod_updated"]}>
+						<i className="fa-solid fa-up"></i>
+					</div>
+				) : null
 			}
 		</label>
 	)

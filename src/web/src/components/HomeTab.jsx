@@ -55,7 +55,44 @@ const HomeTab = ({
 	)
 }
 
-function Select({ options=[], value, onChange, placeholder="", display_hint=false }) {
+const SelectOption = ({val, hint=false, children, className, onClick}) => {
+	return (
+		<Button className={className} onClick={onClick}
+			tooltip={(hint && val.path != "custom") ? val.path : null}
+		>
+			{
+				val.type == "steam" ? (
+					<div className="icon blue">
+						<i className="fa-brands fa-steam-symbol"></i>
+					</div>
+				) : val.type == "wg" ? (
+					<div className="icon yellow">
+						<i className="fa-solid fa-gamepad-modern"></i>
+					</div>
+				) : val.path == "custom" ? (
+					<div className="icon">
+						<i className="fa-solid fa-folder-open"></i>
+					</div>
+				) : null
+			}
+			<div className="select-item-area">
+				<div className={`select-title ${val.type == "steam" ? "blue" : val.type == "wg" ? "yellow" : ""}`}>
+					<span>{val ? val.title : placeholder}</span>
+					{(val.branch && val.branch !== "release") && <span className="tag">test</span>}
+				</div>
+				{
+					(hint && val && val.path != "custom") && (
+						<div className="selected-value">
+							{val.path}
+						</div>
+					)
+				}
+			</div>
+			{children}
+		</Button>
+	)
+}
+function Select({ options=[], value, onChange, placeholder="", display_hint=false, style={} }) {
 	const [open, setOpen] = React.useState(false)
 	const ref = React.useRef(null)
 
@@ -75,68 +112,36 @@ function Select({ options=[], value, onChange, placeholder="", display_hint=fals
 	}
 
 	return (
-		<div ref={ref} className="select">
-			<Button className="select-header"
+		<div ref={ref} className="select" style={style}>
+			<SelectOption
+				val={value}
+				className="select-header tooltip-bottom"
+				hint={display_hint}
 				onClick={() => setOpen(!open)}
-				tooltip={(display_hint && value && value.path != "custom") ? value.path : null}
 			>
-				{value ? value.title : placeholder}
-			</Button>
+				<div className={`arrow ${open ? "open" : ""}`}>
+					<i className="fa-solid fa-angle-down"></i>
+				</div>
+			</SelectOption>
 			{open && (
 				<div className="select-options">
 					{options.map((option) => (
-						<Button key={option.path}
-							tooltip={(display_hint && option.path != "custom") ? option.path : null}
+						<SelectOption
+							key={option.path}
+							val={option}
 							className={(value?.path == option.path) ? "selected": ""}
+							hint={display_hint}
 							onClick={() => handleSelect(option)}
 						>
-							{option.title}
-						</Button>
+							{(value?.path == option.path) && (
+								<div className="arrow" style={{fontSize: "0.75em", marginRight: "0.25em"}}>
+									<i className="fa-solid fa-check"></i>
+								</div>
+							)}
+						</SelectOption>
 					))}
 				</div>
 			)}
 		</div>
-	)
-}
-const Button = ({children, href=null, className="", ...props})=>{
-	if (href){
-		return (
-			<a className={`button hover ${className}`.trim()}
-				href={href} target="_blank" {...props}
-			>
-				{children}
-			</a>
-		)
-	}
-	return (
-		<div className={`button hover ${className}`.trim()}
-			{...props}
-		>
-			{children}
-		</div>
-	)
-}
-const BackButton = ({className="", style, ...props})=>{
-	return (
-		<Button
-			className={`flex-center-row ${className}`}
-			style={{ display: "inline-flex", gap: "5px", ...style }}
-			{...props}
-		>
-			<img src="images/back.svg" height="18" draggable={false}/>
-			<LANG id="back"/>
-		</Button>
-	)
-}
-const NextButton = ({className="", style, ...props})=>{
-	return (
-		<Button
-			className={`flex-center-row ${className}`}
-			style={{ display: "inline-flex", gap: "5px", ...style }}
-			{...props}
-		>
-			<LANG id="next"/>
-			<img src="images/next.svg" height="18" draggable={false}/>
-		</Button>
 	)
 }

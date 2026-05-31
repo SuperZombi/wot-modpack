@@ -21,9 +21,9 @@ const Popup = ({
 		>
 			<div className="popup_wraper">
 				{closeButton && (
-					<img src="/images/close.svg" className="close hover" draggable={false}
-						onClick={BeforeClose}
-					/>
+					<div onClick={BeforeClose} className="close hover">
+						<i className="fa-regular fa-circle-xmark"></i>
+					</div>
 				)}
 				{typeof children === "function" ? children({ close: BeforeClose }) : children}
 			</div>
@@ -31,19 +31,6 @@ const Popup = ({
 	)
 }
 
-const UpdatePopup = ({onClose}) => {
-	return (
-		<Popup onClose={onClose}>
-			<div className="flex-center">
-				<img src="/images/up-arrow.svg" height="64" draggable={false} style={{userSelect: "none"}}/>
-				<h3><LANG id="update_available"/></h3>
-				<Button href="https://github.com/SuperZombi/wot-modpack/releases">
-					<LANG id="download"/>
-				</Button>
-			</div>
-		</Popup>
-	)
-}
 const DataCollectionPopup = ({onClose}) => {
 	const { langData } = useApp()
 	return (

@@ -9,17 +9,16 @@ const ModsTab = ({
 	const [modPreview, setPreview] = React.useState(null)
 	const [displayPreview, setDisplayPreview] = React.useState(false)
 
-	const {langData, settings, updateSetting} = useApp()
+	const {langData, settings} = useApp()
 	const audioRef = React.useRef(null)
 	const [imageLoaded, setImageLoaded] = React.useState(false)
 
-	const [forceOpenCategories, setForceOpenCategories] = React.useState(false)
-	const [needToShowTooltip, setNeedToShowTooltip] = React.useState(settings.layout_tooltip)
-	const tooltipOnClick = () => {
-		setNeedToShowTooltip(false)
-		updateSetting("layout_tooltip", false)
-		setForceOpenCategories(true)
-	}
+	const [activeCat, setActiveCat] = React.useState()
+
+
+	React.useEffect(() => {
+		setActiveCat(categories[0]?.name)
+	}, [categories])
 
 	React.useEffect(() => {
 		const audio = audioRef.current
@@ -81,10 +80,6 @@ const ModsTab = ({
 		reader.readAsText(droppedFile)
 	}
 
-	const layoutButtonStyle = {
-		display: "flex",
-		boxShadow: (needToShowTooltip && settings.layout == "list") ? "0 0 10px orange" : null
-	}
 
 	return (
 		<React.Fragment>
@@ -92,7 +87,7 @@ const ModsTab = ({
 				<div id="retry_area">
 					<LANG id="mods_info_parse_fail"/>
 					<Button onClick={_=>setFailedToLoadModsInfo(false)}>
-						<img src="images/retry.svg" height="18" draggable={false}/>
+						<i className="fa-regular fa-arrow-rotate-left"></i>
 						<LANG id="retry"/>
 					</Button>
 				</div>
@@ -105,88 +100,129 @@ const ModsTab = ({
 						onDrop={onDrop}
 					>
 						<div id="drag-area" className={drag ? "show":""}></div>
-						<div id="mods-list-area">
-							<div id="search-area">
-								<input
-									className="large"
-									type="text"
-									placeholder={langData["search"] || "Search"}
-									value={search}
-									onChange={e => setSearch(e.target.value)}
-								/>
-								<div tooltip={
-									(needToShowTooltip && settings.layout == "list")?langData["layout_tooltip"]:null
-								} className="tooltip-bottom tooltip-show"
-									onClick={(needToShowTooltip && settings.layout == "list")?tooltipOnClick:null}
-								>
-									<Button style={layoutButtonStyle}
-										onClick={_=>updateSetting("layout", settings.layout=="grid"?"list":"grid")}
-										tooltip={settings.layout=="grid"?langData["list_view"]:langData["grid_view"]}
-										className="tooltip-left"
-									>
-										{settings.layout == "grid" ? (
-											<img src="images/list.svg" draggable={false} height="20"/>
-										) : (
-											<img src="images/grid.svg" draggable={false} height="20"/>
-										)}
-									</Button>
+
+						<SideBar
+							mini={displayPreview}
+							setDisplayPreview={setDisplayPreview}
+							activeCat={activeCat}
+							setActiveCat={setActiveCat}
+							mods={mods}
+							categories={categories}
+							search={search}
+							setSearch={setSearch}
+						/>
+						
+						<ModList
+							activeCat={activeCat}
+							mods={mods}
+							groups={groups}
+							stats={stats}
+							search={search}
+							selectedMods={selectedMods}
+							setSelectedMods={setSelectedMods}
+							setPreview={setPreview}
+							setDisplayPreview={setDisplayPreview}
+							cachedMods={cachedMods}
+							selectedClient={selectedClient}
+						/>
+						{displayPreview && (
+							<div id="mod-preview" className="container">
+								<div className="close hover" onClick={_=>setDisplayPreview(false)}>
+									<i className="fa-regular fa-circle-xmark"></i>
+								</div>
+								<div className="image-container">
+									<img id="mod-image"
+										className={`${imageLoaded ? '' : 'loading'}`}
+										src={modPreview?.image || ""}
+										key={modPreview?.image || ""}
+										draggable={false}
+										onLoad={_=>setImageLoaded(true)}
+									/>
+								</div>
+								<div id="mod-description-text">
+									<h3 align="center" id="mod-title">{modPreview ? replaceFlags(modPreview.title[settings.language]) : ""}</h3>
+									<h4 id="mod-subtitle">
+										<div className="mod-header-item">
+											<div style={{display: !modPreview?.author ? "none" : ""}}>
+												<i className="fa-regular fa-user"></i>
+											</div>
+											<div id="mod-author">{modPreview?.author}</div>
+										</div>
+										<div className="mod-header-item">
+											<span>{modPreview && (stats[modPreview.id] || 0)}</span>
+											<i className="fa-regular fa-arrow-down-to-bracket"></i>
+										</div>
+									</h4>
+									{modPreview?.audio && (
+										<audio id="mod-audio"
+											src={modPreview.audio || ""}
+											ref={audioRef} controls autoPlay
+											controlsList="nodownload"
+										/>
+									)}
+									<div id="mod-description"
+										dangerouslySetInnerHTML={{ __html: modPreview?.description?.[settings.language]}}
+									></div>
 								</div>
 							</div>
-							<ModList
-								mods={mods}
-								categories={categories}
-								groups={groups}
-								stats={stats}
-								search={search}
-								selectedMods={selectedMods}
-								setSelectedMods={setSelectedMods}
-								setPreview={setPreview}
-								setDisplayPreview={setDisplayPreview}
-								cachedMods={cachedMods}
-								selectedClient={selectedClient}
-								forceOpen={forceOpenCategories}
-							/>
-						</div>
-						<div id="mod-preview"
-							className={`${displayPreview ? "show": ""}`}
-							onMouseOver={_=>setDisplayPreview(true)}
-							onMouseOut={_=>setDisplayPreview(false)}
-						>
-							<div className="image-container">
-								<img id="mod-image"
-									className={`${imageLoaded ? '' : 'loading'}`}
-									src={modPreview?.image || ""}
-									key={modPreview?.image || ""}
-									draggable={false}
-									onLoad={_=>setImageLoaded(true)}
-								/>
-							</div>
-							<div id="mod-description-text">
-								<h3 align="center" id="mod-title">{modPreview ? replaceFlags(modPreview.title[settings.language]) : ""}</h3>
-								<h4 id="mod-subtitle">
-									<div id="mod-author">{modPreview?.author}</div>
-									<div id="mod-downloads">
-										<span>{modPreview && (stats[modPreview.id] || 0)}</span>
-										<img src="images/download.svg" height="18" draggable={false}/>
-									</div>
-								</h4>
-								{modPreview?.audio && (
-									<audio id="mod-audio"
-										src={modPreview.audio || ""}
-										ref={audioRef} controls
-										controlsList="nodownload"
-									/>
-								)}
-								<div id="mod-description"
-									dangerouslySetInnerHTML={{ __html: modPreview?.description?.[settings.language]}}
-								></div>
-							</div>
-						</div>
+						)}
 					</div>
 				) : (
 					<Loader/>
 				)
 			)}
 		</React.Fragment>
+	)
+}
+const SideBar = ({
+	mini,
+	activeCat,
+	setActiveCat,
+	mods,
+	categories,
+	search,
+	setSearch,
+	setDisplayPreview
+}) => {
+	const {langData, settings} = useApp()
+	return (
+		<div id="mods-sidebar" className="container">
+			{!mini && (
+				<div id="search-area">
+					<input
+						type="search"
+						placeholder={langData["search"]}
+						value={search}
+						onChange={e => setSearch(e.target.value)}
+					/>
+				</div>
+			)}
+
+			{categories.map(cat=>(
+				<div className={`cat-item hover ${activeCat == cat.name ? "active" : ""}`}
+					key={cat.name} onClick={_=>{
+						setActiveCat(cat.name)
+						setSearch("")
+						setDisplayPreview(false)
+					}}
+				>
+					<i className={`fa-regular fa-${cat.icon}`}></i>
+					{!mini && (
+						<React.Fragment>
+							<span>{cat.title[settings.language]}</span>
+							<span className="cnt">{mods.filter(m=>m.category == cat.name).length}</span>
+						</React.Fragment>
+					)}
+				</div>
+			))}
+			{!mini && (
+				<div className="mod-list-hint">
+					<i className="fa-regular fa-computer-mouse-button-left"></i>
+					<LANG id="mod_list_hint_left_click"/>
+					<i className="fa-regular fa-computer-mouse-button-right"></i>
+					<LANG id="mod_list_hint_right_click"/>
+				</div>
+			)}
+		</div>
 	)
 }

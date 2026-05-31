@@ -153,25 +153,18 @@ const App = () => {
 
 	return (
 		<React.Fragment>
-			<header>
-				<a href="https://superzombi.github.io/wot-modpack/" target="_blank" className="hover" draggable={false}>
-					<img src="/images/favicon.png" draggable={false}/>
-					<span>Web Modpack</span>
-				</a>
-				<img id="setting_button" className="hover"
-					src="/images/settings.svg" draggable={false}
-					onClick={_=>setShowSettings(true)}
-				/>
-			</header>
+			<Header
+				version={appVersion}
+				updateAvailable={updateAvailable}
+				show_settings={_=>setShowSettings(true)}
+			/>
 
 			{showSettings && (
 				<Settings
-					appVersion={appVersion}
 					onClose={_=>setShowSettings(false)}
 					setCachedMods={setCachedMods}
 				/>
 			)}
-			{ updateAvailable && <UpdatePopup onClose={_=>setUpdateAvailable(false)}/>}
 			
 			<div className="flex-center">
 				{page == "home" ? (
@@ -219,11 +212,12 @@ const App = () => {
 				) : null}
 			</div>
 
-			<div className="bottom-buttons">
+			<div className="bottom-buttons container">
 				{(selectedClient && selectedClient.path != "custom") && (
 					page == "home" ? (
 						<React.Fragment>
-							<Button onClick={onModsDelete}>
+							<Button onClick={onModsDelete} style={{ gap: "5px" }}>
+								<i className="fa-regular fa-trash"></i>
 								<LANG id="delete_mods_button"/>
 							</Button>
 							<NextButton onClick={_=>setPage("mods")}/>
@@ -235,6 +229,7 @@ const App = () => {
 								<BackButton onClick={_=>setPage("home")}/>
 								{mods.length > 0 && (
 									<Button onClick={resetAllSelected}>
+										<i className="fa-regular fa-arrow-rotate-left"></i>
 										<LANG id="reset"/>
 									</Button>
 								)}
@@ -249,15 +244,21 @@ const App = () => {
 								<Button className="flex-center-row" style={{display: "flex"}}
 									onClick={_=>writeToFile(JSON.stringify(selectedMods, null, 4), "my-mods.json")}
 								>
-									<img src="images/share.svg" height="18" draggable={false}/>
+									<i className="fa-solid fa-share"></i>
 									<LANG id="share"/>
 								</Button>
 							)}
 							<Button onClick={mainCall}>
 								{selectedMods.length > 0 ? (
-									<LANG id="install"/>
+									<React.Fragment>
+										<LANG id="install"/>
+										<i className="fa-regular fa-angle-right"></i>
+									</React.Fragment>
 								) : (
-									<LANG id="delete_mods_button"/>
+									<React.Fragment>
+										<i className="fa-regular fa-trash"></i>
+										<LANG id="delete_mods_button"/>
+									</React.Fragment>
 								)}
 							</Button>
 						</React.Fragment>
@@ -266,12 +267,45 @@ const App = () => {
 						<Button onClick={_=>setPage("home")}
 							style={{margin: "auto"}}
 						>
+							<i className="fa-regular fa-house"></i>
 							<LANG id="home"/>
 						</Button>
 					) : null
 				)}
 			</div>
 		</React.Fragment>
+	)
+}
+const Header = ({
+	version,
+	updateAvailable,
+	show_settings
+}) => {
+	const { langData } = useApp()
+	return (
+		<header className="container">
+			<div className="header-container">
+				<a draggable={false}>
+					<img src="/images/favicon.png" draggable={false}/>
+					<span className="title">Web Modpack</span>
+				</a>
+				{version && (
+					<span className="version">{version}</span>
+				)}
+			</div>
+			<div className="header-container">
+				{updateAvailable && (
+					<Button tooltip={langData["update_available"]} className="tooltip-bottom"
+						href="https://github.com/SuperZombi/wot-modpack/releases"
+					>
+						<i className="fa-regular fa-arrow-up"></i>
+					</Button>
+				)}
+				<Button onClick={show_settings}>
+					<i className="fa-regular fa-gear"></i>
+				</Button>
+			</div>
+		</header>
 	)
 }
 

@@ -37,8 +37,10 @@ const CheckoutTab = ({
 				<br/><br/>
 				<input type="text" value={selectedClient.path} readOnly={true}
 					style={{
-						width: `${selectedClient.path.length + 1}ch`,
-						maxWidth: "400px"
+						width: `${selectedClient.path.length + 2}ch`,
+						maxWidth: "400px",
+						fontFamily: "monospace",
+						fontSize: "1rem"
 					}}
 				/>
 				<br/><br/>
@@ -49,10 +51,12 @@ const CheckoutTab = ({
 						(needToShowTooltip && settings.first_install)?langData["first_install_tooltip"]:null
 					}>
 						<Button onClick={onClearInstall} style={layoutButtonStyle}>
+							<i className="fa-regular fa-layer-group"></i>
 							<LANG id="clear_install_button"/>
 						</Button>
 					</div>
 					<Button onClick={onUpdateInstall}>
+						<i className="fa-regular fa-circle-up"></i>
 						<LANG id="update_install_button"/>
 					</Button>
 				</div>
@@ -63,7 +67,7 @@ const CheckoutTab = ({
 							checked={installArgs["save_selected_mods"]}
 							onChange={e=>onArgChange("save_selected_mods", e.target.checked)}
 						/>
-						<img src="images/bookmark.svg" height="16" draggable={false}/>
+						<i className="fa-solid fa-bookmark"></i>
 						<LANG id="save_selected_mods"/>
 					</label>
 					<br/>
@@ -72,7 +76,7 @@ const CheckoutTab = ({
 							checked={installArgs["delete_mods"]}
 							onChange={e=>onArgChange("delete_mods", e.target.checked)}
 						/>
-						<img src="images/delete.svg" height="16" draggable={false}/>
+						<i className="fa-solid fa-trash-can"></i>
 						<LANG id="remove_all_mods"/>
 					</label>
 					<br/>
@@ -81,7 +85,7 @@ const CheckoutTab = ({
 							checked={installArgs["delete_configs"]}
 							onChange={e=>onArgChange("delete_configs", e.target.checked)}
 						/>
-						<img src="images/delete-settings.svg" height="16" draggable={false}/>
+						<i className="fa-regular fa-file-slash"></i>
 						<LANG id="remove_mod_configs"/>
 					</label>
 					<br/>
@@ -99,18 +103,18 @@ const CheckoutTab = ({
 								<div className={`mod-item ${(cached_ver && cached_ver == modObj.ver) ? "" : "prior"}`} key={modObj.id}>
 									{(cached_ver && cached_ver == modObj.ver) ? (
 										<div tooltip={langData["mod_in_cache"]} className="help">
-											<img src="images/check.svg" draggable={false}/>
+											<i className="fa-solid fa-circle-check" style={{color: "#00c500"}}></i>
 										</div>
 									) : (
 										<div tooltip={langData["mod_will_be_downloaded"]} className="help">
-											<img src="images/down-arrow.svg" draggable={false}/>
+											<i className="fa-solid fa-circle-down" style={{color: "#ffa500"}}></i>
 										</div>
 									)}
 									<span>{replaceFlags(modObj.title[settings.language])}</span>
 									<div tooltip={langData["remove"]} className="remove hover"
 										onClick={_=>setSelectedMods(prev => prev.filter(id => id !== modObj.id))}
 									>
-										<img src="images/close.svg" draggable={false}/>
+										<i className="fa-regular fa-circle-xmark" style={{color: "red"}}></i>
 									</div>
 								</div>
 							)

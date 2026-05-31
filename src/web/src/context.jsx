@@ -6,8 +6,6 @@ function AppProvider({children}) {
 		language: supportedLangs.includes(userLang) ? userLang : 'en',
 		match_client_lang: true,
 		use_cache: true,
-		layout: "list",
-		layout_tooltip: true,
 		data_collection: false,
 		first_install: true
 	}
@@ -60,4 +58,7 @@ function replaceFlags(text) {
 		}
 		return part
 	})
+}
+function bytesToMb(bytes) {
+	return Math.round(bytes / (1024 * 1024));
 }
