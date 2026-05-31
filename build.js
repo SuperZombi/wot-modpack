@@ -27,7 +27,7 @@ esbuild.build({
 
 
 const cssFiles = glob.sync('src/web/styles/*.css')
-const tempCss = 'src/web/temp_combined.css'
+const tempCss = 'temp_combined.css'
 const combinedCss = cssFiles.map(f => fs.readFileSync(f, 'utf8')).join('\n\n')
 fs.writeFileSync(tempCss, combinedCss)
 esbuild.build({
