@@ -40,7 +40,7 @@ esbuild.build({
 		{
 			name: 'ignore-urls',
 			setup(build) {
-				build.onResolve({ filter: /^\/images\// }, args => ({
+				build.onResolve({ filter: /^\// }, args => ({
 					path: args.path,
 					external: true
 				}))
