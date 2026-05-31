@@ -19,7 +19,9 @@ const FinishTab = ({
 		<div>
 			{ fails.length > 0 ? (
 				<React.Fragment>
-					<br/>
+					<div className="finish-tab-header error">
+						<i className="fa-solid fa-circle-xmark"></i>
+					</div>
 					{known_error ? (
 						<h3 style={{color: "red"}} dangerouslySetInnerHTML={{ __html: known_error }}></h3>
 					) : system_errors.length > 0 ? (
@@ -38,32 +40,35 @@ const FinishTab = ({
 							</ul>
 						</React.Fragment>
 					) : null}
-					<br/>
-						<Button href="https://github.com/SuperZombi/wot-modpack/issues" style={{fontSize: "12px"}}>
+						<Button href="https://github.com/SuperZombi/wot-modpack/issues"
+							style={{fontSize: "12px", marginTop: "8px"}}
+						>
+							<i className="fa-regular fa-bug"></i>
 							<LANG id="report_bug"/>
 						</Button>
-						<div style={{marginTop: "8px"}}>
+						<div style={{margin: "8px"}}>
 							<InstallLogsViewer onVisibilityChange={setIsLogsOpen}/>
 						</div>
 					</React.Fragment>
 				) : (
 				<React.Fragment>
-					<br/>
-					<div className="finish-tab-header">
+					<div className="finish-tab-header done">
 						<i className="fa-solid fa-circle-check"></i>
-						{selectedMods.length > 0 ? (
-							<LANG id="installed_success"/>
-						) : (
-							<LANG id="deleted_success"/>
-						)}
+						<div style={{fontWeight: "bold"}}>
+							{selectedMods.length > 0 ? (
+								<LANG id="installed_success"/>
+							) : (
+								<LANG id="deleted_success"/>
+							)}
+						</div>
 					</div>
 					<InstallLogsViewer onVisibilityChange={setIsLogsOpen}/>
 					{!isLogsOpen && (
 						<React.Fragment>
 							<div className="advert-block">
-								<h4><LANG id="advert_title"/></h4>
+								<div style={{fontWeight: "bold"}}><LANG id="advert_title"/></div>
 								<p><LANG id="advert_description"/></p>
-								<Button href="https://donatello.to/super_zombi" style={{marginTop: "0.5rem"}}>
+								<Button href="https://donatello.to/super_zombi">
 									<i className="fa-solid fa-heart"></i>
 									<LANG id="advert_button"/>
 								</Button>
