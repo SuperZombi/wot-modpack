@@ -9,7 +9,6 @@ def send_telemetry(
 	wot_lang: str,
 	wot_realm: str,
 	wot_branch: str,
-	layout: str,
 ):
 	FORM_ID = "1FAIpQLSfC97X60xa_K9GkqmNKu3bKfq0cMWNZeDRDYGTSN6w5EuWS2w"
 	FORM_ENDPOINT = f"https://docs.google.com/forms/d/e/{FORM_ID}/formResponse"
@@ -23,7 +22,6 @@ def send_telemetry(
 	WOT_LANG = "entry.1724540185"
 	WOT_REALM = "entry.1505311192"
 	WOT_BRANCH = "entry.1523491408"
-	LAYOUT = "entry.951084848"
 
 	data = {
 		UUID: str(uid),
@@ -34,7 +32,6 @@ def send_telemetry(
 		WOT_LANG: str(wot_lang),
 		WOT_REALM: str(wot_realm),
 		WOT_BRANCH: str(wot_branch),
-		LAYOUT: str(layout) if layout in ["list", "grid"] else "",
 	}
 	headers = {
 		"User-Agent": "Mozilla/5.0",
