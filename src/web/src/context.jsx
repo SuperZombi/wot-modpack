@@ -6,7 +6,6 @@ function AppProvider({children}) {
 		language: supportedLangs.includes(userLang) ? userLang : 'en',
 		match_client_lang: true,
 		use_cache: true,
-		data_collection: false,
 		first_install: true
 	}
 	const [settings, setSettings] = React.useState(defaultSettings)

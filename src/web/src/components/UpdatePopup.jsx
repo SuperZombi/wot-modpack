@@ -30,25 +30,3 @@ const Popup = ({
 		</div>
 	)
 }
-
-const DataCollectionPopup = ({onClose}) => {
-	const { langData } = useApp()
-	return (
-		<Popup onClose={onClose} closeButton={false} closeOnOutsideClick={false}>
-			{({ close }) => (
-				<div className="flex-center data-collection">
-					<h3><LANG id="data_collection_title"/></h3>
-					<p><LANG id="data_collection_description"/></p>
-					<ul>
-						{langData["data_collection_list"].split(",").map((item, index) => (
-							<li key={index}>{item.trim()}</li>
-						))}
-					</ul>
-					<div style={{marginTop: "1em"}}>
-						<Button onClick={close}><LANG id="accept"/></Button>
-					</div>
-				</div>
-			)}
-		</Popup>
-	)
-}

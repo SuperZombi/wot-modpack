@@ -36,7 +36,6 @@ const HomeTab = ({
 	]
 	return (
 		<React.Fragment>
-			{ !settings.data_collection && <DataCollectionPopup onClose={_=>{updateSetting("data_collection", true)}}/>}
 			<div>
 				<br/>
 				<h3><LANG id="select_game_folder"/></h3>
