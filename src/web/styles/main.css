@@ -61,6 +61,8 @@ header .button {
 	flex-direction: column;
 	gap: 2px;
 	padding: 0.5em;
+	border-top: 0;
+	border-bottom: 0;
 }
 #mods-sidebar .cat-item {
 	padding: 8px 10px;
@@ -165,7 +167,8 @@ header .button {
 	padding: 5px;
 	overflow: auto;
 	scrollbar-width: thin;
-	color-scheme: dark;
+	border-top: 0;
+	border-bottom: 0;
 }
 
 #mod-preview .image-container{
