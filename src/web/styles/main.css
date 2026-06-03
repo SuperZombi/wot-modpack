@@ -135,7 +135,6 @@ header .button {
 #mods-list-area .mod img{
 	height: 100%;
 	width: 100%;
-	max-height: fit-content;
 	object-fit: cover;
 }
 #mods-list-area .mod span{
