@@ -102,7 +102,6 @@ const ModsTab = ({
 						<div id="drag-area" className={drag ? "show":""}></div>
 
 						<SideBar
-							mini={displayPreview}
 							setDisplayPreview={setDisplayPreview}
 							activeCat={activeCat}
 							setActiveCat={setActiveCat}
@@ -125,47 +124,45 @@ const ModsTab = ({
 							cachedMods={cachedMods}
 							selectedClient={selectedClient}
 						/>
-						{displayPreview && (
-							<div id="mod-preview" className="container">
-								<div className="close hover" onClick={_=>setDisplayPreview(false)}>
-									<i className="fa-regular fa-circle-xmark"></i>
-								</div>
-								<div className="image-container">
-									<img id="mod-image"
-										className={`${imageLoaded ? '' : 'loading'}`}
-										src={modPreview?.image || ""}
-										key={modPreview?.image || ""}
-										draggable={false}
-										onLoad={_=>setImageLoaded(true)}
-									/>
-								</div>
-								<div id="mod-description-text">
-									<h3 align="center" id="mod-title">{modPreview ? replaceFlags(modPreview.title[settings.language]) : ""}</h3>
-									<h4 id="mod-subtitle">
-										<div className="mod-header-item">
-											<div style={{display: !modPreview?.author ? "none" : ""}}>
-												<i className="fa-regular fa-user"></i>
-											</div>
-											<div id="mod-author">{modPreview?.author}</div>
-										</div>
-										<div className="mod-header-item">
-											<span>{modPreview && (stats[modPreview.id] || 0)}</span>
-											<i className="fa-regular fa-arrow-down-to-bracket"></i>
-										</div>
-									</h4>
-									{modPreview?.audio && (
-										<audio id="mod-audio"
-											src={modPreview.audio || ""}
-											ref={audioRef} controls autoPlay
-											controlsList="nodownload"
-										/>
-									)}
-									<div id="mod-description"
-										dangerouslySetInnerHTML={{ __html: modPreview?.description?.[settings.language]}}
-									></div>
-								</div>
+						<div id="mod-preview" className={`container ${displayPreview ? "show-preview" : ""}`}>
+							<div className="close hover" onClick={_=>setDisplayPreview(false)}>
+								<i className="fa-regular fa-circle-xmark"></i>
 							</div>
-						)}
+							<div className="image-container">
+								<img id="mod-image"
+									className={`${imageLoaded ? '' : 'loading'}`}
+									src={modPreview?.image || ""}
+									key={modPreview?.image || ""}
+									draggable={false}
+									onLoad={_=>setImageLoaded(true)}
+								/>
+							</div>
+							<div id="mod-description-text">
+								<h3 align="center" id="mod-title">{modPreview ? replaceFlags(modPreview.title[settings.language]) : ""}</h3>
+								<h4 id="mod-subtitle">
+									<div className="mod-header-item">
+										<div style={{display: !modPreview?.author ? "none" : ""}}>
+											<i className="fa-regular fa-user"></i>
+										</div>
+										<div id="mod-author">{modPreview?.author}</div>
+									</div>
+									<div className="mod-header-item">
+										<span>{modPreview && (stats[modPreview.id] || 0)}</span>
+										<i className="fa-regular fa-arrow-down-to-bracket"></i>
+									</div>
+								</h4>
+								{modPreview?.audio && displayPreview && (
+									<audio id="mod-audio"
+										src={modPreview.audio || ""}
+										ref={audioRef} controls autoPlay
+										controlsList="nodownload"
+									/>
+								)}
+								<div id="mod-description"
+									dangerouslySetInnerHTML={{ __html: modPreview?.description?.[settings.language]}}
+								></div>
+							</div>
+						</div>
 					</div>
 				) : (
 					<Loader/>
@@ -175,7 +172,6 @@ const ModsTab = ({
 	)
 }
 const SideBar = ({
-	mini,
 	activeCat,
 	setActiveCat,
 	mods,
@@ -187,19 +183,21 @@ const SideBar = ({
 	const {langData, settings} = useApp()
 	return (
 		<div id="mods-sidebar" className="container">
-			{!mini && (
-				<div id="search-area">
-					<input
-						type="search"
-						placeholder={langData["search"]}
-						value={search}
-						onChange={e => setSearch(e.target.value)}
-					/>
-				</div>
-			)}
+			<div id="search-area" className={`hover ${search ? "active" : ""}`}
+				onClick={_=>{setDisplayPreview(false)}}
+			>
+				<i className="fa-solid fa-magnifying-glass"></i>
+				<input
+					type="search"
+					className="text-area"
+					placeholder={langData["search"]}
+					value={search}
+					onChange={e => setSearch(e.target.value)}
+				/>
+			</div>
 
 			{categories.map(cat=>(
-				<div className={`cat-item hover ${activeCat == cat.name ? "active" : ""}`}
+				<div className={`cat-item hover ${((activeCat == cat.name) && !search) ? "active" : ""}`}
 					key={cat.name} onClick={_=>{
 						setActiveCat(cat.name)
 						setSearch("")
@@ -207,22 +205,18 @@ const SideBar = ({
 					}}
 				>
 					<i className={`fa-regular fa-${cat.icon}`}></i>
-					{!mini && (
-						<React.Fragment>
-							<span>{cat.title[settings.language]}</span>
-							<span className="cnt">{mods.filter(m=>m.category == cat.name).length}</span>
-						</React.Fragment>
-					)}
+					<div className="text-area">
+						<span>{cat.title[settings.language]}</span>
+						<span className="cnt">{mods.filter(m=>m.category == cat.name).length}</span>
+					</div>
 				</div>
 			))}
-			{!mini && (
-				<div className="mod-list-hint">
-					<i className="fa-regular fa-computer-mouse-button-left"></i>
-					<LANG id="mod_list_hint_left_click"/>
-					<i className="fa-regular fa-computer-mouse-button-right"></i>
-					<LANG id="mod_list_hint_right_click"/>
-				</div>
-			)}
+			<div className="mod-list-hint">
+				<i className="fa-regular fa-computer-mouse-button-left"></i>
+				<LANG id="mod_list_hint_left_click"/>
+				<i className="fa-regular fa-computer-mouse-button-right"></i>
+				<LANG id="mod_list_hint_right_click"/>
+			</div>
 		</div>
 	)
 }
