@@ -11,7 +11,7 @@ from utils import *
 
 MODS_DATA = {}
 console = Logger()
-__version__ = "3.0.0"
+__version__ = "3.1.0"
 @eel.expose
 def app_version(): return __version__
 SETTINGS = {}
