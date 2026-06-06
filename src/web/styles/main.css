@@ -112,6 +112,7 @@ header .button {
 	justify-content: space-between;
 	width: calc(100% - 48px);
 	transition: 0.5s;
+	white-space: nowrap;
 }
 #mods-area:has(.show-preview) #mods-sidebar .text-area {
 	opacity: 0;
