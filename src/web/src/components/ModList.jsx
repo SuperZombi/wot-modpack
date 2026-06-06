@@ -198,17 +198,11 @@ function Mod({
 				/>
 			</div>
 			<span>{replaceFlags(mod.title[settings.language])}</span>
-			{
-				checked ? (
-					<div className="checkmark">
-						<i className="fa-regular fa-check"></i>
-					</div>
-				) : (cached_ver && cached_ver != mod.ver) ? (
-					<div className="checkmark tooltip-left" tooltip={langData["mod_updated"]}>
-						<i className="fa-solid fa-up"></i>
-					</div>
-				) : null
-			}
+			{checked && (
+				<div className="checkmark">
+					<i className="fa-regular fa-check"></i>
+				</div>
+			)}
 		</label>
 	)
 }
