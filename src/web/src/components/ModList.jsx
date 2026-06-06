@@ -55,9 +55,10 @@ function ModList({
 
 	if (search && !filteredMods.length){
 		return (
-			<h3 align="center">
-				<LANG id="nothing_found"/>
-			</h3>
+			<div className="flex-center reveal">
+				<img src="/images/empty-box.png" height="128" draggable={false} style={{userSelect: "none"}}/>
+				<h3><LANG id="nothing_found"/></h3>
+			</div>
 		)
 	}
 	
