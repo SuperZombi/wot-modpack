@@ -479,3 +479,19 @@ section .row .row-label{
 	transform: translateX(18px);
 	background: #f5a623;
 }
+
+.reveal {
+	will-change: opacity, transform;
+	animation: reveal-enter 0.55s ease backwards;
+	animation-delay: calc((sibling-index() - 1) * 40ms);
+}
+@keyframes reveal-enter {
+	from {
+		opacity: 0;
+		transform: translateY(16px) scale(0.985);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0) scale(1);
+	}
+}

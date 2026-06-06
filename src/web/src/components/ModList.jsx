@@ -175,7 +175,7 @@ function Mod({
 	const cached_ver = (cachedMods.find(el=>el.id==mod.id)||{}).ver || null
 
 	return (
-		<label className="mod hover"
+		<label className="mod hover reveal"
 			onClick={onGridClick}
 			onMouseOver={_=>setPreview(mod)}
 			onContextMenu={e=>{e.preventDefault();onMouse()}}
