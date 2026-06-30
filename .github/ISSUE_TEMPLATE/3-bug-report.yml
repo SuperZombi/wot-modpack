@@ -51,3 +51,12 @@ body:
       description: Attach some screenshots or images if you have them.
     validations:
       required: false
+
+    - type: textarea
+    id: logs
+    attributes:
+      label: Logs
+      description: Paste any relevant logs, error messages, or console output here.
+      render: shell
+    validations:
+      required: false
