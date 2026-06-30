@@ -47,7 +47,7 @@ body:
   - type: textarea
     id: bug-images
     attributes:
-      label: Pictures (optional)
+      label: Screenshots
       description: Attach some screenshots or images if you have them.
     validations:
       required: false
@@ -58,5 +58,14 @@ body:
       label: Logs
       description: Paste any relevant logs, error messages, or console output here.
       render: shell
+    validations:
+      required: false
+
+  - type: input
+    id: contact
+    attributes:
+      label: Contact
+      description: Provide your Telegram, Discord, email, or another way to contact you if we need additional information.
+      placeholder: "@username"
     validations:
       required: false
