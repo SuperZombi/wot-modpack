@@ -55,7 +55,7 @@ function ModList({
 
 	if (search && !filteredMods.length){
 		return (
-			<div className="flex-center reveal">
+			<div className="flex-center reveal" style={{justifyContent: "center"}}>
 				<img src="/images/empty-box.png" height="128" draggable={false} style={{userSelect: "none"}}/>
 				<h3><LANG id="nothing_found"/></h3>
 			</div>
