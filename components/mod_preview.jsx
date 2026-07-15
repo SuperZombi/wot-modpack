@@ -17,7 +17,7 @@ const ModPreview = ({onClosePreview, previewData, collectFiles, stats, stats_csv
 			filename: previewData.id,
 			files: files,
 			gameVersion: currentGameVersion,
-			downloadErrorText: langData["download_file_error"]?.[lang]
+			downloadErrorText: langData?.["download_file_error"]?.[lang]
 		})
 	}
 	return (
@@ -32,23 +32,23 @@ const ModPreview = ({onClosePreview, previewData, collectFiles, stats, stats_csv
 			)}
 			<div className="badge-area">
 				{previewData.author && (
-					<div className="badge shine" title={langData["author"][lang]}>
+					<div className="badge shine" title={langData?.["author"]?.[lang]}>
 						<i className="fa-solid fa-circle-user"></i>
 						<span>{previewData.author}</span>
 					</div>
 				)}
 				{previewData.ver && (
-					<div className="badge shine" title={langData["version"][lang]}>
+					<div className="badge shine" title={langData?.["version"]?.[lang]}>
 						<i className="fa-solid fa-tag"></i>
 						<span>{previewData.ver}</span>
 					</div>
 				)}
-				<div className="badge shine" title={langData["downloads"][lang]}>
+				<div className="badge shine" title={langData?.["downloads"]?.[lang]}>
 					<i className="fa-solid fa-circle-down"></i>
 					<span>{stats[previewData.id] || 0}</span>
 				</div>
 				{previewData.src && (
-					<a href={previewData.src} className="badge shine" title={langData["source"][lang]} target="_blank">
+					<a href={previewData.src} className="badge shine" title={langData?.["source"]?.[lang]} target="_blank">
 						<i className="fa-solid fa-code"></i>
 					</a>
 				)}
