@@ -1,0 +1,7 @@
+{
+	"reducedArmor": ${"reducedArmor.json"},
+	"battleGui" : ${"battleGui.json"},
+	"battleChat" : ${"battleChat.json"},
+	"systemMessages": ${"systemMessages.json"},
+	"sessionStatistic" : ${"sessionStatistic.json"}
+}

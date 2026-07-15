@@ -1,0 +1,8 @@
+{
+	"enable": true,
+	"hideDynSquadMessages": true,
+	"playersHealth": ${"playersHealth.json"},
+	"detectionState": ${"detectionState.json"},
+	"minimapAnglesFix": ${"minimapAnglesFix.json"},
+	"hidePostmortemDogTag": ${"postmortemDogTag.json"}
+}

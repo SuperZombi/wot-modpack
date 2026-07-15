@@ -1,0 +1,42 @@
+{
+	"enable": true,
+	"displayByALT": true,
+	"hideDeadPlayers": true,
+	"left": {
+		"label": {
+			"enable": true,
+			"position": [90, 3],
+			"size": [80, 20],
+			"text": "<font face=\"$FieldFont\" size=\"14\" color=\"#FFFFFF\"><p align=\"center\">{{hp_current}}</p></font>"
+		},
+		"healthBar": {
+			"enable": true,
+			"position": [90, 6],
+			"size": [80, 16],
+			"skin": "default"
+		}
+	},
+	"right": {
+		"label": {
+			"enable": true,
+			"position": [-170, 3],
+			"size": [80, 20],
+			"text": "<font face=\"$FieldFont\" size=\"14\" color=\"#FFFFFF\"><p align=\"center\">{{hp_current}}</p></font>"
+		},
+		"healthBar": {
+			"enable": true,
+			"position": [-170, 6],
+			"size": [80, 16],
+			"skin": "default"
+		}
+	},
+	"shadow": {
+		"enable": false,
+		"alpha": 90,
+		"blur": 2,
+		"color": "000000",
+		"strength": 2,
+		"distance": 0,
+		"angle": 0
+	}
+}

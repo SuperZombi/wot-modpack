@@ -1,0 +1,20 @@
+<sixthSense.xml>	
+	<showIcon>True</showIcon>
+	<showDefaultIcon>False</showDefaultIcon>
+	<fileName>71G1L_</fileName>
+	<fileFormat>.png</fileFormat>
+	<sizeX>120</sizeX>
+	<sizeY>120</sizeY>
+	
+	<fadeOut>False</fadeOut> <!-- fade out the image | true =  immediately hidden -->
+	<fadeTime>1.0</fadeTime> <!--how long the image fades out -->
+	
+	<oneFrame>False</oneFrame> <!-- True = single, not animated image / False = animated image -->
+	<stayTime>10.0</stayTime> <!-- how long the one Frame stays on the screen for one frame images | different behaviour for animations -->
+	
+	<pauseTimeModeTotal>True</pauseTimeModeTotal> <!-- True = pause time gets calculated such that the whole animation with pause runs for stayTime seconds -->
+	<!-- False = animation pauses for stayTime seconds, whole animation with pause runs for more than -->
+
+	<speed>6</speed> <!-- Frames per Second -->
+	<animLength>118</animLength> <!-- the last Frame of Animation -->
+</sixthSense.xml>

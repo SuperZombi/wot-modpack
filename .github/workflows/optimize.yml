@@ -1,0 +1,39 @@
+name: Optimize JSON
+
+on:
+  push:
+    branches: ["mods"]
+    paths:
+      - 'config.big.json'
+
+jobs:
+  optimize-json:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: mods
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install json5
+
+      - name: Optimize JSON
+        run: |
+          import json5, json
+          with open('config.big.json', 'r', encoding='utf-8') as f:
+              data = json5.load(f)
+          with open('config.json', 'w', encoding='utf-8') as f:
+              json.dump(data, f, ensure_ascii=False, separators=(',', ':'))
+        shell: python
+      
+      - name: Commit and push changes
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: Optimize config.json

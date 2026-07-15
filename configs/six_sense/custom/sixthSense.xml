@@ -1,0 +1,14 @@
+<sixthSense.xml>	
+	<showIcon>True</showIcon>
+	<showDefaultIcon>False</showDefaultIcon>
+	<fileName>SixthSense</fileName>
+	<fileFormat>.png</fileFormat>
+	<sizeX>128</sizeX>
+	<sizeY>128</sizeY>
+	
+	<fadeOut>False</fadeOut> <!-- fade out the image | true =  immediately hidden -->
+	<fadeTime>1.0</fadeTime> <!--how long the image fades out -->
+	
+	<oneFrame>True</oneFrame> <!-- True = single, not animated image / False = animated image -->
+	<stayTime>10.0</stayTime> <!-- how long the one Frame stays on the screen for one frame images | different behaviour for animations (see below) -->
+</sixthSense.xml>
