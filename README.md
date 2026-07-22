@@ -17,10 +17,10 @@ This modpack downloads only those mods that the user selected at runtime.<br>
 Also it has a modern Web interface.<br>
 Supports all client versions (including CT and SB)
 
-> [!WARNING]  
+> [!WARNING]
 > For the first installation, it is recommended to check the «Delete mod configs» option to avoid conflicts with previous modpacks.
 
-> [!NOTE]  
+> [!NOTE]
 > Modpack version does **NOT** necessarily have to match the client version!
 
 <br>
